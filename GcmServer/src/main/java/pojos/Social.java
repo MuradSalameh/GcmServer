@@ -1,4 +1,4 @@
-package pojos;
+package main.java.pojos;
 
 
 public class Social {
