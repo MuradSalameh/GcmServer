@@ -1,4 +1,4 @@
-package main.java.pojos;
+package main.java.hibernate.model;
 
 
 

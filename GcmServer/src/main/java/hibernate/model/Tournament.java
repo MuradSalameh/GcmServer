@@ -1,4 +1,4 @@
-package main.java.pojos;
+package main.java.hibernate.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
