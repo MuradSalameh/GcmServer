@@ -1,5 +1,8 @@
 package main.java.hibernate.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -43,13 +46,17 @@ public class App {
 		session.persist(ulrich);
 
 		Role admin = new Role("admin", "Clan Administrator");
-		session.persist(admin);
+		//session.persist(admin);
 
 		Role member = new Role("member", "Clan Member");
-		session.persist(member);
+		//session.persist(member);
 
-		ulrich.getRoles().add(member);
-		ulrich.getRoles().add(admin);
+		
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(admin);
+		roles.add(member);		
+
+		ulrich.setRoles(roles);
 		
 		session.persist(ulrich);
 
