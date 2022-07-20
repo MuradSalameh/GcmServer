@@ -1,45 +1,61 @@
 package main.java.hibernate.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "social")
 public class Social {
-	private int id;
-	private String socialPlatformName;		
-	private String socialPlattformUsername;	
-	private String socialLink;	
-	private String socialAdditionalNotes;
 	
-	public Social(int id, String socialPlatformName, String socialPlattformUsername, String socialLink,
-			String socialAdditionalNotes) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private int id;
+	
+	@Column(name = "social_platform")
+	private String socialPlatform;	
+	
+	@Column(name = "social_username")
+	private String socialUsername;	
+	
+	@Column(name = "social_link")
+	private String socialLink;	
+	
+	@Column(name = "social_notes")
+	private String socialNotes;
+	
+	
+
+	public Social() {
 		super();
-		this.id = id;
-		this.socialPlatformName = socialPlatformName;
-		this.socialPlattformUsername = socialPlattformUsername;
+	}
+
+	public Social(String socialPlatform, String socialUsername, String socialLink, String socialNotes) {
+		super();
+		this.socialPlatform = socialPlatform;
+		this.socialUsername = socialUsername;
 		this.socialLink = socialLink;
-		this.socialAdditionalNotes = socialAdditionalNotes;
+		this.socialNotes = socialNotes;
 	}
 
-	public int getId() {
-		return id;
+	public String getSocialPlatform() {
+		return socialPlatform;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setSocialPlatform(String socialPlatform) {
+		this.socialPlatform = socialPlatform;
 	}
 
-	public String getSocialPlatformName() {
-		return socialPlatformName;
+	public String getSocialUsername() {
+		return socialUsername;
 	}
 
-	public void setSocialPlatformName(String socialPlatformName) {
-		this.socialPlatformName = socialPlatformName;
-	}
-
-	public String getSocialPlattformUsername() {
-		return socialPlattformUsername;
-	}
-
-	public void setSocialPlattformUsername(String socialPlattformUsername) {
-		this.socialPlattformUsername = socialPlattformUsername;
+	public void setSocialUsername(String socialUsername) {
+		this.socialUsername = socialUsername;
 	}
 
 	public String getSocialLink() {
@@ -50,16 +66,18 @@ public class Social {
 		this.socialLink = socialLink;
 	}
 
-	public String getSocialAdditionalNotes() {
-		return socialAdditionalNotes;
+	public String getSocialNotes() {
+		return socialNotes;
 	}
 
-	public void setSocialAdditionalNotes(String socialAdditionalNotes) {
-		this.socialAdditionalNotes = socialAdditionalNotes;
+	public void setSocialNotes(String socialNotes) {
+		this.socialNotes = socialNotes;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
-	
-
 	
 
 }
