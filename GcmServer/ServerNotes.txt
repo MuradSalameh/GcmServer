@@ -1,0 +1,5 @@
+ToDo:
+member_team annotation
+
+server side serialization - restful
+

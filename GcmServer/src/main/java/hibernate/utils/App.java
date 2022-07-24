@@ -135,8 +135,8 @@ public class App {
 
 		// Create Game
 		Game game1 = new Game(
-				"TestGame #1", 						// title
-				LocalDate.of(2022, 10, 28), 						// release date LocalDate
+				"TestGame #1", 				// title
+				LocalDate.of(2022, 10, 28), // release date LocalDate
 				null, 						// genre list
 				null, 						// member list
 				null, 						// tournament list
@@ -172,7 +172,6 @@ public class App {
 		
 		//set game to tournament
 		tournament1.setGame(game1);
-
 
 		HibernateUtil.sessionCommit();
 	}

@@ -53,20 +53,20 @@ public class Member {
 	private String phoneNumber;	
 	
 
-	//join table for user roles
+	//join table for member roles
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable(
-			name="users_roles",
+			name="member_roles",
 			joinColumns = @JoinColumn( name="member_id"),
 			inverseJoinColumns = @JoinColumn( name="role_id")
 			)
 	List<Role> roles = new ArrayList<>();
 
 	
-	//join table for user socials
+	//join table for member socials
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable(
-			name="users_socials",
+			name="member_socials",
 			joinColumns = @JoinColumn( name="member_id"),
 			inverseJoinColumns = @JoinColumn( name="social_id")
 			)
