@@ -44,15 +44,11 @@ public class Game {
 	//join table members games
 	@ManyToMany(mappedBy = "games")
 	List<Member> members = new ArrayList<Member>();
-
-	// join table for game tournaments
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name = "game_tournaments", 
-			joinColumns = { @JoinColumn(name = "game_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "tournament_id") }
-			)	
-	List<Tournament> tournaments = new ArrayList<>();
+	
+	// join column tournament game
+	@OneToMany(mappedBy="game")
+    List<Tournament> tournaments = new ArrayList<Tournament>();
+	
 
 
 	@Column(name = "game_additional_notes")
@@ -154,6 +150,7 @@ public class Game {
 	public int getId() {
 		return id;
 	}
+
 
 	
 }

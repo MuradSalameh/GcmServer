@@ -51,6 +51,7 @@ public class Member {
 
 	@Column(name = "phone_number")
 	private String phoneNumber;	
+	
 
 	//join table for user roles
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -61,6 +62,7 @@ public class Member {
 			)
 	List<Role> roles = new ArrayList<>();
 
+	
 	//join table for user socials
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable(
@@ -70,6 +72,7 @@ public class Member {
 			)
 	List<Social> socials = new ArrayList<>();
 
+	
 	//join table for games
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
@@ -79,9 +82,11 @@ public class Member {
 			)
 	List<Game> games = new ArrayList<>();
 
+	
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
+	
 	//join table for teams
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(

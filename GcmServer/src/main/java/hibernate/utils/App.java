@@ -128,12 +128,10 @@ public class App {
 				"Testing nr 1", 			// description
 				LocalDate.of(1990, 8, 30),	// tournament date
 				LocalTime.of(22,58),		// start time
-				LocalTime.of(2,30), 						// end time
+				LocalTime.of(2,30), 		// end time
 				null,						// teams list
+				null,						// games list
 				null);						// result string
-
-
-
 
 		// Create Game
 		Game game1 = new Game(
@@ -164,6 +162,16 @@ public class App {
 		// persist tournament together with teams list		
 		tournament1.setTeams(teams);
 		HibernateUtil.getSession().persist(tournament1);
+		
+		// Set Games to members
+		hans.setGames(games);
+		HibernateUtil.getSession().persist(hans);
+		
+		ulli.setGames(games);
+		HibernateUtil.getSession().persist(ulli);
+		
+		//set game to tournament
+		tournament1.setGame(game1);
 
 
 		HibernateUtil.sessionCommit();
