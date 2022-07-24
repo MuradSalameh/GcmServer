@@ -14,7 +14,8 @@
 		<slf4j.version>1.7.36</slf4j.version>
 		<hibernate.version>6.1.1.Final</hibernate.version>
 		<mysql.version>8.0.28</mysql.version>
-		<spark.version>2.7.2</spark.version>
+		<jersey.version>3.1.0-M3</jersey.version>
+		<jerseyinject.version>3.1.0-M3</jerseyinject.version>
 
 	</properties>
 
@@ -25,6 +26,21 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>${jerseyinject.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -52,13 +68,6 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.8.2</version>
 			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>com.sparkjava</groupId>
-			<artifactId>spark-core</artifactId>
-			<version>${spark.version}</version>
 		</dependency>
 
 	</dependencies>
