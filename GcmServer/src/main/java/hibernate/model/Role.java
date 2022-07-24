@@ -23,7 +23,7 @@ public class Role {
 	private String roleDescription;
 	
 	
-	
+    
 	public Role() {
 		super();
 	}

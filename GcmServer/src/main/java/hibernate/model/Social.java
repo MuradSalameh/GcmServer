@@ -28,8 +28,6 @@ public class Social {
 	@Column(name = "social_notes")
 	private String socialNotes;
 	
-	
-
 	public Social() {
 		super();
 	}

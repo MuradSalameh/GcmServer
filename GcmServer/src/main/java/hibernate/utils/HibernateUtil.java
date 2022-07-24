@@ -1,51 +1,68 @@
 package main.java.hibernate.utils;
 
-import java.util.Properties;
-
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
-import org.hibernate.service.ServiceRegistry;
 
-import main.java.hibernate.model.GcmUser;
+import main.java.hibernate.model.Expense;
+import main.java.hibernate.model.ExpenseType;
+import main.java.hibernate.model.Game;
+import main.java.hibernate.model.Genre;
+import main.java.hibernate.model.Member;
+import main.java.hibernate.model.Revenue;
+import main.java.hibernate.model.RevenueType;
+import main.java.hibernate.model.Role;
+import main.java.hibernate.model.Social;
+import main.java.hibernate.model.Team;
+import main.java.hibernate.model.Tournament;
 
 public class HibernateUtil {
+	private static Session session = null;	
+	
+	public static void startSession() {
+		// create configurations
+		Configuration configuration = new Configuration();
+		configuration.configure("hibernate.cfg.xml");		
+		configuration.addAnnotatedClass(Role.class);
+		configuration.addAnnotatedClass(Social.class);
+		configuration.addAnnotatedClass(Team.class);
+		configuration.addAnnotatedClass(Tournament.class);
+		configuration.addAnnotatedClass(Member.class);
+		configuration.addAnnotatedClass(Game.class);
+		configuration.addAnnotatedClass(Genre.class);
+		configuration.addAnnotatedClass(Tournament.class);
+		configuration.addAnnotatedClass(Team.class);
+		configuration.addAnnotatedClass(Expense.class);
+		configuration.addAnnotatedClass(ExpenseType.class);
+		configuration.addAnnotatedClass(Revenue.class);
+		configuration.addAnnotatedClass(RevenueType.class);		
 
-	private static SessionFactory sessionFactory;
+		// crate session factory - data source
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
 
-	public static SessionFactory getSessionFactory() {
-		if(sessionFactory == null) {
-			try {
-				Configuration configuration = new Configuration();
-				//Hibernate settings equivalent to hibernate.cfg.xml properties file
-				Properties settings = new Properties();
-				settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-				settings.put(Environment.URL, "jdbc:mysql://localhost:3306/gcm");
-				settings.put(Environment.USER, "gcmconn");
-				settings.put(Environment.PASS, "1GcmConn!");
-				settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+		//initialize session object
+		session = sessionFactory.openSession();
 
-				settings.put(Environment.SHOW_SQL, "true");
-
-				settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
-				settings.put(Environment.HBM2DDL_AUTO, "create-drop");
-
-				configuration.setProperties(settings);
-				configuration.addAnnotatedClass(GcmUser.class);
-
-				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-						.applySettings(configuration.getProperties()).build();
-
-				sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		if(!session.isOpen()) {
+			System.out.println("Unable to open session!");
+		} else {
+			System.out.println("Session is open");
 		}
-		
-		return sessionFactory;
+
+		session.beginTransaction();
 	}
+
+	public static void sessionCommit() {
+		session.getTransaction().commit();
+	}
+
+	public static Session getSession() {
+		return session;
+	}
+	
+	
+	
+	
 }
 
 

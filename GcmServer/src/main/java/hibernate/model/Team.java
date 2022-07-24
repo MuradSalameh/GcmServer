@@ -1,24 +1,44 @@
 package main.java.hibernate.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "team")
 public class Team {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")	
 	private int id;	
+
+	@Column(name = "team_name")
 	private String teamName;
+
+	@Column(name = "team_description")
 	private String teamDescription;
+
+	@ManyToMany(mappedBy = "teams")
+   List<Member> members = new ArrayList<>();
 	
-	public Team(int id, String teamName, String teamDescription) {
+
+	public Team() {
 		super();
-		this.id = id;
+	}
+
+	public Team(String teamName, String teamDescription, List<Member> members) {
+		super();
 		this.teamName = teamName;
 		this.teamDescription = teamDescription;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		this.members = members;
 	}
 
 	public String getTeamName() {
@@ -36,9 +56,21 @@ public class Team {
 	public void setTeamDescription(String teamDescription) {
 		this.teamDescription = teamDescription;
 	}
-	
-	
 
-	
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+
+
+
 }
 
