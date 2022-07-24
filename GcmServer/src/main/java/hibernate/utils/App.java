@@ -1,11 +1,17 @@
 package main.java.hibernate.utils;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.java.hibernate.model.Game;
+import main.java.hibernate.model.Genre;
 import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
+import main.java.hibernate.model.Team;
+import main.java.hibernate.model.Tournament;
 
 public class App {
 
@@ -71,10 +77,7 @@ public class App {
 		// test socials join table
 
 		Social social1 = new Social("YouTube", "Ulli", "www.youtube.com","neuer gaming kanal");
-		//session.persist(social1);
-
-		Social social2 = new Social("Facebook", "UlliFB", "www.facebook.com","FB-Seite");
-		//session.persist(social2);
+		Social social2 = new Social("Facebook", "UlliFB", "www.facebook.com","FB-Seite");		
 
 		List<Social> socials = new ArrayList<Social>();
 		socials.add(social1);
@@ -85,61 +88,83 @@ public class App {
 
 
 		//////// test tournament - teams join table
-
-
-		/*
-		//create teams
+		//create team 1
 		Team t1 = new Team(
 				"team #1", 		// team name
 				"test team #1", // team description
 				null);			// team members list
 
+		// create member list for team
 		List<Member> membersTeam1 = new ArrayList<Member>();
 
+		// create team 2
 		Team t2 = new Team(
 				"team #2", 		// team name
 				"test team #2", // team description
 				null);			// team members	list	
 
+		// create member list for team 2
 		List<Member> membersTeam2 = new ArrayList<Member>();
 
-		// add members to teams
+		// add members to member lists
 		membersTeam1.add(ulli);
-		membersTeam2.add(hans);
+		t1.setMembers(membersTeam1);
+		HibernateUtil.getSession().persist(t1);
 
+		membersTeam2.add(hans);
+		t1.setMembers(membersTeam1);
+		HibernateUtil.getSession().persist(t2);
 
 		// Add teams to a list
 		List<Team> teams = new ArrayList<Team>();
 		teams.add(t1);
 		teams.add(t2);
-		
+
+
 
 		//create basic tournament
-		Tournament tournament1 = new Tournament("Tournament #1", null, null, null, null, null, null, null);
-		// add teams to tournament
-		tournament1.setTeams(teams);
+		Tournament tournament1 = new Tournament(
+				"TestTournament #1", 		//title
+				"Testing nr 1", 			// description
+				LocalDate.of(1990, 8, 30),	// tournament date
+				LocalTime.of(22,58),		// start time
+				LocalTime.of(2,30), 						// end time
+				null,						// teams list
+				null);						// result string
 
-		
+
+
+
 		// Create Game
-		Game game1 = new Game("Game#1",null , null, null);
-		game1.setReleaseDate(LocalDate.of(2022, 10, 28));
-		
+		Game game1 = new Game(
+				"TestGame #1", 						// title
+				LocalDate.of(2022, 10, 28), 						// release date LocalDate
+				null, 						// genre list
+				null, 						// member list
+				null, 						// tournament list
+				null);						// additional notes
+
+		// Create games list and add created games
 		List<Game> games = new ArrayList<Game>();
 		games.add(game1);		
 
 		// Create genres
 		Genre strategy = new Genre("strategy", null);
-		Genre simulation = new Genre("strategy", null);		
+		Genre simulation = new Genre("simulation", null);	
+
+		// Add genres to list
 		List<Genre> genres = new ArrayList<Genre>();
 		genres.add(strategy);
 		genres.add(simulation);	
 
+		// persist game together with new genre list
 		game1.setGenres(genres);
 		HibernateUtil.getSession().persist(game1);
-	
 
+		// persist tournament together with teams list		
 		tournament1.setTeams(teams);
-*/
+		HibernateUtil.getSession().persist(tournament1);
+
 
 		HibernateUtil.sessionCommit();
 	}

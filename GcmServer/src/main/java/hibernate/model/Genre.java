@@ -26,6 +26,7 @@ public class Genre {
 	@ManyToMany(mappedBy = "genres")
     List<Game> games = new ArrayList<>();
 
+	
 	public Genre() {
 		super();
 	}

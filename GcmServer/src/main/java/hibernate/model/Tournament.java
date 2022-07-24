@@ -26,10 +26,7 @@ public class Tournament {
 	
 	@Column(name = "tournament_title")
 	private String touramentTitle;
-	
-	@Column(name = "game")
-	private Game game;
-	
+		
 	@Column(name = "tournament_description")
 	private String tournamentDescription;
 	
@@ -63,11 +60,10 @@ public class Tournament {
 
 
 
-	public Tournament(String touramentTitle, Game game, String tournamentDescription, LocalDate tournamentDate,
+	public Tournament(String touramentTitle, String tournamentDescription, LocalDate tournamentDate,
 			LocalTime tournamentTimeBeginn, LocalTime tournamentTimeEnd, List<Team> teams, String tournamentResult) {
 		super();
 		this.touramentTitle = touramentTitle;
-		this.game = game;
 		this.tournamentDescription = tournamentDescription;
 		this.tournamentDate = tournamentDate;
 		this.tournamentTimeBeginn = tournamentTimeBeginn;
@@ -86,18 +82,6 @@ public class Tournament {
 
 	public void setTouramentTitle(String touramentTitle) {
 		this.touramentTitle = touramentTitle;
-	}
-
-
-
-	public Game getGame() {
-		return game;
-	}
-
-
-
-	public void setGame(Game game) {
-		this.game = game;
 	}
 
 
@@ -178,6 +162,6 @@ public class Tournament {
 		return id;
 	}
 
-	
+
 	
 }
