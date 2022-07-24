@@ -37,6 +37,7 @@ public class App {
 				null);						// teams
 
 		HibernateUtil.getSession().persist(ulli);
+		
 
 		Member hans = new Member(
 				"hans", 					// first name
@@ -56,6 +57,8 @@ public class App {
 
 		hans.setBirthday(LocalDate.of(1990, 8, 30));
 		HibernateUtil.getSession().persist(hans);
+		
+
 
 
 		// test roles join table
@@ -96,7 +99,10 @@ public class App {
 
 		// create member list for team
 		List<Member> membersTeam1 = new ArrayList<Member>();
-
+		membersTeam1.add(ulli);
+		t1.setMembers(membersTeam1);
+		HibernateUtil.getSession().persist(t1);
+		
 		// create team 2
 		Team t2 = new Team(
 				"team #2", 		// team name
@@ -105,22 +111,14 @@ public class App {
 
 		// create member list for team 2
 		List<Member> membersTeam2 = new ArrayList<Member>();
-
-		// add members to member lists
-		membersTeam1.add(ulli);
-		t1.setMembers(membersTeam1);
-		HibernateUtil.getSession().persist(t1);
-
 		membersTeam2.add(hans);
-		t1.setMembers(membersTeam1);
+		t2.setMembers(membersTeam2);		
 		HibernateUtil.getSession().persist(t2);
 
 		// Add teams to a list
 		List<Team> teams = new ArrayList<Team>();
 		teams.add(t1);
 		teams.add(t2);
-
-
 
 		//create basic tournament
 		Tournament tournament1 = new Tournament(
@@ -162,14 +160,14 @@ public class App {
 		// persist tournament together with teams list		
 		tournament1.setTeams(teams);
 		HibernateUtil.getSession().persist(tournament1);
-		
+
 		// Set Games to members
 		hans.setGames(games);
 		HibernateUtil.getSession().persist(hans);
-		
+
 		ulli.setGames(games);
 		HibernateUtil.getSession().persist(ulli);
-		
+
 		//set game to tournament
 		tournament1.setGame(game1);
 

@@ -87,13 +87,7 @@ public class Member {
 	private LocalDate birthday;
 
 	
-	//join table for teams
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-			name = "member_team", 
-			joinColumns = { @JoinColumn(name = "member_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "team_id") }
-			)	
+	@ManyToMany(mappedBy = "members")
 	List<Team> teams = new ArrayList<>();
 
 
