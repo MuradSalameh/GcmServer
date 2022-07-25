@@ -40,7 +40,7 @@
 			<artifactId>jersey-hk2</artifactId>
 			<version>${jerseyinject.version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson -->
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
@@ -76,16 +76,10 @@
 			<scope>test</scope>
 		</dependency>
 
-		
-
-
 	</dependencies>
 
-
 	<build>
-
 		<sourceDirectory>src</sourceDirectory>
-
 		<resources>
 
 			<resource>
@@ -97,7 +91,6 @@
 
 		</resources>
 
-
 		<plugins>
 
 			<plugin>
@@ -108,9 +101,36 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.glassfish</groupId>
+				<artifactId>maven-embedded-glassfish-plugin</artifactId>
+				<version>3.0-74b</version>
+				<configuration>
+					<goalPrefix>embedded-glassfish</goalPrefix>
+					<app>test.war</app>
+					<port>8080</port>
+					<contextRoot>test</contextRoot>
+					<autoDelete>true</autoDelete>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 
 	</build>
-
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/glassfish/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
