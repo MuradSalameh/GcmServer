@@ -40,7 +40,13 @@
 			<artifactId>jersey-hk2</artifactId>
 			<version>${jerseyinject.version}</version>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jerseyinject.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -69,6 +75,9 @@
 			<version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
+
+		
+
 
 	</dependencies>
 
