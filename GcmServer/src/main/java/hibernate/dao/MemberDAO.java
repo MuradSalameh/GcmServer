@@ -11,14 +11,18 @@ import org.hibernate.Transaction;
 
 public class MemberDAO {
 
-	public void addMember(Member bean){
+	public static void addMember(Member bean){
 		Session session = SessionUtil.getSession();    
 		Transaction tx = session.beginTransaction();
-		addMember(session,bean);    
+		
+		//addMember(session,bean);    
+		session.persist(bean);    // Dafür die add member nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
 	}
 
+		// da addMember oben nicht mehr aufgerufen wird, ist diese MEthode obsolet.
+	/*
 	private void addMember(Session session, Member bean){
 		Member Member = new Member();
 
@@ -39,6 +43,7 @@ public class MemberDAO {
 
 		session.persist(Member);
 	}
+	*/
 
 	public List<Member> getMembers(){
 		Session session = SessionUtil.getSession();  

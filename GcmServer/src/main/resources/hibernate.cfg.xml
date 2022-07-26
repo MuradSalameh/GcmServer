@@ -23,6 +23,19 @@
 		
 		<!-- create tables if not existing or update if existing -->
 		 <property name="hibernate.hbm2ddl.auto">update</property>
+		 
+		<mapping class="main.java.hibernate.model.Expense"/>
+		<mapping class="main.java.hibernate.model.ExpenseType"/>
+		<mapping class="main.java.hibernate.model.Game"/>
+		<mapping class="main.java.hibernate.model.Genre"/>
+		<mapping class="main.java.hibernate.model.Member"/>
+		<mapping class="main.java.hibernate.model.Partner"/>
+		<mapping class="main.java.hibernate.model.Revenue"/>
+		<mapping class="main.java.hibernate.model.RevenueType"/>
+		<mapping class="main.java.hibernate.model.Role"/>
+		<mapping class="main.java.hibernate.model.Social"/>
+		<mapping class="main.java.hibernate.model.Team"/>
+		<mapping class="main.java.hibernate.model.Tournament"/>
 		
 		
 		
