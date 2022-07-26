@@ -21,57 +21,39 @@ public class MemberDAO {
 		session.close();
 	}
 
-		// da addMember oben nicht mehr aufgerufen wird, ist diese MEthode obsolet.
-	/*
-	private void addMember(Session session, Member bean){
-		Member Member = new Member();
 
-		Member.setFirstName(bean.getFirstName());
-		Member.setLastName(bean.getLastName());
-		Member.setAddressStreet(bean.getAddressStreet());
-		Member.setAddressNumber(bean.getAddressNumber());
-		Member.setAddressPostCode(bean.getAddressPostCode());
-		Member.setAddressCity(bean.getAddressCity());
-		Member.setCountry(bean.getCountry());
-		Member.setEmail(bean.getEmail());
-		Member.setPhoneNumber(bean.getPhoneNumber());
-		Member.setRoles(bean.getRoles());
-		Member.setSocials(bean.getSocials());
-		Member.setGames(bean.getGames());
-		Member.setBirthday(bean.getBirthday());
-		Member.setTeams(bean.getTeams());
-
-		session.persist(Member);
-	}
-	*/
-
-	public List<Member> getMembers(){
+	public static List<Member> getMembers(){
 		Session session = SessionUtil.getSession();  
 		String hql = "from Member";
 		Query query = session.createQuery(hql);
-		List<Member> Members =  query.list();
-		session.close();
+		List<Member> Members =  query.list();		
+		session.close();		
 		return Members;
 	}
 
-	public int deleteMember(int id) {
+	public static void deleteMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		String hql = "delete from Member where id = :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id",id);
-		int rowCount = query.executeUpdate();
-		System.out.println("Rows affected: " + rowCount);
+		Member member = session.find(Member.class, id);
+		session.remove(member);
 		tx.commit();
 		session.close();
-		return rowCount;
+		
 	}
 
-	public int updateMember(int id, Member member){
+	public static void updateMember(int id, Member member){
+		/*
 		if(id <=0)  
 			return 0;  
+		*/
+		
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
+		Member old = session.find(Member.class, id);
+		
+		old.setFirstName(member.getFirstName());
+		
+		/*
 		String hql = "update Member "
 				+ "set first_name = :first_name, "
 				+ "last_name = :last_name, "
@@ -107,11 +89,15 @@ public class MemberDAO {
 		query.setParameter("birthday",member.getBirthday());
 		query.setParameter("teams",member.getTeams());		
 		
-		int rowCount = query.executeUpdate();
+		
+		int rowCount = query.executeUpdate();		
 		System.out.println("Rows affected: " + rowCount);
+		*/
+		
+		
 		tx.commit();
 		session.close();
-		return rowCount;
+		//return rowCount;
 	}
 
 }

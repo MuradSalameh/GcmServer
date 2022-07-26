@@ -15,4 +15,13 @@
 ---> Passwörter und wichtige Variablen verschlüsseln?
 
 
+ToDo:
 
+Projekt nur mit Pojos anlegen - pojos mit xml annotierungen versehen
+Pojo jar in server und in client einbinden.
+
+
+
+auf der Server Seite muss ich dann
+
+LocalDateAdapter in localTime umwandeln 

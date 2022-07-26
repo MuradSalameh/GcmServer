@@ -14,7 +14,7 @@ import jakarta.ws.rs.core.Response.Status;
 
 @Path("gcmmanager")
 public class GcmResource {
-	/*
+	
 	static {
 		GcmDBReturn dr = Datenbank.createTable();
 		if(!dr.isRc())
@@ -22,7 +22,7 @@ public class GcmResource {
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	@Path("wein")
 	public Response getWeine() {
 		GcmDBReturnData<WeinList> dr = Datenbank.leseWeine();

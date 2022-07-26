@@ -1,6 +1,7 @@
 package main.java.hibernate.utils;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import main.java.hibernate.dao.MemberDAO;
 import main.java.hibernate.model.Member;
@@ -10,7 +11,7 @@ public class TestMethodenDaos {
 	public static void main(String[] args) {
 		
 		
-		
+		/*
 		Member test = new Member(
 				"test", 					// first name
 				"ttttt", 					// last name
@@ -26,10 +27,24 @@ public class TestMethodenDaos {
 				null, 						// games
 				LocalDate.of(1981, 4, 11), 	// birthday
 				null);						// teams
+				
 		
-		MemberDAO.addMember(test);
-		HibernateUtil.sessionCommit();
+		MemberDAO.addMember(test);	
+		
+		
+		test.setFirstName("UpdateTest");
+		MemberDAO.updateMember(5, test);
+		*/
+		
+		MemberDAO.deleteMember(5);
+		
+		List<Member> members = MemberDAO.getMembers();
+		members.forEach(System.out::println);
+		
+		
 		
 	}
+	
+	
 
 }

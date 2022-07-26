@@ -74,7 +74,7 @@ public class Member {
 
 	
 	//join table for games
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
 			name = "member_game", 
 			joinColumns = { @JoinColumn(name = "member_id") }, 
@@ -261,6 +261,18 @@ public class Member {
 		return id;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressStreet="
+				+ addressStreet + ", addressNumber=" + addressNumber + ", addressPostCode=" + addressPostCode
+				+ ", addressCity=" + addressCity + ", country=" + country + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + ", birthday=" + birthday + "]";
+	}
+
+
+	
+	
 
 
 

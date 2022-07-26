@@ -23,19 +23,7 @@ public class HibernateUtil {
 		// create configurations
 		Configuration configuration = new Configuration();
 		configuration.configure("hibernate.cfg.xml");		
-		configuration.addAnnotatedClass(Role.class);
-		configuration.addAnnotatedClass(Social.class);
-		configuration.addAnnotatedClass(Team.class);
-		configuration.addAnnotatedClass(Tournament.class);
-		configuration.addAnnotatedClass(Member.class);
-		configuration.addAnnotatedClass(Game.class);
-		configuration.addAnnotatedClass(Genre.class);
-		configuration.addAnnotatedClass(Tournament.class);
-		configuration.addAnnotatedClass(Team.class);
-		configuration.addAnnotatedClass(Expense.class);
-		configuration.addAnnotatedClass(ExpenseType.class);
-		configuration.addAnnotatedClass(Revenue.class);
-		configuration.addAnnotatedClass(RevenueType.class);		
+		
 
 		// crate session factory - data source
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
