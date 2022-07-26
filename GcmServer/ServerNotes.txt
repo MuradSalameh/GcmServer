@@ -1,5 +1,18 @@
-ToDo:
-member_team annotation
 
-server side serialization - restful jersey
+---> Klassen abtrennen in neues Projekt, aber wie? Oder nicht abtrennen und direkt in Client importieren?
+
+
+---> vom Cient aus die DAOs ansprechen und nutzen. Für jedes DAo ein eigenes ServiceFunction anlegen?
+	
+		ServiceFunctionMember
+		ServiceFunctionPartner
+		ServiceFunctionSocial
+		...
+		...?
+
+---> JSON statt XML verwenden um später eine Webapplication daraus machen zu können.
+
+---> Passwörter und wichtige Variablen verschlüsseln?
+
+
 

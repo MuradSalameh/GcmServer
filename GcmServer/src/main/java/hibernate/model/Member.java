@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "member")
@@ -32,16 +32,16 @@ public class Member {
 	private String lastName;	
 
 	@Column(name = "address_street")
-	private String adressStreet;
+	private String addressStreet;
 
 	@Column(name = "address_number")
-	private String adressNumber;
+	private String addressNumber;
 
 	@Column(name = "address_postcode")
-	private String adressPostCode;
+	private String addressPostCode;
 
 	@Column(name = "address_city")
-	private String adressCity;	
+	private String addressCity;	
 
 	@Column(name = "country")
 	private String country;	
@@ -96,16 +96,16 @@ public class Member {
 	}
 
 
-	public Member(String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Role> roles, List<Social> socials,
+	public Member(String firstName, String lastName, String addressStreet, String addressNumber, String addressPostCode,
+			String addressCity, String country, String email, String phoneNumber, List<Role> roles, List<Social> socials,
 			List<Game> games, LocalDate birthday, List<Team> teams) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.adressStreet = adressStreet;
-		this.adressNumber = adressNumber;
-		this.adressPostCode = adressPostCode;
-		this.adressCity = adressCity;
+		this.addressStreet = addressStreet;
+		this.addressNumber = addressNumber;
+		this.addressPostCode = addressPostCode;
+		this.addressCity = addressCity;
 		this.country = country;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
@@ -137,43 +137,43 @@ public class Member {
 	}
 
 
-	public String getAdressStreet() {
-		return adressStreet;
+	public String getAddressStreet() {
+		return addressStreet;
 	}
 
 
-	public void setAdressStreet(String adressStreet) {
-		this.adressStreet = adressStreet;
+	public void setAddressStreet(String addressStreet) {
+		this.addressStreet = addressStreet;
 	}
 
 
-	public String getAdressNumber() {
-		return adressNumber;
+	public String getAddressNumber() {
+		return addressNumber;
 	}
 
 
-	public void setAdressNumber(String adressNumber) {
-		this.adressNumber = adressNumber;
+	public void setAddressNumber(String addressNumber) {
+		this.addressNumber = addressNumber;
 	}
 
 
-	public String getAdressPostCode() {
-		return adressPostCode;
+	public String getAddressPostCode() {
+		return addressPostCode;
 	}
 
 
-	public void setAdressPostCode(String adressPostCode) {
-		this.adressPostCode = adressPostCode;
+	public void setAddressPostCode(String addressPostCode) {
+		this.addressPostCode = addressPostCode;
 	}
 
 
-	public String getAdressCity() {
-		return adressCity;
+	public String getAddressCity() {
+		return addressCity;
 	}
 
 
-	public void setAdressCity(String adressCity) {
-		this.adressCity = adressCity;
+	public void setAddressCity(String addressCity) {
+		this.addressCity = addressCity;
 	}
 
 

@@ -1,4 +1,4 @@
-package main.java.hibernate.utils;
+package test.java.test.java;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,6 +12,7 @@ import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.model.Team;
 import main.java.hibernate.model.Tournament;
+import main.java.hibernate.utils.HibernateUtil;
 
 public class App {
 
