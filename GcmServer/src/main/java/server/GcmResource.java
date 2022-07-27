@@ -14,13 +14,14 @@ import jakarta.ws.rs.core.Response.Status;
 
 @Path("gcmmanager")
 public class GcmResource {
-	
+/*
 	static {
 		GcmDBReturn dr = Datenbank.createTable();
 		if(!dr.isRc())
 			System.out.println(dr.getMeldung());
 	}
-
+*/
+	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("wein")

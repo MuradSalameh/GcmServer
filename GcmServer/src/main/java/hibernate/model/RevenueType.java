@@ -1,23 +1,35 @@
 package main.java.hibernate.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "revenue_type")
 public class RevenueType {
-	private int id;
-	private String revenueTypeTitle;
-	private String revenueTypeDescription;
 	
-	public RevenueType(int id, String revenueTypeTitle, String revenueTypeDescription) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private int id;
+	
+	@Column(name = "revenue_type_title")
+	private String revenueTypeTitle;
+	
+	@Column(name = "revenue_type_description")
+	private String revenueTypeDescription;
+
+	public RevenueType() {
 		super();
-		this.id = id;
+	}
+
+	public RevenueType(String revenueTypeTitle, String revenueTypeDescription) {
+		super();
 		this.revenueTypeTitle = revenueTypeTitle;
 		this.revenueTypeDescription = revenueTypeDescription;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getRevenueTypeTitle() {
@@ -34,6 +46,10 @@ public class RevenueType {
 
 	public void setRevenueTypeDescription(String revenueTypeDescription) {
 		this.revenueTypeDescription = revenueTypeDescription;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 	

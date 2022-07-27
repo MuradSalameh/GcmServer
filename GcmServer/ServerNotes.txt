@@ -22,6 +22,6 @@ Pojo jar in server und in client einbinden.
 
 
 
-auf der Server Seite muss ich dann
+
 
 LocalDateAdapter in localTime umwandeln 
