@@ -21,7 +21,6 @@ Projekt nur mit Pojos anlegen - pojos mit xml annotierungen versehen
 Pojo jar in server und in client einbinden.
 
 
+Erinnerungen:
 
-
-
-LocalDateAdapter in localTime umwandeln 
+- in FXML immer fx:id statt id schreiben, damit javaFx die fx:ids finden kann.
