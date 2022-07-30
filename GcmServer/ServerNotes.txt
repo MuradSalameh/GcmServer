@@ -24,3 +24,5 @@ Pojo jar in server und in client einbinden.
 Erinnerungen:
 
 - in FXML immer fx:id statt id schreiben, damit javaFx die fx:ids finden kann.
+
+- evet klasse in hibernate models und und in classes einfügen.

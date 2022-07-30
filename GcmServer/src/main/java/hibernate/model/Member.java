@@ -25,18 +25,18 @@ public class Member {
 	@Column(name = "ID")
 	private int id;	
 
-	@Column(name = "first_name")
-	private String firstName;
+	@Column(name = "clan_name")
+	private String clanName;
 
-	@Column(name = "last_name")
-	private String lastName;	
+	@Column(name = "clan_id")
+	private String clanId;	
 
-	@Column(name = "address_street")
-	private String addressStreet;
+	@Column(name = "realName")
+	private String realName;
 
-	@Column(name = "address_number")
-	private String addressNumber;
-
+	@Column(name = "address")
+	private String address;
+	
 	@Column(name = "address_postcode")
 	private String addressPostCode;
 
@@ -96,14 +96,14 @@ public class Member {
 	}
 
 
-	public Member(String firstName, String lastName, String addressStreet, String addressNumber, String addressPostCode,
-			String addressCity, String country, String email, String phoneNumber, List<Role> roles, List<Social> socials,
-			List<Game> games, LocalDate birthday, List<Team> teams) {
+	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
+			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
+			List<Social> socials, List<Game> games, LocalDate birthday, List<Team> teams) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.addressStreet = addressStreet;
-		this.addressNumber = addressNumber;
+		this.clanName = clanName;
+		this.clanId = clanId;
+		this.realName = realName;
+		this.address = address;
 		this.addressPostCode = addressPostCode;
 		this.addressCity = addressCity;
 		this.country = country;
@@ -117,43 +117,43 @@ public class Member {
 	}
 
 
-	public String getFirstName() {
-		return firstName;
+	public String getClanName() {
+		return clanName;
 	}
 
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setClanName(String clanName) {
+		this.clanName = clanName;
 	}
 
 
-	public String getLastName() {
-		return lastName;
+	public String getClanId() {
+		return clanId;
 	}
 
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setClanId(String clanId) {
+		this.clanId = clanId;
 	}
 
 
-	public String getAddressStreet() {
-		return addressStreet;
+	public String getRealName() {
+		return realName;
 	}
 
 
-	public void setAddressStreet(String addressStreet) {
-		this.addressStreet = addressStreet;
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 
-	public String getAddressNumber() {
-		return addressNumber;
+	public String getAddress() {
+		return address;
 	}
 
 
-	public void setAddressNumber(String addressNumber) {
-		this.addressNumber = addressNumber;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 
@@ -264,16 +264,10 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressStreet="
-				+ addressStreet + ", addressNumber=" + addressNumber + ", addressPostCode=" + addressPostCode
-				+ ", addressCity=" + addressCity + ", country=" + country + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", birthday=" + birthday + "]";
+		return "Member [id=" + id + ", clanName=" + clanName + ", clanId=" + clanId + ", realName=" + realName
+				+ ", address=" + address + ", addressPostCode=" + addressPostCode + ", addressCity=" + addressCity
+				+ ", country=" + country + ", email=" + email + ", phoneNumber=" + phoneNumber + ", birthday="
+				+ birthday + "]";
 	}
-
-
-	
-	
-
-
 
 }
