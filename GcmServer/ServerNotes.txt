@@ -20,9 +20,14 @@ ToDo:
 Projekt nur mit Pojos anlegen - pojos mit xml annotierungen versehen
 Pojo jar in server und in client einbinden.
 
+- event klasse in hibernate models und und in classes einfügen.
+
+- Daos in server fertig machen
 
 Erinnerungen:
 
 - in FXML immer fx:id statt id schreiben, damit javaFx die fx:ids finden kann.
 
-- evet klasse in hibernate models und und in classes einfügen.
+
+
+ButtonType in FXML muss manchmal manuell importiert werden!

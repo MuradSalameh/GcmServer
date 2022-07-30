@@ -51,7 +51,7 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 		Member old = session.find(Member.class, id);
 		
-		old.setFirstName(member.getFirstName());
+		old.setClanName(member.getClanName());
 		
 		/*
 		String hql = "update Member "
