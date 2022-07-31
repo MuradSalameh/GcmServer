@@ -13,9 +13,8 @@ public class MemberDAO {
 
 	public static void addMember(Member bean){
 		Session session = SessionUtil.getSession();    
-		Transaction tx = session.beginTransaction();
-		
-		//addMember(session,bean);    
+		Transaction tx = session.beginTransaction();		
+		 
 		session.persist(bean);    // Dafür die add member nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
@@ -26,9 +25,9 @@ public class MemberDAO {
 		Session session = SessionUtil.getSession();  
 		String hql = "from Member";
 		Query query = session.createQuery(hql);
-		List<Member> Members =  query.list();		
+		List<Member> members =  query.list();		
 		session.close();		
-		return Members;
+		return members;
 	}
 
 	public static void deleteMember(int id) {
@@ -42,62 +41,29 @@ public class MemberDAO {
 	}
 
 	public static void updateMember(int id, Member member){
-		/*
-		if(id <=0)  
-			return 0;  
-		*/
-		
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Member old = session.find(Member.class, id);
 		
 		old.setClanName(member.getClanName());
+		old.setClanId(member.getClanId());
+		old.setRealName(member.getRealName());
+		old.setAddress(member.getAddress());
+		old.setAddressPostCode(member.getAddressPostCode());
+		old.setAddressCity(member.getAddressCity());
+		old.setCountry(member.getCountry());
+		old.setEmail(member.getEmail());
+		old.setPhoneNumber(member.getPhoneNumber());
 		
-		/*
-		String hql = "update Member "
-				+ "set first_name = :first_name, "
-				+ "last_name = :last_name, "
-				+ "address_street = :address_street, "
-				+ "address_number = :address_number, "
-				+ "address_postcode = :address_postcode, "
-				+ "address_city = :address_city, "
-				+ "country = :country, "
-				+ "email = :email, "
-				+ "phone_number = :phone_number, "
-				+ "roles = :roles, "
-				+ "socials = :socials, "
-				+ "games = :games, "
-				+ "birtday = :birthday, "
-				+ "teams = :teams "				
-				+ "where id = :id";
+		old.setRoles(member.getRoles());
+		old.setSocials(member.getSocials());
+		old.setGames(member.getGames());
+		old.setTeams(member.getTeams());
 		
-		Query query = session.createQuery(hql);
-		
-		query.setParameter("id",id);
-		query.setParameter("first_name",member.getFirstName());
-		query.setParameter("last_name",member.getLastName());
-		query.setParameter("address_street",member.getAddressStreet());
-		query.setParameter("address_number",member.getAddressNumber());
-		query.setParameter("address_postcode",member.getAddressPostCode());
-		query.setParameter("address_city",member.getAddressCity());
-		query.setParameter("country",member.getCountry());
-		query.setParameter("email",member.getEmail());
-		query.setParameter("phone_number",member.getPhoneNumber());
-		query.setParameter("roles",member.getRoles());
-		query.setParameter("socials",member.getSocials());
-		query.setParameter("games",member.getGames());
-		query.setParameter("birthday",member.getBirthday());
-		query.setParameter("teams",member.getTeams());		
-		
-		
-		int rowCount = query.executeUpdate();		
-		System.out.println("Rows affected: " + rowCount);
-		*/
-		
+		old.setBirthday(member.getBirthday());		
 		
 		tx.commit();
-		session.close();
-		//return rowCount;
+		session.close();		
 	}
 
 }

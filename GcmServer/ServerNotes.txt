@@ -16,13 +16,11 @@
 
 
 ToDo:
+- Daos in server fertig machen!!!!!!!!!!!!!!!!!!!!!!!
 
-Projekt nur mit Pojos anlegen - pojos mit xml annotierungen versehen
-Pojo jar in server und in client einbinden.
+- Tippfehler korrigieren adress bei Partner DAO und Partner Klassen.
+- Tippfehler tourament title Tournamen Dao und klassen
 
-- event klasse in hibernate models und und in classes einfügen.
-
-- Daos in server fertig machen
 
 Erinnerungen:
 

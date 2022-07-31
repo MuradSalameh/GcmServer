@@ -53,7 +53,7 @@ public class Game {
 
 
 	@Column(name = "game_additional_notes")
-	private String gameAddidionalNotes;
+	private String gameAdditionalNotes;
 
 
 
@@ -64,14 +64,14 @@ public class Game {
 
 
 	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, List<Member> members,
-			List<Tournament> tournaments, String gameAddidionalNotes) {
+			List<Tournament> tournaments, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
 		this.releaseDate = releaseDate;
 		this.genres = genres;
 		this.members = members;
 		this.tournaments = tournaments;
-		this.gameAddidionalNotes = gameAddidionalNotes;
+		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
 
@@ -136,14 +136,14 @@ public class Game {
 
 
 
-	public String getGameAddidionalNotes() {
-		return gameAddidionalNotes;
+	public String getGameAdditionalNotes() {
+		return gameAdditionalNotes;
 	}
 
 
 
-	public void setGameAddidionalNotes(String gameAddidionalNotes) {
-		this.gameAddidionalNotes = gameAddidionalNotes;
+	public void setGameAdditionalNotes(String gameAdditionalNotes) {
+		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
 
