@@ -36,7 +36,7 @@ public class Member {
 
 	@Column(name = "address")
 	private String address;
-	
+
 	@Column(name = "address_postcode")
 	private String addressPostCode;
 
@@ -51,7 +51,7 @@ public class Member {
 
 	@Column(name = "phone_number")
 	private String phoneNumber;	
-	
+
 
 	//join table for member roles
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -62,7 +62,7 @@ public class Member {
 			)
 	List<Role> roles = new ArrayList<>();
 
-	
+
 	//join table for member socials
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable(
@@ -72,7 +72,7 @@ public class Member {
 			)
 	List<Social> socials = new ArrayList<>();
 
-	
+
 	//join table for games
 	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
@@ -82,11 +82,15 @@ public class Member {
 			)
 	List<Game> games = new ArrayList<>();
 
-	
+	//join table members events
+	@ManyToMany(mappedBy = "members")
+	List<Event> events = new ArrayList<Event>();
+
+
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-	
+
 	@ManyToMany(mappedBy = "members")
 	List<Team> teams = new ArrayList<>();
 
