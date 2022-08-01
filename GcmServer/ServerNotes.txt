@@ -20,6 +20,7 @@ ToDo:
 
 - Tippfehler korrigieren adress bei Partner DAO und Partner Klassen.
 - Tippfehler tourament title Tournamen Dao und klassen
+- klassen in classes und in client.fxclasses aktualisieren
 
 
 Erinnerungen:

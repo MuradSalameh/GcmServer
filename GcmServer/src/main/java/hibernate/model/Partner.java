@@ -70,6 +70,15 @@ public class Partner{
             inverseJoinColumns = @JoinColumn( name="social_id")
     )
 	List<Social> socials = new ArrayList<>();
+	
+	//join table for partner revenue
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinTable(
+			name="partner_revenue",
+			joinColumns = @JoinColumn( name="partner_id"),
+			inverseJoinColumns = @JoinColumn( name="revenue_id")
+			)
+	List<Revenue> revenues = new ArrayList<>();
 
 	
 	public Partner() {
@@ -79,7 +88,8 @@ public class Partner{
 
 	public Partner(String companyName, String contactPersonName, String contactPersonPhone, String contactPersonMail,
 			String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Social> socials) {
+			String adressCity, String country, String email, String phoneNumber, List<Social> socials,
+			List<Revenue> revenues) {
 		super();
 		this.companyName = companyName;
 		this.contactPersonName = contactPersonName;
@@ -95,6 +105,7 @@ public class Partner{
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.socials = socials;
+		this.revenues = revenues;
 	}
 
 
@@ -238,12 +249,18 @@ public class Partner{
 	}
 
 
+	public List<Revenue> getRevenues() {
+		return revenues;
+	}
+
+
+	public void setRevenues(List<Revenue> revenues) {
+		this.revenues = revenues;
+	}
+
+
 	public int getId() {
 		return id;
-	}
-	
-	
-	
-	
+	}	
 
 }

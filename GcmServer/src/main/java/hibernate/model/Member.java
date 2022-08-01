@@ -102,7 +102,7 @@ public class Member {
 
 	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
 			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
-			List<Social> socials, List<Game> games, LocalDate birthday, List<Team> teams) {
+			List<Social> socials, List<Game> games, List<Event> events, LocalDate birthday, List<Team> teams) {
 		super();
 		this.clanName = clanName;
 		this.clanId = clanId;
@@ -116,6 +116,7 @@ public class Member {
 		this.roles = roles;
 		this.socials = socials;
 		this.games = games;
+		this.events = events;
 		this.birthday = birthday;
 		this.teams = teams;
 	}
@@ -241,6 +242,16 @@ public class Member {
 	}
 
 
+	public List<Event> getEvents() {
+		return events;
+	}
+
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+
 	public LocalDate getBirthday() {
 		return birthday;
 	}
@@ -268,10 +279,21 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", clanName=" + clanName + ", clanId=" + clanId + ", realName=" + realName
-				+ ", address=" + address + ", addressPostCode=" + addressPostCode + ", addressCity=" + addressCity
-				+ ", country=" + country + ", email=" + email + ", phoneNumber=" + phoneNumber + ", birthday="
-				+ birthday + "]";
+		return "\nMember id = " + id 
+				+ "\nclanName = " + clanName 
+				+ "\nclanId = " + clanId 
+				+ "\nrealName = " + realName
+				+ "\naddress=" + address 
+				+ "\naddressPostCode=" + addressPostCode 
+				+ "\naddressCity=" + addressCity
+				+ "\ncountry=" + country 
+				+ "\nemail=" + email 
+				+ "\nphoneNumber=" + phoneNumber 
+				+ "\nbirthday="	+ birthday 
+				+ "\n----------------------------------"
+				+ "\n";
 	}
 
+
+	
 }

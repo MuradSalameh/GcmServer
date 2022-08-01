@@ -20,7 +20,7 @@ public class GcmResource {
 		if(!dr.isRc())
 			System.out.println(dr.getMeldung());
 	}
-*/
+
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
@@ -63,6 +63,6 @@ public class GcmResource {
 	public Response deleteWein(@PathParam("weinid")String id) {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-	*/
+*/	
 
 }

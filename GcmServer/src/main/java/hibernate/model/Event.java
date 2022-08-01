@@ -59,6 +59,89 @@ public class Event {
 		super();
 	}
 
+	public Event(String eventTitle, String eventDescription, LocalDate date, LocalTime eventStartTime,
+			LocalTime eventEndTime, String eventAddidtionalNotes, boolean reoccuring, List<Member> members) {
+		super();
+		this.eventTitle = eventTitle;
+		this.eventDescription = eventDescription;
+		this.date = date;
+		this.eventStartTime = eventStartTime;
+		this.eventEndTime = eventEndTime;
+		this.eventAddidtionalNotes = eventAddidtionalNotes;
+		this.reoccuring = reoccuring;
+		this.members = members;
+	}
+
+	public String getEventTitle() {
+		return eventTitle;
+	}
+
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+
+	public String getEventDescription() {
+		return eventDescription;
+	}
+
+	public void setEventDescription(String eventDescription) {
+		this.eventDescription = eventDescription;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public LocalTime getEventStartTime() {
+		return eventStartTime;
+	}
+
+	public void setEventStartTime(LocalTime eventStartTime) {
+		this.eventStartTime = eventStartTime;
+	}
+
+	public LocalTime getEventEndTime() {
+		return eventEndTime;
+	}
+
+	public void setEventEndTime(LocalTime eventEndTime) {
+		this.eventEndTime = eventEndTime;
+	}
+
+	public String getEventAddidtionalNotes() {
+		return eventAddidtionalNotes;
+	}
+
+	public void setEventAddidtionalNotes(String eventAddidtionalNotes) {
+		this.eventAddidtionalNotes = eventAddidtionalNotes;
+	}
+
+	public boolean isReoccuring() {
+		return reoccuring;
+	}
+
+	public void setReoccuring(boolean reoccuring) {
+		this.reoccuring = reoccuring;
+	}
+
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	
+
 
 
 }

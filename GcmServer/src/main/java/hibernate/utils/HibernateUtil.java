@@ -22,7 +22,7 @@ public class HibernateUtil {
 	public static void startSession() {
 		// create configurations
 		Configuration configuration = new Configuration();
-		configuration.configure("hibernate.cfg.xml");		
+		configuration.configure("/main/resources/hibernate.cfg.xml");		
 		
 
 		// crate session factory - data source

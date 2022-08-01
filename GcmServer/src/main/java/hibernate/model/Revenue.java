@@ -36,84 +36,63 @@ public class Revenue {
 	@Column(name = "date")
 	private LocalDate date;
 	
-	@Column(name = "partner")
-	private Partner partner;
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="revenue_revenue_type",
-			joinColumns = @JoinColumn( name="revenue_id"),
-			inverseJoinColumns = @JoinColumn( name="revenue_type_id")
-			)
-	List<RevenueType> revenueTypes = new ArrayList<>();
-
 	public Revenue() {
 		super();
 	}
 
-	public Revenue(String revenueTitle, String revenueDescription, double amount, LocalDate date, Partner partner,
-			List<RevenueType> revenueTypes) {
+
+	public Revenue(String revenueTitle, String revenueDescription, double amount, LocalDate date) {
 		super();
 		this.revenueTitle = revenueTitle;
 		this.revenueDescription = revenueDescription;
 		this.amount = amount;
-		this.date = date;
-		this.partner = partner;
-		this.revenueTypes = revenueTypes;
+		this.date = date;		
 	}
+
 
 	public String getRevenueTitle() {
 		return revenueTitle;
 	}
 
+
 	public void setRevenueTitle(String revenueTitle) {
 		this.revenueTitle = revenueTitle;
 	}
+
 
 	public String getRevenueDescription() {
 		return revenueDescription;
 	}
 
+
 	public void setRevenueDescription(String revenueDescription) {
 		this.revenueDescription = revenueDescription;
 	}
+
 
 	public double getAmount() {
 		return amount;
 	}
 
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
 
 	public LocalDate getDate() {
 		return date;
 	}
 
+
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public Partner getPartner() {
-		return partner;
-	}
-
-	public void setPartner(Partner partner) {
-		this.partner = partner;
-	}
-
-	public List<RevenueType> getRevenueTypes() {
-		return revenueTypes;
-	}
-
-	public void setRevenueTypes(List<RevenueType> revenueTypes) {
-		this.revenueTypes = revenueTypes;
-	}
 
 	public int getId() {
 		return id;
 	}
-	
-	
 
+	
 }

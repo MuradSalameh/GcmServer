@@ -48,6 +48,7 @@ public class RevenueTypeDAO {
 		
 		old.setRevenueTypeTitle(revenueType.getRevenueTypeTitle());
 		old.setRevenueTypeDescription(revenueType.getRevenueTypeDescription());
+		old.setRevenues(revenueType.getRevenues());
 		
 		tx.commit();
 		session.close();		

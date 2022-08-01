@@ -58,6 +58,7 @@ public class MemberDAO {
 		old.setRoles(member.getRoles());
 		old.setSocials(member.getSocials());
 		old.setGames(member.getGames());
+		old.setEvents(member.getEvents());
 		old.setTeams(member.getTeams());
 		
 		old.setBirthday(member.getBirthday());		

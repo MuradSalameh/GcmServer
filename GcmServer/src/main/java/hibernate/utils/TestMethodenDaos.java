@@ -11,13 +11,13 @@ public class TestMethodenDaos {
 	public static void main(String[] args) {
 		
 		
-		/*
+	/*
 		Member test = new Member(
-				"test", 					// first name
-				"ttttt", 					// last name
-				"tttttt 1", 				// street
-				"44", 						// street number
-				"1160", 					// post code
+				"test", 					// clan name
+				"ttttt", 					// clan id
+				"tttttt 1", 				// real name
+				"44", 						// address
+				"1160", 					// adress post code
 				"Vienna", 					// city
 				"Austria", 					// country
 				"ulli@email.com", 			// mail
@@ -25,6 +25,7 @@ public class TestMethodenDaos {
 				null, 						// role
 				null, 						// socials
 				null, 						// games
+				null,						// events
 				LocalDate.of(1981, 4, 11), 	// birthday
 				null);						// teams
 				
@@ -32,11 +33,11 @@ public class TestMethodenDaos {
 		MemberDAO.addMember(test);	
 		
 		
-		test.setFirstName("UpdateTest");
-		MemberDAO.updateMember(5, test);
-		*/
+		test.setClanName("UpdateTest");
+		MemberDAO.updateMember(1, test);
 		
-		MemberDAO.deleteMember(5);
+		*/
+		//MemberDAO.deleteMember(5);
 		
 		List<Member> members = MemberDAO.getMembers();
 		members.forEach(System.out::println);
