@@ -3,16 +3,16 @@ package main.java.hibernate.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "partner")
@@ -70,6 +70,15 @@ public class Partner{
             inverseJoinColumns = @JoinColumn( name="social_id")
     )
 	List<Social> socials = new ArrayList<>();
+	
+	//join table for partner revenue
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinTable(
+			name="partner_revenue",
+			joinColumns = @JoinColumn( name="partner_id"),
+			inverseJoinColumns = @JoinColumn( name="revenue_id")
+			)
+	List<Revenue> revenues = new ArrayList<>();
 
 	
 	public Partner() {
@@ -79,7 +88,8 @@ public class Partner{
 
 	public Partner(String companyName, String contactPersonName, String contactPersonPhone, String contactPersonMail,
 			String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Social> socials) {
+			String adressCity, String country, String email, String phoneNumber, List<Social> socials,
+			List<Revenue> revenues) {
 		super();
 		this.companyName = companyName;
 		this.contactPersonName = contactPersonName;
@@ -95,6 +105,7 @@ public class Partner{
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.socials = socials;
+		this.revenues = revenues;
 	}
 
 
@@ -238,12 +249,18 @@ public class Partner{
 	}
 
 
+	public List<Revenue> getRevenues() {
+		return revenues;
+	}
+
+
+	public void setRevenues(List<Revenue> revenues) {
+		this.revenues = revenues;
+	}
+
+
 	public int getId() {
 		return id;
-	}
-	
-	
-	
-	
+	}	
 
 }

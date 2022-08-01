@@ -1,34 +1,65 @@
 package main.java.hibernate.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "expense")
 public class Expense {
-	private int id;
-	private String expenseTitle;
-	private String expenseDescription;
-	private double amount;
-	private LocalDate date;
-	private String recipientName;
-	private ExpenseType expenseType;
 	
-	public Expense(int id, String expenseTitle, String expenseDescription, double amount, LocalDate date,
-			String recipientName, ExpenseType expenseType) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private int id;
+	
+	@Column(name = "expense_title")
+	private String expenseTitle;
+	
+	@Column(name = "expense_description")
+	private String expenseDescription;
+	
+	@Column(name = "amount")
+	private double amount;
+	
+	@Column(name = "date")
+	private LocalDate date;
+	
+	@Column(name = "recipient_name")
+	private String recipientName;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinTable(
+			name="expense_expense_type",
+			joinColumns = @JoinColumn( name="expense_id"),
+			inverseJoinColumns = @JoinColumn( name="expense_type_id")
+			)
+	List<ExpenseType> expenseTypes = new ArrayList<>();
+
+	public Expense() {
 		super();
-		this.id = id;
+	}
+
+	public Expense(String expenseTitle, String expenseDescription, double amount, LocalDate date, String recipientName,
+			List<ExpenseType> expenseTypes) {
+		super();
 		this.expenseTitle = expenseTitle;
 		this.expenseDescription = expenseDescription;
 		this.amount = amount;
 		this.date = date;
 		this.recipientName = recipientName;
-		this.expenseType = expenseType;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		this.expenseTypes = expenseTypes;
 	}
 
 	public String getExpenseTitle() {
@@ -71,15 +102,17 @@ public class Expense {
 		this.recipientName = recipientName;
 	}
 
-	public ExpenseType getExpenseType() {
-		return expenseType;
+	public List<ExpenseType> getExpenseTypes() {
+		return expenseTypes;
 	}
 
-	public void setExpenseType(ExpenseType expenseType) {
-		this.expenseType = expenseType;
+	public void setExpenseTypes(List<ExpenseType> expenseTypes) {
+		this.expenseTypes = expenseTypes;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 	
-	
-
 }

@@ -1,86 +1,98 @@
 package main.java.hibernate.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "revenue")
 public class Revenue {
-	private int id;
-	private String title;
-	private String description;
-	private double amount;
-	private LocalDate date;
-	private Partner partner;
-	private RevenueType reventueType;
 	
-	public Revenue(int id, String title, String description, double amount, LocalDate date, Partner partner,
-			RevenueType reventueType) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private int id;
+	
+	@Column(name = "revenue_title")
+	private String revenueTitle;
+	
+	@Column(name = "revenue_description")
+	private String revenueDescription;
+	
+	@Column(name = "amount")
+	private double amount;
+	
+	@Column(name = "date")
+	private LocalDate date;
+	
+	public Revenue() {
 		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
+	}
+
+
+	public Revenue(String revenueTitle, String revenueDescription, double amount, LocalDate date) {
+		super();
+		this.revenueTitle = revenueTitle;
+		this.revenueDescription = revenueDescription;
 		this.amount = amount;
-		this.date = date;
-		this.partner = partner;
-		this.reventueType = reventueType;
+		this.date = date;		
 	}
 
-	public int getId() {
-		return id;
+
+	public String getRevenueTitle() {
+		return revenueTitle;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+	public void setRevenueTitle(String revenueTitle) {
+		this.revenueTitle = revenueTitle;
 	}
 
-	public String getTitle() {
-		return title;
+
+	public String getRevenueDescription() {
+		return revenueDescription;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setRevenueDescription(String revenueDescription) {
+		this.revenueDescription = revenueDescription;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public double getAmount() {
 		return amount;
 	}
 
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
 
 	public LocalDate getDate() {
 		return date;
 	}
 
+
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public Partner getPartner() {
-		return partner;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setPartner(Partner partner) {
-		this.partner = partner;
-	}
-
-	public RevenueType getReventueType() {
-		return reventueType;
-	}
-
-	public void setReventueType(RevenueType reventueType) {
-		this.reventueType = reventueType;
-	}
 	
-	
-	
-	
-
 }

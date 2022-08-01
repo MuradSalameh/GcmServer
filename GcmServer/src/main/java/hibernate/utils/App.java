@@ -21,18 +21,19 @@ public class App {
 
 		// test persist GcmUser
 		Member ulli = new Member(
-				"Ulli", 					// first name
-				"Bulli", 					// last name
-				"Street 1", 				// street
-				"44", 						// street number
+				"Ulli", 					// clan name
+				"Bulli", 					// clan id
+				"Street 1", 				// real name
+				"44", 						// address
 				"1160", 					// post code
 				"Vienna", 					// city
 				"Austria", 					// country
 				"ulli@email.com", 			// mail
 				"+43 677 678 643 44", 		// phone number
-				null, 						// role
+				null, 						// roles
 				null, 						// socials
 				null, 						// games
+				null,						// events
 				LocalDate.of(1981, 4, 11), 	// birthday
 				null);						// teams
 
@@ -40,18 +41,19 @@ public class App {
 		
 
 		Member hans = new Member(
-				"hans", 					// first name
-				"kranz", 					// last name
-				"Street2", 					// street
-				"333", 						// street number
+				"hans", 					// clan name
+				"kranz", 					// clan id
+				"Street2", 					// real name
+				"333", 						// address
 				"14129", 					// post code
 				"Berlin", 					// city
 				"Germany", 					// country
 				"hans@email.com", 			// mail
 				"+49 177 456 543 11", 		// phone number
-				null, 						// role
+				null, 						// roles
 				null, 						// socials
 				null, 						// games
+				null,						// events
 				null, 						// birthday
 				null);						// teams
 

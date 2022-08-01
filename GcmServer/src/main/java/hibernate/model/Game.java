@@ -4,17 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "game")
@@ -52,7 +53,7 @@ public class Game {
 
 
 	@Column(name = "game_additional_notes")
-	private String gameAddidionalNotes;
+	private String gameAdditionalNotes;
 
 
 
@@ -63,14 +64,14 @@ public class Game {
 
 
 	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, List<Member> members,
-			List<Tournament> tournaments, String gameAddidionalNotes) {
+			List<Tournament> tournaments, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
 		this.releaseDate = releaseDate;
 		this.genres = genres;
 		this.members = members;
 		this.tournaments = tournaments;
-		this.gameAddidionalNotes = gameAddidionalNotes;
+		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
 
@@ -135,14 +136,14 @@ public class Game {
 
 
 
-	public String getGameAddidionalNotes() {
-		return gameAddidionalNotes;
+	public String getGameAdditionalNotes() {
+		return gameAdditionalNotes;
 	}
 
 
 
-	public void setGameAddidionalNotes(String gameAddidionalNotes) {
-		this.gameAddidionalNotes = gameAddidionalNotes;
+	public void setGameAdditionalNotes(String gameAdditionalNotes) {
+		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
 

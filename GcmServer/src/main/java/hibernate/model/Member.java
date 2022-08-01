@@ -4,17 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "member")
@@ -25,23 +26,23 @@ public class Member {
 	@Column(name = "ID")
 	private int id;	
 
-	@Column(name = "first_name")
-	private String firstName;
+	@Column(name = "clan_name")
+	private String clanName;
 
-	@Column(name = "last_name")
-	private String lastName;	
+	@Column(name = "clan_id")
+	private String clanId;	
 
-	@Column(name = "address_street")
-	private String adressStreet;
+	@Column(name = "realName")
+	private String realName;
 
-	@Column(name = "address_number")
-	private String adressNumber;
+	@Column(name = "address")
+	private String address;
 
 	@Column(name = "address_postcode")
-	private String adressPostCode;
+	private String addressPostCode;
 
 	@Column(name = "address_city")
-	private String adressCity;	
+	private String addressCity;	
 
 	@Column(name = "country")
 	private String country;	
@@ -51,7 +52,7 @@ public class Member {
 
 	@Column(name = "phone_number")
 	private String phoneNumber;	
-	
+
 
 	//join table for member roles
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -62,7 +63,7 @@ public class Member {
 			)
 	List<Role> roles = new ArrayList<>();
 
-	
+
 	//join table for member socials
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinTable(
@@ -72,9 +73,9 @@ public class Member {
 			)
 	List<Social> socials = new ArrayList<>();
 
-	
+
 	//join table for games
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
 			name = "member_game", 
 			joinColumns = { @JoinColumn(name = "member_id") }, 
@@ -82,11 +83,15 @@ public class Member {
 			)
 	List<Game> games = new ArrayList<>();
 
-	
+	//join table members events
+	@ManyToMany(mappedBy = "members")
+	List<Event> events = new ArrayList<Event>();
+
+
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-	
+
 	@ManyToMany(mappedBy = "members")
 	List<Team> teams = new ArrayList<>();
 
@@ -96,84 +101,85 @@ public class Member {
 	}
 
 
-	public Member(String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Role> roles, List<Social> socials,
-			List<Game> games, LocalDate birthday, List<Team> teams) {
+	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
+			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
+			List<Social> socials, List<Game> games, List<Event> events, LocalDate birthday, List<Team> teams) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.adressStreet = adressStreet;
-		this.adressNumber = adressNumber;
-		this.adressPostCode = adressPostCode;
-		this.adressCity = adressCity;
+		this.clanName = clanName;
+		this.clanId = clanId;
+		this.realName = realName;
+		this.address = address;
+		this.addressPostCode = addressPostCode;
+		this.addressCity = addressCity;
 		this.country = country;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.roles = roles;
 		this.socials = socials;
 		this.games = games;
+		this.events = events;
 		this.birthday = birthday;
 		this.teams = teams;
 	}
 
 
-	public String getFirstName() {
-		return firstName;
+	public String getClanName() {
+		return clanName;
 	}
 
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setClanName(String clanName) {
+		this.clanName = clanName;
 	}
 
 
-	public String getLastName() {
-		return lastName;
+	public String getClanId() {
+		return clanId;
 	}
 
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setClanId(String clanId) {
+		this.clanId = clanId;
 	}
 
 
-	public String getAdressStreet() {
-		return adressStreet;
+	public String getRealName() {
+		return realName;
 	}
 
 
-	public void setAdressStreet(String adressStreet) {
-		this.adressStreet = adressStreet;
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 
-	public String getAdressNumber() {
-		return adressNumber;
+	public String getAddress() {
+		return address;
 	}
 
 
-	public void setAdressNumber(String adressNumber) {
-		this.adressNumber = adressNumber;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 
-	public String getAdressPostCode() {
-		return adressPostCode;
+	public String getAddressPostCode() {
+		return addressPostCode;
 	}
 
 
-	public void setAdressPostCode(String adressPostCode) {
-		this.adressPostCode = adressPostCode;
+	public void setAddressPostCode(String addressPostCode) {
+		this.addressPostCode = addressPostCode;
 	}
 
 
-	public String getAdressCity() {
-		return adressCity;
+	public String getAddressCity() {
+		return addressCity;
 	}
 
 
-	public void setAdressCity(String adressCity) {
-		this.adressCity = adressCity;
+	public void setAddressCity(String addressCity) {
+		this.addressCity = addressCity;
 	}
 
 
@@ -237,6 +243,16 @@ public class Member {
 	}
 
 
+	public List<Event> getEvents() {
+		return events;
+	}
+
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+
 	public LocalDate getBirthday() {
 		return birthday;
 	}
@@ -262,6 +278,23 @@ public class Member {
 	}
 
 
+	@Override
+	public String toString() {
+		return "\nMember id = " + id 
+				+ "\nclanName = " + clanName 
+				+ "\nclanId = " + clanId 
+				+ "\nrealName = " + realName
+				+ "\naddress=" + address 
+				+ "\naddressPostCode=" + addressPostCode 
+				+ "\naddressCity=" + addressCity
+				+ "\ncountry=" + country 
+				+ "\nemail=" + email 
+				+ "\nphoneNumber=" + phoneNumber 
+				+ "\nbirthday="	+ birthday 
+				+ "\n----------------------------------"
+				+ "\n";
+	}
 
 
+	
 }

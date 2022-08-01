@@ -8,7 +8,6 @@
 		<!-- url -->
 		<property name= "hibernate.connection.url">jdbc:mysql://localhost:3306/gcm</property>
 		
-		
 		<!-- username -->
 		<property name= "hibernate.connection.username">gcmconn</property>
 
@@ -18,12 +17,28 @@
 		<!-- mysql driver -->
 		<property name= "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		
+		<!-- dialect -->
+		 <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		
 		<!-- show sql -->
 		<property name= "hibernate.show_sql">true</property>
 		
 		<!-- create tables if not existing or update if existing -->
 		 <property name="hibernate.hbm2ddl.auto">update</property>
-		
+		 
+		<mapping class="main.java.hibernate.model.Expense"/>
+		<mapping class="main.java.hibernate.model.ExpenseType"/>
+		<mapping class="main.java.hibernate.model.Game"/>
+		<mapping class="main.java.hibernate.model.Genre"/>
+		<mapping class="main.java.hibernate.model.Member"/>
+		<mapping class="main.java.hibernate.model.Partner"/>
+		<mapping class="main.java.hibernate.model.Revenue"/>
+		<mapping class="main.java.hibernate.model.RevenueType"/>
+		<mapping class="main.java.hibernate.model.Role"/>
+		<mapping class="main.java.hibernate.model.Social"/>
+		<mapping class="main.java.hibernate.model.Team"/>
+		<mapping class="main.java.hibernate.model.Event"/>
+		<mapping class="main.java.hibernate.model.Tournament"/>
 		
 		
 	</session-factory>
