@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.ExecutorService;
 
+import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.sun.net.httpserver.HttpServer;
@@ -12,7 +13,7 @@ public class GcmServer {
 
 	public static void main(String[] args) {
 
-		/*
+		
 		URI basisUri = URI.create("http://localhost:4712/");
 		// package mit den annotierten Klassen bekanntgeben
 		ResourceConfig config = new ResourceConfig().packages("main.java.server");
@@ -26,7 +27,7 @@ public class GcmServer {
 		}
 		server.stop(0);
 		((ExecutorService)server.getExecutor()).shutdown();
-		 */
+		 
 	}
 
 

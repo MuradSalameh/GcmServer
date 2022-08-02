@@ -51,7 +51,7 @@ public class TournamentDAO {
 		old.setTournamentTimeBeginn(tournament.getTournamentTimeBeginn());
 		old.setTournamentTimeEnd(tournament.getTournamentTimeEnd());
 		old.setTeams(tournament.getTeams());
-		old.setGame(tournament.getGame());
+		//old.setGame(tournament.getGame());
 		old.setTournamentResult(tournament.getTournamentResult());
 		
 		tx.commit();

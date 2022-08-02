@@ -2,7 +2,9 @@ package main.java.hibernate.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,16 +44,27 @@ public class Game {
 			)
 	List<Genre> genres = new ArrayList<Genre>();
 
-	//join table members games
-	@ManyToMany(mappedBy = "games")
-	List<Member> members = new ArrayList<Member>();
 	
+	
+	@ManyToMany(cascade = {
+		    CascadeType.PERSIST,
+		    CascadeType.MERGE
+		})
+	@JoinTable(
+			name = "game_member", 
+			joinColumns = { @JoinColumn(name = "game_id") }, 
+			inverseJoinColumns = { @JoinColumn(name = "member_id") }
+			)
+	Set<Member> members = new HashSet<>();
+	
+	
+		
 	// join column tournament game
-	@OneToMany(mappedBy="game")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "game_id")
     List<Tournament> tournaments = new ArrayList<Tournament>();
 	
-
-
+	
 	@Column(name = "game_additional_notes")
 	private String gameAdditionalNotes;
 
@@ -63,7 +76,7 @@ public class Game {
 
 
 
-	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, List<Member> members,
+	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, Set<Member> members,
 			List<Tournament> tournaments, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
@@ -112,13 +125,13 @@ public class Game {
 
 
 
-	public List<Member> getMembers() {
+	public Set<Member> getMembers() {
 		return members;
 	}
 
 
 
-	public void setMembers(List<Member> members) {
+	public void setMembers(Set<Member> members) {
 		this.members = members;
 	}
 

@@ -1,8 +1,10 @@
 package main.java.hibernate.dao;
 
 import main.java.hibernate.model.Member;
+import main.java.hibernate.utils.HibernateUtil;
 import main.java.hibernate.utils.SessionUtil;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -72,16 +74,19 @@ public class MemberDAO {
 	}
 	*/
 	
-	public static void updateMember(int id, Member member){
+	public static void updateMember(int id, Member member) {
 		
 	
 		
         Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Member old = session.find(Member.class, id);
+	
+		//Member old = session.load(Member.class, id);
 		
+		//Member old = session.find(Member.class, id);
 		
-		
+		Member old = session.get(Member.class, id);
+				
 		old.setClanName(member.getClanName());
 		old.setClanId(member.getClanId());
 		old.setRealName(member.getRealName());
@@ -90,16 +95,24 @@ public class MemberDAO {
 		old.setAddressCity(member.getAddressCity());
 		old.setCountry(member.getCountry());
 		old.setEmail(member.getEmail());
-		old.setPhoneNumber(member.getPhoneNumber());
+		old.setPhoneNumber(member.getPhoneNumber());		 		
+		old.setBirthday(member.getBirthday());
 		
-		old.setRoles(member.getRoles());
-		old.setSocials(member.getSocials());
-		old.setGames(member.getGames());
-		old.setEvents(member.getEvents());
-		old.setTeams(member.getTeams());
+		session.saveOrUpdate(old);
 		
-		old.setBirthday(member.getBirthday());		
+//  Anderen Weg finden um die Listen und Sets zu persistieren
 		
+		//old.setRoles(member.getRoles());
+	
+		
+		//old.setSocials(member.getSocials());
+		//old.setGames(member.getGames());
+		//old.setEvents(member.getEvents());
+		//old.setTeams(member.getTeams());
+		
+		
+		
+		session.flush();
 		tx.commit();
 		session.close();	
 		}

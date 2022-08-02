@@ -1,7 +1,7 @@
 package main.java.hibernate.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,14 +29,14 @@ public class Team {
 	@Column(name = "team_description")
 	private String teamDescription;
 	
-	//join table for members
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-			name = "member_team", 
-			joinColumns = { @JoinColumn(name = "team_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "member_id") }
-			)	
-	List<Member> members = new ArrayList<>();
+	
+	
+	
+	
+	
+	
+	@ManyToMany(mappedBy = "teams")
+		private Set<Member> members = new HashSet<>();	
 
 	
 	public Team() {
@@ -44,7 +44,7 @@ public class Team {
 	}
 
 
-	public Team(String teamName, String teamDescription, List<Member> members) {
+	public Team(String teamName, String teamDescription, Set<Member> members) {
 		super();
 		this.teamName = teamName;
 		this.teamDescription = teamDescription;
@@ -72,12 +72,12 @@ public class Team {
 	}
 
 
-	public List<Member> getMembers() {
+	public Set<Member> getMembers() {
 		return members;
 	}
 
 
-	public void setMembers(List<Member> members) {
+	public void setMembers(Set<Member> members) {
 		this.members = members;
 	}
 
@@ -85,8 +85,8 @@ public class Team {
 	public int getId() {
 		return id;
 	}
-	
-	
+
+
 
 }
 

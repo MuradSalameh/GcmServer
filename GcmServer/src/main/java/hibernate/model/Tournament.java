@@ -2,8 +2,9 @@ package main.java.hibernate.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -14,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 @Entity
@@ -48,13 +48,15 @@ public class Tournament {
 			joinColumns = { @JoinColumn(name = "tournament_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "team_id") }
 			)	
-	List<Team> teams = new ArrayList<>();
+	Set<Team> teams = new HashSet<>();
 
 
 	// join column for game tournaments
+	
 	@ManyToOne
     @JoinColumn(name="game_id")
     private Game game;
+    
 
 	@Column(name = "tournament_result")
 	private String tournamentResult;
@@ -75,7 +77,7 @@ public class Tournament {
 
 
 	public Tournament(String touramentTitle, String tournamentDescription, LocalDate tournamentDate,
-			LocalTime tournamentTimeBeginn, LocalTime tournamentTimeEnd, List<Team> teams, Game game,
+			LocalTime tournamentTimeBeginn, LocalTime tournamentTimeEnd, Set<Team> teams,Game game,
 			String tournamentResult) {
 		super();
 		this.touramentTitle = touramentTitle;
@@ -150,13 +152,13 @@ public class Tournament {
 
 
 
-	public List<Team> getTeams() {
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
 
 
-	public void setTeams(List<Team> teams) {
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
 

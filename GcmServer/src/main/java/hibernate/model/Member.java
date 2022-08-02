@@ -2,8 +2,9 @@ package main.java.hibernate.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -74,36 +75,52 @@ public class Member {
 	List<Social> socials = new ArrayList<>();
 
 
+
 	//join table for games
-	@ManyToMany(cascade = { CascadeType.ALL})
-	@JoinTable(
-			name = "member_game", 
-			joinColumns = { @JoinColumn(name = "member_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "game_id") }
-			)
-	List<Game> games = new ArrayList<>();
+	@ManyToMany//(mappedBy = "members")
+	Set<Game> games = new HashSet<>();
+
+
+
 
 	//join table members events
 	@ManyToMany(mappedBy = "members")
-	List<Event> events = new ArrayList<Event>();
+	Set<Event> events = new HashSet<>();
 
 
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-	// Teams
-	@ManyToMany(mappedBy = "members")
-	List<Team> teams = new ArrayList<>();
 
+
+	// Teams
+	@ManyToMany(cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+	})
+	@JoinTable(name = "member_team", 
+	joinColumns = @JoinColumn(name = "member_id"), 
+	inverseJoinColumns = @JoinColumn(name = "team_id")
+			)
+	Set<Team> teams = new HashSet<>();
 
 	public Member() {
 		super();
 	}
+	
+	
+
+
+
+	
+
+
+
 
 
 	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
 			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
-			List<Social> socials, List<Game> games, List<Event> events, LocalDate birthday, List<Team> teams) {
+			List<Social> socials, Set<Game> games, Set<Event> events, LocalDate birthday, Set<Team> teams) {
 		super();
 		this.clanName = clanName;
 		this.clanId = clanId;
@@ -121,6 +138,7 @@ public class Member {
 		this.birthday = birthday;
 		this.teams = teams;
 	}
+
 
 
 	public String getClanName() {
@@ -128,9 +146,11 @@ public class Member {
 	}
 
 
+
 	public void setClanName(String clanName) {
 		this.clanName = clanName;
 	}
+
 
 
 	public String getClanId() {
@@ -138,9 +158,11 @@ public class Member {
 	}
 
 
+
 	public void setClanId(String clanId) {
 		this.clanId = clanId;
 	}
+
 
 
 	public String getRealName() {
@@ -148,9 +170,11 @@ public class Member {
 	}
 
 
+
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
+
 
 
 	public String getAddress() {
@@ -158,9 +182,11 @@ public class Member {
 	}
 
 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 
 
 	public String getAddressPostCode() {
@@ -168,9 +194,11 @@ public class Member {
 	}
 
 
+
 	public void setAddressPostCode(String addressPostCode) {
 		this.addressPostCode = addressPostCode;
 	}
+
 
 
 	public String getAddressCity() {
@@ -178,9 +206,11 @@ public class Member {
 	}
 
 
+
 	public void setAddressCity(String addressCity) {
 		this.addressCity = addressCity;
 	}
+
 
 
 	public String getCountry() {
@@ -188,9 +218,11 @@ public class Member {
 	}
 
 
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
 
 
 	public String getEmail() {
@@ -198,9 +230,11 @@ public class Member {
 	}
 
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 
 	public String getPhoneNumber() {
@@ -208,9 +242,11 @@ public class Member {
 	}
 
 
+
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 
 
 	public List<Role> getRoles() {
@@ -218,9 +254,13 @@ public class Member {
 	}
 
 
+
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+		this.roles.clear();
+	    this.roles.addAll(roles);
 	}
+
 
 
 	public List<Social> getSocials() {
@@ -228,29 +268,35 @@ public class Member {
 	}
 
 
+
 	public void setSocials(List<Social> socials) {
 		this.socials = socials;
 	}
 
 
-	public List<Game> getGames() {
+
+	public Set<Game> getGames() {
 		return games;
 	}
 
 
-	public void setGames(List<Game> games) {
+
+	public void setGames(Set<Game> games) {
 		this.games = games;
 	}
 
 
-	public List<Event> getEvents() {
+
+	public Set<Event> getEvents() {
 		return events;
 	}
 
 
-	public void setEvents(List<Event> events) {
+
+	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
+
 
 
 	public LocalDate getBirthday() {
@@ -258,24 +304,29 @@ public class Member {
 	}
 
 
+
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
 
-	public List<Team> getTeams() {
+
+	public Set<Team> getTeams() {
 		return teams;
 	}
 
 
-	public void setTeams(List<Team> teams) {
+
+	public void setTeams(Set<Team> teams) {
 		this.teams = teams;
 	}
+
 
 
 	public int getId() {
 		return id;
 	}
+
 
 
 	@Override
@@ -296,5 +347,5 @@ public class Member {
 	}
 
 
-	
+
 }
