@@ -29,7 +29,7 @@ public class Team {
 	@Column(name = "team_description")
 	private String teamDescription;
 	
-	//join table for teams
+	//join table for members
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 			name = "member_team", 

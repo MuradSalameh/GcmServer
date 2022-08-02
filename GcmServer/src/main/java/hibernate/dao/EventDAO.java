@@ -24,7 +24,7 @@ public class EventDAO {
 	public static List<Event> getEvents(){
 		Session session = SessionUtil.getSession();  
 		String hql = "from Event";
-		Query query = session.createQuery(hql);
+		Query<Event> query = session.createQuery(hql);
 		List<Event> events =  query.list();		
 		session.close();		
 		return events;

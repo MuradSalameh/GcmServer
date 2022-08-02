@@ -6,6 +6,7 @@
 	<artifactId>GcmServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GcmServer</name>
+	<!--  <packaging>war</packaging>   -->
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -99,9 +100,6 @@
 			<version>3.0.5</version>
 		</dependency>
 
-
-
-
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-grizzly2-http</artifactId>
@@ -137,13 +135,19 @@
 			<artifactId>jersey-container-jetty-servlet</artifactId>
 			<version>3.0.5</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
 		<dependency>
 			<groupId>org.glassfish.jersey.inject</groupId>
 			<artifactId>jersey-hk2</artifactId>
 			<version>3.0.5</version>
-		</dependency>
+		</dependency>	
 
 		<!-- https://mvnrepository.com/artifact/jakarta.ws.rs/jakarta.ws.rs-api -->
 		<dependency>

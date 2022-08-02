@@ -29,15 +29,19 @@ public class TestMethodenDaos {
 				LocalDate.of(1981, 4, 11), 	// birthday
 				null);						// teams
 				
-		
+	
 		MemberDAO.addMember(test);	
+			*/
 		
 		
-		test.setClanName("UpdateTest");
+          
+        Member test = new Member();
+         test.setClanName("MethodenTester");
 		MemberDAO.updateMember(1, test);
 		
-		*/
-		//MemberDAO.deleteMember(5);
+		
+		//MemberDAO.deleteMember(8);
+		
 		
 		List<Member> members = MemberDAO.getMembers();
 		members.forEach(System.out::println);

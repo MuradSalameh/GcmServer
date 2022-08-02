@@ -91,7 +91,7 @@ public class Member {
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-
+	// Teams
 	@ManyToMany(mappedBy = "members")
 	List<Team> teams = new ArrayList<>();
 

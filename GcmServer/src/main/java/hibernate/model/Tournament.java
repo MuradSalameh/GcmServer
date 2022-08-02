@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 @Entity
@@ -58,7 +59,14 @@ public class Tournament {
 	@Column(name = "tournament_result")
 	private String tournamentResult;
 
-
+	/*
+	@PreRemove
+	public void checkAssociationBeforeRemoval() {
+		if(!this.teams.isEmpty()) {
+			throw new RuntimeException("Can't remove Tournament that has teams");
+		}
+	}
+*/
 
 	public Tournament() {
 		super();
