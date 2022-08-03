@@ -12,8 +12,12 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("gcmmanager")
+@Path("/gcm")
+
+@Consumes(MediaType.APPLICATION_XML)
+@Produces(MediaType.APPLICATION_XML)
 public class GcmResource {
+	
 /*
 	static {
 		GcmDBReturn dr = Datenbank.createTable();
@@ -21,8 +25,18 @@ public class GcmResource {
 			System.out.println(dr.getMeldung());
 	}
 
+	*/
 	
 	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/test")
+	public String serverTest() {
+		return "Test erfolgreich";
+	}
+	
+	/*
+	
+		@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("wein")
 	public Response getWeine() {
@@ -36,6 +50,8 @@ public class GcmResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(dr.getMeldung()).build();
 		}
 	}
+	
+
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
@@ -63,6 +79,6 @@ public class GcmResource {
 	public Response deleteWein(@PathParam("weinid")String id) {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-*/	
 
+*/
 }
