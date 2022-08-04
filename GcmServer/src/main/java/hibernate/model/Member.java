@@ -26,6 +26,7 @@ import javax.persistence.JoinColumn;
 
 
 @XmlRootElement(name = "Member")
+
 @Entity
 @Table(name = "member")
 public class Member  implements Serializable {

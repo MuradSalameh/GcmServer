@@ -23,6 +23,16 @@ public class MemberDAO {
 		tx.commit();
 		session.close();
 	}
+	
+	
+	public static Member getMember(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Member member = session.get(Member.class, id);
+			
+			return member;
+	}
 
 
 	public static List<Member> getMembers(){

@@ -7,8 +7,8 @@ import main.java.hibernate.model.Member;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -19,6 +19,7 @@ import main.java.hibernate.dao.MemberDAO;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class MemberResource {
+	
 
 
 	// server Test	
@@ -29,8 +30,20 @@ public class MemberResource {
 		return "server test successful!";
 	}
 
+	
 
-
+	@GET
+	@Produces(MediaType.TEXT_XML)
+	@Path("/test2/{id}")
+	public Response getMember(@PathParam("id") int id) { 
+			
+		Member member = new Member();
+		member = MemberDAO.getMember(id);	
+		
+		return Response.status(Status.OK).entity(member).build();
+	}
+	
+	
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
@@ -45,8 +58,8 @@ public class MemberResource {
 		return Response.status(Status.OK).entity(members).build();
 	}
 
-
 	/*
+
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_XML)
@@ -58,7 +71,7 @@ public class MemberResource {
 		return members;
 	}
 
-/*
+
 
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
@@ -86,6 +99,6 @@ public class MemberResource {
 	public Response deleteWein(@PathParam("weinid")String id) {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-
-	 */
+*/
+	 
 }
