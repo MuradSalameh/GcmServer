@@ -17,13 +17,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import javax.persistence.JoinColumn;
 
 
-@XmlRootElement
+@XmlRootElement(name = "Member")
 @Entity
 @Table(name = "member")
 public class Member  implements Serializable {
@@ -32,7 +34,7 @@ public class Member  implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
+	@Column(name = "ID")	
 	private int id;	
 
 	@Column(name = "clan_name")
@@ -140,7 +142,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="ClanName")
 	public String getClanName() {
 		return clanName;
 	}
@@ -152,7 +154,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="ClanID")
 	public String getClanId() {
 		return clanId;
 	}
@@ -164,7 +166,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="RealName")
 	public String getRealName() {
 		return realName;
 	}
@@ -176,7 +178,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="Address")
 	public String getAddress() {
 		return address;
 	}
@@ -188,7 +190,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="AddressPostCode")
 	public String getAddressPostCode() {
 		return addressPostCode;
 	}
@@ -200,7 +202,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="AddressCity")
 	public String getAddressCity() {
 		return addressCity;
 	}
@@ -212,7 +214,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="Country")
 	public String getCountry() {
 		return country;
 	}
@@ -224,7 +226,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="Email")
 	public String getEmail() {
 		return email;
 	}
@@ -236,7 +238,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="PhoneNumber")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -248,13 +250,13 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlTransient
 	public List<Role> getRoles() {
 		return roles;
 	}
 
 
-
+	
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 		this.roles.clear();
@@ -262,7 +264,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlTransient
 	public List<Social> getSocials() {
 		return socials;
 	}
@@ -274,7 +276,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlTransient
 	public Set<Game> getGames() {
 		return games;
 	}
@@ -286,7 +288,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlTransient
 	public Set<Event> getEvents() {
 		return events;
 	}
@@ -299,6 +301,7 @@ public class Member  implements Serializable {
 
 
 	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
+	@XmlElement(name="Birthday")
 	public LocalDate getBirthday() {
 		return birthday;
 	}
@@ -310,7 +313,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlTransient
 	public Set<Team> getTeams() {
 		return teams;
 	}
@@ -322,7 +325,7 @@ public class Member  implements Serializable {
 	}
 
 
-
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}

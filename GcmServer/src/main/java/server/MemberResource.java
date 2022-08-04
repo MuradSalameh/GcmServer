@@ -8,7 +8,10 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.MemberDAO;
 
 @Path("/gcm")
@@ -30,10 +33,12 @@ public class MemberResource {
 
 
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
 	public List<Member> getMembers() {
+		
+		
 		List<Member> members = new ArrayList<>();			
 		members = MemberDAO.getMembers();
 		members.forEach(System.out::println);
