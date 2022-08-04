@@ -1,5 +1,6 @@
 package main.java.hibernate.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,13 +15,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import javax.persistence.JoinColumn;
 
 
-
+@XmlRootElement
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,7 +95,9 @@ public class Event {
 	public void setEventDescription(String eventDescription) {
 		this.eventDescription = eventDescription;
 	}
-
+	
+	
+	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
 	public LocalDate getDate() {
 		return date;
 	}
@@ -98,6 +106,7 @@ public class Event {
 		this.date = date;
 	}
 
+	@XmlJavaTypeAdapter(value= LocalTimeAdapter.class)
 	public LocalTime getEventStartTime() {
 		return eventStartTime;
 	}
@@ -106,6 +115,7 @@ public class Event {
 		this.eventStartTime = eventStartTime;
 	}
 
+	@XmlJavaTypeAdapter(value= LocalTimeAdapter.class)
 	public LocalTime getEventEndTime() {
 		return eventEndTime;
 	}

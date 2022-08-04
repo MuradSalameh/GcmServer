@@ -1,5 +1,6 @@
 package main.java.hibernate.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
 @Entity
 @Table(name = "revenue_type")
-public class RevenueType {
+public class RevenueType  implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

@@ -1,5 +1,6 @@
 package main.java.hibernate.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,11 +18,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
+@XmlRootElement
 @Entity
 @Table(name = "game")
-public class Game {
+public class Game  implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -100,7 +105,7 @@ public class Game {
 	}
 
 
-
+	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
 	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}

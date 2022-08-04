@@ -1,12 +1,12 @@
 package main.java.hibernate.dao;
 
 import java.util.List;
-
+import main.java.hibernate.model.Event;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import gcmClasses.Event;
+
 import main.java.hibernate.utils.SessionUtil;
 
 public class EventDAO {

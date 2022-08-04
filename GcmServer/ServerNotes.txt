@@ -1,5 +1,8 @@
 ToDo:
-member_team annotation
+member_team annotation - fixed
 
 server side serialization - restful jersey
+
+
+
 
