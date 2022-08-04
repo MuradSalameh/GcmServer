@@ -33,17 +33,16 @@ public class MemberResource {
 
 
 	@GET
-	@Produces(MediaType.TEXT_XML)
+	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
-	public List<Member> getMembers() {
+	public Response getMembers() {
 		
 		
 		List<Member> members = new ArrayList<>();			
 		members = MemberDAO.getMembers();
-		members.forEach(System.out::println);
 
-		return members;
+		return Response.status(Status.OK).entity(members).build();
 	}
 
 

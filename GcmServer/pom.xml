@@ -113,6 +113,8 @@
     <version>3.0.5</version>
 </dependency>
 
+<!--
+
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-grizzly2-http</artifactId>
@@ -123,8 +125,10 @@
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-grizzly2-servlet</artifactId>
 			<version>3.0.5</version>
-		</dependency>
-
+			</dependency>
+			
+	-->
+	
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-jdk-http</artifactId>
@@ -189,11 +193,7 @@
             <version>3.0.0</version>
         </dependency>
         
-      
-
-
-
-
+ 
 	</dependencies>
 
 	<build>
