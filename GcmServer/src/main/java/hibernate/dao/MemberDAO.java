@@ -5,6 +5,7 @@ import main.java.hibernate.utils.HibernateUtil;
 import main.java.hibernate.utils.SessionUtil;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.query.Query;
@@ -39,7 +40,7 @@ public class MemberDAO {
 		Session session = SessionUtil.getSession();  
 		String hql = "from Member";
 		Query query = session.createQuery(hql);
-		List<Member> members =  query.list();		
+		List<Member> members =  new ArrayList<Member>(query.list());		
 		session.close();		
 		return members;
 	}

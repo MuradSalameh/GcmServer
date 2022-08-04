@@ -49,14 +49,26 @@ public class MemberResource {
 	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
-	public Response getMembers() {
-		
-		
+	public List<Member> getMemberList() {
+	
+		return MemberDAO.getMembers();
+	}
+	
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	//@Consumes(MediaType.APPLICATION_XML)
+	@Path("/memberlist2")
+	public Response getMemberListResponse() {		
+	
 		List<Member> members = new ArrayList<>();			
 		members = MemberDAO.getMembers();
-
-		return Response.status(Status.OK).entity(members).build();
+		
+		return Response.status(Status.OK).entity(members).build();			
 	}
+	
+	
 
 	/*
 

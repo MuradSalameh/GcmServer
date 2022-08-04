@@ -1,6 +1,7 @@
 package main.java.hibernate.utils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -34,15 +35,19 @@ public class TestMethodenDaos {
 		/*
 		
 		MemberDAO.deleteMember(9);
-	*/	
+		
 		
 		 Member member = MemberDAO.getMember(2);
 		 System.out.println(member);
 		 
-		 /*
+	*/	
 		List<Member> members = MemberDAO.getMembers();
-		members.forEach(System.out::println);
-	*/
+		ArrayList<Member> ol = new ArrayList<Member>();
+		//members.forEach(System.out::println);
+		for(Member m : members) {
+			  ol.add(m);
+			  System.out.println(m);
+			}
 		
 		
 	}
