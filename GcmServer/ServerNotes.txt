@@ -4,5 +4,8 @@ member_team annotation - fixed
 server side serialization - restful jersey
 
 
+--- klassen projekt naktualisieren ohne hibernate annotationen nur mit XML anotationen --- AUF IMPOTRTS ACHTEN!!!!!!!
+
+
 
 

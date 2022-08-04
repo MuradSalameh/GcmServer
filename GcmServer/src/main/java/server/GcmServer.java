@@ -16,7 +16,7 @@ public class GcmServer {
 		
 		URI basisUri = URI.create("http://localhost:4712/");
 		// package mit den annotierten Klassen bekanntgeben
-		ResourceConfig config = new ResourceConfig().packages("main.java.server");
+		ResourceConfig config = new ResourceConfig().packages("main.java.hibernate.model, main.java.server");
 		// Server starten
 		HttpServer server = JdkHttpServerFactory.createHttpServer(basisUri, config);
 		System.out.println("Zum Beenden des GCM-Server die Eingabetaste drücken");

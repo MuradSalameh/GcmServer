@@ -1,7 +1,8 @@
 package main.java.hibernate.model;
 
 import java.time.LocalTime;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Adapter (for JAXB) to convert between the LocalTime and the ISO 8601 

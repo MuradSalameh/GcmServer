@@ -33,7 +33,7 @@ public class MemberResource {
 	
 
 	@GET
-	@Produces(MediaType.TEXT_XML)
+	@Produces(MediaType.APPLICATION_XML)
 	@Path("/test2/{id}")
 	public Response getMember(@PathParam("id") int id) { 
 			

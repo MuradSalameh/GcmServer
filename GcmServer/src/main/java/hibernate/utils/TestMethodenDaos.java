@@ -12,7 +12,9 @@ public class TestMethodenDaos {
 	
 	public static void main(String[] args) {
 		
-		 Session session = SessionUtil.getSession();
+		// Session session = SessionUtil.getSession();
+		 
+		 
 	
 		 //addTestMember();
 		
@@ -29,14 +31,18 @@ public class TestMethodenDaos {
 		*/
 		
 		
-		
+		/*
 		
 		MemberDAO.deleteMember(9);
+	*/	
 		
-		
+		 Member member = MemberDAO.getMember(2);
+		 System.out.println(member);
+		 
+		 /*
 		List<Member> members = MemberDAO.getMembers();
 		members.forEach(System.out::println);
-		
+	*/
 		
 		
 	}
