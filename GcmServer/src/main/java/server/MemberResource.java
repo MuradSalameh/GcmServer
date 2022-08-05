@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.MemberDAO;
 
-@Path("/gcm")
+@Path("/member")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
@@ -37,7 +37,7 @@ public class MemberResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("/test2/{id}")
+	@Path("/member/{id}")
 	public Response getMember(@PathParam("id") int id) { 
 			
 		Member member = new Member();
@@ -47,29 +47,17 @@ public class MemberResource {
 	}
 	
 	
-
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
-	public List<Member> getMemberList() {
-	
-		return MemberDAO.getMembers();
-	}
-	
-	
-	
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	//@Consumes(MediaType.APPLICATION_XML)
-	@Path("/memberlist2")
-	public Response getMemberListResponse() {		
+	public Response getMemberList() {		
 	
 		List<Member> members = new ArrayList<>();			
 		members = MemberDAO.getMembers();
 		
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
-	      //  return Response.ok(ml).build();
+	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
 	

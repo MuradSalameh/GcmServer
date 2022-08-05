@@ -1,4 +1,10 @@
 ToDo:
+
+Schreibfehler:
+
+tournament title in tournament klassen.
+
+
 member_team annotation - fixed
 
 server side serialization - restful jersey
