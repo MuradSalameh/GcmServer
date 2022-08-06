@@ -7,7 +7,10 @@ import org.glassfish.jersey.internal.guava.Lists;
 
 import main.java.hibernate.model.Member;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -62,48 +65,31 @@ public class MemberResource {
 	}
 	
 	
-
-	/*
-
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("memberlist")
-	public List<Member> getMembers() {
-		List<Member> members = MemberDAO.getMembers();
-		members.forEach(System.out::println);
-
-		return members;
-	}
-
-
-
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("wein")
-	public Response postWein(Wein neuerWein) {
-		GcmDBReturn dr = Datenbank.insertWein(neuerWein);
-		if(dr.isRc()) {
-			return Response.status(Status.CREATED).build();
-		}
-		else {
-			// SQL Exception text an Client senden
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(dr.getMeldung()).build();
-		}
+	@Path("/addMember")
+	public Response postMember(Member newMember) {
+		
+		MemberDAO.addMember(newMember);	
+		return Response.status(Status.CREATED).build();
+		
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("wein/{weinid}")
-	public Response putWein(@PathParam("weinid")String weinid, Wein geaenderterWein) {
+	@Path("/updateMember/{id}")
+	public Response putMember(@PathParam("memberid")int id, Member alteredMember) {
+		
+		MemberDAO.updateMember(id, alteredMember);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("wein/{weinid}")
-	public Response deleteWein(@PathParam("weinid")String id) {
+	@Path("/deleteMember/{id}")
+	public Response deleteMember(@PathParam("id")int id) {
+		MemberDAO.deleteMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-*/
+
 	 
 }
