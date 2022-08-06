@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.RevenueType;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -19,6 +20,15 @@ public class RevenueTypeDAO {
 		session.persist(bean);    // Dafür die add revenueType nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static RevenueType getRevenueType(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			RevenueType rev = session.get(RevenueType.class, id);
+			
+			return rev;
 	}
 
 
@@ -48,8 +58,10 @@ public class RevenueTypeDAO {
 		
 		old.setRevenueTypeTitle(revenueType.getRevenueTypeTitle());
 		old.setRevenueTypeDescription(revenueType.getRevenueTypeDescription());
-		old.setRevenues(revenueType.getRevenues());
+		//old.setRevenues(revenueType.getRevenues());
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
 		session.close();		
 	}

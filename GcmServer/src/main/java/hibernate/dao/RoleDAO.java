@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Role;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -20,9 +21,18 @@ public class RoleDAO {
 		tx.commit();
 		session.close();
 	}
+	
+	public static Role getRole(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Role r = session.get(Role.class, id);
+			
+			return r;
+	}
 
 
-	public static List<Role> getRole(){
+	public static List<Role> getRoles(){
 		Session session = SessionUtil.getSession();  
 		String hql = "from Role";
 		Query query = session.createQuery(hql);
@@ -49,8 +59,10 @@ public class RoleDAO {
 		old.setRoleName(role.getRoleName());
 		old.setRoleDescription(role.getRoleDescription());
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();			
 	}
 
 

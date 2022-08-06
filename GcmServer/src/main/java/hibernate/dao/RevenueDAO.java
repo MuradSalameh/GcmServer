@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Revenue;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -18,6 +19,15 @@ public class RevenueDAO {
 		session.persist(bean);    // Dafür die add revenue nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static Revenue getRevenue(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Revenue rev = session.get(Revenue.class, id);
+			
+			return rev;
 	}
 
 	public static List<Revenue> getRevenues(){
@@ -49,8 +59,10 @@ public class RevenueDAO {
 		old.setAmount(revenue.getAmount());
 		old.setDate(revenue.getDate());
 						
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();	
 	}
 
 

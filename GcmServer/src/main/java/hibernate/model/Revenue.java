@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -49,7 +51,7 @@ public class Revenue  implements Serializable{
 		this.date = date;		
 	}
 
-
+	@XmlElement(name="RevenueTitle")
 	public String getRevenueTitle() {
 		return revenueTitle;
 	}
@@ -59,7 +61,7 @@ public class Revenue  implements Serializable{
 		this.revenueTitle = revenueTitle;
 	}
 
-
+	@XmlElement(name="ReveneueDescription")
 	public String getRevenueDescription() {
 		return revenueDescription;
 	}
@@ -69,7 +71,7 @@ public class Revenue  implements Serializable{
 		this.revenueDescription = revenueDescription;
 	}
 
-
+	@XmlElement(name="Amount")
 	public double getAmount() {
 		return amount;
 	}
@@ -80,6 +82,7 @@ public class Revenue  implements Serializable{
 	}
 
 	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
+	@XmlElement(name="Date")
 	public LocalDate getDate() {
 		return date;
 	}
@@ -89,9 +92,21 @@ public class Revenue  implements Serializable{
 		this.date = date;
 	}
 
-
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "\nRevenue id=" + id 
+				+ "\nrevenueTitle=" + revenueTitle 
+				+ "\nrevenueDescription=" + revenueDescription
+				+ "\namount=" + amount 
+				+ "\ndate=" + date
+				+ "\n----------------------------------"
+				+ "\n";
 	}
 
 	

@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import jakarta.xml.bind.annotation.XmlElement;
 @XmlRootElement
 @Entity
 @Table(name = "revenue_type")
@@ -53,6 +55,7 @@ public class RevenueType  implements Serializable{
 		this.revenues = revenues;
 	}
 
+	@XmlElement(name="RevenueTypeTitle")
 	public String getRevenueTypeTitle() {
 		return revenueTypeTitle;
 	}
@@ -61,6 +64,7 @@ public class RevenueType  implements Serializable{
 		this.revenueTypeTitle = revenueTypeTitle;
 	}
 
+	@XmlElement(name="RevenueTypeDescription")
 	public String getRevenueTypeDescription() {
 		return revenueTypeDescription;
 	}
@@ -76,9 +80,19 @@ public class RevenueType  implements Serializable{
 	public void setRevenues(List<Revenue> revenues) {
 		this.revenues = revenues;
 	}
-
+	
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "\nRevenueType id=" + id 
+				+ "\nrevenueTypeTitle=" + revenueTypeTitle 
+				+ "\nrevenueTypeDescription=" + revenueTypeDescription
+				+ "\n----------------------------------"
+				+ "\n";
 	}
 
 	

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -19,6 +20,15 @@ public class SocialDAO {
 		session.persist(bean);    // Dafür die add social nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static Social getSocial(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Social s = session.get(Social.class, id);
+			
+			return s;
 	}
 
 
@@ -51,6 +61,8 @@ public class SocialDAO {
 		old.setSocialLink(social.getSocialLink());
 		old.setSocialNotes(social.getSocialNotes());
 			
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
 		session.close();		
 	}

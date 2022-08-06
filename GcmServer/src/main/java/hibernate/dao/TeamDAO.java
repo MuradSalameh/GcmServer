@@ -1,11 +1,13 @@
 package main.java.hibernate.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Team;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -20,11 +22,20 @@ public class TeamDAO {
 		session.close();
 	}
 
+	public static Team getTeam(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Team t = session.get(Team.class, id);
+			
+			return t;
+	}
+	
 	public static List<Team> getTeams(){
 		Session session = SessionUtil.getSession();  
 		String hql = "from Team";
 		Query query = session.createQuery(hql);
-		List<Team> teams =  query.list();		
+		List<Team> teams =  new ArrayList<Team>(query.list());	
 		session.close();		
 		return teams;
 	}
@@ -46,10 +57,12 @@ public class TeamDAO {
 		
 		old.setTeamName(team.getTeamName());
 		old.setTeamDescription(team.getTeamDescription());
-		old.setMembers(team.getMembers());			
+		//old.setMembers(team.getMembers());			
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();	
 	}
 
 

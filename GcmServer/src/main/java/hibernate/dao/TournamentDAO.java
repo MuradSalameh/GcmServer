@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Tournament;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -19,6 +20,16 @@ public class TournamentDAO {
 		tx.commit();
 		session.close();
 	}
+	
+	public static Tournament getTournament(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Tournament t = session.get(Tournament.class, id);
+			
+			return t;
+	}
+
 
 
 	public static List<Tournament> getTournaments(){
@@ -50,12 +61,14 @@ public class TournamentDAO {
 		old.setTournamentDate(tournament.getTournamentDate());
 		old.setTournamentTimeBeginn(tournament.getTournamentTimeBeginn());
 		old.setTournamentTimeEnd(tournament.getTournamentTimeEnd());
-		old.setTeams(tournament.getTeams());
-		//old.setGame(tournament.getGame());
+		//old.setTeams(tournament.getTeams());
+		old.setGame(tournament.getGame());
 		old.setTournamentResult(tournament.getTournamentResult());
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();	
 	}
 
 

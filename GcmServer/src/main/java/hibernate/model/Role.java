@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import jakarta.xml.bind.annotation.XmlElement;
 @XmlRootElement
 @Entity
 @Table(name = "role")
@@ -40,10 +42,12 @@ public class Role  implements Serializable{
 		this.roleDescription = roleDescription;
 	}
 
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
 
+	@XmlElement(name="RoleName")
 	public String getRoleName() {
 		return roleName;
 	}
@@ -52,12 +56,22 @@ public class Role  implements Serializable{
 		this.roleName = roleName;
 	}
 
+	@XmlElement(name="RoleDescription")
 	public String getRoleDescription() {
 		return roleDescription;
 	}
 
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
+	}
+
+	@Override
+	public String toString() {
+		return "\nRole id=" + id 
+				+ "\nroleName=" + roleName 
+				+ "\nroleDescription=" + roleDescription 
+				+ "\n----------------------------------"
+				+ "\n";
 	}
 	
 	

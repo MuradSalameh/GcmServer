@@ -20,5 +20,7 @@ server side serialization - restful jersey
 
 
 FIX:   Mapping Genre Game. - Versuchen mapping auf games zu legen?
+		mapping socials geht nicht bei delete, vergleichen mit roles - oneomany owner 
+		teams mapping checken wegen delete.
 
 

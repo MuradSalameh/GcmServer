@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import jakarta.xml.bind.annotation.XmlElement;
 @XmlRootElement
 @Entity
 @Table(name = "team")
@@ -55,7 +57,7 @@ public class Team  implements Serializable{
 		this.members = members;
 	}
 
-
+	@XmlElement(name="Teamname")
 	public String getTeamName() {
 		return teamName;
 	}
@@ -66,6 +68,7 @@ public class Team  implements Serializable{
 	}
 
 
+	@XmlElement(name="TeamDescription")
 	public String getTeamDescription() {
 		return teamDescription;
 	}
@@ -75,7 +78,7 @@ public class Team  implements Serializable{
 		this.teamDescription = teamDescription;
 	}
 
-
+	
 	public Set<Member> getMembers() {
 		return members;
 	}
@@ -85,11 +88,20 @@ public class Team  implements Serializable{
 		this.members = members;
 	}
 
-
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
 
+
+	@Override
+	public String toString() {
+		return "\nTeam [id=" + id 
+				+ "\nteamName=" + teamName 
+				+ "\nteamDescription=" + teamDescription 				
+				+ "\n----------------------------------"
+				+ "\n";
+	}
 
 
 }
