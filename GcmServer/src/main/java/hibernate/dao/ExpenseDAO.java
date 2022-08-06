@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Expense;
+
 import main.java.hibernate.utils.SessionUtil;
 
 public class ExpenseDAO {
@@ -19,6 +20,16 @@ public class ExpenseDAO {
 		tx.commit();
 		session.close();
 	}
+	
+	public static Expense getExpense(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Expense expense = session.get(Expense.class, id);
+			
+			return expense;
+	}
+
 
 
 	public static List<Expense> getExpenses(){
@@ -51,8 +62,11 @@ public class ExpenseDAO {
 		old.setDate(expense.getDate());
 		old.setRecipientName(expense.getRecipientName());
 		
-		old.setExpenseTypes(expense.getExpenseTypes());
+		//old.setExpenseTypes(expense.getExpenseTypes());
 
+		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
 		session.close();		
 	}

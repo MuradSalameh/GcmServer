@@ -15,7 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
@@ -69,6 +72,7 @@ public class Expense  implements Serializable{
 		this.expenseTypes = expenseTypes;
 	}
 
+	@XmlElement(name="ExpenseTitle")
 	public String getExpenseTitle() {
 		return expenseTitle;
 	}
@@ -77,6 +81,7 @@ public class Expense  implements Serializable{
 		this.expenseTitle = expenseTitle;
 	}
 
+	@XmlElement(name="ExpenseDescription")
 	public String getExpenseDescription() {
 		return expenseDescription;
 	}
@@ -85,6 +90,7 @@ public class Expense  implements Serializable{
 		this.expenseDescription = expenseDescription;
 	}
 
+	@XmlElement(name="Amount")
 	public double getAmount() {
 		return amount;
 	}
@@ -94,6 +100,7 @@ public class Expense  implements Serializable{
 	}
 	
 	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
+	@XmlElement(name="Date")
 	public LocalDate getDate() {
 		return date;
 	}
@@ -102,6 +109,7 @@ public class Expense  implements Serializable{
 		this.date = date;
 	}
 
+	@XmlElement(name="RecipientName")
 	public String getRecipientName() {
 		return recipientName;
 	}
@@ -110,17 +118,33 @@ public class Expense  implements Serializable{
 		this.recipientName = recipientName;
 	}
 
+	@XmlTransient
 	public List<ExpenseType> getExpenseTypes() {
 		return expenseTypes;
 	}
 
+	
 	public void setExpenseTypes(List<ExpenseType> expenseTypes) {
 		this.expenseTypes = expenseTypes;
 	}
 
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "\nExpense id=" + id 
+				+ "\nexpenseTitle=" + expenseTitle 
+				+ "\nexpenseDescription=" + expenseDescription
+				+ "\namount=" + amount 
+				+ "\ndate=" + date 
+				+ "\nrecipientName=" + recipientName
+				+ "\n----------------------------------"
+				+ "\n";
+	}
+	
 	
 	
 }

@@ -22,6 +22,13 @@ public class MemberDAOTest {
 		//addTestMember();
 
 
+		
+		//--------- deleteMember() Test -----------//
+
+		//deleteMemberTest(id);
+
+
+		
 		//--------- getMember() Test to get one specific member by id -----------//
 
 		//getMemberTest(id);
@@ -39,10 +46,6 @@ public class MemberDAOTest {
 		//String newClanNameValue = "BOBO";
 		//updateMemberTest(id,newClanNameValue);
 
-
-		//--------- deleteMember() Test -----------//
-
-		//deleteMemberTest(id);
 
 
 	}

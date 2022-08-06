@@ -2,6 +2,8 @@ package main.java.hibernate.dao;
 
 import java.util.List;
 import main.java.hibernate.model.Event;
+
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -19,6 +21,16 @@ public class EventDAO {
 		tx.commit();
 		session.close();
 	}
+	
+	public static Event getEvent(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Event event = session.get(Event.class, id);
+			
+			return event;
+	}
+
 
 
 	public static List<Event> getEvents(){
@@ -52,8 +64,10 @@ public class EventDAO {
 		old.setEventEndTime(event.getEventEndTime());
 		old.setEventAddidtionalNotes(event.getEventAddidtionalNotes());
 		old.setReoccuring(event.isReoccuring());
-		old.setMembers(event.getMembers());		
+		//old.setMembers(event.getMembers());		
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
 		session.close();		
 	}

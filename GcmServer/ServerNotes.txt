@@ -1,6 +1,7 @@
 ToDo:
 
 - Server:  alle DAOS fertig schreiben und Methoden testen
+	Hibernate Model Klassen getter mit XML annotieren und toString hinzufügen und formatieren.
 - Client: alle Klaasen Service Functions erstellen und fertig schreiben.
 - 
 

@@ -15,7 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import javax.persistence.JoinColumn;
@@ -80,6 +83,7 @@ public class Event implements Serializable{
 		this.members = members;
 	}
 
+	@XmlElement(name="EventTitle")
 	public String getEventTitle() {
 		return eventTitle;
 	}
@@ -88,6 +92,7 @@ public class Event implements Serializable{
 		this.eventTitle = eventTitle;
 	}
 
+	@XmlElement(name="EventDescription")
 	public String getEventDescription() {
 		return eventDescription;
 	}
@@ -95,9 +100,10 @@ public class Event implements Serializable{
 	public void setEventDescription(String eventDescription) {
 		this.eventDescription = eventDescription;
 	}
-	
-	
+
+
 	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
+	@XmlElement(name="Date")
 	public LocalDate getDate() {
 		return date;
 	}
@@ -107,6 +113,7 @@ public class Event implements Serializable{
 	}
 
 	@XmlJavaTypeAdapter(value= LocalTimeAdapter.class)
+	@XmlElement(name="EventStartTime")
 	public LocalTime getEventStartTime() {
 		return eventStartTime;
 	}
@@ -116,6 +123,7 @@ public class Event implements Serializable{
 	}
 
 	@XmlJavaTypeAdapter(value= LocalTimeAdapter.class)
+	@XmlElement(name="EventEndTime")
 	public LocalTime getEventEndTime() {
 		return eventEndTime;
 	}
@@ -124,6 +132,7 @@ public class Event implements Serializable{
 		this.eventEndTime = eventEndTime;
 	}
 
+	@XmlElement(name="EventAdditionalNotes")
 	public String getEventAddidtionalNotes() {
 		return eventAddidtionalNotes;
 	}
@@ -132,6 +141,7 @@ public class Event implements Serializable{
 		this.eventAddidtionalNotes = eventAddidtionalNotes;
 	}
 
+	@XmlElement(name="Reoccuring")
 	public boolean isReoccuring() {
 		return reoccuring;
 	}
@@ -140,6 +150,7 @@ public class Event implements Serializable{
 		this.reoccuring = reoccuring;
 	}
 
+	@XmlTransient
 	public List<Member> getMembers() {
 		return members;
 	}
@@ -148,11 +159,27 @@ public class Event implements Serializable{
 		this.members = members;
 	}
 
+
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "\nEvent id=" + id 
+				+ "\neventTitle=" + eventTitle 
+				+ "\neventDescription=" + eventDescription 
+				+ "\ndate="	+ date 
+				+ "\neventStartTime=" + eventStartTime 
+				+ "\neventEndTime=" + eventEndTime
+				+ "\neventAddidtionalNotes=" + eventAddidtionalNotes 
+				+ "\nreoccuring=" + reoccuring
+				+ "\n----------------------------------"
+				+ "\n";
+	}
+
+
 
 
 

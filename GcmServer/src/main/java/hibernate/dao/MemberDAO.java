@@ -72,7 +72,7 @@ public class MemberDAO {
 		old.setPhoneNumber(member.getPhoneNumber());		 		
 		old.setBirthday(member.getBirthday());
 		
-		session.saveOrUpdate(old);
+		
 		
 //  Anderen Weg finden um die Listen und Sets zu persistieren
 		
@@ -82,6 +82,7 @@ public class MemberDAO {
 		//old.setEvents(member.getEvents());
 		//old.setTeams(member.getTeams());
 		
+		session.saveOrUpdate(old);
 		session.flush();
 		tx.commit();
 		session.close();	
