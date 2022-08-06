@@ -1,5 +1,9 @@
 ToDo:
 
+- Server:  alle DAOS fertig schreiben und Methoden testen
+- Client: alle Klaasen Service Functions erstellen und fertig schreiben.
+- 
+
 Schreibfehler:
 
 tournament title in tournament klassen.
