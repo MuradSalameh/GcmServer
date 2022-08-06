@@ -24,7 +24,7 @@
 		<property name= "hibernate.show_sql">true</property>
 		
 		<!-- create tables if not existing or update if existing -->
-		 <property name="hibernate.hbm2ddl.auto">update</property>
+		 <property name="hibernate.hbm2ddl.auto">validate</property>
 		 
 		<mapping class="main.java.hibernate.model.Expense"/>
 		<mapping class="main.java.hibernate.model.ExpenseType"/>

@@ -2,9 +2,12 @@ package main.java.hibernate.dao;
 
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Partner;
 import main.java.hibernate.utils.SessionUtil;
@@ -19,6 +22,15 @@ public class PartnerDAO {
 		session.persist(bean);    // Dafür die add partner nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static Partner getPartner(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Partner partner = session.get(Partner.class, id);
+			
+			return partner;
 	}
 
 
@@ -44,6 +56,7 @@ public class PartnerDAO {
 	public static void updatePartner(int id, Partner partner){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
+		
 		Partner old = session.find(Partner.class, id);
 		
 		old.setCompanyName(partner.getCompanyName());
@@ -59,8 +72,10 @@ public class PartnerDAO {
 		old.setCountry(partner.getCountry());
 		old.setEmail(partner.getEmail());
 		old.setPhoneNumber(partner.getPhoneNumber());		
-		old.setSocials(partner.getSocials());		
+		old.setSocials(partner.getSocials());	
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
 		session.close();		
 	}
