@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
 @XmlRootElement
 @Entity
 @Table(name = "expense_type")
@@ -40,7 +42,7 @@ public class ExpenseType  implements Serializable{
 		this.expenseDescription = expenseDescription;
 	}
 
-
+	@XmlElement(name="ExpenseTitle")
 	public String getExpenseTitle() {
 		return expenseTitle;
 	}
@@ -51,6 +53,7 @@ public class ExpenseType  implements Serializable{
 	}
 
 
+	@XmlElement(name="ExpenseDescription")
 	public String getExpenseDescription() {
 		return expenseDescription;
 	}
@@ -59,9 +62,25 @@ public class ExpenseType  implements Serializable{
 	public void setExpenseDescription(String expenseDescription) {
 		this.expenseDescription = expenseDescription;
 	}
-
+	
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
-	}	
+	}
+
+
+	@Override
+	public String toString() {
+		return "\nExpenseType id=" + id 
+				+ "\nexpenseTitle=" + expenseTitle 
+				+ "\nexpenseDescription=" + expenseDescription
+				+ "\n----------------------------------"
+				+ "\n";
+				
+	}
+	
+	
+	
+	
 	
 }

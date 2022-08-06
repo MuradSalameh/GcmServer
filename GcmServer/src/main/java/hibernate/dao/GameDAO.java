@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Game;
+import main.java.hibernate.model.Game;
 import main.java.hibernate.utils.SessionUtil;
 
 public class GameDAO {
@@ -18,6 +19,15 @@ public class GameDAO {
 		session.persist(bean);    // Dafür die add game nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static Game getGame(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Game game = session.get(Game.class, id);
+			
+			return game;
 	}
 
 	public static List<Game> getGames(){
@@ -46,13 +56,15 @@ public class GameDAO {
 		
 		old.setGameTitle(game.getGameTitle());
 		old.setReleaseDate(game.getReleaseDate());
-		old.setGenres(game.getGenres());
-		old.setMembers(game.getMembers());
-		old.setTournaments(game.getTournaments());
+		//old.setGenres(game.getGenres());
+		//old.setMembers(game.getMembers());
+		//old.setTournaments(game.getTournaments());
 		old.setGameAdditionalNotes(game.getGameAdditionalNotes());
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();	
 	}
 
 

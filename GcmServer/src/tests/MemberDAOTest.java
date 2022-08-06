@@ -16,10 +16,20 @@ public class MemberDAOTest {
 
 		Session session = SessionUtil.getSession();
 		int id = 5;
+		int id2 = 5;
+		int id3 = 5;
 
 		//--------- addMember() Test -----------//
 
 		//addTestMember();
+		//addTestMember();
+		//addTestMember();
+		//addTestMember();
+		
+		
+		//--------- getMembers() Test to get a List of all members in database-----------//
+
+		//getMemberList();
 
 
 		
@@ -35,16 +45,10 @@ public class MemberDAOTest {
 
 
 
-		//--------- getMembers() Test to get a List of all members in database-----------//
-
-		getMemberList();
-
-
-
 		//--------- updateMember() Test -----------//
 
-		//String newClanNameValue = "BOBO";
-		//updateMemberTest(id,newClanNameValue);
+		//String s = "BOBO";
+		//updateMemberTest(id,s);
 
 
 

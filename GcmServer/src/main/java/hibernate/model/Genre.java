@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import jakarta.xml.bind.annotation.XmlElement;
 @XmlRootElement
 @Entity
 @Table(name = "genre")
@@ -41,6 +43,7 @@ public class Genre  implements Serializable{
 		this.games = games;
 	}
 
+	@XmlElement(name="GenreTitle")
 	public String getGenreTitle() {
 		return genreTitle;
 	}
@@ -49,6 +52,7 @@ public class Genre  implements Serializable{
 		this.genreTitle = genreTitle;
 	}
 
+	@XmlElement(name="Games")
 	public List<Game> getGames() {
 		return games;
 	}
@@ -57,8 +61,17 @@ public class Genre  implements Serializable{
 		this.games = games;
 	}
 
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "\nGenre id=" + id 
+				+ "\ngenreTitle=" + genreTitle
+				+ "\n----------------------------------"
+				+ "\n";
 	}
 
 	

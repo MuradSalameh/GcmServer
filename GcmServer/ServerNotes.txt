@@ -19,4 +19,6 @@ server side serialization - restful jersey
 
 
 
+FIX:   Mapping Genre Game. - Versuchen mapping auf games zu legen?
+
 

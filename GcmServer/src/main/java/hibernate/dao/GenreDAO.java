@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Genre;
+import main.java.hibernate.model.Member;
 import main.java.hibernate.utils.SessionUtil;
 
 public class GenreDAO {
@@ -19,6 +20,15 @@ public class GenreDAO {
 		session.persist(bean);    // Dafür die add genre nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static Genre getGenre(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			Genre genre = session.get(Genre.class, id);
+			
+			return genre;
 	}
 
 
@@ -47,10 +57,12 @@ public class GenreDAO {
 		Genre old = session.find(Genre.class, id);
 		
 		old.setGenreTitle(genre.getGenreTitle());
-		old.setGames(genre.getGames());			
+		//old.setGames(genre.getGames());			
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();	
 	}
 
 	

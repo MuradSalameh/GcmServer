@@ -18,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -93,7 +95,7 @@ public class Game  implements Serializable{
 	}
 
 
-
+	@XmlElement(name="GameTitle")
 	public String getGameTitle() {
 		return gameTitle;
 	}
@@ -106,6 +108,7 @@ public class Game  implements Serializable{
 
 
 	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
+	@XmlElement(name="ReleaseDate")
 	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
@@ -117,7 +120,7 @@ public class Game  implements Serializable{
 	}
 
 
-
+	@XmlElement(name="Genres")
 	public List<Genre> getGenres() {
 		return genres;
 	}
@@ -129,7 +132,7 @@ public class Game  implements Serializable{
 	}
 
 
-
+	@XmlElement(name="Members")
 	public Set<Member> getMembers() {
 		return members;
 	}
@@ -141,7 +144,7 @@ public class Game  implements Serializable{
 	}
 
 
-
+	@XmlElement(name="Tournaments")
 	public List<Tournament> getTournaments() {
 		return tournaments;
 	}
@@ -153,7 +156,7 @@ public class Game  implements Serializable{
 	}
 
 
-
+	@XmlElement(name="GameAdditionalNotes")
 	public String getGameAdditionalNotes() {
 		return gameAdditionalNotes;
 	}
@@ -165,10 +168,24 @@ public class Game  implements Serializable{
 	}
 
 
-
+	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "\nGame id=" + id 
+				+ "\ngameTitle=" + gameTitle 
+				+ "\nreleaseDate=" + releaseDate 
+				+ "\ngameAdditionalNotes="	+ getGameAdditionalNotes()
+				+ "\n----------------------------------"
+				+ "\n";
+	}
+	
+	
 
 
 	

@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.ExpenseType;
+
 import main.java.hibernate.utils.SessionUtil;
 
 public class ExpenseTypeDAO {
@@ -19,6 +20,15 @@ public class ExpenseTypeDAO {
 		session.persist(bean);    // Dafür die add expenseType nicht mehr aufrufen, da direkt im bean gespeichert wird.
 		tx.commit();
 		session.close();
+	}
+	
+	public static ExpenseType getExpenseType(int id) {
+		   Session session = SessionUtil.getSession();
+			Transaction tx = session.beginTransaction();
+		
+			ExpenseType expenseType = session.get(ExpenseType.class, id);
+			
+			return expenseType;
 	}
 
 
@@ -49,6 +59,8 @@ public class ExpenseTypeDAO {
 		old.setExpenseTitle(expenseType.getExpenseTitle());
 		old.setExpenseDescription(expenseType.getExpenseDescription());
 		
+		session.saveOrUpdate(old);
+		session.flush();
 		tx.commit();
 		session.close();		
 	}
