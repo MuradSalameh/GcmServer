@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.GameDAO;
 
 @Path("/game")
-
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class GameResource {
@@ -52,16 +51,15 @@ public class GameResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	//@Consumes(MediaType.APPLICATION_XML)
 	@Path("/gamelist")
 	public Response getGameList() {		
 	
 		List<Game> games = new ArrayList<>();			
 		games = GameDAO.getGames();
 		
-		GenericEntity<List<Game>> ml = new GenericEntity<List<Game>>(Lists.newArrayList(games)) {};
+		GenericEntity<List<Game>> g = new GenericEntity<List<Game>>(Lists.newArrayList(games)) {};
 	    
-		return Response.status(Status.OK).entity(ml).build();			
+		return Response.status(Status.OK).entity(g).build();			
 	}
 	
 	

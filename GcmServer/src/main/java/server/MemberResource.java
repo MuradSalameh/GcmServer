@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.MemberDAO;
 
 @Path("/member")
-
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class MemberResource {
@@ -52,7 +51,6 @@ public class MemberResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	//@Consumes(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
 	public Response getMemberList() {		
 	

@@ -29,7 +29,7 @@ public class GameDAOTest {
 		
 		//--------- getGames() Test to get a List of all games in database-----------//
 
-//		getGameList();
+		getGameList();
 
 
 		
@@ -43,7 +43,7 @@ public class GameDAOTest {
 		
 		//--------- getGame() Test to get one specific game by id -----------//
 
-//		getGameTest(id);
+//	getGameTest(id);
 
 
 
