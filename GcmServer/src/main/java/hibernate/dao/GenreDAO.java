@@ -7,7 +7,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Genre;
-import main.java.hibernate.model.Member;
 import main.java.hibernate.utils.SessionUtil;
 
 public class GenreDAO {

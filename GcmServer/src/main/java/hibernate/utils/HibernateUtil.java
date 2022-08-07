@@ -4,18 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import main.java.hibernate.model.Expense;
-import main.java.hibernate.model.ExpenseType;
-import main.java.hibernate.model.Game;
-import main.java.hibernate.model.Genre;
-import main.java.hibernate.model.Member;
-import main.java.hibernate.model.Revenue;
-import main.java.hibernate.model.RevenueType;
-import main.java.hibernate.model.Role;
-import main.java.hibernate.model.Social;
-import main.java.hibernate.model.Team;
-import main.java.hibernate.model.Tournament;
-
 public class HibernateUtil {
 	private static Session session = null;	
 	

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Member;
+import main.java.hibernate.model.Tournament;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -18,13 +18,13 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import main.java.hibernate.dao.MemberDAO;
+import main.java.hibernate.dao.TournamentDAO;
 
-@Path("/member")
+@Path("/tournament")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
-public class MemberResource {
+public class TournamentResource {
 	
 
 
@@ -40,26 +40,26 @@ public class MemberResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("/member/{id}")
-	public Response getMember(@PathParam("id") int id) { 
+	@Path("/tournament/{id}")
+	public Response getTournament(@PathParam("id") int id) { 
 			
-		Member member = new Member();
-		member = MemberDAO.getMember(id);	
+		Tournament tournament = new Tournament();
+		tournament = TournamentDAO.getTournament(id);	
 		
-		return Response.status(Status.OK).entity(member).build();
+		return Response.status(Status.OK).entity(tournament).build();
 	}
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
-	@Path("/memberlist")
-	public Response getMemberList() {		
+	@Path("/tournamentlist")
+	public Response getTournamentList() {		
 	
-		List<Member> members = new ArrayList<>();			
-		members = MemberDAO.getMembers();
+		List<Tournament> tournaments = new ArrayList<>();			
+		tournaments = TournamentDAO.getTournaments();
 		
-		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
+		GenericEntity<List<Tournament>> ml = new GenericEntity<List<Tournament>>(Lists.newArrayList(tournaments)) {};
 	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
@@ -67,27 +67,27 @@ public class MemberResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addMember")
-	public Response postMember(Member newMember) {
+	@Path("/addTournament")
+	public Response postTournament(Tournament newTournament) {
 		
-		MemberDAO.addMember(newMember);	
+		TournamentDAO.addTournament(newTournament);	
 		return Response.status(Status.CREATED).build();
 		
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateMember/{id}")
-	public Response putMember(@PathParam("id")int id, Member alteredMember) {
+	@Path("/updateTournament/{id}")
+	public Response putTournament(@PathParam("id")int id, Tournament alteredTournament) {
 		
-		MemberDAO.updateMember(id, alteredMember);
+		TournamentDAO.updateTournament(id, alteredTournament);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("/deleteMember/{id}")
-	public Response deleteMember(@PathParam("id")int id) {
-		MemberDAO.deleteMember(id);
+	@Path("/deleteTournament/{id}")
+	public Response deleteTournament(@PathParam("id")int id) {
+		TournamentDAO.deleteTournament(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

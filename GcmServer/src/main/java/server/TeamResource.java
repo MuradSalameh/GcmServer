@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Member;
+import main.java.hibernate.model.Team;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -18,13 +18,13 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import main.java.hibernate.dao.MemberDAO;
+import main.java.hibernate.dao.TeamDAO;
 
-@Path("/member")
+@Path("/team")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
-public class MemberResource {
+public class TeamResource {
 	
 
 
@@ -40,26 +40,26 @@ public class MemberResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("/member/{id}")
-	public Response getMember(@PathParam("id") int id) { 
+	@Path("/team/{id}")
+	public Response getTeam(@PathParam("id") int id) { 
 			
-		Member member = new Member();
-		member = MemberDAO.getMember(id);	
+		Team team = new Team();
+		team = TeamDAO.getTeam(id);	
 		
-		return Response.status(Status.OK).entity(member).build();
+		return Response.status(Status.OK).entity(team).build();
 	}
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
-	@Path("/memberlist")
-	public Response getMemberList() {		
+	@Path("/teamlist")
+	public Response getTeamList() {		
 	
-		List<Member> members = new ArrayList<>();			
-		members = MemberDAO.getMembers();
+		List<Team> teams = new ArrayList<>();			
+		teams = TeamDAO.getTeams();
 		
-		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
+		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {};
 	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
@@ -67,27 +67,27 @@ public class MemberResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addMember")
-	public Response postMember(Member newMember) {
+	@Path("/addTeam")
+	public Response postTeam(Team newTeam) {
 		
-		MemberDAO.addMember(newMember);	
+		TeamDAO.addTeam(newTeam);	
 		return Response.status(Status.CREATED).build();
 		
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateMember/{id}")
-	public Response putMember(@PathParam("id")int id, Member alteredMember) {
+	@Path("/updateTeam/{id}")
+	public Response putTeam(@PathParam("id")int id, Team alteredTeam) {
 		
-		MemberDAO.updateMember(id, alteredMember);
+		TeamDAO.updateTeam(id, alteredTeam);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("/deleteMember/{id}")
-	public Response deleteMember(@PathParam("id")int id) {
-		MemberDAO.deleteMember(id);
+	@Path("/deleteTeam/{id}")
+	public Response deleteTeam(@PathParam("id")int id) {
+		TeamDAO.deleteTeam(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

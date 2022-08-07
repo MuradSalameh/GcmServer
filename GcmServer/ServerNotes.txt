@@ -1,7 +1,7 @@
 ToDo:
 
 
-- Client: alle Klaasen Service Functions erstellen und Testklassen fertig schreiben.
+- Client: alle Klassen Service Functions erstellen und Testklassen fertig schreiben.
 - 
 
 Schreibfehler:

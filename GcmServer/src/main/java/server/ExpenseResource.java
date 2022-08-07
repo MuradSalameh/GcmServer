@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Member;
+import main.java.hibernate.model.Expense;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -18,13 +18,13 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import main.java.hibernate.dao.MemberDAO;
+import main.java.hibernate.dao.ExpenseDAO;
 
-@Path("/member")
+@Path("/expense")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
-public class MemberResource {
+public class ExpenseResource {
 	
 
 
@@ -40,26 +40,26 @@ public class MemberResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("/member/{id}")
-	public Response getMember(@PathParam("id") int id) { 
+	@Path("/expense/{id}")
+	public Response getExpense(@PathParam("id") int id) { 
 			
-		Member member = new Member();
-		member = MemberDAO.getMember(id);	
+		Expense expense = new Expense();
+		expense = ExpenseDAO.getExpense(id);	
 		
-		return Response.status(Status.OK).entity(member).build();
+		return Response.status(Status.OK).entity(expense).build();
 	}
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
-	@Path("/memberlist")
-	public Response getMemberList() {		
+	@Path("/expenselist")
+	public Response getExpenseList() {		
 	
-		List<Member> members = new ArrayList<>();			
-		members = MemberDAO.getMembers();
+		List<Expense> expenses = new ArrayList<>();			
+		expenses = ExpenseDAO.getExpenses();
 		
-		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
+		GenericEntity<List<Expense>> ml = new GenericEntity<List<Expense>>(Lists.newArrayList(expenses)) {};
 	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
@@ -67,27 +67,27 @@ public class MemberResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addMember")
-	public Response postMember(Member newMember) {
+	@Path("/addExpense")
+	public Response postExpense(Expense newExpense) {
 		
-		MemberDAO.addMember(newMember);	
+		ExpenseDAO.addExpense(newExpense);	
 		return Response.status(Status.CREATED).build();
 		
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateMember/{id}")
-	public Response putMember(@PathParam("id")int id, Member alteredMember) {
+	@Path("/updateExpense/{id}")
+	public Response putExpense(@PathParam("id")int id, Expense alteredExpense) {
 		
-		MemberDAO.updateMember(id, alteredMember);
+		ExpenseDAO.updateExpense(id, alteredExpense);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("/deleteMember/{id}")
-	public Response deleteMember(@PathParam("id")int id) {
-		MemberDAO.deleteMember(id);
+	@Path("/deleteExpense/{id}")
+	public Response deleteExpense(@PathParam("id")int id) {
+		ExpenseDAO.deleteExpense(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

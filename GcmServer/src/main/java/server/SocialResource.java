@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Member;
+import main.java.hibernate.model.Social;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -18,13 +18,13 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import main.java.hibernate.dao.MemberDAO;
+import main.java.hibernate.dao.SocialDAO;
 
-@Path("/member")
+@Path("/social")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
-public class MemberResource {
+public class SocialResource {
 	
 
 
@@ -40,26 +40,26 @@ public class MemberResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	@Path("/member/{id}")
-	public Response getMember(@PathParam("id") int id) { 
+	@Path("/social/{id}")
+	public Response getSocial(@PathParam("id") int id) { 
 			
-		Member member = new Member();
-		member = MemberDAO.getMember(id);	
+		Social social = new Social();
+		social = SocialDAO.getSocial(id);	
 		
-		return Response.status(Status.OK).entity(member).build();
+		return Response.status(Status.OK).entity(social).build();
 	}
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	//@Consumes(MediaType.APPLICATION_XML)
-	@Path("/memberlist")
-	public Response getMemberList() {		
+	@Path("/sociallist")
+	public Response getSocialList() {		
 	
-		List<Member> members = new ArrayList<>();			
-		members = MemberDAO.getMembers();
+		List<Social> socials = new ArrayList<>();			
+		socials = SocialDAO.getSocials();
 		
-		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
+		GenericEntity<List<Social>> ml = new GenericEntity<List<Social>>(Lists.newArrayList(socials)) {};
 	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
@@ -67,27 +67,27 @@ public class MemberResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addMember")
-	public Response postMember(Member newMember) {
+	@Path("/addSocial")
+	public Response postSocial(Social newSocial) {
 		
-		MemberDAO.addMember(newMember);	
+		SocialDAO.addSocial(newSocial);	
 		return Response.status(Status.CREATED).build();
 		
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateMember/{id}")
-	public Response putMember(@PathParam("id")int id, Member alteredMember) {
+	@Path("/updateSocial/{id}")
+	public Response putSocial(@PathParam("id")int id, Social alteredSocial) {
 		
-		MemberDAO.updateMember(id, alteredMember);
+		SocialDAO.updateSocial(id, alteredSocial);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("/deleteMember/{id}")
-	public Response deleteMember(@PathParam("id")int id) {
-		MemberDAO.deleteMember(id);
+	@Path("/deleteSocial/{id}")
+	public Response deleteSocial(@PathParam("id")int id) {
+		SocialDAO.deleteSocial(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

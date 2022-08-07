@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Revenue;
 import main.java.hibernate.utils.SessionUtil;
 
