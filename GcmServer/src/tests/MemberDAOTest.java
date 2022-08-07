@@ -29,7 +29,7 @@ public class MemberDAOTest {
 		
 		//--------- getMembers() Test to get a List of all members in database-----------//
 
-		//getMemberList();
+		getMemberList();
 
 
 		

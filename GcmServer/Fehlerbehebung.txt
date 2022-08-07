@@ -1,0 +1,31 @@
+Fehler:
+
+IMPORTS!!!! - JAAVAX.PERSISTANCE    & JAKARARTA.XML - !!!!!
+
+---------
+bei abruf von liste vom Server:
+Exception in thread "main" jakarta.ws.rs.InternalServerErrorException: HTTP 500 Internal Server Error
+Lösung: IMPORTS XML auf jakarta setzen bei gcmClasses und bei hibernate.models ,
+
+eventuell - xml annotationen Listen auf Transient setzen in hibernate.models und in gcmClasses
+Alternativ : wie listen innerhalb von Listen mit übertragen?
+
+-----------------
+
+body writer fehler ---> imports checken jakarta
+
+
+
+Datenbank Mappings:
+
+Tournament: Cannot delete or update a parent row: a foreign key constraint fails (`gcm`.`tournament_teams`, CONSTRAINT `FKguo939y7qyj537p7q5hj82yhn` FOREIGN KEY (`team_id`) REFERENCES `team` (`ID`))
+Mapping Genre Game. - Versuchen mapping auf games zu legen?
+mapping socials geht nicht bei delete, vergleichen mit roles - oneomany owner 
+Teams mapping checken wegen delete.
+
+
+
+Schreibfehler:
+
+tournament title in tournament klassen.
+additional in allen klassen kontrollieren - irgenwo falsch

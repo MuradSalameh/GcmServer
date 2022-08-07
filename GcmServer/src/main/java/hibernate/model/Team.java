@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
@@ -74,7 +76,7 @@ public class Team  implements Serializable{
 		this.teamDescription = teamDescription;
 	}
 
-	
+	@XmlTransient
 	public Set<Member> getMembers() {
 		return members;
 	}

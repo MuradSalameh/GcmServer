@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
@@ -72,6 +74,7 @@ public class RevenueType  implements Serializable{
 		this.revenueTypeDescription = revenueTypeDescription;
 	}
 
+	@XmlTransient
 	public List<Revenue> getRevenues() {
 		return revenues;
 	}

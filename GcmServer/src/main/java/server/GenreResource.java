@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.GenreDAO;
 
 @Path("/genre")
-
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class GenreResource {

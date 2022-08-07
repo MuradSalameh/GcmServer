@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @Entity
 @Table(name = "genre")
@@ -51,7 +53,7 @@ public class Genre  implements Serializable{
 		this.genreTitle = genreTitle;
 	}
 
-	@XmlElement(name="Games")
+	@XmlTransient
 	public List<Game> getGames() {
 		return games;
 	}

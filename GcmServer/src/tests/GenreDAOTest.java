@@ -28,7 +28,7 @@ public class GenreDAOTest {
 		
 		//--------- getGenres() Test to get a List of all genres in database-----------//
 
-//		getGenreList();
+		getGenreList();
 
 
 		
@@ -47,8 +47,8 @@ public class GenreDAOTest {
 
 		//--------- updateGenre() Test -----------//
 
-		String s = "BOBO genre";
-		updateGenreTest(id,s);
+//		String s = "BOBO genre";
+//		updateGenreTest(id,s);
 
 
 
