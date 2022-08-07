@@ -18,10 +18,10 @@ public class ExpenseTypeDAOTest {
 
 		//--------- addExpenseType() Test -----------//
 
-		//addTestExpenseType();
-		//addTestExpenseType();
-		//addTestExpenseType();
-		//addTestExpenseType();
+		addTestExpenseType();
+		addTestExpenseType();
+		addTestExpenseType();
+		addTestExpenseType();
 
 		
 
