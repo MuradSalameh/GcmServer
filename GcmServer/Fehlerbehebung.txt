@@ -29,3 +29,11 @@ Schreibfehler:
 
 tournament title in tournament klassen.
 additional in allen klassen kontrollieren - irgenwo falsch
+
+
+JavaFX Tabellendaten werden nicht angezeigt --> 
+schauen ob jeweilige Tabelle inhalte hat in der DB
+import korrekte serviceFunction checken
+fx:ids der elemente checken
+schauen ob SceneController gesetzt ist
+
