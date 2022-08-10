@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
+
 import main.java.hibernate.model.Social;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -18,6 +19,7 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+
 import main.java.hibernate.dao.SocialDAO;
 
 @Path("/social")
@@ -63,6 +65,19 @@ public class SocialResource {
 	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
+	
+	@GET 
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/socialsByMember/{id}")
+	public Response getSocialsByMember(@PathParam("id") int id) { 
+		List<Social> s = SocialDAO.getSocialsByMemberId(id);
+		
+		
+		GenericEntity<List<Social>> sl = new GenericEntity<List<Social>>(Lists.newArrayList(s)) {};
+	    
+		return Response.status(Status.OK).entity(sl).build();	
+	}
+	
 	
 	
 	@POST

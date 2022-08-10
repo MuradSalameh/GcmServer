@@ -66,15 +66,15 @@ public class App {
 
 // test roles join table
 
-		Role admin = new Role("admin", "Clan Administrator");
-		HibernateUtil.getSession().persist(admin);
+		Role adminRole = new Role("admin", "Clan Administrator");
+		HibernateUtil.getSession().persist(adminRole);
 
-		Role member = new Role("member", "Clan Member");
-		HibernateUtil.getSession().persist(member);
+		Role memberRole = new Role("member", "Clan Member");
+		HibernateUtil.getSession().persist(memberRole);
 
 		List<Role> roles = new ArrayList<Role>();
-		roles.add(admin);
-		roles.add(member);	
+		roles.add(adminRole);
+		roles.add(memberRole);	
 
 		ulli.setRoles(roles);
 		HibernateUtil.getSession().persist(ulli);

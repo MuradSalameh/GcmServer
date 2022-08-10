@@ -1,11 +1,14 @@
 package main.java.hibernate.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.MemberSocials;
+import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -38,6 +41,27 @@ public class SocialDAO {
 		List<Social> socials =  query.list();		
 		session.close();		
 		return socials;
+	}
+	
+	public static List<Social> getSocialsByMemberId(int id){		
+		//SQL: SELECT * FROM gcm.member_socials where member_id= '3'
+
+		Session session = SessionUtil.getSession(); 			
+		String hql = "from MemberSocials social_id where member_id= :id";		
+		Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+		List<MemberSocials> socialsMember =  query.list();	
+		List<Social> filteredSocialsList =  new ArrayList<>();	
+		
+		for(MemberSocials m : socialsMember) {
+			int sId = m.getSocialId();
+			Social s = session.get(Social.class, sId);
+			filteredSocialsList.add(s);
+			System.out.println(s);
+		}
+						
+		session.close();		
+		return filteredSocialsList;		
 	}
 
 	public static void deleteSocial(int id) {

@@ -49,6 +49,11 @@ public class RoleDAOTest {
 
 //		String s = "BOBO role";
 //		updateRoleTest(id,s);
+		
+		
+		//--------- getRolesByMemberTest() -----------//
+
+//		getRolesByMemberTest(3);
 
 
 
@@ -91,6 +96,20 @@ public class RoleDAOTest {
 	public static void getRoleTest(int id) {
 		System.out.println(RoleDAO.getRole(id)); 
 	}
+	
+	
+	public static void getRolesByMemberTest(int id) {
+		Session session = SessionUtil.getSession();
+		List<Role> roles = RoleDAO.getRolesByMemberId(id);
+		ArrayList<Role> ol = new ArrayList<Role>();
+	
+		for(Role m : roles) {
+			  ol.add(m);
+			  System.out.println(m);
+		}
+	}
+	
+	
 
 	public static void getRoleList() {
 		List<Role> roles = RoleDAO.getRoles();

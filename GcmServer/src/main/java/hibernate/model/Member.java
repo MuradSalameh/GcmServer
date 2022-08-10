@@ -260,8 +260,7 @@ public class Member  implements Serializable {
 	
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
-		this.roles.clear();
-	    this.roles.addAll(roles);
+		
 	}
 
 

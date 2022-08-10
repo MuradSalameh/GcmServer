@@ -5,7 +5,8 @@ IMPORTS!!!! - JAAVAX.PERSISTANCE    & JAKARARTA.XML - !!!!!
 ---------
 bei abruf von liste vom Server:
 Exception in thread "main" jakarta.ws.rs.InternalServerErrorException: HTTP 500 Internal Server Error
-Lösung: IMPORTS XML auf jakarta setzen bei gcmClasses und bei hibernate.models ,
+Lösung: Server neu Starten nach änderungen an Server-Dateien
+IMPORTS XML auf jakarta setzen bei gcmClasses und bei hibernate.models ,
 
 eventuell - xml annotationen Listen auf Transient setzen in hibernate.models und in gcmClasses
 Alternativ : wie listen innerhalb von Listen mit übertragen?

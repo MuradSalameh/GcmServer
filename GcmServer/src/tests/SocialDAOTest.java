@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import main.java.hibernate.dao.RoleDAO;
 import main.java.hibernate.dao.SocialDAO;
+import main.java.hibernate.model.MemberSocials;
+import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -47,8 +50,14 @@ public class SocialDAOTest {
 
 		//--------- updateSocial() Test -----------//
 
-		String s = "BOBO NewPlatform";
-		updateSocialTest(id,s);
+//		String s = "BOBO NewPlatform";
+//		updateSocialTest(id,s);
+		
+		
+		//--------- getSocialById()  -----------//
+		
+		getSocialsByMemberIdTest(1);
+		
 
 	}
 	
@@ -102,6 +111,19 @@ public class SocialDAOTest {
 		}
 	}
 
-
+	public static void getSocialsByMemberIdTest(int id) {
+		//Session session = SessionUtil.getSession();
+		/*
+		List<Social> socials = SocialDAO.getSocialsByMemberId(id);
+		ArrayList<Social> ol = new ArrayList<Social>();
+	
+		for(Social m : socials) {
+			//  ol.add(m);
+			  System.out.println(m);
+		}
+		*/
+		
+		SocialDAO.getSocialsByMemberId(id);
+	}
 
 }

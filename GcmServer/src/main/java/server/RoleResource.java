@@ -64,6 +64,19 @@ public class RoleResource {
 		return Response.status(Status.OK).entity(ml).build();			
 	}
 	
+	@GET 
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("rolelistmember/{id}")
+	public Response getRolesByMember(@PathParam("id") int id) { 
+		List<Role> roles = new ArrayList<>();			
+		roles = RoleDAO.getRolesByMemberId(id);
+		
+		GenericEntity<List<Role>> ml = new GenericEntity<List<Role>>(Lists.newArrayList(roles)) {};
+	    
+		return Response.status(Status.OK).entity(ml).build();
+	
+	}
+	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)

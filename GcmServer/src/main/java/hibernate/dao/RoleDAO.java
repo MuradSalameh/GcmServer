@@ -39,6 +39,20 @@ public class RoleDAO {
 		session.close();		
 		return roles;
 	}
+	
+	
+	public static List<Role> getRolesByMemberId(int id){
+	
+		//SELECT * FROM gcm.member_socials where member_id= '3'
+		
+		Session session = SessionUtil.getSession(); 	
+//		String hql = "from member_roles where member_id= :id";
+		String hql = "from member_roles where member_id= :id";
+		Query query = session.createQuery(hql);
+		List<Role> rolesMember =  query.list();		
+		session.close();		
+		return rolesMember;
+	}
 
 	public static void deleteRole(int id) {
 		Session session = SessionUtil.getSession();
