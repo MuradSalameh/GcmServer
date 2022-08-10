@@ -71,8 +71,7 @@ public class SocialResource {
 	@Path("/socialsByMember/{id}")
 	public Response getSocialsByMember(@PathParam("id") int id) { 
 		List<Social> s = SocialDAO.getSocialsByMemberId(id);
-		
-		
+				
 		GenericEntity<List<Social>> sl = new GenericEntity<List<Social>>(Lists.newArrayList(s)) {};
 	    
 		return Response.status(Status.OK).entity(sl).build();	
