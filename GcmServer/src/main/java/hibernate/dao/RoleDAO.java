@@ -1,12 +1,16 @@
 package main.java.hibernate.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.MemberRoles;
+import main.java.hibernate.model.MemberSocials;
 import main.java.hibernate.model.Role;
+import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
 public class RoleDAO {
@@ -45,13 +49,23 @@ public class RoleDAO {
 	
 		//SELECT * FROM gcm.member_socials where member_id= '3'
 		
-		Session session = SessionUtil.getSession(); 	
-//		String hql = "from member_roles where member_id= :id";
-		String hql = "from member_roles where member_id= :id";
+		Session session = SessionUtil.getSession(); 			
+		String hql = "from MemberRoles role_id where member_id= :id";		
 		Query query = session.createQuery(hql);
-		List<Role> rolesMember =  query.list();		
+        query.setParameter("id", id);
+		List<MemberRoles> rolesMember =  query.list();	
+		List<Role> filteredRolesList =  new ArrayList<>();	
+		
+		for(MemberRoles m : rolesMember) {
+			int sId = m.getRoleId();
+			Role s = session.get(Role.class, sId);
+			filteredRolesList.add(s);
+			
+		}
+						
 		session.close();		
-		return rolesMember;
+		return filteredRolesList;		
+	
 	}
 
 	public static void deleteRole(int id) {

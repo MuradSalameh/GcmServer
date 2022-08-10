@@ -39,7 +39,7 @@ public class HibernateTests {
 		roles.add(rB);	
 
 		member.setRoles(roles);
-		HibernateUtil.getSession().merge(member);
+		HibernateUtil.getSession().saveOrUpdate(member);
 		
 		HibernateUtil.sessionCommit();
 		

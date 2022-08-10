@@ -53,7 +53,7 @@ public class RoleDAOTest {
 		
 		//--------- getRolesByMemberTest() -----------//
 
-//		getRolesByMemberTest(3);
+	getRolesByMemberTest(1);
 
 
 
