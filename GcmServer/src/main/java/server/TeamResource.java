@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Team;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -63,6 +64,34 @@ public class TeamResource {
 	    
 		return Response.status(Status.OK).entity(ml).build();			
 	}
+	
+	
+	@GET 
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/teamsByMember/{id}")
+	public Response getTeamsByMember(@PathParam("id") int id) { 
+	
+		List<Team> teams = TeamDAO.getTeamsByMemberId(id);
+		
+		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {};
+	    
+		return Response.status(Status.OK).entity(ml).build();			
+	}
+	
+	
+	@GET 
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/membersByTeam/{id}")
+	public Response getMembersByTeam(@PathParam("id") int id) { 
+		
+		List<Member> members = TeamDAO.getMembersByTeamId(id);
+		
+		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
+		
+		return Response.status(Status.OK).entity(ml).build();			
+	}
+	
+	
 	
 	
 	@POST

@@ -103,27 +103,28 @@ public class Member  implements Serializable {
 	private LocalDate birthday;
 
 
-
+/*
 	// Teams
-	@ManyToMany(cascade = {
-			CascadeType.PERSIST,
-			CascadeType.MERGE
-	})
-	@JoinTable(name = "member_team", 
-	joinColumns = @JoinColumn(name = "member_id"), 
-	inverseJoinColumns = @JoinColumn(name = "team_id")
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+			name = "member_team",    
+			joinColumns = { @JoinColumn(name = "member_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "team_id") }
 			)
 	Set<Team> teams = new HashSet<>();
-
+*/
+	@OneToMany(mappedBy = "member")
+	private Set<MemberTeam> memberTeam = new HashSet<>();	
+	
+	
 	public Member() {
 		super();
 	}
 	
 	
-
 	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
 			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
-			List<Social> socials, Set<Game> games, Set<Event> events, LocalDate birthday, Set<Team> teams) {
+			List<Social> socials, Set<Game> games, Set<Event> events, LocalDate birthday, Set<MemberTeam> memberTeam) {
 		super();
 		this.clanName = clanName;
 		this.clanId = clanId;
@@ -139,10 +140,10 @@ public class Member  implements Serializable {
 		this.games = games;
 		this.events = events;
 		this.birthday = birthday;
-		this.teams = teams;
+		this.memberTeam = memberTeam;
 	}
 
-
+	
 	@XmlElement(name="ClanName")
 	public String getClanName() {
 		return clanName;
@@ -313,15 +314,16 @@ public class Member  implements Serializable {
 	}
 
 
+
+
 	@XmlTransient
-	public Set<Team> getTeams() {
-		return teams;
+	public Set<MemberTeam> getMemberTeam() {
+		return memberTeam;
 	}
 
 
-
-	public void setTeams(Set<Team> teams) {
-		this.teams = teams;
+	public void setMembers(Set<MemberTeam> memberTeam) {
+		this.memberTeam = memberTeam;
 	}
 
 

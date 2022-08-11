@@ -10,6 +10,7 @@ import java.util.Set;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.Genre;
 import main.java.hibernate.model.Member;
+import main.java.hibernate.model.MemberTeam;
 import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.model.Team;
@@ -40,7 +41,7 @@ public class App {
 				null);						// teams
 
 		HibernateUtil.getSession().persist(ulli);
-		
+
 
 		Member hans = new Member(
 				"hans", 					// clan name
@@ -61,10 +62,10 @@ public class App {
 
 		hans.setBirthday(LocalDate.of(1990, 8, 30));
 		HibernateUtil.getSession().persist(hans);
-		
 
 
-// test roles join table
+
+		// test roles join table
 
 		Role adminRole = new Role("admin", "Clan Administrator");
 		HibernateUtil.getSession().persist(adminRole);
@@ -80,7 +81,7 @@ public class App {
 		HibernateUtil.getSession().persist(ulli);
 
 
-// test socials join table
+		// test socials join table
 
 		Social social1 = new Social("YouTube", "Ulli", "www.youtube.com","neuer gaming kanal");
 		Social social2 = new Social("Facebook", "UlliFB", "www.facebook.com","FB-Seite");		
@@ -93,44 +94,78 @@ public class App {
 		HibernateUtil.getSession().persist(ulli);
 
 
-// test teams join table
-		
+		// test teams join table
+
 		//create team 1
 		Team t1 = new Team(
 				"team #1", 		// team name
 				"test team #1", // team description
 				null);			// team members list
-		
-		
+
+
 		HibernateUtil.getSession().persist(t1);
-		
-		// create member list for team
-		Set<Member> membersTeam1 = new HashSet<>();
-		membersTeam1.add(ulli);
-		t1.setMembers(membersTeam1);
-		HibernateUtil.getSession().persist(t1);
-		
+
 		// create team 2
 		Team t2 = new Team(
 				"team #2", 		// team name
 				"test team #2", // team description
 				null);			// team members	list	
-		
 
-
-		// create member list for team 2
-		Set<Member> membersTeam2 = new HashSet<Member>();
-		membersTeam2.add(hans);
-		t2.setMembers(membersTeam2);		
 		HibernateUtil.getSession().persist(t2);
-
-		// Add teams to a list
+		
+		//Teamlist List for tournaments
 		Set<Team> teams = new HashSet<Team>();
 		teams.add(t1);
 		teams.add(t2);
 		
+		
+		// Connect members with team
+		MemberTeam memberTeam1 = new MemberTeam();
+		memberTeam1.setTeam(t1);     //specify Team 
+		
+		memberTeam1.setMember(hans);	//add Member to team 
+		HibernateUtil.getSession().save(memberTeam1);	// save
+		
+		memberTeam1.setMember(ulli);	//add Member to team		
+		HibernateUtil.getSession().save(memberTeam1);	//save
+		
+//		Set<Member>memberTeams1 = new HashSet<>();
+//		// Add Team to Member Teams List
+//		memberTeams1.add(ulli);
+//		//Assign List of Teams to Member
+//		t1.setMembers(memberTeams1);
+//
+//		HibernateUtil.getSession().saveOrUpdate(t1);
 
-// test tournament
+
+		
+/*
+		// Create Team List for member
+		Set<Team>memberTeams1 = new HashSet<>();
+		// Add Team to Member Teams List
+		memberTeams1.add(t1);
+		//Assign List of Teams to Member
+		ulli.setTeams(memberTeams1);
+
+		HibernateUtil.getSession().persist(ulli);
+
+
+
+
+		// create member list for team 2
+		// Create Team List for member
+		Set<Team>memberTeams2 = new HashSet<>();
+		// Add Team to Member Teams List
+		memberTeams2.add(t1);
+		//Assign List of Teams to Member
+		hans.setTeams(memberTeams2);
+
+ */
+		// Add teams to a list
+		
+
+
+		// test tournament
 		Tournament tournament1 = new Tournament(
 				"TestTournament #1", 		//title
 				"Testing nr 1", 			// description
@@ -141,7 +176,7 @@ public class App {
 				null,						// games list
 				null);						// result string
 
-// test Game
+		// test Game
 		Game game1 = new Game(
 				"TestGame #1", 				// title
 				LocalDate.of(2022, 10, 28), // release date LocalDate
@@ -153,13 +188,13 @@ public class App {
 		// Create games list and add created games
 		Set<Game> games = new HashSet<Game>();
 		games.add(game1);	
-		
-		
+
+
 		// Create tournaments list and add created tournaments to list
 		List<Tournament> tournaments = new ArrayList<Tournament>();
 		tournaments.add(tournament1);			
 
-// test Create genres
+		// test Create genres
 		Genre strategy = new Genre("strategy", null);
 		Genre simulation = new Genre("simulation", null);	
 
@@ -176,17 +211,17 @@ public class App {
 		tournament1.setTeams(teams);
 		HibernateUtil.getSession().persist(tournament1);
 
-// test games to members
+		// test games to members
 		hans.setGames(games);
 		HibernateUtil.getSession().persist(hans);
 
 		ulli.setGames(games);
 		HibernateUtil.getSession().persist(ulli);
 
-// test tournament to game
+		// test tournament to game
 		game1.setTournaments(tournaments);
 
-		
+
 
 
 		HibernateUtil.sessionCommit();

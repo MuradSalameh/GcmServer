@@ -46,11 +46,20 @@ public class TeamDAOTest {
 
 		//--------- updateTeam() Test -----------//
 
-		String s = "BOBO Team";
-		updateTeamTest(id,s);
+//		String s = "BOBO Team";
+//		updateTeamTest(id,s);
 
 
+		//--------- getTeamsByMemberIdTest() Test -----------//
 
+//		getTeamsByMemberIdTest(3);
+		
+		
+		//--------- getMembersByTeamIdTest() Test -----------//
+
+		
+//		getMembersByTeamIdTest(1);
+		
 	}
 	
 	
@@ -100,6 +109,16 @@ public class TeamDAOTest {
 			  ol.add(m);
 			  System.out.println(m);
 		}
+	}
+	
+	public static void getTeamsByMemberIdTest(int id) {
+		
+		TeamDAO.getTeamsByMemberId(id);
+	}
+	
+	public static void getMembersByTeamIdTest(int id) {
+		
+		TeamDAO.getMembersByTeamId(id);
 	}
 
 

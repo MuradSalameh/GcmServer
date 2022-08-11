@@ -23,7 +23,9 @@ roles rausnehmen und als direkte Auswahl mit festgelegten rollen setzen.
 
 join table query by ID --- 
 - erst join table als klasse anlegen und hibernate mappings machen
+- joinTable klasse in hibernat config eintragen
 -  im server dao funktion anlegen
+
 - im server resource funktion anlegen
 - im client servicefunctions funktion anlegen.
 

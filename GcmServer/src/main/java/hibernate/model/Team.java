@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import jakarta.xml.bind.annotation.XmlTransient;
@@ -34,13 +35,8 @@ public class Team  implements Serializable{
 	private String teamDescription;
 	
 	
-	
-	
-	
-	
-	
-	@ManyToMany(mappedBy = "teams")
-		private Set<Member> members = new HashSet<>();	
+	@OneToMany(mappedBy = "team")
+	private Set<MemberTeam> memberTeam = new HashSet<>();	
 
 	
 	public Team() {
@@ -48,11 +44,11 @@ public class Team  implements Serializable{
 	}
 
 
-	public Team(String teamName, String teamDescription, Set<Member> members) {
+	public Team(String teamName, String teamDescription, Set<MemberTeam> memberTeam) {
 		super();
 		this.teamName = teamName;
 		this.teamDescription = teamDescription;
-		this.members = members;
+		this.memberTeam = memberTeam;
 	}
 
 	@XmlElement(name="Teamname")
@@ -77,13 +73,13 @@ public class Team  implements Serializable{
 	}
 
 	@XmlTransient
-	public Set<Member> getMembers() {
-		return members;
+	public Set<MemberTeam> getMemberTeam() {
+		return memberTeam;
 	}
 
 
-	public void setMembers(Set<Member> members) {
-		this.members = members;
+	public void setMembers(Set<MemberTeam> memberTeam) {
+		this.memberTeam = memberTeam;
 	}
 
 	@XmlElement(name="ID",required=true)
