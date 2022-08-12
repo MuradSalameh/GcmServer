@@ -10,6 +10,7 @@ import java.util.Set;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.Genre;
 import main.java.hibernate.model.Member;
+import main.java.hibernate.model.MemberGames;
 import main.java.hibernate.model.MemberTeam;
 import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
@@ -112,34 +113,34 @@ public class App {
 				null);			// team members	list	
 
 		HibernateUtil.getSession().persist(t2);
-		
+
 		//Teamlist List for tournaments
 		Set<Team> teams = new HashSet<Team>();
 		teams.add(t1);
 		teams.add(t2);
-		
-		
+
+
 		// Connect members with team
 		MemberTeam memberTeam1 = new MemberTeam();
 		memberTeam1.setTeam(t1);     //specify Team 
-		
+
 		memberTeam1.setMember(hans);	//add Member to team 
 		HibernateUtil.getSession().save(memberTeam1);	// save
-		
+
 		memberTeam1.setMember(ulli);	//add Member to team		
 		HibernateUtil.getSession().save(memberTeam1);	//save
-		
-//		Set<Member>memberTeams1 = new HashSet<>();
-//		// Add Team to Member Teams List
-//		memberTeams1.add(ulli);
-//		//Assign List of Teams to Member
-//		t1.setMembers(memberTeams1);
-//
-//		HibernateUtil.getSession().saveOrUpdate(t1);
+
+		//		Set<Member>memberTeams1 = new HashSet<>();
+		//		// Add Team to Member Teams List
+		//		memberTeams1.add(ulli);
+		//		//Assign List of Teams to Member
+		//		t1.setMembers(memberTeams1);
+		//
+		//		HibernateUtil.getSession().saveOrUpdate(t1);
 
 
-		
-/*
+
+		/*
 		// Create Team List for member
 		Set<Team>memberTeams1 = new HashSet<>();
 		// Add Team to Member Teams List
@@ -160,9 +161,9 @@ public class App {
 		//Assign List of Teams to Member
 		hans.setTeams(memberTeams2);
 
- */
+		 */
 		// Add teams to a list
-		
+
 
 
 		// test tournament
@@ -185,9 +186,46 @@ public class App {
 				null, 						// tournament list
 				null);						// additional notes
 
+
+		// test Game
+		Game game2 = new Game(
+				"TestGame 22222222", 				// title
+				LocalDate.of(2022, 10, 28), // release date LocalDate
+				null, 						// genre list
+				null, 						// member list
+				null, 						// tournament list
+				null);						// additional notes
+
+
 		// Create games list and add created games
-		Set<Game> games = new HashSet<Game>();
-		games.add(game1);	
+		Set<Game> gameList = new HashSet<Game>();
+		gameList.add(game1);	
+		gameList.add(game2);	
+
+		// Connect games to members --- ManyToMany custom Class
+		// Every New Entry/Row needs its own MembersGames Object
+		
+		MemberGames memberGames1 = new MemberGames();
+		memberGames1.setGame(game1);			
+		memberGames1.setMember(ulli);	//add member
+		HibernateUtil.getSession().saveOrUpdate(memberGames1);	
+
+		MemberGames memberGames2 = new MemberGames();
+		memberGames2.setGame(game2);     //specify game		
+		//memberGames2.setGame(game2);     //specify game		
+		memberGames2.setMember(ulli);	//add member
+		HibernateUtil.getSession().saveOrUpdate(memberGames2);	// s
+
+		MemberGames memberGames3 = new MemberGames();
+		memberGames3.setGame(game2);			
+		memberGames3.setMember(hans);	//add member
+		HibernateUtil.getSession().saveOrUpdate(memberGames3);	
+
+
+
+
+
+
 
 
 		// Create tournaments list and add created tournaments to list
@@ -211,12 +249,7 @@ public class App {
 		tournament1.setTeams(teams);
 		HibernateUtil.getSession().persist(tournament1);
 
-		// test games to members
-		hans.setGames(games);
-		HibernateUtil.getSession().persist(hans);
 
-		ulli.setGames(games);
-		HibernateUtil.getSession().persist(ulli);
 
 		// test tournament to game
 		game1.setTournaments(tournaments);

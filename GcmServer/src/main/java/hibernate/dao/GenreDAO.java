@@ -43,7 +43,7 @@ public class GenreDAO {
 	public static void deleteGenre(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Genre genre = session.find(Genre.class, id);
+		Genre genre = session.get(Genre.class, id);
 		session.remove(genre);
 		tx.commit();
 		session.close();
@@ -53,7 +53,7 @@ public class GenreDAO {
 	public static void updateGenre(int id, Genre genre){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Genre old = session.find(Genre.class, id);
+		Genre old = session.get(Genre.class, id);
 		
 		old.setGenreTitle(genre.getGenreTitle());
 		//old.setGames(genre.getGames());			

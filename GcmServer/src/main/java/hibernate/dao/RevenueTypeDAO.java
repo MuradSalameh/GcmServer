@@ -43,7 +43,7 @@ public class RevenueTypeDAO {
 	public static void deleteRevenueType(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		RevenueType revenueType = session.find(RevenueType.class, id);
+		RevenueType revenueType = session.get(RevenueType.class, id);
 		session.remove(revenueType);
 		tx.commit();
 		session.close();
@@ -53,7 +53,7 @@ public class RevenueTypeDAO {
 	public static void updateRevenueType(int id, RevenueType revenueType){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		RevenueType old = session.find(RevenueType.class, id);
+		RevenueType old = session.get(RevenueType.class, id);
 		
 		old.setRevenueTypeTitle(revenueType.getRevenueTypeTitle());
 		old.setRevenueTypeDescription(revenueType.getRevenueTypeDescription());

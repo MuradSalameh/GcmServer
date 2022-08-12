@@ -46,7 +46,7 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 		
 		//Member member = session.get(Member.class, id);
-		Member member = session.find(Member.class, id);
+		Member member = session.get(Member.class, id);
 		session.remove(member);
 		//session.delete(session.find(Member.class, id));
 		tx.commit();
@@ -59,7 +59,7 @@ public class MemberDAO {
         Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 	
-		Member old = session.find(Member.class, id);
+		Member old = session.get(Member.class, id);
 		
 		old.setClanName(member.getClanName());
 		old.setClanId(member.getClanId());

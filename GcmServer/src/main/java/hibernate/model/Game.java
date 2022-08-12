@@ -54,17 +54,9 @@ public class Game  implements Serializable{
 
 	
 	
-	@ManyToMany(cascade = {
-		    CascadeType.PERSIST,
-		    CascadeType.MERGE
-		})
-	@JoinTable(
-			name = "game_member", 
-			joinColumns = { @JoinColumn(name = "game_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "member_id") }
-			)
-	Set<Member> members = new HashSet<>();
-	
+	// Members
+		@OneToMany(mappedBy = "game")
+		Set<MemberGames> memberGames = new HashSet<>();
 	
 		
 	// join column tournament game
@@ -84,13 +76,13 @@ public class Game  implements Serializable{
 
 
 
-	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, Set<Member> members,
+	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, Set<MemberGames> memberGames,
 			List<Tournament> tournaments, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
 		this.releaseDate = releaseDate;
 		this.genres = genres;
-		this.members = members;
+		this.memberGames = memberGames;
 		this.tournaments = tournaments;
 		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
@@ -134,14 +126,14 @@ public class Game  implements Serializable{
 
 
 	@XmlTransient
-	public Set<Member> getMembers() {
-		return members;
+	public Set<MemberGames> getMembers() {
+		return memberGames;
 	}
 
 
 
-	public void setMembers(Set<Member> members) {
-		this.members = members;
+	public void setMembers(Set<MemberGames> memberGames) {
+		this.memberGames = memberGames;
 	}
 
 

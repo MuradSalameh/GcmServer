@@ -92,7 +92,7 @@ public class TeamDAO {
 	public static void deleteTeam(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Team team = session.find(Team.class, id);
+		Team team = session.get(Team.class, id);
 		session.remove(team);
 		tx.commit();
 		session.close();
@@ -102,7 +102,7 @@ public class TeamDAO {
 	public static void updateTeam(int id, Team team){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Team old = session.find(Team.class, id);
+		Team old = session.get(Team.class, id);
 		
 		old.setTeamName(team.getTeamName());
 		old.setTeamDescription(team.getTeamDescription());

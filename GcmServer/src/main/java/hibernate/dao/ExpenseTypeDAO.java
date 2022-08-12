@@ -44,7 +44,7 @@ public class ExpenseTypeDAO {
 	public static void deleteExpenseType(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		ExpenseType expenseType = session.find(ExpenseType.class, id);
+		ExpenseType expenseType = session.get(ExpenseType.class, id);
 		session.remove(expenseType);
 		tx.commit();
 		session.close();
@@ -54,7 +54,7 @@ public class ExpenseTypeDAO {
 	public static void updateExpenseType(int id, ExpenseType expenseType){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		ExpenseType old = session.find(ExpenseType.class, id);
+		ExpenseType old = session.get(ExpenseType.class, id);
 		
 		old.setExpenseTitle(expenseType.getExpenseTitle());
 		old.setExpenseDescription(expenseType.getExpenseDescription());

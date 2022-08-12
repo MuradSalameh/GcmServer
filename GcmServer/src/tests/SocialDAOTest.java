@@ -38,13 +38,14 @@ public class SocialDAOTest {
 		
 		//--------- deleteSocial() Test -----------//
 
-//		deleteSocialTest(id);
+		deleteSocialTest(id);
+		
 
 
 		
 		//--------- getSocial() Test to get one specific social by id -----------//
 
-		//getSocialTest(id);
+//		getSocialTest(id);
 
 
 
@@ -56,8 +57,8 @@ public class SocialDAOTest {
 		
 		//--------- getSocialById()  -----------//
 		
-		getSocialsByMemberIdTest(1);
-		
+	//	getSocialsByMemberIdTest(1);
+//		deleteSocialFromMemberTest(1);
 
 	}
 	
@@ -124,6 +125,10 @@ public class SocialDAOTest {
 		*/
 		
 		SocialDAO.getSocialsByMemberId(id);
+	}
+	
+	public static void deleteSocialFromMemberTest(int id) {
+		SocialDAO.deleteSocialFromMember(id);
 	}
 
 }

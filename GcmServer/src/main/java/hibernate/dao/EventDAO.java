@@ -45,7 +45,7 @@ public class EventDAO {
 	public static void deleteEvent(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Event event = session.find(Event.class, id);
+		Event event = session.get(Event.class, id);
 		session.remove(event);
 		tx.commit();
 		session.close();
@@ -55,7 +55,7 @@ public class EventDAO {
 	public static void updateEvent(int id, Event event){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Event old = session.find(Event.class, id);
+		Event old = session.get(Event.class, id);
 		
 		old.setEventTitle(event.getEventTitle());
 		old.setEventDescription(event.getEventDescription());

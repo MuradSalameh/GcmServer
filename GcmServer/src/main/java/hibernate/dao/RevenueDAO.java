@@ -41,7 +41,7 @@ public class RevenueDAO {
 	public static void deleteRevenue(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Revenue revenue = session.find(Revenue.class, id);
+		Revenue revenue = session.get(Revenue.class, id);
 		session.remove(revenue);
 		tx.commit();
 		session.close();
@@ -51,7 +51,7 @@ public class RevenueDAO {
 	public static void updateRevenue(int id, Revenue revenue){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Revenue old = session.find(Revenue.class, id);
+		Revenue old = session.get(Revenue.class, id);
 		
 		old.setRevenueTitle(revenue.getRevenueTitle());
 		old.setRevenueDescription(revenue.getRevenueDescription());

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.internal.build.AllowSysOut;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.MemberSocials;
@@ -62,21 +63,48 @@ public class SocialDAO {
 		session.close();		
 		return filteredSocialsList;		
 	}
+	
+	
+	public static void deleteSocialFromMember(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberSocials Table
+		String hql = "delete from MemberSocials id where social_id= :id";		
+		Query query = session.createQuery(hql);		
+        query.setParameter("id", id);
+        
+        int count = query.executeUpdate();
+        System.out.println(count + " Record(s) Deleted.");
+        
+        // Remove from Social Table
+    	Social social = session.get(Social.class, id);
+		session.remove(social);
 
+        tx.commit();
+        session.clear();
+        session.close();
+	}
+	
+	
+	
 	public static void deleteSocial(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Social social = session.find(Social.class, id);
+		
+		Social social = session.get(Social.class, id);
 		session.remove(social);
 		tx.commit();
 		session.close();
 		
 	}
 
+	
+	
 	public static void updateSocial(int id, Social social){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Social old = session.find(Social.class, id);
+		Social old = session.get(Social.class, id);
 		
 		old.setSocialPlatform(social.getSocialPlatform());
 		old.setSocialUsername(social.getSocialUsername());

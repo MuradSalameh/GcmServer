@@ -71,7 +71,7 @@ public class RoleDAO {
 	public static void deleteRole(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Role role = session.find(Role.class, id);
+		Role role = session.get(Role.class, id);
 		session.remove(role);
 		tx.commit();
 		session.close();
@@ -81,7 +81,7 @@ public class RoleDAO {
 	public static void updateRole(int id, Role role){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Role old = session.find(Role.class, id);
+		Role old = session.get(Role.class, id);
 		
 		old.setRoleName(role.getRoleName());
 		old.setRoleDescription(role.getRoleDescription());

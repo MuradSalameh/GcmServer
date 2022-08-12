@@ -43,7 +43,7 @@ public class PartnerDAO {
 	public static void deletePartner(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Partner partner = session.find(Partner.class, id);
+		Partner partner = session.get(Partner.class, id);
 		session.remove(partner);
 		tx.commit();
 		session.close();
@@ -54,7 +54,7 @@ public class PartnerDAO {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		
-		Partner old = session.find(Partner.class, id);
+		Partner old = session.get(Partner.class, id);
 		
 		old.setCompanyName(partner.getCompanyName());
 		old.setContactPersonName(partner.getContactPersonName());

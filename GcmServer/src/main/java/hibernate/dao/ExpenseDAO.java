@@ -44,7 +44,7 @@ public class ExpenseDAO {
 	public static void deleteExpense(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Expense expense = session.find(Expense.class, id);
+		Expense expense = session.get(Expense.class, id);
 		session.remove(expense);
 		tx.commit();
 		session.close();
@@ -54,7 +54,7 @@ public class ExpenseDAO {
 	public static void updateExpense(int id, Expense expense){
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		Expense old = session.find(Expense.class, id);
+		Expense old = session.get(Expense.class, id);
 
 		old.setExpenseTitle(expense.getExpenseTitle());
 		old.setExpenseDescription(expense.getExpenseDescription());
