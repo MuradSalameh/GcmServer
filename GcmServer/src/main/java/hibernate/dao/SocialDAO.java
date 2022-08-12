@@ -26,10 +26,8 @@ public class SocialDAO {
 	
 	public static Social getSocial(int id) {
 		   Session session = SessionUtil.getSession();
-			Transaction tx = session.beginTransaction();
-		
-			Social s = session.get(Social.class, id);
-			
+			Transaction tx = session.beginTransaction();	
+			Social s = session.get(Social.class, id);			
 			return s;
 	}
 

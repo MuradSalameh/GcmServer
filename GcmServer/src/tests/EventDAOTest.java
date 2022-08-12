@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import main.java.hibernate.dao.EventDAO;
+import main.java.hibernate.dao.GameDAO;
 import main.java.hibernate.model.Event;
 import main.java.hibernate.utils.SessionUtil;
 
@@ -43,11 +44,13 @@ public class EventDAOTest {
 
 		//--------- updateEvent() Test -----------//
 
-		String string = "PartyTime";
-		updateEventTest(id,string);
+//		String string = "PartyTime";
+//		updateEventTest(id,string);
 
 
-		
+//		getMembersByEventIdTest(1);
+//		getEventsByMemberIdTest(1); 
+		deleteEventFromMemberTest(2);
 
 	}
 	
@@ -108,6 +111,17 @@ public class EventDAOTest {
 		}
 	}
 
+
+	public static void getMembersByEventIdTest(int id) {
+		EventDAO.getMembersByEventId(id);
+	}
+	public static void getEventsByMemberIdTest(int id) {
+		EventDAO.getEventsByMemberId(id);
+	}
+	
+	public static void deleteEventFromMemberTest(int id) {
+		EventDAO.deleteEventFromMember(id);
+	}
 
 
 }

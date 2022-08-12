@@ -87,16 +87,15 @@ public class Member  implements Serializable {
 
 
 
-	//join table for games
+	//join table for games --- Custom ManyToMany
 	@OneToMany(mappedBy = "member")
 	Set<MemberGames> memberGames = new HashSet<>();
 
 
 
-
-	//join table members events
-	@ManyToMany(mappedBy = "members")
-	Set<Event> events = new HashSet<>();
+	//join table members events --- Custom ManyToMany
+	@OneToMany(mappedBy = "member")
+	Set<MemberEvents> memberEvents = new HashSet<>();
 
 
 	@Column(name = "birthday")
@@ -115,7 +114,7 @@ public class Member  implements Serializable {
 	
 	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
 			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
-			List<Social> socials, Set<MemberGames> memberGames, Set<Event> events, LocalDate birthday, Set<MemberTeam> memberTeam) {
+			List<Social> socials, Set<MemberGames> memberGames, Set<MemberEvents> memberEvents, LocalDate birthday, Set<MemberTeam> memberTeam) {
 		super();
 		this.clanName = clanName;
 		this.clanId = clanId;
@@ -129,7 +128,7 @@ public class Member  implements Serializable {
 		this.roles = roles;
 		this.socials = socials;
 		this.memberGames = memberGames;
-		this.events = events;
+		this.memberEvents = memberEvents;
 		this.birthday = birthday;
 		this.memberTeam = memberTeam;
 	}
@@ -281,14 +280,14 @@ public class Member  implements Serializable {
 
 
 	@XmlTransient
-	public Set<Event> getEvents() {
-		return events;
+	public Set<MemberEvents> getEvents() {
+		return memberEvents;
 	}
 
 
 
-	public void setEvents(Set<Event> events) {
-		this.events = events;
+	public void setEvents(Set<MemberEvents> events) {
+		this.memberEvents = events;
 	}
 
 

@@ -16,47 +16,52 @@ public class GameDAOTest {
 
 		Session session = SessionUtil.getSession();
 		int id = 1;
-		int id2 = 6;
-		int id3 = 7;
+		int id2 = 3;
+		int id3 = 4;
 
 		//--------- addGame() Test -----------//
 
-//		addTestGame();
-//		addTestGame();
-//		addTestGame();
-//		addTestGame();
-		
-		
+		//		addTestGame();
+		//		addTestGame();
+		//		addTestGame();
+		//		addTestGame();
+
+
 		//--------- getGames() Test to get a List of all games in database-----------//
 
-//		getGameList();
+		//		getGameList();
 
 
-		
+
 		//--------- deleteGame() Test -----------//
 
-//		deleteGameTest(id);
-//		deleteGameTest(id2);
-//		deleteGameTest(id3);
+		//		deleteGameTest(id);
+		//		deleteGameTest(id2);
+		//		deleteGameTest(id3);
 
 
-		
+
 		//--------- getGame() Test to get one specific game by id -----------//
 
-//	getGameTest(id);
+		//	getGameTest(id);
 
 
 
 		//--------- updateGame() Test -----------//
 
-//		String s = "BOBO the Game";
-//		updateGameTest(id,s);
+		//		String s = "BOBO the Game";
+		//		updateGameTest(id,s);
 
 
+//		getMembersByGameIdTest(id3);
+		
+//		getGamesByMemberIdTest(id2);
+		
+//		deleteGameFromMemberTest(id3);
 
 	}
-	
-	
+
+
 
 	public static void addTestGame() {
 		Game test = new Game(
@@ -101,13 +106,22 @@ public class GameDAOTest {
 	public static void getGameList() {
 		List<Game> games = GameDAO.getGames();
 		ArrayList<Game> ol = new ArrayList<Game>();
-	
+
 		for(Game m : games) {
-			  ol.add(m);
-			  System.out.println(m);
+			ol.add(m);
+			System.out.println(m);
 		}
 	}
 
-
+	public static void getMembersByGameIdTest(int id) {
+		GameDAO.getMembersByGameId(id);
+	}
+	public static void getGamesByMemberIdTest(int id) {
+		GameDAO.getGamesByMemberId(id);
+	}
+	
+	public static void deleteGameFromMemberTest(int id) {
+		GameDAO.deleteGameFromMember(id);
+	}
 
 }

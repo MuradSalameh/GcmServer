@@ -7,9 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import main.java.hibernate.model.Event;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.Genre;
 import main.java.hibernate.model.Member;
+import main.java.hibernate.model.MemberEvents;
 import main.java.hibernate.model.MemberGames;
 import main.java.hibernate.model.MemberTeam;
 import main.java.hibernate.model.Role;
@@ -214,17 +216,12 @@ public class App {
 		memberGames2.setGame(game2);     //specify game		
 		//memberGames2.setGame(game2);     //specify game		
 		memberGames2.setMember(ulli);	//add member
-		HibernateUtil.getSession().saveOrUpdate(memberGames2);	// s
+		HibernateUtil.getSession().saveOrUpdate(memberGames2);	
 
 		MemberGames memberGames3 = new MemberGames();
 		memberGames3.setGame(game2);			
 		memberGames3.setMember(hans);	//add member
 		HibernateUtil.getSession().saveOrUpdate(memberGames3);	
-
-
-
-
-
 
 
 
@@ -254,8 +251,43 @@ public class App {
 		// test tournament to game
 		game1.setTournaments(tournaments);
 
+		//Create news Event
+		Event event1 = new Event(
+				"erstes event", 					// event title
+				"event descr", 					// eventdescription
+				LocalDate.of(1990, 8, 30),	// tournament date
+				LocalTime.of(22,58),		// start time
+				LocalTime.of(2,30), 		// end time
+				"lorem ipsum", 			// additional notes
+				false, 						// reoccuring
+				null);						// members
 
+		Event event2 = new Event(
+				"party event", 					// event title
+				"event descr", 					// eventdescription
+				LocalDate.of(1990, 8, 30),	// tournament date
+				LocalTime.of(22,58),		// start time
+				LocalTime.of(2,30), 		// end time
+				"lorem ipsum", 			// additional notes
+				false, 						// reoccuring
+				null);						// members
+		
+		
+		// Connect Events to members --- ManyToMany custom Class
+		// Every New Entry/Row needs its own Membervents Object
+		
+		MemberEvents memberEvents1 = new MemberEvents();
+		memberEvents1.setEvent(event1);			
+		memberEvents1.setMember(ulli);	//add member
+		HibernateUtil.getSession().saveOrUpdate(memberEvents1);	
 
+		MemberEvents memberEvents2 = new MemberEvents();
+		memberEvents2.setEvent(event2);     //specify game			
+		memberEvents2.setMember(ulli);	//add member
+		
+		HibernateUtil.getSession().saveOrUpdate(memberEvents2);	
+
+		
 
 		HibernateUtil.sessionCommit();
 	}

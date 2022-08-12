@@ -2,7 +2,7 @@ Fehler:
 
 IMPORTS!!!! - JAAVAX.PERSISTANCE    & JAKARARTA.XML - !!!!!
 
----------
+--------- HTTP 500 Internal Server Error 
 bei abruf von liste vom Server:
 Exception in thread "main" jakarta.ws.rs.InternalServerErrorException: HTTP 500 Internal Server Error
 Lösung: Server neu Starten nach änderungen an Server-Dateien
@@ -21,8 +21,10 @@ Datenbank Mappings:
 
 Tournament: Cannot delete or update a parent row: a foreign key constraint fails (`gcm`.`tournament_teams`, CONSTRAINT `FKguo939y7qyj537p7q5hj82yhn` FOREIGN KEY (`team_id`) REFERENCES `team` (`ID`))
 Mapping Genre Game. - Versuchen mapping auf games zu legen?
-mapping socials geht nicht bei delete, vergleichen mit roles - oneomany owner 
+
 Teams mapping checken wegen delete.
+
+Lösung: erst verknüpfung aus join table löschen dann entitiy löschen
 
 
 

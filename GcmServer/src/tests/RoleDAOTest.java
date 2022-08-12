@@ -53,9 +53,11 @@ public class RoleDAOTest {
 		
 		//--------- getRolesByMemberTest() -----------//
 
-	getRolesByMemberTest(1);
+//	getRolesByMemberTest(1);
 
-
+		
+		deleteRoleFromMemberTest(4);
+		
 
 	}
 	
@@ -119,6 +121,10 @@ public class RoleDAOTest {
 			  ol.add(m);
 			  System.out.println(m);
 		}
+	}
+	
+	public static void deleteRoleFromMemberTest(int id) {
+		RoleDAO.deleteRoleFromMember(id);
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.List;
 import org.glassfish.jersey.internal.guava.Lists;
 
 import main.java.hibernate.model.Game;
+import main.java.hibernate.model.Social;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.GameDAO;
+import main.java.hibernate.dao.SocialDAO;
 
 @Path("/game")
 @Consumes(MediaType.APPLICATION_XML)
@@ -62,6 +64,17 @@ public class GameResource {
 		return Response.status(Status.OK).entity(g).build();			
 	}
 	
+	@GET 
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/gamesByMember/{id}")
+	public Response getGamesByMember(@PathParam("id") int id) { 
+		List<Game> s = GameDAO.getGamesByMemberId(id);
+				
+		GenericEntity<List<Game>> sl = new GenericEntity<List<Game>>(Lists.newArrayList(s)) {};
+	    
+		return Response.status(Status.OK).entity(sl).build();	
+	}
+	
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
@@ -82,6 +95,13 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	@DELETE
+	@Path("/deleteGameFromMember/{id}")
+	public Response deleteGameFromMember(@PathParam("id")int id) {
+		GameDAO.deleteGameFromMember(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
 	@DELETE
 	@Path("/deleteGame/{id}")
 	public Response deleteGame(@PathParam("id")int id) {

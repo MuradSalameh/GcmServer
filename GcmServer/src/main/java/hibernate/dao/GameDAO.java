@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberGames;
+import main.java.hibernate.model.Role;
 import main.java.hibernate.utils.SessionUtil;
 
 public class GameDAO {
@@ -86,6 +87,27 @@ public class GameDAO {
 		return filteredGamesList;		
 	}
 	//---------------------------------------------
+	
+	public static void deleteGameFromMember(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberGames Table
+		String hql = "delete from MemberGames id where game_id= :id";		
+		Query query = session.createQuery(hql);		
+        query.setParameter("id", id);
+        
+        int count = query.executeUpdate();
+        System.out.println(count + " Record(s) Deleted.");
+        
+        // Remove from Game Table
+    	Game game = session.get(Game.class, id);
+		session.remove(game);
+
+        tx.commit();
+        session.clear();
+        session.close();
+	}
 
 	public static void deleteGame(int id) {
 		Session session = SessionUtil.getSession();

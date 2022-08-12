@@ -67,6 +67,27 @@ public class RoleDAO {
 		return filteredRolesList;		
 	
 	}
+	
+	public static void deleteRoleFromMember(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberRoles Table
+		String hql = "delete from MemberRoles id where role_id= :id";		
+		Query query = session.createQuery(hql);		
+        query.setParameter("id", id);
+        
+        int count = query.executeUpdate();
+        System.out.println(count + " Record(s) Deleted.");
+        
+        // Remove from Role Table
+    	Role role = session.get(Role.class, id);
+		session.remove(role);
+
+        tx.commit();
+        session.clear();
+        session.close();
+	}
 
 	public static void deleteRole(int id) {
 		Session session = SessionUtil.getSession();

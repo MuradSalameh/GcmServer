@@ -78,7 +78,6 @@ public class SocialResource {
 	}
 	
 	
-	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addSocial")
@@ -101,7 +100,7 @@ public class SocialResource {
 	@DELETE
 	@Path("/deleteSocial/{id}")
 	public Response deleteSocial(@PathParam("id")int id) {
-		SocialDAO.deleteSocial(id);
+		SocialDAO.deleteSocialFromMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 import org.glassfish.jersey.internal.guava.Lists;
 
 import main.java.hibernate.model.Event;
+import main.java.hibernate.model.Game;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.EventDAO;
+import main.java.hibernate.dao.GameDAO;
 
 @Path("/event")
 
@@ -65,6 +67,19 @@ public class EventResource {
 	}
 	
 	
+	@GET 
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/eventsByMember/{id}")
+	public Response getEventsByMember(@PathParam("id") int id) { 
+		List<Event> s = EventDAO.getEventsByMemberId(id);
+				
+		GenericEntity<List<Event>> sl = new GenericEntity<List<Event>>(Lists.newArrayList(s)) {};
+	    
+		return Response.status(Status.OK).entity(sl).build();	
+	}
+	
+	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addEvent")
@@ -83,6 +98,14 @@ public class EventResource {
 		EventDAO.updateEvent(id, alteredEvent);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
+	
+	@DELETE
+	@Path("/deleteEventFromMember/{id}")
+	public Response deleteEventFromMember(@PathParam("id")int id) {
+		EventDAO.deleteEventFromMember(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
 
 	@DELETE
 	@Path("/deleteEvent/{id}")

@@ -43,6 +43,7 @@
 		<mapping class="main.java.hibernate.model.MemberRoles"/>
 		<mapping class="main.java.hibernate.model.MemberTeam"/>
 		<mapping class="main.java.hibernate.model.MemberGames"/>
+		<mapping class="main.java.hibernate.model.MemberEvents"/>
 		
 		
 	</session-factory>

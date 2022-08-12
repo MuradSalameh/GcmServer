@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import jakarta.xml.bind.annotation.XmlElement;
@@ -58,20 +61,18 @@ public class Event implements Serializable{
 	private boolean reoccuring;
 
 	//join table for members
-	@ManyToMany(cascade = { CascadeType.ALL})
-	@JoinTable(
-			name = "events_members", 
-			joinColumns = { @JoinColumn(name = "event_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "member_id") }
-			)
-	List<Member> members = new ArrayList<>();
+
+	// Members
+	@OneToMany(mappedBy = "event")
+	Set<MemberEvents> memberEvents = new HashSet<>();
+
 
 	public Event() {
 		super();
 	}
 
 	public Event(String eventTitle, String eventDescription, LocalDate date, LocalTime eventStartTime,
-			LocalTime eventEndTime, String eventAddidtionalNotes, boolean reoccuring, List<Member> members) {
+			LocalTime eventEndTime, String eventAddidtionalNotes, boolean reoccuring, Set<MemberEvents> memberEvents) {
 		super();
 		this.eventTitle = eventTitle;
 		this.eventDescription = eventDescription;
@@ -80,7 +81,7 @@ public class Event implements Serializable{
 		this.eventEndTime = eventEndTime;
 		this.eventAddidtionalNotes = eventAddidtionalNotes;
 		this.reoccuring = reoccuring;
-		this.members = members;
+		this.memberEvents = memberEvents;
 	}
 
 	@XmlElement(name="EventTitle")
@@ -151,12 +152,12 @@ public class Event implements Serializable{
 	}
 
 	@XmlTransient
-	public List<Member> getMembers() {
-		return members;
+	public Set<MemberEvents> getMembers() {
+		return memberEvents;
 	}
 
-	public void setMembers(List<Member> members) {
-		this.members = members;
+	public void setMembers(Set<MemberEvents> memberEvents) {
+		this.memberEvents = memberEvents;
 	}
 
 
