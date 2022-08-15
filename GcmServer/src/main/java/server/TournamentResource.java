@@ -99,6 +99,13 @@ public class TournamentResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 	
+	@DELETE
+	@Path("/deleteTournamentFromGame/{id}")
+	public Response deleteTournamentFromGame(@PathParam("id")int id) {
+		TournamentDAO.deleteTournamentFromGame(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
 
 	 
 }

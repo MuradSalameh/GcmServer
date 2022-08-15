@@ -3,10 +3,7 @@ package main.java.hibernate.utils;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import main.java.hibernate.model.Event;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.GameGenres;

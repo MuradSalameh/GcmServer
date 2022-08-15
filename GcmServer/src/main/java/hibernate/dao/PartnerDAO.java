@@ -69,7 +69,7 @@ public class PartnerDAO {
 		old.setCountry(partner.getCountry());
 		old.setEmail(partner.getEmail());
 		old.setPhoneNumber(partner.getPhoneNumber());		
-		old.setSocials(partner.getSocials());	
+		
 		
 		session.saveOrUpdate(old);
 		session.flush();

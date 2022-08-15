@@ -49,27 +49,19 @@ public class Expense  implements Serializable{
 	@Column(name = "recipient_name")
 	private String recipientName;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="expense_expense_type",
-			joinColumns = @JoinColumn( name="expense_id"),
-			inverseJoinColumns = @JoinColumn( name="expense_type_id")
-			)
-	List<ExpenseType> expenseTypes = new ArrayList<>();
 
 	public Expense() {
 		super();
 	}
 
-	public Expense(String expenseTitle, String expenseDescription, double amount, LocalDate date, String recipientName,
-			List<ExpenseType> expenseTypes) {
+	public Expense(String expenseTitle, String expenseDescription, double amount, LocalDate date, String recipientName) {
 		super();
 		this.expenseTitle = expenseTitle;
 		this.expenseDescription = expenseDescription;
 		this.amount = amount;
 		this.date = date;
 		this.recipientName = recipientName;
-		this.expenseTypes = expenseTypes;
+		
 	}
 
 	@XmlElement(name="ExpenseTitle")
@@ -118,15 +110,6 @@ public class Expense  implements Serializable{
 		this.recipientName = recipientName;
 	}
 
-	@XmlTransient
-	public List<ExpenseType> getExpenseTypes() {
-		return expenseTypes;
-	}
-
-	
-	public void setExpenseTypes(List<ExpenseType> expenseTypes) {
-		this.expenseTypes = expenseTypes;
-	}
 
 	@XmlElement(name="ID",required=true)
 	public int getId() {

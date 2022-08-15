@@ -68,24 +68,6 @@ public class Partner implements Serializable {
 	@Column(name = "phone_number")
 	private String phoneNumber;	
 
-	//join table for partner socials
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-            name="partner_socials",
-            joinColumns = @JoinColumn( name="partner_id"),
-            inverseJoinColumns = @JoinColumn( name="social_id")
-    )
-	List<Social> socials = new ArrayList<>();
-	
-	//join table for partner revenue
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="partner_revenue",
-			joinColumns = @JoinColumn( name="partner_id"),
-			inverseJoinColumns = @JoinColumn( name="revenue_id")
-			)
-	List<Revenue> revenues = new ArrayList<>();
-
 	
 	public Partner() {
 		super();
@@ -94,8 +76,7 @@ public class Partner implements Serializable {
 
 	public Partner(String companyName, String contactPersonName, String contactPersonPhone, String contactPersonMail,
 			String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Social> socials,
-			List<Revenue> revenues) {
+			String adressCity, String country, String email, String phoneNumber) {
 		super();
 		this.companyName = companyName;
 		this.contactPersonName = contactPersonName;
@@ -110,8 +91,7 @@ public class Partner implements Serializable {
 		this.country = country;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.socials = socials;
-		this.revenues = revenues;
+
 	}
 
 	@XmlElement(name="CompanyName")
@@ -244,25 +224,6 @@ public class Partner implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@XmlTransient
-	public List<Social> getSocials() {
-		return socials;
-	}
-
-
-	public void setSocials(List<Social> socials) {
-		this.socials = socials;
-	}
-
-	@XmlTransient
-	public List<Revenue> getRevenues() {
-		return revenues;
-	}
-
-	
-	public void setRevenues(List<Revenue> revenues) {
-		this.revenues = revenues;
-	}
 
 	@XmlElement(name="ID",required=true)
 	public int getId() {

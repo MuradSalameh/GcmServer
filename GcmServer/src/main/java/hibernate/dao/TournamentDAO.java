@@ -62,10 +62,25 @@ public class TournamentDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 		
-		// Remove from Team Table
-//    	Team team = session.get(Team.class, id);
-//		session.remove(team);
+
 		
+		tx.commit();
+		session.clear();
+		session.close();
+	}
+	
+	public static void deleteTournamentFromGame(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+	
+		String hql = "delete from TournamentGame id where tournament_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+
 		tx.commit();
 		session.clear();
 		session.close();
