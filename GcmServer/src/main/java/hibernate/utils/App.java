@@ -31,9 +31,9 @@ public class App {
 		// test persist GcmUser
 		Member ulli = new Member(
 				"Ulli", 					// clan name
-				"Bulli", 					// clan id
-				"Street 1", 				// real name
-				"44", 						// address
+				"#345634653456", 			// clan id
+				"Real Ulli", 				// real name
+				"Street 45", 						// address
 				"1160", 					// post code
 				"Vienna", 					// city
 				"Austria", 					// country
@@ -51,9 +51,9 @@ public class App {
 
 		Member hans = new Member(
 				"hans", 					// clan name
-				"kranz", 					// clan id
-				"Street2", 					// real name
-				"333", 						// address
+				"#1234555433", 				// clan id
+				"Real Hans", 				// real name
+				"Street 5677", 						// address
 				"14129", 					// post code
 				"Berlin", 					// city
 				"Germany", 					// country
