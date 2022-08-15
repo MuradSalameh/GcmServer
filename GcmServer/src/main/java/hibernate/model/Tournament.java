@@ -51,22 +51,11 @@ public class Tournament  implements Serializable{
 	@Column(name = "tournament_time_end")
 	private LocalTime tournamentTimeEnd;
 
-	// join table for tournament teams
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name = "tournament_teams", 
-			joinColumns = { @JoinColumn(name = "tournament_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "team_id") }
-			)	
-	Set<Team> teams = new HashSet<>();
-
-
-	// join column for game tournaments
+	@OneToMany(mappedBy = "tournament")
+	private Set<TournamentsTeams> tournamentsTeams = new HashSet<>();
 	
-	@ManyToOne
-    @JoinColumn(name="game_id")
-    private Game game;
-    
+	@OneToMany(mappedBy = "tournament")
+	private Set<TournamentGame> tournamentGame = new HashSet<>();	
 
 	@Column(name = "tournament_result")
 	private String tournamentResult;
@@ -84,10 +73,8 @@ public class Tournament  implements Serializable{
 		super();
 	}
 
-
-
 	public Tournament(String touramentTitle, String tournamentDescription, LocalDate tournamentDate,
-			LocalTime tournamentTimeBeginn, LocalTime tournamentTimeEnd, Set<Team> teams,Game game,
+			LocalTime tournamentTimeBeginn, LocalTime tournamentTimeEnd, Set<TournamentsTeams> tournamentsTeams,Set<TournamentGame> tournamentGame,
 			String tournamentResult) {
 		super();
 		this.touramentTitle = touramentTitle;
@@ -95,8 +82,8 @@ public class Tournament  implements Serializable{
 		this.tournamentDate = tournamentDate;
 		this.tournamentTimeBeginn = tournamentTimeBeginn;
 		this.tournamentTimeEnd = tournamentTimeEnd;
-		this.teams = teams;
-		this.game = game;
+		this.tournamentsTeams = tournamentsTeams;
+		this.tournamentGame = tournamentGame;
 		this.tournamentResult = tournamentResult;
 	}
 
@@ -164,28 +151,38 @@ public class Tournament  implements Serializable{
 	}
 
 
-@XmlTransient
-	public Set<Team> getTeams() {
-		return teams;
+
+	
+
+	@XmlTransient
+	public Set<TournamentsTeams> getTournamentsTeams() {
+		return tournamentsTeams;
 	}
 
 
 
-	public void setTeams(Set<Team> teams) {
-		this.teams = teams;
+	public void setTournamentsTeams(Set<TournamentsTeams> tournamentsTeams) {
+		this.tournamentsTeams = tournamentsTeams;
 	}
 
 
-	@XmlElement(name="Game")
-	public Game getGame() {
-		return game;
+	@XmlTransient
+	public Set<TournamentGame> getTournamentGame() {
+		return tournamentGame;
 	}
 
 
 
-	public void setGame(Game game) {
-		this.game = game;
+	public void setTournamentGame(Set<TournamentGame> tournamentGame) {
+		this.tournamentGame = tournamentGame;
 	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 
 	@XmlElement(name="TournamentResult")
@@ -215,7 +212,6 @@ public class Tournament  implements Serializable{
 				+ "\ntournamentDate=" + tournamentDate 
 				+ "\ntournamentTimeBeginn="	+ tournamentTimeBeginn 
 				+ "\ntournamentTimeEnd=" + tournamentTimeEnd 
-				+ "\ngame=" + game
 				+ "\ntournamentResult=" + tournamentResult 
 				+ "\n----------------------------------"
 				+ "\n";

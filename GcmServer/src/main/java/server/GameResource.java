@@ -103,6 +103,20 @@ public class GameResource {
 	}
 	
 	@DELETE
+	@Path("/deleteGameFromTournament/{id}")
+	public Response deleteGameFromTournament(@PathParam("id")int id) {
+		GameDAO.deleteGameFromTournament(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@DELETE
+	@Path("/deleteGameFromGenre/{id}")
+	public Response deleteGameFromGenre(@PathParam("id")int id) {
+		GameDAO.deleteGameFromGenre(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@DELETE
 	@Path("/deleteGame/{id}")
 	public Response deleteGame(@PathParam("id")int id) {
 		GameDAO.deleteGame(id);

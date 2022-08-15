@@ -49,6 +49,28 @@ public class TournamentDAO {
 		session.close();
 		
 	}
+	
+	public static void deleteTournamentsFromTeams(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberTeams Table
+		String hql = "delete from TournamentsTeams id where tournament_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+		
+		// Remove from Team Table
+//    	Team team = session.get(Team.class, id);
+//		session.remove(team);
+		
+		tx.commit();
+		session.clear();
+		session.close();
+	}
+	
 
 	public static void updateTournament(int id, Tournament tournament){
 		Session session = SessionUtil.getSession();
@@ -61,7 +83,7 @@ public class TournamentDAO {
 		old.setTournamentTimeBeginn(tournament.getTournamentTimeBeginn());
 		old.setTournamentTimeEnd(tournament.getTournamentTimeEnd());
 		//old.setTeams(tournament.getTeams());
-		old.setGame(tournament.getGame());
+	//	old.setGame(tournament.getGame());
 		old.setTournamentResult(tournament.getTournamentResult());
 		
 		session.saveOrUpdate(old);

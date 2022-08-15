@@ -56,9 +56,15 @@ public class TeamDAOTest {
 		
 		
 		//--------- getMembersByTeamIdTest() Test -----------//
-
 		
 //		getMembersByTeamIdTest(1);
+		
+		
+		//--------- deleteTeamFromTournamentsTest() Test -----------//
+		
+		deleteTeamFromTournamentsTest(1);
+		
+		
 		
 	}
 	
@@ -68,7 +74,8 @@ public class TeamDAOTest {
 		Team test = new Team(
 				"test", 					// team name
 				"ttttt", 					// desc
-				null);						// members
+				null, 		//members teams
+				null);			// team tournaments teams
 
 		TeamDAO.addTeam(test);			
 	}
@@ -119,6 +126,12 @@ public class TeamDAOTest {
 	public static void getMembersByTeamIdTest(int id) {
 		
 		TeamDAO.getMembersByTeamId(id);
+	}
+	
+	
+	public static void deleteTeamFromTournamentsTest(int id) {
+		
+		TeamDAO.deleteTeamFromTournaments(id);
 	}
 
 

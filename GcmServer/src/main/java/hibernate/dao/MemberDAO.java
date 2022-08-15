@@ -16,7 +16,7 @@ public class MemberDAO {
 		Session session = SessionUtil.getSession();    
 		Transaction tx = session.beginTransaction();		
 		 
-		session.persist(bean);    // Dafür die add member nicht mehr aufrufen, da direkt im bean gespeichert wird.
+		session.persist(bean);    
 		tx.commit();
 		session.close();
 	}
@@ -30,6 +30,22 @@ public class MemberDAO {
 			
 			return member;
 	}
+	
+	
+	public static Member getMemberWithHighestId() {
+		Session session = SessionUtil.getSession();
+		//String hql = "select max(id) from Member";
+		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Member").getSingleResult();
+		
+		System.out.println(maxId);
+		
+		
+		Member member = session.get(Member.class, maxId);
+		
+		return member;
+	}
+	
+	
 
 
 	public static List<Member> getMembers(){
@@ -52,6 +68,70 @@ public class MemberDAO {
 		tx.commit();
 		session.close();
 		
+	}
+	
+	public static void deleteMemberFromEvents(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberMembers Table
+		String hql = "delete from MemberEvents id where member_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+		
+		// Remove from Member Table
+//    	Member member = session.get(Member.class, id);
+//		session.remove(member);
+		
+		tx.commit();
+		session.clear();
+		session.close();
+	}
+	
+	
+	public static void deleteMemberFromTeams(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberMembers Table
+		String hql = "delete from MemberTeam id where member_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+		
+		// Remove from Member Table
+//    	Member member = session.get(Member.class, id);
+//		session.remove(member);
+		
+		tx.commit();
+		session.clear();
+		session.close();
+	}
+	
+	public static void deleteMemberFromGames(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		// Delete connection from MemberMembers Table
+		String hql = "delete from MemberGames id where member_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+		
+		// Remove from Member Table
+//    	Member member = session.get(Member.class, id);
+//		session.remove(member);
+		
+		tx.commit();
+		session.clear();
+		session.close();
 	}
 	
 	

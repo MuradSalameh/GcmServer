@@ -121,4 +121,19 @@ public class TeamResource {
 	}
 
 	 
+	@DELETE
+	@Path("/deleteTeamFromMember/{id}")
+	public Response deleteTeamFromMember(@PathParam("id")int id) {
+		TeamDAO.deleteTeamFromMember(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@DELETE
+	@Path("/deleteTeamFromTournaments/{id}")
+	public Response deleteTeamFromTournaments(@PathParam("id")int id) {
+		TeamDAO.deleteTeamFromTournaments(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	
 }

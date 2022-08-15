@@ -1,16 +1,16 @@
 package main.java.hibernate.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -30,19 +30,20 @@ public class Genre  implements Serializable{
 	@Column(name = "genre_title")
 	private String genreTitle;	
 
-	@ManyToMany(mappedBy = "genres")
-    List<Game> games = new ArrayList<>();
-
+	@OneToMany(mappedBy = "genre")
+	private Set<GameGenres> gameGenres = new HashSet<>();
+ 
 	
 	public Genre() {
 		super();
 	}
-
-	public Genre(String genreTitle, List<Game> games) {
+	
+	public Genre(String genreTitle, Set<GameGenres> gameGenres) {
 		super();
 		this.genreTitle = genreTitle;
-		this.games = games;
+		this.gameGenres = gameGenres;
 	}
+	
 
 	@XmlElement(name="GenreTitle")
 	public String getGenreTitle() {
@@ -54,18 +55,19 @@ public class Genre  implements Serializable{
 	}
 
 	@XmlTransient
-	public List<Game> getGames() {
-		return games;
+	public Set<GameGenres> getGameGenres() {
+		return gameGenres;
 	}
 
-	public void setGames(List<Game> games) {
-		this.games = games;
+	public void setGameGenres(Set<GameGenres> gameGenres) {
+		this.gameGenres = gameGenres;
 	}
 
 	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
+
 
 	@Override
 	public String toString() {
@@ -74,8 +76,4 @@ public class Genre  implements Serializable{
 				+ "\n----------------------------------"
 				+ "\n";
 	}
-
-	
-	
-
 }

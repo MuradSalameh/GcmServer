@@ -44,6 +44,9 @@
 		<mapping class="main.java.hibernate.model.MemberTeam"/>
 		<mapping class="main.java.hibernate.model.MemberGames"/>
 		<mapping class="main.java.hibernate.model.MemberEvents"/>
+		<mapping class="main.java.hibernate.model.TournamentsTeams"/>
+		<mapping class="main.java.hibernate.model.TournamentGame"/>
+		<mapping class="main.java.hibernate.model.GameGenres"/>
 		
 		
 	</session-factory>

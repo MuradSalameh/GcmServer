@@ -39,51 +39,35 @@ public class Game  implements Serializable{
 	@Column(name = "game_title")
 	private String gameTitle;
 
-
 	@Column(name = "release_date")
 	private LocalDate releaseDate;
+	
+	@OneToMany(mappedBy = "game")
+	private Set<GameGenres> gameGenres = new HashSet<>();
 
-	// join table genre games
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-			name="game_genre",
-			joinColumns = @JoinColumn( name="game_id"),
-			inverseJoinColumns = @JoinColumn( name="genre_id")
-			)
-	List<Genre> genres = new ArrayList<Genre>();
+	@OneToMany(mappedBy = "game")
+	Set<MemberGames> memberGames = new HashSet<>();
 
-	
-	
-	// Members
-		@OneToMany(mappedBy = "game")
-		Set<MemberGames> memberGames = new HashSet<>();
-	
-		
-	// join column tournament game
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "game_id")
-    List<Tournament> tournaments = new ArrayList<Tournament>();
-	
-	
+	@OneToMany(mappedBy = "game")
+	private Set<TournamentGame> tournamentGame = new HashSet<>();
+
 	@Column(name = "game_additional_notes")
 	private String gameAdditionalNotes;
-
 
 
 	public Game() {
 		super();
 	}
+	
 
-
-
-	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, Set<MemberGames> memberGames,
-			List<Tournament> tournaments, String gameAdditionalNotes) {
+	public Game(String gameTitle, LocalDate releaseDate, Set<GameGenres> gameGenres, Set<MemberGames> memberGames,
+			Set<TournamentGame> tournamentGame, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
 		this.releaseDate = releaseDate;
-		this.genres = genres;
+		this.gameGenres = gameGenres;
 		this.memberGames = memberGames;
-		this.tournaments = tournaments;
+		this.tournamentGame = tournamentGame;
 		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
@@ -93,12 +77,9 @@ public class Game  implements Serializable{
 		return gameTitle;
 	}
 
-
-
 	public void setGameTitle(String gameTitle) {
 		this.gameTitle = gameTitle;
 	}
-
 
 	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
 	@XmlElement(name="ReleaseDate")
@@ -106,66 +87,63 @@ public class Game  implements Serializable{
 		return releaseDate;
 	}
 
-
-
 	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
+	@XmlTransient
+	public Set<GameGenres> getGameGenres() {
+		return gameGenres;
+	}
+
+	public void setGameGenres(Set<GameGenres> gameGenres) {
+		this.gameGenres = gameGenres;
+	}
 
 	@XmlTransient
-	public List<Genre> getGenres() {
-		return genres;
+	public Set<MemberGames> getMemberGames() {
+		return memberGames;
 	}
 
-
-
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+	public void setMemberGames(Set<MemberGames> memberGames) {
+		this.memberGames = memberGames;
 	}
 
+	@XmlTransient
+	public Set<TournamentGame> getTournamentGame() {
+		return tournamentGame;
+	}
+
+	public void setTournamentGame(Set<TournamentGame> tournamentGame) {
+		this.tournamentGame = tournamentGame;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@XmlTransient
 	public Set<MemberGames> getMembers() {
 		return memberGames;
 	}
 
-
-
 	public void setMembers(Set<MemberGames> memberGames) {
 		this.memberGames = memberGames;
 	}
-
-
-	@XmlTransient
-	public List<Tournament> getTournaments() {
-		return tournaments;
-	}
-
-
-
-	public void setTournaments(List<Tournament> tournaments) {
-		this.tournaments = tournaments;
-	}
-
 
 	@XmlElement(name="GameAdditionalNotes")
 	public String getGameAdditionalNotes() {
 		return gameAdditionalNotes;
 	}
 
-
-
 	public void setGameAdditionalNotes(String gameAdditionalNotes) {
 		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
-
 
 	@XmlElement(name="ID",required=true)
 	public int getId() {
 		return id;
 	}
-
 
 
 	@Override
@@ -177,9 +155,4 @@ public class Game  implements Serializable{
 				+ "\n----------------------------------"
 				+ "\n";
 	}
-	
-	
-
-
-	
 }

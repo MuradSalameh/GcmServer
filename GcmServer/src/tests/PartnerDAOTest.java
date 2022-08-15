@@ -18,7 +18,11 @@ public class PartnerDAOTest {
 
 		//--------- addPartner() Test -----------//
 
-		//addTestPartner();
+		addTestPartner();
+		addTestPartner();
+		addTestPartner();
+		addTestPartner();
+		addTestPartner();
 		
 		
 		
@@ -36,7 +40,7 @@ public class PartnerDAOTest {
 
 		//--------- getPartners() Test to get a List of all partners in database-----------//
 
-		getPartnerList();
+//		getPartnerList();
 
 
 

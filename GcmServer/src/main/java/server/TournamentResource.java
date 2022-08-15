@@ -18,6 +18,7 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import main.java.hibernate.dao.TeamDAO;
 import main.java.hibernate.dao.TournamentDAO;
 
 @Path("/tournament")
@@ -90,6 +91,14 @@ public class TournamentResource {
 		TournamentDAO.deleteTournament(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
+	
+	@DELETE
+	@Path("/deleteTournamentFromTeams/{id}")
+	public Response deleteTournamentsFromTeams(@PathParam("id")int id) {
+		TournamentDAO.deleteTournamentsFromTeams(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
 
 	 
 }

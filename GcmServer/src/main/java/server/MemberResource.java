@@ -19,12 +19,13 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.MemberDAO;
+import main.java.hibernate.dao.TournamentDAO;
 
 @Path("/member")
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class MemberResource {
-	
+
 
 
 	// server Test	
@@ -35,49 +36,61 @@ public class MemberResource {
 		return "server test successful!";
 	}
 
-	
+
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/member/{id}")
 	public Response getMember(@PathParam("id") int id) { 
-			
+
 		Member member = new Member();
 		member = MemberDAO.getMember(id);	
-		
+
 		return Response.status(Status.OK).entity(member).build();
 	}
-	
-	
+
+
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/memberWithHighestId/")
+	public Response getMemberWithhighestId() { 
+
+		Member member = new Member();
+		member = MemberDAO.getMemberWithHighestId();	
+
+		return Response.status(Status.OK).entity(member).build();
+	}
+
+
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
 	public Response getMemberList() {		
-	
+
 		List<Member> members = new ArrayList<>();			
 		members = MemberDAO.getMembers();
-		
+
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {};
-	    
+
 		return Response.status(Status.OK).entity(ml).build();			
 	}
-	
-	
+
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addMember")
 	public Response postMember(Member newMember) {
-		
+
 		MemberDAO.addMember(newMember);	
 		return Response.status(Status.CREATED).build();
-		
+
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateMember/{id}")
 	public Response putMember(@PathParam("id")int id, Member alteredMember) {
-		
+
 		MemberDAO.updateMember(id, alteredMember);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -89,5 +102,25 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
-	 
+	@DELETE
+	@Path("/deleteMemberFromEvents/{id}")
+	public Response deleteMemberFromEvents(@PathParam("id")int id) {
+		MemberDAO.deleteMemberFromEvents(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@DELETE
+	@Path("/deleteMemberFromTeams/{id}")
+	public Response deleteMemberFromTeams(@PathParam("id")int id) {
+		MemberDAO.deleteMemberFromTeams(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@DELETE
+	@Path("/deleteMemberFromGames/{id}")
+	public Response deleteMemberFromGames(@PathParam("id")int id) {
+		MemberDAO.deleteMemberFromGames(id);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
 }

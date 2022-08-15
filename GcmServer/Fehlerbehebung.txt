@@ -40,3 +40,15 @@ import korrekte serviceFunction checken
 fx:ids der elemente checken
 schauen ob SceneController gesetzt ist
 
+
+Fhler: java.lang.NullPointerException: Cannot invoke "javafx.scene.control.TextField.setText(String)" because "this.clanNameTf" is null
+Lösung: Optional<ButtonType> result = dialogAn.showAndWait();	muss vor den Controller
+
+
+Fehler bei erstellen der Datenbanken über App.java:
+Error executing DDL "alter table game_genres add constraint FK4q9qal2sqn8hjy7l58ver6ne6 foreign key (ID) references game_genres (ID)" via JDBC Statement
+Lösung: Mappings checken
+
+
+beim Löschen eines Objektes fehler foreign Key constraint ---- im DAO über ""delete From..." löschen und session.remove(); entfernen
+

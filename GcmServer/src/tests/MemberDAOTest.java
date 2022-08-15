@@ -29,9 +29,9 @@ public class MemberDAOTest {
 		
 		//--------- getMembers() Test to get a List of all members in database-----------//
 
-		getMemberList();
+//		getMemberList();
 
-
+//		getMemberWithHighestIdTest();
 		
 		//--------- deleteMember() Test -----------//
 
@@ -49,7 +49,23 @@ public class MemberDAOTest {
 
 		//String s = "BOBO";
 		//updateMemberTest(id,s);
+		
+		
 
+		//--------- deleteMemberFromEventsTest() Test -----------//
+		
+//		deleteMemberFromEventsTest(1);
+		
+		
+		//--------- deleteMemberFromTeamsTest() Test -----------//
+		
+//		deleteMemberFromTeamsTest(1);
+		
+		
+		//--------- deleteMemberFromGames() Test -----------//
+		
+		deleteMemberFromGamesTest(1);
+		
 
 
 	}
@@ -115,6 +131,25 @@ public class MemberDAOTest {
 		}
 	}
 
-
+	public static void getMemberWithHighestIdTest() {
+	Member m =	MemberDAO.getMemberWithHighestId();
+	System.out.println(m);
+	}
+	
+	
+	public static void deleteMemberFromEventsTest(int id) {
+		MemberDAO.deleteMemberFromEvents(id);
+		
+	}
+	
+	public static void deleteMemberFromTeamsTest(int id) {
+		MemberDAO.deleteMemberFromTeams(id);
+		
+	}
+	
+	public static void deleteMemberFromGamesTest(int id) {
+		MemberDAO.deleteMemberFromGames(id);
+		
+	}
 
 }

@@ -58,6 +58,8 @@ public class GameDAOTest {
 //		getGamesByMemberIdTest(id2);
 		
 //		deleteGameFromMemberTest(id3);
+		
+		deleteGameFromGenreTest(1);
 
 	}
 
@@ -122,6 +124,9 @@ public class GameDAOTest {
 	
 	public static void deleteGameFromMemberTest(int id) {
 		GameDAO.deleteGameFromMember(id);
+	}
+	public static void deleteGameFromGenreTest(int id) {
+		GameDAO.deleteGameFromGenre(id);
 	}
 
 }

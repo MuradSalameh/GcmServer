@@ -37,6 +37,9 @@ public class Team  implements Serializable{
 	
 	@OneToMany(mappedBy = "team")
 	private Set<MemberTeam> memberTeam = new HashSet<>();	
+	
+	@OneToMany(mappedBy = "team")
+	private Set<TournamentsTeams> tournamentsTeams = new HashSet<>();	
 
 	
 	public Team() {
@@ -44,12 +47,19 @@ public class Team  implements Serializable{
 	}
 
 
-	public Team(String teamName, String teamDescription, Set<MemberTeam> memberTeam) {
-		super();
+	
+
+	public Team(String teamName, String teamDescription, Set<MemberTeam> memberTeam,
+			Set<TournamentsTeams> tournamentsTeams) {
+		super();		
 		this.teamName = teamName;
 		this.teamDescription = teamDescription;
 		this.memberTeam = memberTeam;
+		this.tournamentsTeams = tournamentsTeams;
 	}
+
+
+
 
 	@XmlElement(name="Teamname")
 	public String getTeamName() {
@@ -72,15 +82,41 @@ public class Team  implements Serializable{
 		this.teamDescription = teamDescription;
 	}
 
+
 	@XmlTransient
 	public Set<MemberTeam> getMemberTeam() {
 		return memberTeam;
 	}
 
 
-	public void setMembers(Set<MemberTeam> memberTeam) {
+
+
+	public void setMemberTeam(Set<MemberTeam> memberTeam) {
 		this.memberTeam = memberTeam;
 	}
+
+
+
+	@XmlTransient
+	public Set<TournamentsTeams> getTournamentsTeams() {
+		return tournamentsTeams;
+	}
+
+
+
+	public void setTournamentsTeams(Set<TournamentsTeams> tournamentsTeams) {
+		this.tournamentsTeams = tournamentsTeams;
+	}
+
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
 
 	@XmlElement(name="ID",required=true)
 	public int getId() {

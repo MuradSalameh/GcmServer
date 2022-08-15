@@ -100,13 +100,56 @@ public class GameDAO {
         int count = query.executeUpdate();
         System.out.println(count + " Record(s) Deleted.");
         
-        // Remove from Game Table
-    	Game game = session.get(Game.class, id);
-		session.remove(game);
-
+        
+//        // Remove from Game Table
+//    	Game game = session.get(Game.class, id);
+//		session.remove(game);
+         
         tx.commit();
         session.clear();
         session.close();
+	}
+	
+	public static void deleteGameFromTournament(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+	
+		String hql = "delete from TournamentGame id where game_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+		
+//
+//		Game game = session.get(Game.class, id);
+//		session.remove(game);
+		
+		tx.commit();
+		session.clear();
+		session.close();
+	}
+	
+	public static void deleteGameFromGenre(int id){		
+		Session session = SessionUtil.getSession(); 
+		Transaction tx = session.beginTransaction();
+		
+		
+		String hql = "delete from GameGenres id where game_id= :id";		
+		Query query = session.createQuery(hql);		
+		query.setParameter("id", id);
+		
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+		
+		
+//		Game game = session.get(Game.class, id);
+//		session.remove(game);
+		
+		tx.commit();
+		session.clear();
+		session.close();
 	}
 
 	public static void deleteGame(int id) {
