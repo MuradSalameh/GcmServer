@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import main.java.hibernate.model.Event;
+import main.java.hibernate.model.Expense;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.GameGenres;
 import main.java.hibernate.model.Genre;
@@ -12,6 +13,8 @@ import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberEvents;
 import main.java.hibernate.model.MemberGames;
 import main.java.hibernate.model.MemberTeam;
+import main.java.hibernate.model.Partner;
+import main.java.hibernate.model.Revenue;
 import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.model.Team;
@@ -294,7 +297,119 @@ public class App {
 		memberEvents2.setMember(ulli);	//add member
 
 		HibernateUtil.getSession().saveOrUpdate(memberEvents2);	
+		
+		
+		
+		Expense e1 = new Expense(
+				"test", 					// title
+				"ttttt", 					// desc
+				500.00, 					// amount
+				LocalDate.of(1981, 4, 11),	// date
+				"heinrich" 					//recipient
+				);	
+		HibernateUtil.getSession().persist(e1);
+		
 
+		Expense e2 = new Expense(
+				"test", 					// title
+				"ttttt", 					// desc
+				500.00, 					// amount
+				LocalDate.of(1981, 4, 11),	// date
+				"heinrich" 					//recipient
+				);	
+		
+		HibernateUtil.getSession().persist(e2);
+		
+		Expense e3 = new Expense(
+				"test", 					// title
+				"ttttt", 					// desc
+				1000.00, 					// amount
+				LocalDate.of(1981, 4, 11),	// date
+				"heinrich" 					//recipient
+				);						
+		HibernateUtil.getSession().persist(e3);
+		
+		Revenue r1 = new Revenue(
+				"Revenue", 					// title
+				"earnings", 					// desc
+				5000, 					// amount
+				LocalDate.of(1981, 4, 11));	// date
+		
+		HibernateUtil.getSession().persist(r1);
+
+			
+		Revenue r2 = new Revenue(
+				"Revenue", 					// title
+				"earnings", 					// desc
+				2000, 					// amount
+				LocalDate.of(1981, 4, 11));	// date
+		
+		HibernateUtil.getSession().persist(r2);
+
+		
+		Revenue r3 = new Revenue(
+				"Revenue", 					// title
+				"earnings", 					// desc
+				1000, 					// amount
+				LocalDate.of(1981, 4, 11));	// date
+		
+		HibernateUtil.getSession().persist(r3);
+		
+		
+		Partner p1 = new Partner(
+				"111111111", 					// company name
+				"ttttt", 					// contact person name
+				"tttttt 1", 				// contact person phone
+				"contact@mail.com", 			// contact person mail
+				"dfvdfv", 					// first name
+				"rororor", 					// last name
+				"StreetCompany", 			// adress street 
+				"99", 						// addess number 
+				"2345", 					// post code
+				"Dublin", 					// city
+				"Ireland", 					// country
+				"company@company.com", 		// email
+				"+43 677 678 643 44" 		// phone
+				);						// reveues
+
+		HibernateUtil.getSession().persist(p1);
+
+		Partner p2 = new Partner(
+				"22222222222222", 					// company name
+				"ttttt", 					// contact person name
+				"tttttt 1", 				// contact person phone
+				"contact@mail.com", 			// contact person mail
+				"dfvdfv", 					// first name
+				"rororor", 					// last name
+				"StreetCompany", 			// adress street 
+				"99", 						// addess number 
+				"2345", 					// post code
+				"Dublin", 					// city
+				"Ireland", 					// country
+				"company@company.com", 		// email
+				"+43 677 678 643 44" 		// phone
+				);						// reveues
+		
+		HibernateUtil.getSession().persist(p2);
+		
+		Partner p3 = new Partner(
+				"3333333333333", 					// company name
+				"ttttt", 					// contact person name
+				"tttttt 1", 				// contact person phone
+				"contact@mail.com", 			// contact person mail
+				"dfvdfv", 					// first name
+				"rororor", 					// last name
+				"StreetCompany", 			// adress street 
+				"99", 						// addess number 
+				"2345", 					// post code
+				"Dublin", 					// city
+				"Ireland", 					// country
+				"company@company.com", 		// email
+				"+43 677 678 643 44" 		// phone
+				);						// reveues
+		
+		HibernateUtil.getSession().persist(p3);
+		
 
 
 
