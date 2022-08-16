@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.java.hibernate.dao.RoleDAO;
 import main.java.hibernate.model.Event;
 import main.java.hibernate.model.Expense;
 import main.java.hibernate.model.Game;
@@ -25,10 +27,37 @@ import main.java.hibernate.model.TournamentGame;
 import main.java.hibernate.model.TournamentsTeams;
 
 public class App {
+	
 
 	public static void main(String[] args) {
+		
+		if(HibernateUtil.getSession() != null) {
+			HibernateUtil.getSession().close();
+		}
 
 		HibernateUtil.startSession();
+		
+		// test persist GcmUser
+		Member superAdmin = new Member(
+				"SuperAdmin", 					// clan name
+				"-", 			// clan id
+				"-", 				// real name
+				"-", 						// address
+				"-", 					// post code
+				"-", 					// city
+				"-", 					// country
+				"-", 			// mail
+				"-", 		// phone number
+				null, 						// roles
+				null, 						// socials
+				null, 						// games
+				null,						// events
+				LocalDate.of(1981, 4, 11), 	// birthday
+				null);						// teams
+
+		HibernateUtil.getSession().persist(superAdmin);
+		
+		
 
 		// test persist GcmUser
 		Member ulli = new Member(
@@ -70,25 +99,56 @@ public class App {
 
 		hans.setBirthday(LocalDate.of(1990, 8, 30));
 		HibernateUtil.getSession().persist(hans);
+			
+			Role admin = new Role("Admin", "Clan Administrator", null);
+			HibernateUtil.getSession().persist(admin);
 
+			Role mod = new Role("Mod", "Clan Moderator", null);
+			HibernateUtil.getSession().persist(mod);
 
+			Role vip = new Role("VIP", "Clan VIP", null);
+			HibernateUtil.getSession().persist(vip);
 
-		// test roles join table
+			Role member = new Role("Member", "Clan Member", null);
+			HibernateUtil.getSession().persist(member);
 
-		Role adminRole = new Role("admin", "Clan Administrator", null);
-		HibernateUtil.getSession().persist(adminRole);
+			Role guest = new Role("Guest", "Guest", null);
+			HibernateUtil.getSession().persist(guest);
+			
+			
+		
+	// Every Role Member Connection needs its own MemberRoles Object!!
+	MemberRoles sar1 = new MemberRoles();
+	sar1.setMember(superAdmin);   
+	sar1.setRole(admin);
+	HibernateUtil.getSession().save(sar1);
+	
+	MemberRoles sar2 = new MemberRoles();
+	sar2.setMember(superAdmin);   
+	sar2.setRole(mod);
+	HibernateUtil.getSession().save(sar2);
+	
+	MemberRoles sar3 = new MemberRoles();
+	sar3.setMember(superAdmin);   
+	sar3.setRole(vip);
+	HibernateUtil.getSession().save(sar3);
+	
+	MemberRoles sar4 = new MemberRoles();
+	sar4.setMember(superAdmin);   
+	sar4.setRole(member);
+	HibernateUtil.getSession().save(sar4);
+	
+	MemberRoles sar5 = new MemberRoles();
+	sar5.setMember(superAdmin);   
+	sar5.setRole(guest);
+	HibernateUtil.getSession().save(sar5);
+	
+		
+	
 
-		Role memberRole = new Role("member", "Clan Member", null);
-		HibernateUtil.getSession().persist(memberRole);
-
-
-		MemberRoles mr1 = new MemberRoles();
-		mr1.setRole(adminRole);   
-		mr1.setMember(ulli);   
-		HibernateUtil.getSession().save(mr1);
 
 		MemberRoles mr2 = new MemberRoles();
-		mr2.setRole(memberRole);   
+		mr2.setRole(guest);   
 		mr2.setMember(ulli);   
 		HibernateUtil.getSession().save(mr2);
 		

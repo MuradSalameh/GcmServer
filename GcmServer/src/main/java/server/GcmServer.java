@@ -9,10 +9,14 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.sun.net.httpserver.HttpServer;
 
+import main.java.hibernate.dao.RoleDAO;
+import main.java.hibernate.model.Role;
+import main.java.hibernate.utils.HibernateUtil;
+
 public class GcmServer {
 
 	public static void main(String[] args) {
-
+	//	HibernateUtil.startSession();
 		
 		URI basisUri = URI.create("http://localhost:4712/");
 		// package mit den annotierten Klassen bekanntgeben
@@ -27,7 +31,8 @@ public class GcmServer {
 		}
 		server.stop(0);
 		((ExecutorService)server.getExecutor()).shutdown();
-		 
+
+
 	}
 
 
