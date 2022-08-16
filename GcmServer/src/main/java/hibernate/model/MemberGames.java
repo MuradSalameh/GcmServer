@@ -77,8 +77,8 @@ public class MemberGames {
 		return game;
 	}
 
-	public void setGame(Game gameId) {
-		this.game = gameId;
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
 	@Override

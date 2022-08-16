@@ -1,15 +1,19 @@
 package main.java.hibernate.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 
 @XmlRootElement
@@ -36,17 +40,25 @@ public class Social  implements Serializable{
 	@Column(name = "social_notes")
 	private String socialNotes;
 	
+	@OneToMany(mappedBy = "social")
+	private Set<MemberSocials> membersocials = new HashSet<>();
+	
 	public Social() {
 		super();
 	}
 
-	public Social(String socialPlatform, String socialUsername, String socialLink, String socialNotes) {
+	
+	public Social(String socialPlatform, String socialUsername, String socialLink, String socialNotes,
+			Set<MemberSocials> membersocials) {
 		super();
 		this.socialPlatform = socialPlatform;
 		this.socialUsername = socialUsername;
 		this.socialLink = socialLink;
 		this.socialNotes = socialNotes;
+		this.membersocials = membersocials;
 	}
+
+
 
 	@XmlElement(name="SocialPlatform")
 	public String getSocialPlatform() {
@@ -88,6 +100,18 @@ public class Social  implements Serializable{
 	public int getId() {
 		return id;
 	}
+	
+	
+	@XmlTransient
+	public Set<MemberSocials> getMembersocials() {
+		return membersocials;
+	}
+
+
+	public void setMembersocials(Set<MemberSocials> membersocials) {
+		this.membersocials = membersocials;
+	}
+
 
 	@Override
 	public String toString() {

@@ -1,10 +1,13 @@
 package main.java.hibernate.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import jakarta.xml.bind.annotation.XmlElement;
@@ -22,11 +25,16 @@ public class MemberRoles {
 	@Column(name = "ID")	
 	private int id;	
 
-	@Column(name = "member_id")
-	private int  memberId;
+	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id")
+	private Member  member;
 
-	@Column(name = "role_id")
-	private int  roleId;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+	private Role  role;
 
 	public MemberRoles() {
 		super();
@@ -34,11 +42,11 @@ public class MemberRoles {
 
 
 
-	public MemberRoles(int id, int memberId, int roleId) {
+	public MemberRoles(int id, Member member, Role role) {
 		super();
 		this.id = id;
-		this.memberId = memberId;
-		this.roleId = roleId;
+		this.member = member;
+		this.role = role;
 	}
 
 
@@ -54,29 +62,29 @@ public class MemberRoles {
 	}
 
 
-	@XmlElement(name="MemberId")
-	public int getMemberId() {
-		return memberId;
+	@XmlElement(name="Member")
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
-	@XmlElement(name="RoleId")
-	public int getRoleId() {
-		return roleId;
+	@XmlElement(name="Role")
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
 		return "\nMemberRoles "
-				+ "\nmemberId=" + memberId 
-				+ "\nroleId=" + roleId
+				+ "\nmemberId=" + member.getClanName()
+				+ "\nroleId=" + role.getRoleName()
 				+ "\n----------------------------------"
 				+ "\n";
 	}

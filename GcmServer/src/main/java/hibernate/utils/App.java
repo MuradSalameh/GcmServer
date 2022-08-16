@@ -12,6 +12,8 @@ import main.java.hibernate.model.Genre;
 import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberEvents;
 import main.java.hibernate.model.MemberGames;
+import main.java.hibernate.model.MemberRoles;
+import main.java.hibernate.model.MemberSocials;
 import main.java.hibernate.model.MemberTeam;
 import main.java.hibernate.model.Partner;
 import main.java.hibernate.model.Revenue;
@@ -73,33 +75,42 @@ public class App {
 
 		// test roles join table
 
-		Role adminRole = new Role("admin", "Clan Administrator");
+		Role adminRole = new Role("admin", "Clan Administrator", null);
 		HibernateUtil.getSession().persist(adminRole);
 
-		Role memberRole = new Role("member", "Clan Member");
+		Role memberRole = new Role("member", "Clan Member", null);
 		HibernateUtil.getSession().persist(memberRole);
 
-		List<Role> roles = new ArrayList<Role>();
-		roles.add(adminRole);
-		roles.add(memberRole);	
 
-		ulli.setRoles(roles);
-		HibernateUtil.getSession().persist(ulli);
+		MemberRoles mr1 = new MemberRoles();
+		mr1.setRole(adminRole);   
+		mr1.setMember(ulli);   
+		HibernateUtil.getSession().save(mr1);
+
+		MemberRoles mr2 = new MemberRoles();
+		mr2.setRole(memberRole);   
+		mr2.setMember(ulli);   
+		HibernateUtil.getSession().save(mr2);
+		
 
 
 		// test socials join table
 
-		Social social1 = new Social("YouTube", "Ulli", "www.youtube.com","neuer gaming kanal");
-		Social social2 = new Social("Facebook", "UlliFB", "www.facebook.com","FB-Seite");		
+		Social social1 = new Social("YouTube", "Ulli", "www.youtube.com","neuer gaming kanal",null);
+		Social social2 = new Social("Facebook", "UlliFB", "www.facebook.com","FB-Seite", null);		
+
+		// Connect socials with member
+		
+		MemberSocials ms1 = new MemberSocials();
+		ms1.setSocial(social1);   
+		ms1.setMember(ulli);  		
+		HibernateUtil.getSession().save(ms1);
 
 		
-		
-		List<Social> socials = new ArrayList<Social>();
-		socials.add(social1);
-		socials.add(social2);
-
-		ulli.setSocials(socials);	
-		HibernateUtil.getSession().persist(ulli);
+		MemberSocials ms2 = new MemberSocials();
+		ms2.setSocial(social2);   
+		ms2.setMember(ulli);   
+		HibernateUtil.getSession().save(ms2);
 
 
 		// test teams join table
@@ -122,9 +133,9 @@ public class App {
 
 		HibernateUtil.getSession().persist(t2);
 
-		
-		
-		
+
+
+
 		// Connect members with team
 		MemberTeam memberTeam1 = new MemberTeam();
 		memberTeam1.setTeam(t1);     //specify Team 
@@ -181,7 +192,7 @@ public class App {
 				null, 						// tournament list
 				null);						// additional notes
 
-		
+
 		// test Create genres
 		Genre strategy = new Genre("strategy", null);
 		Genre simulation = new Genre("simulation", null);	
@@ -201,8 +212,8 @@ public class App {
 
 		HibernateUtil.getSession().saveOrUpdate(gameGenre2);	
 
-		
-		
+
+
 
 		// Connect games to members --- ManyToMany custom Class
 		// Every New Entry/Row needs its own MembersGames Object
@@ -297,9 +308,9 @@ public class App {
 		memberEvents2.setMember(ulli);	//add member
 
 		HibernateUtil.getSession().saveOrUpdate(memberEvents2);	
-		
-		
-		
+
+
+
 		Expense e1 = new Expense(
 				"test", 					// title
 				"ttttt", 					// desc
@@ -308,7 +319,7 @@ public class App {
 				"heinrich" 					//recipient
 				);	
 		HibernateUtil.getSession().persist(e1);
-		
+
 
 		Expense e2 = new Expense(
 				"test", 					// title
@@ -317,9 +328,9 @@ public class App {
 				LocalDate.of(1981, 4, 11),	// date
 				"heinrich" 					//recipient
 				);	
-		
+
 		HibernateUtil.getSession().persist(e2);
-		
+
 		Expense e3 = new Expense(
 				"test", 					// title
 				"ttttt", 					// desc
@@ -328,34 +339,34 @@ public class App {
 				"heinrich" 					//recipient
 				);						
 		HibernateUtil.getSession().persist(e3);
-		
+
 		Revenue r1 = new Revenue(
 				"Revenue", 					// title
 				"earnings", 					// desc
 				5000, 					// amount
 				LocalDate.of(1981, 4, 11));	// date
-		
+
 		HibernateUtil.getSession().persist(r1);
 
-			
+
 		Revenue r2 = new Revenue(
 				"Revenue", 					// title
 				"earnings", 					// desc
 				2000, 					// amount
 				LocalDate.of(1981, 4, 11));	// date
-		
+
 		HibernateUtil.getSession().persist(r2);
 
-		
+
 		Revenue r3 = new Revenue(
 				"Revenue", 					// title
 				"earnings", 					// desc
 				1000, 					// amount
 				LocalDate.of(1981, 4, 11));	// date
-		
+
 		HibernateUtil.getSession().persist(r3);
-		
-		
+
+
 		Partner p1 = new Partner(
 				"111111111", 					// company name
 				"ttttt", 					// contact person name
@@ -389,9 +400,9 @@ public class App {
 				"company@company.com", 		// email
 				"+43 677 678 643 44" 		// phone
 				);						// reveues
-		
+
 		HibernateUtil.getSession().persist(p2);
-		
+
 		Partner p3 = new Partner(
 				"3333333333333", 					// company name
 				"ttttt", 					// contact person name
@@ -407,9 +418,9 @@ public class App {
 				"company@company.com", 		// email
 				"+43 677 678 643 44" 		// phone
 				);						// reveues
-		
+
 		HibernateUtil.getSession().persist(p3);
-		
+
 
 
 

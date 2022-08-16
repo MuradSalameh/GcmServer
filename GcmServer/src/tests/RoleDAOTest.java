@@ -66,7 +66,8 @@ public class RoleDAOTest {
 	public static void addTestRole() {
 		Role test = new Role(
 				"test", 					// role name
-				"ttttt");					// desc
+				"ttttt",
+				null);					// desc
 
 		RoleDAO.addRole(test);			
 	}

@@ -2,27 +2,20 @@ package main.java.hibernate.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import javax.persistence.JoinColumn;
 
 
 @XmlRootElement(name = "Member")
@@ -67,23 +60,13 @@ public class Member  implements Serializable {
 
 
 	//join table for member roles
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="member_roles",
-			joinColumns = @JoinColumn( name="member_id"),
-			inverseJoinColumns = @JoinColumn( name="role_id")
-			)
-	List<Role> roles = new ArrayList<>();
+	@OneToMany(mappedBy = "member")
+	Set<MemberRoles> memberRoles = new HashSet<>();
 
 
 	//join table for member socials
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="member_socials",
-			joinColumns = @JoinColumn( name="member_id"),
-			inverseJoinColumns = @JoinColumn( name="social_id")
-			)
-	List<Social> socials = new ArrayList<>();
+	@OneToMany(mappedBy = "member")
+	Set<MemberSocials> memberSocials = new HashSet<>();
 
 
 
@@ -113,8 +96,9 @@ public class Member  implements Serializable {
 	
 	
 	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
-			String addressCity, String country, String email, String phoneNumber, List<Role> roles,
-			List<Social> socials, Set<MemberGames> memberGames, Set<MemberEvents> memberEvents, LocalDate birthday, Set<MemberTeam> memberTeam) {
+			String addressCity, String country, String email, String phoneNumber, Set<MemberRoles> memberRoles,
+			Set<MemberSocials> memberSocials, Set<MemberGames> memberGames, Set<MemberEvents> memberEvents,
+			LocalDate birthday, Set<MemberTeam> memberTeam) {
 		super();
 		this.clanName = clanName;
 		this.clanId = clanId;
@@ -125,15 +109,18 @@ public class Member  implements Serializable {
 		this.country = country;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.roles = roles;
-		this.socials = socials;
+		this.memberRoles = memberRoles;
+		this.memberSocials = memberSocials;
 		this.memberGames = memberGames;
 		this.memberEvents = memberEvents;
 		this.birthday = birthday;
 		this.memberTeam = memberTeam;
 	}
 
-	
+
+
+
+
 	@XmlElement(name="ClanName")
 	public String getClanName() {
 		return clanName;
@@ -242,53 +229,7 @@ public class Member  implements Serializable {
 	}
 
 
-	@XmlTransient
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-
 	
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-		
-	}
-
-
-	@XmlTransient
-	public List<Social> getSocials() {
-		return socials;
-	}
-
-
-
-	public void setSocials(List<Social> socials) {
-		this.socials = socials;
-	}
-
-
-	@XmlTransient
-	public Set<MemberGames> getGames() {
-		return memberGames;
-	}
-
-
-
-	public void setGames(Set<MemberGames> memberGames) {
-		this.memberGames = memberGames;
-	}
-
-
-	@XmlTransient
-	public Set<MemberEvents> getEvents() {
-		return memberEvents;
-	}
-
-
-
-	public void setEvents(Set<MemberEvents> events) {
-		this.memberEvents = events;
-	}
 
 
 	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
@@ -304,7 +245,47 @@ public class Member  implements Serializable {
 	}
 
 
+	
 
+	@XmlTransient
+	public Set<MemberRoles> getMemberRoles() {
+		return memberRoles;
+	}
+
+
+	public void setMemberRoles(Set<MemberRoles> memberRoles) {
+		this.memberRoles = memberRoles;
+	}
+
+	@XmlTransient
+	public Set<MemberSocials> getMemberSocials() {
+		return memberSocials;
+	}
+
+
+	public void setMemberSocials(Set<MemberSocials> memberSocials) {
+		this.memberSocials = memberSocials;
+	}
+
+	@XmlTransient
+	public Set<MemberGames> getMemberGames() {
+		return memberGames;
+	}
+
+
+	public void setMemberGames(Set<MemberGames> memberGames) {
+		this.memberGames = memberGames;
+	}
+
+	@XmlTransient
+	public Set<MemberEvents> getMemberEvents() {
+		return memberEvents;
+	}
+
+
+	public void setMemberEvents(Set<MemberEvents> memberEvents) {
+		this.memberEvents = memberEvents;
+	}
 
 	@XmlTransient
 	public Set<MemberTeam> getMemberTeam() {
@@ -312,7 +293,7 @@ public class Member  implements Serializable {
 	}
 
 
-	public void setMembers(Set<MemberTeam> memberTeam) {
+	public void setMemberTeam(Set<MemberTeam> memberTeam) {
 		this.memberTeam = memberTeam;
 	}
 

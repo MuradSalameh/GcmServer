@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberRoles;
 import main.java.hibernate.model.MemberSocials;
 import main.java.hibernate.model.Role;
@@ -20,10 +21,27 @@ public class RoleDAO {
 		Session session = SessionUtil.getSession();    
 		Transaction tx = session.beginTransaction();		
 		 
-		session.persist(bean);    // Dafür die add role nicht mehr aufrufen, da direkt im bean gespeichert wird.
+		session.persist(bean);  
 		tx.commit();
 		session.close();
 	}
+	
+	public static void addRoleToMember(int memberID, int roleID){
+		Session session = SessionUtil.getSession();    
+		Transaction tx = session.beginTransaction();
+		
+		Member m = session.get(Member.class, memberID);
+		Role r = session.get(Role.class, roleID);
+		
+		MemberRoles mr = new MemberRoles();
+		mr.setMember(m);
+		mr.setRole(r);
+		
+		session.save(mr);  
+		tx.commit();
+		session.close();
+	}
+	
 	
 	public static Role getRole(int id) {
 		   Session session = SessionUtil.getSession();
@@ -33,6 +51,21 @@ public class RoleDAO {
 			
 			return r;
 	}
+	
+	public static Role getRoleWithHighestId() {
+		Session session = SessionUtil.getSession();
+		//String hql = "select max(id) from Role";
+		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Role").getSingleResult();
+		
+		System.out.println(maxId);
+		
+		
+		Role role = session.get(Role.class, maxId);
+		
+		return role;
+	}
+	
+	
 
 
 	public static List<Role> getRoles(){
@@ -57,7 +90,7 @@ public class RoleDAO {
 		List<Role> filteredRolesList =  new ArrayList<>();	
 		
 		for(MemberRoles m : rolesMember) {
-			int sId = m.getRoleId();
+			int sId = m.getRole().getId();
 			Role s = session.get(Role.class, sId);
 			filteredRolesList.add(s);
 			

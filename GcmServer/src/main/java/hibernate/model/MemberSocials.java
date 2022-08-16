@@ -1,10 +1,13 @@
 package main.java.hibernate.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import jakarta.xml.bind.annotation.XmlElement;
@@ -22,11 +25,16 @@ public class MemberSocials {
 	@Column(name = "ID")	
 	private int id;	
 
-	@Column(name = "member_id")
-	private int  memberId;
+	
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id")
+	private Member  member;
 
-	@Column(name = "social_id")
-	private int  socialId;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "social_id")
+	private Social  social;
 
 	public MemberSocials() {
 		super();
@@ -34,11 +42,11 @@ public class MemberSocials {
 
 
 
-	public MemberSocials(int id, int memberId, int socialId) {
+	public MemberSocials(int id, Member member, Social social) {
 		super();
 		this.id = id;
-		this.memberId = memberId;
-		this.socialId = socialId;
+		this.member = member;
+		this.social = social;
 	}
 
 
@@ -54,29 +62,29 @@ public class MemberSocials {
 	}
 
 
-	@XmlElement(name="MemberId")
-	public int getMemberId() {
-		return memberId;
+	@XmlElement(name="Member")
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
-	@XmlElement(name="SocialId")
-	public int getSocialId() {
-		return socialId;
+	@XmlElement(name="Social")
+	public Social getSocial() {
+		return social;
 	}
 
-	public void setSocialId(int socialId) {
-		this.socialId = socialId;
+	public void setSocial(Social social) {
+		this.social = social;
 	}
 
 	@Override
 	public String toString() {
 		return "\nMemberSocials "
-				+ "\nmemberId=" + memberId 
-				+ "\nsocialId=" + socialId
+				+ "\nmemberId=" + member.getClanName()
+				+ "\nsocialId=" + social.getSocialPlatform()
 				+ "\n----------------------------------"
 				+ "\n";
 	}

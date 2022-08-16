@@ -69,7 +69,8 @@ public class SocialDAOTest {
 				"test", 					// platform
 				"ttttt", 					// username
 				"tttttt 1", 				// link
-				"44");						// notes
+				"44",						// notes
+				null);						//members				
 
 		SocialDAO.addSocial(test);			
 	}

@@ -151,7 +151,7 @@ public class Game  implements Serializable{
 		return "\nGame id=" + id 
 				+ "\ngameTitle=" + gameTitle 
 				+ "\nreleaseDate=" + releaseDate 
-				+ "\ngameAdditionalNotes="	+ getGameAdditionalNotes()
+				+ "\ngameAdditionalNotes="	+ gameAdditionalNotes
 				+ "\n----------------------------------"
 				+ "\n";
 	}

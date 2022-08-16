@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Role;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -18,7 +19,9 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import main.java.hibernate.dao.MemberDAO;
 import main.java.hibernate.dao.RoleDAO;
+import main.java.hibernate.dao.SocialDAO;
 
 @Path("/role")
 
@@ -46,6 +49,18 @@ public class RoleResource {
 		Role role = new Role();
 		role = RoleDAO.getRole(id);	
 		
+		return Response.status(Status.OK).entity(role).build();
+	}
+	
+
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/roleWithHighestId/")
+	public Response getRoleWithhighestId() { 
+
+		Role role = new Role();
+		role = RoleDAO.getRoleWithHighestId();	
+
 		return Response.status(Status.OK).entity(role).build();
 	}
 	
@@ -92,6 +107,16 @@ public class RoleResource {
 	public Response putRole(@PathParam("id")int id, Role alteredRole) {
 		
 		RoleDAO.updateRole(id, alteredRole);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_XML)
+	@Path("/addRoleToMember/{memberID}/{roleID}")
+	public Response putRole(@PathParam("memberID") int memberID, 
+            @PathParam("roleID") int roleID) {
+		
+		RoleDAO.addRoleToMember(memberID, roleID);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

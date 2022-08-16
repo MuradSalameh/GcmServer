@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.internal.build.AllowSysOut;
 import org.hibernate.query.Query;
 
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberSocials;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
@@ -19,7 +20,23 @@ public class SocialDAO {
 		Session session = SessionUtil.getSession();    
 		Transaction tx = session.beginTransaction();		
 		 
-		session.persist(bean);    // Dafür die add social nicht mehr aufrufen, da direkt im bean gespeichert wird.
+		session.persist(bean);  
+		tx.commit();
+		session.close();
+	}
+	
+	public static void addSocialToMember(int memberID, int socialID){
+		Session session = SessionUtil.getSession();    
+		Transaction tx = session.beginTransaction();
+		
+		Member m = session.get(Member.class, memberID);
+		Social s = session.get(Social.class, socialID);
+		
+		MemberSocials ms = new MemberSocials();
+		ms.setMember(m);
+		ms.setSocial(s);
+		
+		session.save(ms);  
 		tx.commit();
 		session.close();
 	}
@@ -30,6 +47,20 @@ public class SocialDAO {
 			Social s = session.get(Social.class, id);			
 			return s;
 	}
+	
+	public static Social getSocialWithHighestId() {
+		Session session = SessionUtil.getSession();
+		//String hql = "select max(id) from Social";
+		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Social").getSingleResult();
+		
+		System.out.println(maxId);
+		
+		
+		Social social = session.get(Social.class, maxId);
+		
+		return social;
+	}
+	
 
 
 	public static List<Social> getSocials(){
@@ -52,7 +83,7 @@ public class SocialDAO {
 		List<Social> filteredSocialsList =  new ArrayList<>();	
 		
 		for(MemberSocials m : socialsMember) {
-			int sId = m.getSocialId();
+			int sId = m.getSocial().getId();
 			Social s = session.get(Social.class, sId);
 			filteredSocialsList.add(s);
 			System.out.println(s);

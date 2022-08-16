@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-
+import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Social;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -19,7 +19,7 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
+import main.java.hibernate.dao.MemberDAO;
 import main.java.hibernate.dao.SocialDAO;
 
 @Path("/social")
@@ -48,6 +48,18 @@ public class SocialResource {
 		Social social = new Social();
 		social = SocialDAO.getSocial(id);	
 		
+		return Response.status(Status.OK).entity(social).build();
+	}
+	
+
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/socialWithHighestId/")
+	public Response getSocialWithhighestId() { 
+
+		Social social = new Social();
+		social = SocialDAO.getSocialWithHighestId();	
+
 		return Response.status(Status.OK).entity(social).build();
 	}
 	
@@ -94,6 +106,16 @@ public class SocialResource {
 	public Response putSocial(@PathParam("id")int id, Social alteredSocial) {
 		
 		SocialDAO.updateSocial(id, alteredSocial);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_XML)
+	@Path("/addSocialToMember/{memberID}/{socialID}")
+	public Response putSocial(@PathParam("memberID") int memberID, 
+            @PathParam("socialID") int socialID) {
+		
+		SocialDAO.addSocialToMember(memberID, socialID);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
