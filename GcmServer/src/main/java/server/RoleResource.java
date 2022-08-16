@@ -127,5 +127,11 @@ public class RoleResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
-	 
+	@DELETE
+	@Path("/deleteRoleFromMember/{roleid}/{memberid}")
+	public Response deleteRoleFromMember(@PathParam("roleid")int roleid,
+			@PathParam("memberid") int memberid) {
+		RoleDAO.deleteRoleFromMember(roleid,memberid);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
 }

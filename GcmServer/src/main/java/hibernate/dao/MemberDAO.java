@@ -15,37 +15,32 @@ public class MemberDAO {
 	public static void addMember(Member bean){
 		Session session = SessionUtil.getSession();    
 		Transaction tx = session.beginTransaction();		
-		 
+
 		session.persist(bean);    
 		tx.commit();
 		session.close();
 	}
-	
-	
+
+
 	public static Member getMember(int id) {
-		   Session session = SessionUtil.getSession();
-			Transaction tx = session.beginTransaction();
-		
-			Member member = session.get(Member.class, id);
-			
-			return member;
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
+
+		Member member = session.get(Member.class, id);
+
+		return member;
 	}
-	
-	
+
+
 	public static Member getMemberWithHighestId() {
 		Session session = SessionUtil.getSession();
 		//String hql = "select max(id) from Member";
 		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Member").getSingleResult();
-		
-		System.out.println(maxId);
-		
-		
+
 		Member member = session.get(Member.class, maxId);
-		
+
 		return member;
 	}
-	
-	
 
 
 	public static List<Member> getMembers(){
@@ -57,90 +52,92 @@ public class MemberDAO {
 		return members;
 	}
 
+	
 	public static void deleteMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		
+
 		//Member member = session.get(Member.class, id);
 		Member member = session.get(Member.class, id);
 		session.remove(member);
 		//session.delete(session.find(Member.class, id));
 		tx.commit();
 		session.close();
-		
 	}
+
 	
 	public static void deleteMemberFromEvents(int id){		
 		Session session = SessionUtil.getSession(); 
 		Transaction tx = session.beginTransaction();
-		
+
 		// Delete connection from MemberMembers Table
 		String hql = "delete from MemberEvents id where member_id= :id";		
 		Query query = session.createQuery(hql);		
 		query.setParameter("id", id);
-		
+
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
-		
+
 		// Remove from Member Table
-//    	Member member = session.get(Member.class, id);
-//		session.remove(member);
-		
+		//    	Member member = session.get(Member.class, id);
+		//		session.remove(member);
+
 		tx.commit();
 		session.clear();
 		session.close();
 	}
-	
-	
+
+
 	public static void deleteMemberFromTeams(int id){		
 		Session session = SessionUtil.getSession(); 
 		Transaction tx = session.beginTransaction();
-		
+
 		// Delete connection from MemberMembers Table
 		String hql = "delete from MemberTeam id where member_id= :id";		
 		Query query = session.createQuery(hql);		
 		query.setParameter("id", id);
-		
+
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
-		
+
 		// Remove from Member Table
-//    	Member member = session.get(Member.class, id);
-//		session.remove(member);
-		
+		//    	Member member = session.get(Member.class, id);
+		//		session.remove(member);
+
 		tx.commit();
 		session.clear();
 		session.close();
 	}
+
 	
 	public static void deleteMemberFromGames(int id){		
 		Session session = SessionUtil.getSession(); 
 		Transaction tx = session.beginTransaction();
-		
+
 		// Delete connection from MemberMembers Table
 		String hql = "delete from MemberGames id where member_id= :id";		
 		Query query = session.createQuery(hql);		
 		query.setParameter("id", id);
-		
+
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
-		
+
 		// Remove from Member Table
-//    	Member member = session.get(Member.class, id);
-//		session.remove(member);
-		
+		//    	Member member = session.get(Member.class, id);
+		//		session.remove(member);
+
 		tx.commit();
 		session.clear();
 		session.close();
 	}
-	
-	
+
+
 	public static void updateMember(int id, Member member) {
-        Session session = SessionUtil.getSession();
+		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-	
+
 		Member old = session.get(Member.class, id);
-		
+
 		old.setClanName(member.getClanName());
 		old.setClanId(member.getClanId());
 		old.setRealName(member.getRealName());
@@ -151,22 +148,10 @@ public class MemberDAO {
 		old.setEmail(member.getEmail());
 		old.setPhoneNumber(member.getPhoneNumber());		 		
 		old.setBirthday(member.getBirthday());
-		
-		
-		
-//  Anderen Weg finden um die Listen und Sets zu persistieren
-		
-		//old.setRoles(member.getRoles());
-		//old.setSocials(member.getSocials());
-		//old.setGames(member.getGames());
-		//old.setEvents(member.getEvents());
-		//old.setTeams(member.getTeams());
-		
+
 		session.saveOrUpdate(old);
 		session.flush();
 		tx.commit();
 		session.close();	
-		}
-	
-	
+	}
 }

@@ -56,7 +56,7 @@ public class RoleDAOTest {
 //	getRolesByMemberTest(1);
 
 		
-		deleteRoleFromMemberTest(4);
+		deleteRoleFromMemberTest(4,1);
 		
 
 	}
@@ -124,8 +124,8 @@ public class RoleDAOTest {
 		}
 	}
 	
-	public static void deleteRoleFromMemberTest(int id) {
-		RoleDAO.deleteRoleFromMember(id);
+	public static void deleteRoleFromMemberTest(int roleid, int memberid) {
+		RoleDAO.deleteRoleFromMember(roleid,memberid);
 	}
 
 
