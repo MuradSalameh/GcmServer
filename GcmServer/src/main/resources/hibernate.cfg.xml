@@ -28,7 +28,6 @@
 		 
 		<mapping class="main.java.hibernate.model.Expense"/>
 		<mapping class="main.java.hibernate.model.Game"/>
-		<mapping class="main.java.hibernate.model.Genre"/>
 		<mapping class="main.java.hibernate.model.Member"/>
 		<mapping class="main.java.hibernate.model.Partner"/>
 		<mapping class="main.java.hibernate.model.Revenue"/>	
@@ -44,7 +43,7 @@
 		<mapping class="main.java.hibernate.model.MemberEvents"/>
 		<mapping class="main.java.hibernate.model.TournamentsTeams"/>
 		<mapping class="main.java.hibernate.model.TournamentGame"/>
-		<mapping class="main.java.hibernate.model.GameGenres"/>
+
 		
 		
 	</session-factory>

@@ -9,15 +9,11 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.sun.net.httpserver.HttpServer;
 
-import main.java.hibernate.dao.RoleDAO;
-import main.java.hibernate.model.Role;
-import main.java.hibernate.utils.HibernateUtil;
-
 public class GcmServer {
 
 	public static void main(String[] args) {
-	//	HibernateUtil.startSession();
-		
+		// HibernateUtil.startSession();
+
 		URI basisUri = URI.create("http://localhost:4712/");
 		// package mit den annotierten Klassen bekanntgeben
 		ResourceConfig config = new ResourceConfig().packages("main.java.hibernate.model, main.java.server");
@@ -29,11 +25,10 @@ public class GcmServer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		server.stop(0);
-		((ExecutorService)server.getExecutor()).shutdown();
 
+		server.stop(0);
+		((ExecutorService) server.getExecutor()).shutdown();
 
 	}
-
 
 }

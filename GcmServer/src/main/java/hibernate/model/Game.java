@@ -2,20 +2,14 @@ package main.java.hibernate.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,7 +21,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlRootElement
 @Entity
 @Table(name = "game")
-public class Game  implements Serializable{
+public class Game implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -41,9 +35,6 @@ public class Game  implements Serializable{
 
 	@Column(name = "release_date")
 	private LocalDate releaseDate;
-	
-	@OneToMany(mappedBy = "game")
-	private Set<GameGenres> gameGenres = new HashSet<>();
 
 	@OneToMany(mappedBy = "game")
 	Set<MemberGames> memberGames = new HashSet<>();
@@ -54,25 +45,21 @@ public class Game  implements Serializable{
 	@Column(name = "game_additional_notes")
 	private String gameAdditionalNotes;
 
-
 	public Game() {
 		super();
 	}
-	
 
-	public Game(String gameTitle, LocalDate releaseDate, Set<GameGenres> gameGenres, Set<MemberGames> memberGames,
+	public Game(String gameTitle, LocalDate releaseDate, Set<MemberGames> memberGames,
 			Set<TournamentGame> tournamentGame, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
 		this.releaseDate = releaseDate;
-		this.gameGenres = gameGenres;
 		this.memberGames = memberGames;
 		this.tournamentGame = tournamentGame;
 		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
-
-	@XmlElement(name="GameTitle")
+	@XmlElement(name = "GameTitle")
 	public String getGameTitle() {
 		return gameTitle;
 	}
@@ -81,23 +68,14 @@ public class Game  implements Serializable{
 		this.gameTitle = gameTitle;
 	}
 
-	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
-	@XmlElement(name="ReleaseDate")
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@XmlElement(name = "ReleaseDate")
 	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 
 	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
-	}
-
-	@XmlTransient
-	public Set<GameGenres> getGameGenres() {
-		return gameGenres;
-	}
-
-	public void setGameGenres(Set<GameGenres> gameGenres) {
-		this.gameGenres = gameGenres;
 	}
 
 	@XmlTransient
@@ -131,7 +109,7 @@ public class Game  implements Serializable{
 		this.memberGames = memberGames;
 	}
 
-	@XmlElement(name="GameAdditionalNotes")
+	@XmlElement(name = "GameAdditionalNotes")
 	public String getGameAdditionalNotes() {
 		return gameAdditionalNotes;
 	}
@@ -140,19 +118,14 @@ public class Game  implements Serializable{
 		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
-	@XmlElement(name="ID",required=true)
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
 
-
 	@Override
 	public String toString() {
-		return "\nGame id=" + id 
-				+ "\ngameTitle=" + gameTitle 
-				+ "\nreleaseDate=" + releaseDate 
-				+ "\ngameAdditionalNotes="	+ gameAdditionalNotes
-				+ "\n----------------------------------"
-				+ "\n";
+		return "\nGame id=" + id + "\ngameTitle=" + gameTitle + "\nreleaseDate=" + releaseDate
+				+ "\ngameAdditionalNotes=" + gameAdditionalNotes + "\n----------------------------------" + "\n";
 	}
 }

@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-
 @XmlRootElement(name = "MemberSocials")
 
 @Entity
@@ -22,25 +21,20 @@ public class MemberSocials {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")	
-	private int id;	
+	@Column(name = "ID")
+	private int id;
 
-	
-	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-	private Member  member;
+	@JoinColumn(name = "member_id")
+	private Member member;
 
-	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "social_id")
-	private Social  social;
+	@JoinColumn(name = "social_id")
+	private Social social;
 
 	public MemberSocials() {
 		super();
 	}
-
-
 
 	public MemberSocials(int id, Member member, Social social) {
 		super();
@@ -49,20 +43,16 @@ public class MemberSocials {
 		this.social = social;
 	}
 
-
-	@XmlElement(name="ID",required=true)
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
-
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	@XmlElement(name="Member")
+	@XmlElement(name = "Member")
 	public Member getMember() {
 		return member;
 	}
@@ -71,7 +61,7 @@ public class MemberSocials {
 		this.member = member;
 	}
 
-	@XmlElement(name="Social")
+	@XmlElement(name = "Social")
 	public Social getSocial() {
 		return social;
 	}
@@ -82,13 +72,8 @@ public class MemberSocials {
 
 	@Override
 	public String toString() {
-		return "\nMemberSocials "
-				+ "\nmemberId=" + member.getClanName()
-				+ "\nsocialId=" + social.getSocialPlatform()
-				+ "\n----------------------------------"
-				+ "\n";
+		return "\nMemberSocials " + "\nmemberId=" + member.getClanName() + "\nsocialId=" + social.getSocialPlatform()
+				+ "\n----------------------------------" + "\n";
 	}
-
-
 
 }

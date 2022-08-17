@@ -19,75 +19,60 @@ public class GameDAOTest {
 		int id2 = 3;
 		int id3 = 4;
 
-		//--------- addGame() Test -----------//
+		// --------- addGame() Test -----------//
 
-		//		addTestGame();
-		//		addTestGame();
-		//		addTestGame();
-		//		addTestGame();
+		// addTestGame();
+		// addTestGame();
+		// addTestGame();
+		// addTestGame();
 
+		// --------- getGames() Test to get a List of all games in database-----------//
 
-		//--------- getGames() Test to get a List of all games in database-----------//
+		// getGameList();
 
-		//		getGameList();
+		// --------- deleteGame() Test -----------//
 
+		// deleteGameTest(id);
+		// deleteGameTest(id2);
+		// deleteGameTest(id3);
 
+		// --------- getGame() Test to get one specific game by id -----------//
 
-		//--------- deleteGame() Test -----------//
+		// getGameTest(id);
 
-		//		deleteGameTest(id);
-		//		deleteGameTest(id2);
-		//		deleteGameTest(id3);
+		// --------- updateGame() Test -----------//
 
-
-
-		//--------- getGame() Test to get one specific game by id -----------//
-
-		//	getGameTest(id);
-
-
-
-		//--------- updateGame() Test -----------//
-
-		//		String s = "BOBO the Game";
-		//		updateGameTest(id,s);
-
+		// String s = "BOBO the Game";
+		// updateGameTest(id,s);
 
 //		getMembersByGameIdTest(id3);
-		
+
 //		getGamesByMemberIdTest(id2);
-		
+
 //		deleteGameFromMemberTest(id3);
-		
-		deleteGameFromGenreTest(1);
 
 	}
-
-
 
 	public static void addTestGame() {
-		Game test = new Game(
-				"test", 					// title
-				LocalDate.of(1981, 4, 11), 	// release date
-				null, 						// genres
-				null, 						// members
-				null, 						// tournaments
-				"lorem ipsum");				// notes
+		Game test = new Game("test", // title
+				LocalDate.of(1981, 4, 11), // release date
+				null, // members
+				null, // tournaments
+				"lorem ipsum"); // notes
 
-		GameDAO.addGame(test);			
+		GameDAO.addGame(test);
 	}
-
 
 	public static void updateGameTest(int id, String s) {
 		Session session = SessionUtil.getSession();
 
-		//Vorhandenen Game anhand id aus DB holen
+		// Vorhandenen Game anhand id aus DB holen
 		Game m = session.get(Game.class, id);
 
 		// Game m ClanName wert neu setzen
 		m.setGameTitle(s);
 
-		//Game m  in Datenbank updaten
+		// Game m in Datenbank updaten
 		GameDAO.updateGame(id, m);
 
 		System.out.println(m);
@@ -102,14 +87,14 @@ public class GameDAOTest {
 	}
 
 	public static void getGameTest(int id) {
-		System.out.println(GameDAO.getGame(id)); 
+		System.out.println(GameDAO.getGame(id));
 	}
 
 	public static void getGameList() {
 		List<Game> games = GameDAO.getGames();
 		ArrayList<Game> ol = new ArrayList<Game>();
 
-		for(Game m : games) {
+		for (Game m : games) {
 			ol.add(m);
 			System.out.println(m);
 		}
@@ -118,15 +103,13 @@ public class GameDAOTest {
 	public static void getMembersByGameIdTest(int id) {
 		GameDAO.getMembersByGameId(id);
 	}
+
 	public static void getGamesByMemberIdTest(int id) {
 		GameDAO.getGamesByMemberId(id);
 	}
-	
-	public static void deleteGameFromMemberTest(int id) {
-		GameDAO.deleteGameFromMember(id);
-	}
-	public static void deleteGameFromGenreTest(int id) {
-		GameDAO.deleteGameFromGenre(id);
+
+	public static void deleteGameFromMemberTest(int gameid, int memberid) {
+		GameDAO.deleteGameFromMember(gameid, memberid);
 	}
 
 }

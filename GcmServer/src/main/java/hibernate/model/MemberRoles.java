@@ -3,6 +3,7 @@ package main.java.hibernate.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,6 @@ import javax.persistence.Table;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
-
 @XmlRootElement(name = "MemberRoles")
 
 @Entity
@@ -22,25 +22,20 @@ public class MemberRoles {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")	
-	private int id;	
+	@Column(name = "ID")
+	private int id;
 
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-	private Member  member;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
 
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
-	private Role  role;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "role_id")
+	private Role role;
 
 	public MemberRoles() {
 		super();
 	}
-
-
 
 	public MemberRoles(int id, Member member, Role role) {
 		super();
@@ -49,20 +44,16 @@ public class MemberRoles {
 		this.role = role;
 	}
 
-
-	@XmlElement(name="ID",required=true)
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
-
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	@XmlElement(name="Member")
+	@XmlElement(name = "Member")
 	public Member getMember() {
 		return member;
 	}
@@ -71,7 +62,7 @@ public class MemberRoles {
 		this.member = member;
 	}
 
-	@XmlElement(name="Role")
+	@XmlElement(name = "Role")
 	public Role getRole() {
 		return role;
 	}
@@ -82,13 +73,8 @@ public class MemberRoles {
 
 	@Override
 	public String toString() {
-		return "\nMemberRoles "
-				+ "\nmemberId=" + member.getClanName()
-				+ "\nroleId=" + role.getRoleName()
-				+ "\n----------------------------------"
-				+ "\n";
+		return "\nMemberRoles " + "\nmemberId=" + member.getClanName() + "\nroleId=" + role.getRoleName()
+				+ "\n----------------------------------" + "\n";
 	}
-
-
 
 }

@@ -99,23 +99,31 @@ public class GameResource {
 	}
 
 	@DELETE
-	@Path("/deleteGameFromMember/{id}")
-	public Response deleteGameFromMember(@PathParam("id") int id) {
-		GameDAO.deleteGameFromMember(id);
+	@Path("/deleteGameFromMember/{gameid}/{memberid}")
+	public Response deleteGameFromMember(@PathParam("gameid") int gameid, @PathParam("memberid") int memberid) {
+		GameDAO.deleteGameFromMember(gameid, memberid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("/deleteGameFromTournament/{id}")
-	public Response deleteGameFromTournament(@PathParam("id") int id) {
-		GameDAO.deleteGameFromTournament(id);
+	@Path("/deleteGameFromAllMembers/{id}")
+	public Response deleteGameFromAllMembers(@PathParam("id") int id) {
+		GameDAO.deleteGameFromAllMembers(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
-	@Path("/deleteGameFromGenre/{id}")
-	public Response deleteGameFromGenre(@PathParam("id") int id) {
-		GameDAO.deleteGameFromGenre(id);
+	@Path("/deleteGameFromTournament/{gameid}/{tournamentid}")
+	public Response deleteGameFromTournament(@PathParam("gameid") int gameid,
+			@PathParam("tournamentid") int tournamentid) {
+		GameDAO.deleteGameFromTournament(gameid, tournamentid);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+
+	@DELETE
+	@Path("/deleteGameFromAllTournaments/{id}")
+	public Response deleteGameFromAllTournaments(@PathParam("id") int id) {
+		GameDAO.deleteGameFromAllTournaments(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

@@ -52,3 +52,7 @@ Lösung: Mappings checken
 
 beim Löschen eines Objektes fehler foreign Key constraint ---- im DAO über ""delete From..." löschen und session.remove(); entfernen
 
+
+delete parent  foreign keyConstraint bei Delete:
+- tippfehler in den methoden, den hql oder den urls
+- in App.java erstellte Objekte nicht persistiert. Jedes Objekt mur bei erstellung persistiert werden.
