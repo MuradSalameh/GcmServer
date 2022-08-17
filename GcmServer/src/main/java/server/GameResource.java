@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Game;
-import main.java.hibernate.model.Social;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -20,16 +18,14 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.GameDAO;
-import main.java.hibernate.dao.SocialDAO;
+import main.java.hibernate.model.Game;
 
 @Path("/game")
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class GameResource {
-	
 
-
-	// server Test	
+	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/test")
@@ -37,91 +33,97 @@ public class GameResource {
 		return "server test successful!";
 	}
 
-	
-
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/game/{id}")
-	public Response getGame(@PathParam("id") int id) { 
-			
+	public Response getGame(@PathParam("id") int id) {
+
 		Game game = new Game();
-		game = GameDAO.getGame(id);	
-		
+		game = GameDAO.getGame(id);
+
 		return Response.status(Status.OK).entity(game).build();
 	}
-	
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/gamelist")
-	public Response getGameList() {		
-	
-		List<Game> games = new ArrayList<>();			
+	public Response getGameList() {
+
+		List<Game> games = new ArrayList<>();
 		games = GameDAO.getGames();
-		
-		GenericEntity<List<Game>> g = new GenericEntity<List<Game>>(Lists.newArrayList(games)) {};
-	    
-		return Response.status(Status.OK).entity(g).build();			
+
+		GenericEntity<List<Game>> g = new GenericEntity<List<Game>>(Lists.newArrayList(games)) {
+		};
+
+		return Response.status(Status.OK).entity(g).build();
 	}
-	
-	@GET 
+
+	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/gamesByMember/{id}")
-	public Response getGamesByMember(@PathParam("id") int id) { 
+	public Response getGamesByMember(@PathParam("id") int id) {
 		List<Game> s = GameDAO.getGamesByMemberId(id);
-				
-		GenericEntity<List<Game>> sl = new GenericEntity<List<Game>>(Lists.newArrayList(s)) {};
-	    
-		return Response.status(Status.OK).entity(sl).build();	
+
+		GenericEntity<List<Game>> sl = new GenericEntity<List<Game>>(Lists.newArrayList(s)) {
+		};
+
+		return Response.status(Status.OK).entity(sl).build();
 	}
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addGame")
 	public Response postGame(Game newGame) {
-		
-		GameDAO.addGame(newGame);	
+
+		GameDAO.addGame(newGame);
 		return Response.status(Status.CREATED).build();
-		
+
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_XML)
+	@Path("/addGameToMember/{memberID}/{gameID}")
+	public Response putGame(@PathParam("memberID") int memberID, @PathParam("gameID") int gameID) {
+
+		GameDAO.addGameToMember(memberID, gameID);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateGame/{id}")
-	public Response putGame(@PathParam("id")int id, Game alteredGame) {
-		
+	public Response putGame(@PathParam("id") int id, Game alteredGame) {
+
 		GameDAO.updateGame(id, alteredGame);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
 	@Path("/deleteGameFromMember/{id}")
-	public Response deleteGameFromMember(@PathParam("id")int id) {
+	public Response deleteGameFromMember(@PathParam("id") int id) {
 		GameDAO.deleteGameFromMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-	
+
 	@DELETE
 	@Path("/deleteGameFromTournament/{id}")
-	public Response deleteGameFromTournament(@PathParam("id")int id) {
+	public Response deleteGameFromTournament(@PathParam("id") int id) {
 		GameDAO.deleteGameFromTournament(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-	
+
 	@DELETE
 	@Path("/deleteGameFromGenre/{id}")
-	public Response deleteGameFromGenre(@PathParam("id")int id) {
+	public Response deleteGameFromGenre(@PathParam("id") int id) {
 		GameDAO.deleteGameFromGenre(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-	
+
 	@DELETE
 	@Path("/deleteGame/{id}")
-	public Response deleteGame(@PathParam("id")int id) {
+	public Response deleteGame(@PathParam("id") int id) {
 		GameDAO.deleteGame(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
-	 
 }
