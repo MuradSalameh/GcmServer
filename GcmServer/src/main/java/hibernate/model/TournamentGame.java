@@ -1,8 +1,8 @@
 package main.java.hibernate.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,10 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
 
 @XmlRootElement(name = "TournamentGame")
 
@@ -23,25 +21,21 @@ public class TournamentGame {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")	
-	private int id;	
+	@Column(name = "ID")
+	private int id;
 
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tournament_id")
-	private Tournament  tournament;
+	// @ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tournament_id")
+	private Tournament tournament;
 
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "game_id")
-	private Game  game;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "game_id")
+	private Game game;
 
 	public TournamentGame() {
 		super();
 	}
-
-
 
 	public TournamentGame(int id, Tournament tournament, Game game) {
 		super();
@@ -50,20 +44,16 @@ public class TournamentGame {
 		this.game = game;
 	}
 
-
-	@XmlElement(name="ID",required=true)
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
-
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	@XmlElement(name="Tournament")
+	@XmlElement(name = "Tournament")
 	public Tournament getTournament() {
 		return tournament;
 	}
@@ -72,7 +62,7 @@ public class TournamentGame {
 		this.tournament = tournament;
 	}
 
-	@XmlElement(name="Game")
+	@XmlElement(name = "Game")
 	public Game getGame() {
 		return game;
 	}
@@ -83,13 +73,8 @@ public class TournamentGame {
 
 	@Override
 	public String toString() {
-		return "\nTournamentGames "
-				+ "\ntournamentId=" + tournament.getTouramentTitle()
-				+ "\ngameId=" + game.getGameTitle()
-				+ "\n----------------------------------"
-				+ "\n";
+		return "\nTournamentGames " + "\ntournamentId=" + tournament.getTouramentTitle() + "\ngameId="
+				+ game.getGameTitle() + "\n----------------------------------" + "\n";
 	}
-
-
 
 }

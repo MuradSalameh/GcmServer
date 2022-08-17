@@ -24,7 +24,6 @@ public class MemberGames {
 	@Column(name = "ID")
 	private int id;
 
-//	@ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "member_id")
 	private Member member;

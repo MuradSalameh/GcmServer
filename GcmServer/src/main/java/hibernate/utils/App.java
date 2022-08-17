@@ -231,7 +231,6 @@ public class App {
 
 		MemberGames memberGames2 = new MemberGames();
 		memberGames2.setGame(game2); // specify game
-		// memberGames2.setGame(game2); //specify game
 		memberGames2.setMember(ulli); // add member
 		HibernateUtil.getSession().saveOrUpdate(memberGames2);
 
