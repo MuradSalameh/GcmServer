@@ -49,6 +49,15 @@ public class MemberDAO {
 		return members;
 	}
 
+	public static List<Member> getMembersByTeamId(int id) {
+		Session session = SessionUtil.getSession();
+		String hql = "from MemberTeam where team_id= :id";
+		Query query = session.createQuery(hql);
+		List<Member> members = new ArrayList<Member>(query.list());
+		session.close();
+		return members;
+	}
+
 	public static void deleteMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();

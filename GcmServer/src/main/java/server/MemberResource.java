@@ -69,6 +69,20 @@ public class MemberResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/getMembersByTeamId/{id}")
+	public Response getMembersByTeamId(@PathParam("id") int id) {
+
+		List<Member> members = new ArrayList<>();
+		members = MemberDAO.getMembers();
+
+		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
+		};
+
+		return Response.status(Status.OK).entity(ml).build();
+	}
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addMember")
