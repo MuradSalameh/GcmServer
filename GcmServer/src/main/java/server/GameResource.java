@@ -70,6 +70,18 @@ public class GameResource {
 		return Response.status(Status.OK).entity(sl).build();
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	@Path("/getGamesByTournamentId/{id}")
+	public Response getGamesByTournamentId(@PathParam("id") int id) {
+		List<Game> s = GameDAO.getGamesByTournamentId(id);
+
+		GenericEntity<List<Game>> sl = new GenericEntity<List<Game>>(Lists.newArrayList(s)) {
+		};
+
+		return Response.status(Status.OK).entity(sl).build();
+	}
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addGame")
@@ -86,6 +98,15 @@ public class GameResource {
 	public Response putGame(@PathParam("memberID") int memberID, @PathParam("gameID") int gameID) {
 
 		GameDAO.addGameToMember(memberID, gameID);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_XML)
+	@Path("/addGameToTournament/{gameId}/{tournamentId}")
+	public Response addGameToTournament(@PathParam("gameId") int gameId, @PathParam("tournamentId") int tournamentId) {
+
+		GameDAO.addGameToTournament(gameId, tournamentId);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

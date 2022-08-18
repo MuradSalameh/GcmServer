@@ -51,6 +51,8 @@ public class GameDAOTest {
 
 //		deleteGameFromMemberTest(id3);
 
+		deleteGameFromTournamentTest(6, 2);
+
 	}
 
 	public static void addTestGame() {
@@ -110,6 +112,10 @@ public class GameDAOTest {
 
 	public static void deleteGameFromMemberTest(int gameid, int memberid) {
 		GameDAO.deleteGameFromMember(gameid, memberid);
+	}
+
+	public static void deleteGameFromTournamentTest(int gameid, int tournamentid) {
+		GameDAO.deleteGameFromTournament(gameid, tournamentid);
 	}
 
 }

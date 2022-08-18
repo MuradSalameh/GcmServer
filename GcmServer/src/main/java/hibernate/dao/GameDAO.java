@@ -10,6 +10,8 @@ import org.hibernate.query.Query;
 import main.java.hibernate.model.Game;
 import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberGames;
+import main.java.hibernate.model.Tournament;
+import main.java.hibernate.model.TournamentGame;
 import main.java.hibernate.utils.SessionUtil;
 
 public class GameDAO {
@@ -32,6 +34,22 @@ public class GameDAO {
 
 		MemberGames mr = new MemberGames();
 		mr.setMember(m);
+		mr.setGame(g);
+
+		session.save(mr);
+		tx.commit();
+		session.close();
+	}
+
+	public static void addGameToTournament(int gameID, int tournamentID) {
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
+
+		Tournament m = session.get(Tournament.class, tournamentID);
+		Game g = session.get(Game.class, gameID);
+
+		TournamentGame mr = new TournamentGame();
+		mr.setTournament(m);
 		mr.setGame(g);
 
 		session.save(mr);
@@ -69,6 +87,27 @@ public class GameDAO {
 		List<Game> filteredGamesList = new ArrayList<>();
 
 		for (MemberGames m : gamesMember) {
+			int sId = m.getGame().getId();
+			Game s = session.get(Game.class, sId);
+			filteredGamesList.add(s);
+			System.out.println(s);
+		}
+
+		session.close();
+		return filteredGamesList;
+	}
+
+	public static List<Game> getGamesByTournamentId(int id) {
+		// SQL: SELECT * FROM gcm.tournament_games where tournament_id= '3'
+
+		Session session = SessionUtil.getSession();
+		String hql = "from TournamentGame game_id where tournament_id= :id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		List<TournamentGame> gamesTournament = query.list();
+		List<Game> filteredGamesList = new ArrayList<>();
+
+		for (TournamentGame m : gamesTournament) {
 			int sId = m.getGame().getId();
 			Game s = session.get(Game.class, sId);
 			filteredGamesList.add(s);
@@ -166,7 +205,7 @@ public class GameDAO {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		String hql = "delete from TournamentGames id where game_id= :gameid and tournament_id= :tournamentid";
+		String hql = "delete from TournamentGame id where game_id= :gameid and tournament_id= :tournamentid";
 		Query query = session.createQuery(hql);
 		query.setParameter("gameid", gameid);
 		query.setParameter("tournamentid", tournamentid);
