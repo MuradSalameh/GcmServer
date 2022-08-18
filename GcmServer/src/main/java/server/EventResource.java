@@ -6,7 +6,6 @@ import java.util.List;
 import org.glassfish.jersey.internal.guava.Lists;
 
 import main.java.hibernate.model.Event;
-import main.java.hibernate.model.Game;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -20,7 +19,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.EventDAO;
-import main.java.hibernate.dao.GameDAO;
 
 @Path("/event")
 

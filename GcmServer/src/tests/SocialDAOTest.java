@@ -6,10 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import main.java.hibernate.dao.RoleDAO;
 import main.java.hibernate.dao.SocialDAO;
-import main.java.hibernate.model.MemberSocials;
-import main.java.hibernate.model.Role;
 import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 

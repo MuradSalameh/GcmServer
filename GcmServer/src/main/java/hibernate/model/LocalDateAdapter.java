@@ -1,7 +1,6 @@
 package main.java.hibernate.model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**

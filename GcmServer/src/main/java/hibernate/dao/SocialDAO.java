@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.internal.build.AllowSysOut;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Member;

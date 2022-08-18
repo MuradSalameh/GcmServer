@@ -9,9 +9,7 @@ import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Member;
 import main.java.hibernate.model.MemberRoles;
-import main.java.hibernate.model.MemberSocials;
 import main.java.hibernate.model.Role;
-import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
 public class RoleDAO {

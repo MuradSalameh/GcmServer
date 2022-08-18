@@ -8,7 +8,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import main.java.hibernate.dao.EventDAO;
-import main.java.hibernate.dao.GameDAO;
 import main.java.hibernate.model.Event;
 import main.java.hibernate.utils.SessionUtil;
 

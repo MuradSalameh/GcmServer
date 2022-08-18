@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Member;
 import main.java.hibernate.model.Role;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -19,9 +18,7 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import main.java.hibernate.dao.MemberDAO;
 import main.java.hibernate.dao.RoleDAO;
-import main.java.hibernate.dao.SocialDAO;
 
 @Path("/role")
 

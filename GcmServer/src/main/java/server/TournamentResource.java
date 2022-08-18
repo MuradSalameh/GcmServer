@@ -18,7 +18,6 @@ import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-import main.java.hibernate.dao.TeamDAO;
 import main.java.hibernate.dao.TournamentDAO;
 
 @Path("/tournament")
