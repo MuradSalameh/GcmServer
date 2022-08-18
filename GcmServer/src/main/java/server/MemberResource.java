@@ -33,6 +33,25 @@ public class MemberResource {
 		return "server test successful!";
 	}
 
+	@POST
+	@Consumes(MediaType.APPLICATION_XML)
+	@Path("/addMember")
+	public Response postMember(Member newMember) {
+
+		MemberDAO.addMember(newMember);
+		return Response.status(Status.CREATED).build();
+
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_XML)
+	@Path("/addMemberToTeam/{memberID}/{teamID}")
+	public Response addMemberToTeam(@PathParam("memberID") int memberID, @PathParam("teamID") int teamID) {
+
+		MemberDAO.addMemberToTeam(memberID, teamID);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/member/{id}")
@@ -75,22 +94,12 @@ public class MemberResource {
 	public Response getMembersByTeamId(@PathParam("id") int id) {
 
 		List<Member> members = new ArrayList<>();
-		members = MemberDAO.getMembers();
+		members = MemberDAO.getMembersByTeamId(id);
 
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
 		};
 
 		return Response.status(Status.OK).entity(ml).build();
-	}
-
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addMember")
-	public Response postMember(Member newMember) {
-
-		MemberDAO.addMember(newMember);
-		return Response.status(Status.CREATED).build();
-
 	}
 
 	@PUT
@@ -99,6 +108,13 @@ public class MemberResource {
 	public Response putMember(@PathParam("id") int id, Member alteredMember) {
 
 		MemberDAO.updateMember(id, alteredMember);
+		return Response.status(Status.NOT_IMPLEMENTED).build();
+	}
+
+	@DELETE
+	@Path("/deleteMemberFromTeam/{memberid}/{teamid}")
+	public Response deleteMemberFromTeam(@PathParam("memberid") int memberid, @PathParam("teamid") int teamid) {
+		MemberDAO.deleteMemberFromTeam(memberid, teamid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 

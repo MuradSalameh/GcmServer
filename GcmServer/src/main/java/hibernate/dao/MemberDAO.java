@@ -8,6 +8,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Member;
+import main.java.hibernate.model.MemberTeam;
+import main.java.hibernate.model.Team;
 import main.java.hibernate.utils.SessionUtil;
 
 public class MemberDAO {
@@ -17,6 +19,22 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 
 		session.persist(bean);
+		tx.commit();
+		session.close();
+	}
+
+	public static void addMemberToTeam(int memberID, int teamID) {
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
+
+		Member m = session.get(Member.class, memberID);
+		Team t = session.get(Team.class, teamID);
+
+		MemberTeam mt = new MemberTeam();
+		mt.setMember(m);
+		mt.setTeam(t);
+
+		session.save(mt);
 		tx.commit();
 		session.close();
 	}
@@ -51,11 +69,22 @@ public class MemberDAO {
 
 	public static List<Member> getMembersByTeamId(int id) {
 		Session session = SessionUtil.getSession();
-		String hql = "from MemberTeam where team_id= :id";
+		String hql = "from MemberTeam member_id where team_id= :id";
 		Query query = session.createQuery(hql);
-		List<Member> members = new ArrayList<Member>(query.list());
+		query.setParameter("id", id);
+		List<MemberTeam> membersTeam = query.list();
+
+		List<Member> filteredMembersList = new ArrayList<>();
+
+		for (MemberTeam m : membersTeam) {
+			int sId = m.getMember().getId();
+			Member s = session.get(Member.class, sId);
+			filteredMembersList.add(s);
+			System.out.println(s);
+		}
+
 		session.close();
-		return members;
+		return filteredMembersList;
 	}
 
 	public static void deleteMember(int id) {
@@ -129,6 +158,27 @@ public class MemberDAO {
 		// Remove from Member Table
 		// Member member = session.get(Member.class, id);
 		// session.remove(member);
+
+		tx.commit();
+		session.clear();
+		session.close();
+	}
+
+	public static void deleteMemberFromTeam(int memberid, int teamid) {
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
+
+		String hql = "delete from MemberTeam id where member_id= :memberid and team_id= :teamid";
+		Query query = session.createQuery(hql);
+		query.setParameter("memberid", memberid);
+		query.setParameter("teamid", teamid);
+
+		int count = query.executeUpdate();
+		System.out.println(count + " Record(s) Deleted.");
+
+		// Remove from Game Table
+		// Game game = session.get(Game.class, id);
+		// session.remove(game);
 
 		tx.commit();
 		session.clear();
