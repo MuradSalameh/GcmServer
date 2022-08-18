@@ -96,8 +96,8 @@ public class EventDAO {
 		System.out.println(count + " Record(s) Deleted.");
 
 		// Remove from Event Table
-//    	Event event = session.get(Event.class, id);
-//		session.remove(event);
+		// Event event = session.get(Event.class, id);
+		// session.remove(event);
 
 		tx.commit();
 		session.clear();

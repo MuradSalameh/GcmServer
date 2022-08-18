@@ -7,37 +7,35 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Expense;
-
 import main.java.hibernate.utils.SessionUtil;
 
 public class ExpenseDAO {
 
-	public static void addExpense(Expense bean){
-		Session session = SessionUtil.getSession();    
-		Transaction tx = session.beginTransaction();		
+	public static void addExpense(Expense bean) {
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
 
-		session.persist(bean);    // Dafür die add expense nicht mehr aufrufen, da direkt im bean gespeichert wird.
+		session.persist(bean); // Dafür die add expense nicht mehr aufrufen, da direkt im bean gespeichert
+		// wird.
 		tx.commit();
 		session.close();
 	}
-	
+
 	public static Expense getExpense(int id) {
-		   Session session = SessionUtil.getSession();
-			Transaction tx = session.beginTransaction();
-		
-			Expense expense = session.get(Expense.class, id);
-			
-			return expense;
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
+
+		Expense expense = session.get(Expense.class, id);
+
+		return expense;
 	}
 
-
-
-	public static List<Expense> getExpenses(){
-		Session session = SessionUtil.getSession();  
+	public static List<Expense> getExpenses() {
+		Session session = SessionUtil.getSession();
 		String hql = "from Expense";
 		Query query = session.createQuery(hql);
-		List<Expense> expenses =  query.list();		
-		session.close();		
+		List<Expense> expenses = query.list();
+		session.close();
 		return expenses;
 	}
 
@@ -51,7 +49,7 @@ public class ExpenseDAO {
 
 	}
 
-	public static void updateExpense(int id, Expense expense){
+	public static void updateExpense(int id, Expense expense) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Expense old = session.get(Expense.class, id);
@@ -61,15 +59,13 @@ public class ExpenseDAO {
 		old.setAmount(expense.getAmount());
 		old.setDate(expense.getDate());
 		old.setRecipientName(expense.getRecipientName());
-		
-		//old.setExpenseTypes(expense.getExpenseTypes());
 
-		
+		// old.setExpenseTypes(expense.getExpenseTypes());
+
 		session.saveOrUpdate(old);
 		session.flush();
 		tx.commit();
-		session.close();		
+		session.close();
 	}
-
 
 }

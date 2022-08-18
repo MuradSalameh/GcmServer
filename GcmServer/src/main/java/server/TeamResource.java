@@ -42,7 +42,6 @@ public class TeamResource {
 
 		Team team = new Team();
 		team = TeamDAO.getTeam(id);
-
 		return Response.status(Status.OK).entity(team).build();
 	}
 
@@ -54,7 +53,6 @@ public class TeamResource {
 
 		List<Team> teams = new ArrayList<>();
 		teams = TeamDAO.getTeams();
-
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
 		};
 
@@ -67,7 +65,6 @@ public class TeamResource {
 	public Response getTeamsByMember(@PathParam("id") int id) {
 
 		List<Team> teams = TeamDAO.getTeamsByMemberId(id);
-
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
 		};
 
@@ -80,7 +77,6 @@ public class TeamResource {
 	public Response getTeamsByTournamentId(@PathParam("id") int id) {
 
 		List<Team> teams = TeamDAO.getTeamsByTournamentId(id);
-
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
 		};
 
@@ -93,7 +89,6 @@ public class TeamResource {
 	public Response getMembersByTeam(@PathParam("id") int id) {
 
 		List<Member> members = TeamDAO.getMembersByTeamId(id);
-
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
 		};
 
@@ -107,7 +102,6 @@ public class TeamResource {
 
 		TeamDAO.addTeam(newTeam);
 		return Response.status(Status.CREATED).build();
-
 	}
 
 	@PUT
@@ -131,6 +125,7 @@ public class TeamResource {
 	@DELETE
 	@Path("/deleteTeam/{id}")
 	public Response deleteTeam(@PathParam("id") int id) {
+
 		TeamDAO.deleteTeam(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -138,6 +133,7 @@ public class TeamResource {
 	@DELETE
 	@Path("/deleteTeamFromMember/{id}")
 	public Response deleteTeamFromMember(@PathParam("id") int id) {
+
 		TeamDAO.deleteTeamFromMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -145,6 +141,7 @@ public class TeamResource {
 	@DELETE
 	@Path("/deleteTeamFromTournaments/{id}")
 	public Response deleteTeamFromTournaments(@PathParam("id") int id) {
+
 		TeamDAO.deleteTeamFromTournaments(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -153,6 +150,7 @@ public class TeamResource {
 	@Path("/deleteTeamFromTournament/{teamid}/{tournamentid}")
 	public Response deleteTeamFromTournament(@PathParam("teamid") int teamid,
 			@PathParam("tournamentid") int tournamentid) {
+
 		TeamDAO.deleteTeamFromTournament(teamid, tournamentid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}

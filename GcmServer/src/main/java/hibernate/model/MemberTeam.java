@@ -10,10 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
 
 @XmlRootElement(name = "MemberTeam")
 
@@ -23,25 +21,20 @@ public class MemberTeam {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")	
-	private int id;	
+	@Column(name = "ID")
+	private int id;
 
-	
-	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-	private Member  member;
+	@JoinColumn(name = "member_id")
+	private Member member;
 
-	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_id")
-	private Team  team;
+	@JoinColumn(name = "team_id")
+	private Team team;
 
 	public MemberTeam() {
 		super();
 	}
-
-
 
 	public MemberTeam(int id, Member member, Team team) {
 		super();
@@ -50,20 +43,16 @@ public class MemberTeam {
 		this.team = team;
 	}
 
-
-	@XmlElement(name="ID",required=true)
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
-
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	@XmlElement(name="Member")
+	@XmlElement(name = "Member")
 	public Member getMember() {
 		return member;
 	}
@@ -72,7 +61,7 @@ public class MemberTeam {
 		this.member = member;
 	}
 
-	@XmlElement(name="Team")
+	@XmlElement(name = "Team")
 	public Team getTeam() {
 		return team;
 	}
@@ -83,13 +72,8 @@ public class MemberTeam {
 
 	@Override
 	public String toString() {
-		return "\nMemberTeams "
-				+ "\nmemberId=" + member.getClanName()
-				+ "\nteamId=" + team.getTeamName()
-				+ "\n----------------------------------"
-				+ "\n";
+		return "\nMemberTeams " + "\nmemberId=" + member.getClanName() + "\nteamId=" + team.getTeamName()
+				+ "\n----------------------------------" + "\n";
 	}
-
-
 
 }

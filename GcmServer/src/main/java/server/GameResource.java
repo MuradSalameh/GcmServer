@@ -40,7 +40,6 @@ public class GameResource {
 
 		Game game = new Game();
 		game = GameDAO.getGame(id);
-
 		return Response.status(Status.OK).entity(game).build();
 	}
 
@@ -51,7 +50,6 @@ public class GameResource {
 
 		List<Game> games = new ArrayList<>();
 		games = GameDAO.getGames();
-
 		GenericEntity<List<Game>> g = new GenericEntity<List<Game>>(Lists.newArrayList(games)) {
 		};
 
@@ -62,8 +60,8 @@ public class GameResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/gamesByMember/{id}")
 	public Response getGamesByMember(@PathParam("id") int id) {
-		List<Game> s = GameDAO.getGamesByMemberId(id);
 
+		List<Game> s = GameDAO.getGamesByMemberId(id);
 		GenericEntity<List<Game>> sl = new GenericEntity<List<Game>>(Lists.newArrayList(s)) {
 		};
 
@@ -74,8 +72,8 @@ public class GameResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getGamesByTournamentId/{id}")
 	public Response getGamesByTournamentId(@PathParam("id") int id) {
-		List<Game> s = GameDAO.getGamesByTournamentId(id);
 
+		List<Game> s = GameDAO.getGamesByTournamentId(id);
 		GenericEntity<List<Game>> sl = new GenericEntity<List<Game>>(Lists.newArrayList(s)) {
 		};
 
@@ -122,6 +120,7 @@ public class GameResource {
 	@DELETE
 	@Path("/deleteGameFromMember/{gameid}/{memberid}")
 	public Response deleteGameFromMember(@PathParam("gameid") int gameid, @PathParam("memberid") int memberid) {
+
 		GameDAO.deleteGameFromMember(gameid, memberid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -129,6 +128,7 @@ public class GameResource {
 	@DELETE
 	@Path("/deleteGameFromAllMembers/{id}")
 	public Response deleteGameFromAllMembers(@PathParam("id") int id) {
+
 		GameDAO.deleteGameFromAllMembers(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -137,6 +137,7 @@ public class GameResource {
 	@Path("/deleteGameFromTournament/{gameid}/{tournamentid}")
 	public Response deleteGameFromTournament(@PathParam("gameid") int gameid,
 			@PathParam("tournamentid") int tournamentid) {
+
 		GameDAO.deleteGameFromTournament(gameid, tournamentid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -144,6 +145,7 @@ public class GameResource {
 	@DELETE
 	@Path("/deleteGameFromAllTournaments/{id}")
 	public Response deleteGameFromAllTournaments(@PathParam("id") int id) {
+
 		GameDAO.deleteGameFromAllTournaments(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -151,6 +153,7 @@ public class GameResource {
 	@DELETE
 	@Path("/deleteGame/{id}")
 	public Response deleteGame(@PathParam("id") int id) {
+
 		GameDAO.deleteGame(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}

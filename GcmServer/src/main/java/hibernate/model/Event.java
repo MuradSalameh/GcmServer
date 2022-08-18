@@ -19,11 +19,10 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 @XmlRootElement
 @Entity
 @Table(name = "event")
-public class Event implements Serializable{
+public class Event implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,12 +52,11 @@ public class Event implements Serializable{
 	@Column(name = "reoccuring")
 	private boolean reoccuring;
 
-	//join table for members
+	// join table for members
 
 	// Members
 	@OneToMany(mappedBy = "event")
 	Set<MemberEvents> memberEvents = new HashSet<>();
-
 
 	public Event() {
 		super();
@@ -77,7 +75,7 @@ public class Event implements Serializable{
 		this.memberEvents = memberEvents;
 	}
 
-	@XmlElement(name="EventTitle")
+	@XmlElement(name = "EventTitle")
 	public String getEventTitle() {
 		return eventTitle;
 	}
@@ -86,7 +84,7 @@ public class Event implements Serializable{
 		this.eventTitle = eventTitle;
 	}
 
-	@XmlElement(name="EventDescription")
+	@XmlElement(name = "EventDescription")
 	public String getEventDescription() {
 		return eventDescription;
 	}
@@ -95,9 +93,8 @@ public class Event implements Serializable{
 		this.eventDescription = eventDescription;
 	}
 
-
-	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
-	@XmlElement(name="Date")
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@XmlElement(name = "Date")
 	public LocalDate getDate() {
 		return date;
 	}
@@ -106,8 +103,8 @@ public class Event implements Serializable{
 		this.date = date;
 	}
 
-	@XmlJavaTypeAdapter(value= LocalTimeAdapter.class)
-	@XmlElement(name="EventStartTime")
+	@XmlJavaTypeAdapter(value = LocalTimeAdapter.class)
+	@XmlElement(name = "EventStartTime")
 	public LocalTime getEventStartTime() {
 		return eventStartTime;
 	}
@@ -116,8 +113,8 @@ public class Event implements Serializable{
 		this.eventStartTime = eventStartTime;
 	}
 
-	@XmlJavaTypeAdapter(value= LocalTimeAdapter.class)
-	@XmlElement(name="EventEndTime")
+	@XmlJavaTypeAdapter(value = LocalTimeAdapter.class)
+	@XmlElement(name = "EventEndTime")
 	public LocalTime getEventEndTime() {
 		return eventEndTime;
 	}
@@ -126,7 +123,7 @@ public class Event implements Serializable{
 		this.eventEndTime = eventEndTime;
 	}
 
-	@XmlElement(name="EventAdditionalNotes")
+	@XmlElement(name = "EventAdditionalNotes")
 	public String getEventAddidtionalNotes() {
 		return eventAddidtionalNotes;
 	}
@@ -135,7 +132,7 @@ public class Event implements Serializable{
 		this.eventAddidtionalNotes = eventAddidtionalNotes;
 	}
 
-	@XmlElement(name="Reoccuring")
+	@XmlElement(name = "Reoccuring")
 	public boolean isReoccuring() {
 		return reoccuring;
 	}
@@ -153,28 +150,17 @@ public class Event implements Serializable{
 		this.memberEvents = memberEvents;
 	}
 
-
-	@XmlElement(name="ID",required=true)
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
 
 	@Override
 	public String toString() {
-		return "\nEvent id=" + id 
-				+ "\neventTitle=" + eventTitle 
-				+ "\neventDescription=" + eventDescription 
-				+ "\ndate="	+ date 
-				+ "\neventStartTime=" + eventStartTime 
-				+ "\neventEndTime=" + eventEndTime
-				+ "\neventAddidtionalNotes=" + eventAddidtionalNotes 
-				+ "\nreoccuring=" + reoccuring
-				+ "\n----------------------------------"
-				+ "\n";
+		return "\nEvent id=" + id + "\neventTitle=" + eventTitle + "\neventDescription=" + eventDescription + "\ndate="
+				+ date + "\neventStartTime=" + eventStartTime + "\neventEndTime=" + eventEndTime
+				+ "\neventAddidtionalNotes=" + eventAddidtionalNotes + "\nreoccuring=" + reoccuring
+				+ "\n----------------------------------" + "\n";
 	}
-
-
-
-
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Social;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -19,16 +18,15 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.SocialDAO;
+import main.java.hibernate.model.Social;
 
 @Path("/social")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class SocialResource {
-	
 
-
-	// server Test	
+	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/test")
@@ -36,93 +34,84 @@ public class SocialResource {
 		return "server test successful!";
 	}
 
-	
-
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/social/{id}")
-	public Response getSocial(@PathParam("id") int id) { 
-			
+	public Response getSocial(@PathParam("id") int id) {
+
 		Social social = new Social();
-		social = SocialDAO.getSocial(id);	
-		
+		social = SocialDAO.getSocial(id);
 		return Response.status(Status.OK).entity(social).build();
 	}
-	
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/socialWithHighestId/")
-	public Response getSocialWithhighestId() { 
+	public Response getSocialWithhighestId() {
 
 		Social social = new Social();
-		social = SocialDAO.getSocialWithHighestId();	
-
+		social = SocialDAO.getSocialWithHighestId();
 		return Response.status(Status.OK).entity(social).build();
 	}
-	
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	//@Consumes(MediaType.APPLICATION_XML)
+	// @Consumes(MediaType.APPLICATION_XML)
 	@Path("/sociallist")
-	public Response getSocialList() {		
-	
-		List<Social> socials = new ArrayList<>();			
+	public Response getSocialList() {
+
+		List<Social> socials = new ArrayList<>();
 		socials = SocialDAO.getSocials();
-		
-		GenericEntity<List<Social>> ml = new GenericEntity<List<Social>>(Lists.newArrayList(socials)) {};
-	    
-		return Response.status(Status.OK).entity(ml).build();			
+		GenericEntity<List<Social>> ml = new GenericEntity<List<Social>>(Lists.newArrayList(socials)) {
+		};
+
+		return Response.status(Status.OK).entity(ml).build();
 	}
-	
-	@GET 
+
+	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/socialsByMember/{id}")
-	public Response getSocialsByMember(@PathParam("id") int id) { 
+	public Response getSocialsByMember(@PathParam("id") int id) {
+
 		List<Social> s = SocialDAO.getSocialsByMemberId(id);
-				
-		GenericEntity<List<Social>> sl = new GenericEntity<List<Social>>(Lists.newArrayList(s)) {};
-	    
-		return Response.status(Status.OK).entity(sl).build();	
+		GenericEntity<List<Social>> sl = new GenericEntity<List<Social>>(Lists.newArrayList(s)) {
+		};
+
+		return Response.status(Status.OK).entity(sl).build();
 	}
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addSocial")
 	public Response postSocial(Social newSocial) {
-		
-		SocialDAO.addSocial(newSocial);	
+
+		SocialDAO.addSocial(newSocial);
 		return Response.status(Status.CREATED).build();
-		
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateSocial/{id}")
-	public Response putSocial(@PathParam("id")int id, Social alteredSocial) {
-		
+	public Response putSocial(@PathParam("id") int id, Social alteredSocial) {
+
 		SocialDAO.updateSocial(id, alteredSocial);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-	
+
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addSocialToMember/{memberID}/{socialID}")
-	public Response putSocial(@PathParam("memberID") int memberID, 
-            @PathParam("socialID") int socialID) {
-		
+	public Response putSocial(@PathParam("memberID") int memberID, @PathParam("socialID") int socialID) {
+
 		SocialDAO.addSocialToMember(memberID, socialID);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
 	@Path("/deleteSocial/{id}")
-	public Response deleteSocial(@PathParam("id")int id) {
+	public Response deleteSocial(@PathParam("id") int id) {
+
 		SocialDAO.deleteSocialFromMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-
-	 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.glassfish.jersey.internal.guava.Lists;
 
-import main.java.hibernate.model.Expense;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -19,16 +18,15 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import main.java.hibernate.dao.ExpenseDAO;
+import main.java.hibernate.model.Expense;
 
 @Path("/expense")
 
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class ExpenseResource {
-	
 
-
-	// server Test	
+	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/test")
@@ -36,60 +34,55 @@ public class ExpenseResource {
 		return "server test successful!";
 	}
 
-	
-
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/expense/{id}")
-	public Response getExpense(@PathParam("id") int id) { 
-			
+	public Response getExpense(@PathParam("id") int id) {
+
 		Expense expense = new Expense();
-		expense = ExpenseDAO.getExpense(id);	
-		
+		expense = ExpenseDAO.getExpense(id);
 		return Response.status(Status.OK).entity(expense).build();
 	}
-	
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	//@Consumes(MediaType.APPLICATION_XML)
+	// @Consumes(MediaType.APPLICATION_XML)
 	@Path("/expenselist")
-	public Response getExpenseList() {		
-	
-		List<Expense> expenses = new ArrayList<>();			
+	public Response getExpenseList() {
+
+		List<Expense> expenses = new ArrayList<>();
 		expenses = ExpenseDAO.getExpenses();
-		
-		GenericEntity<List<Expense>> ml = new GenericEntity<List<Expense>>(Lists.newArrayList(expenses)) {};
-	    
-		return Response.status(Status.OK).entity(ml).build();			
+		GenericEntity<List<Expense>> ml = new GenericEntity<List<Expense>>(Lists.newArrayList(expenses)) {
+		};
+
+		return Response.status(Status.OK).entity(ml).build();
 	}
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addExpense")
 	public Response postExpense(Expense newExpense) {
-		
-		ExpenseDAO.addExpense(newExpense);	
+
+		ExpenseDAO.addExpense(newExpense);
 		return Response.status(Status.CREATED).build();
-		
+
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateExpense/{id}")
-	public Response putExpense(@PathParam("id")int id, Expense alteredExpense) {
-		
+	public Response putExpense(@PathParam("id") int id, Expense alteredExpense) {
+
 		ExpenseDAO.updateExpense(id, alteredExpense);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
 	@DELETE
 	@Path("/deleteExpense/{id}")
-	public Response deleteExpense(@PathParam("id")int id) {
+	public Response deleteExpense(@PathParam("id") int id) {
+
 		ExpenseDAO.deleteExpense(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
-	 
 }

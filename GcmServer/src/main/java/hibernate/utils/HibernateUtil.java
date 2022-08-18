@@ -5,21 +5,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-	private static Session session = null;	
-	
+	private static Session session = null;
+
 	public static void startSession() {
 		// create configurations
 		Configuration configuration = new Configuration();
-		configuration.configure("/main/resources/hibernate.cfg.xml");		
-		
+		configuration.configure("/main/resources/hibernate.cfg.xml");
 
 		// crate session factory - data source
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
 
-		//initialize session object
+		// initialize session object
 		session = sessionFactory.openSession();
 
-		if(!session.isOpen()) {
+		if (!session.isOpen()) {
 			System.out.println("Unable to open session!");
 		} else {
 			System.out.println("Session is open");
@@ -35,10 +34,5 @@ public class HibernateUtil {
 	public static Session getSession() {
 		return session;
 	}
-	
-	
-	
-	
+
 }
-
-

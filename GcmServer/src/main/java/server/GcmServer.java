@@ -12,7 +12,6 @@ import com.sun.net.httpserver.HttpServer;
 public class GcmServer {
 
 	public static void main(String[] args) {
-		// HibernateUtil.startSession();
 
 		URI basisUri = URI.create("http://localhost:4712/");
 		// package mit den annotierten Klassen bekanntgeben

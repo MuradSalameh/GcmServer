@@ -14,19 +14,17 @@ import main.java.hibernate.utils.SessionUtil;
 
 public class RoleDAO {
 
+	public static void addRole(Role bean) {
+		Session session = SessionUtil.getSession();
+		Transaction tx = session.beginTransaction();
 
-	public static void addRole(Role bean){
-		Session session = SessionUtil.getSession();    
-		Transaction tx = session.beginTransaction();		
-
-		session.persist(bean);  
+		session.persist(bean);
 		tx.commit();
 		session.close();
 	}
 
-
-	public static void addRoleToMember(int memberID, int roleID){
-		Session session = SessionUtil.getSession();    
+	public static void addRoleToMember(int memberID, int roleID) {
+		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
 		Member m = session.get(Member.class, memberID);
@@ -36,11 +34,10 @@ public class RoleDAO {
 		mr.setMember(m);
 		mr.setRole(r);
 
-		session.save(mr);  
+		session.save(mr);
 		tx.commit();
 		session.close();
 	}
-
 
 	public static Role getRole(int id) {
 		Session session = SessionUtil.getSession();
@@ -51,10 +48,9 @@ public class RoleDAO {
 		return r;
 	}
 
-	
 	public static Role getRoleWithHighestId() {
 		Session session = SessionUtil.getSession();
-		//String hql = "select max(id) from Role";
+		// String hql = "select max(id) from Role";
 		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Role").getSingleResult();
 
 		Role role = session.get(Role.class, maxId);
@@ -62,48 +58,46 @@ public class RoleDAO {
 		return role;
 	}
 
-
-	public static List<Role> getRoles(){
-		Session session = SessionUtil.getSession();  
+	public static List<Role> getRoles() {
+		Session session = SessionUtil.getSession();
 		String hql = "from Role";
 		Query query = session.createQuery(hql);
-		List<Role> roles =  query.list();		
-		session.close();		
+		List<Role> roles = query.list();
+		session.close();
 		return roles;
 	}
 
+	public static List<Role> getRolesByMemberId(int id) {
 
-	public static List<Role> getRolesByMemberId(int id){
+		// SELECT * FROM gcm.member_socials where member_id= '3'
 
-		//SELECT * FROM gcm.member_socials where member_id= '3'
-
-		Session session = SessionUtil.getSession(); 			
-		String hql = "from MemberRoles role_id where member_id= :id";		
+		Session session = SessionUtil.getSession();
+		String hql = "from MemberRoles role_id where member_id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		List<MemberRoles> rolesMember =  query.list();	
-		List<Role> filteredRolesList =  new ArrayList<>();	
+		List<MemberRoles> rolesMember = query.list();
+		List<Role> filteredRolesList = new ArrayList<>();
 
-		for(MemberRoles m : rolesMember) {
+		for (MemberRoles m : rolesMember) {
 			int sId = m.getRole().getId();
 			Role s = session.get(Role.class, sId);
 			filteredRolesList.add(s);
 
 		}
 
-		session.close();		
-		return filteredRolesList;		
+		session.close();
+		return filteredRolesList;
 	}
 
-	
-	public static void deleteRoleFromMember(int roleid, int memberid){		
-		Session session = SessionUtil.getSession(); 
+	public static void deleteRoleFromMember(int roleid, int memberid) {
+		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
 		// Delete connection from MemberRoles Table
-		//ROM a WHERE a.b = :par1 OR a.c = :par2").setParameter("par1", obj).setParameter("par2", obj);
-		String hql = "delete from MemberRoles id where role_id= :roleid and member_id= :memberid";	
-		Query query = session.createQuery(hql);		
+		// ROM a WHERE a.b = :par1 OR a.c = :par2").setParameter("par1",
+		// obj).setParameter("par2", obj);
+		String hql = "delete from MemberRoles id where role_id= :roleid and member_id= :memberid";
+		Query query = session.createQuery(hql);
 		query.setParameter("roleid", roleid);
 		query.setParameter("memberid", memberid);
 
@@ -119,7 +113,6 @@ public class RoleDAO {
 		session.close();
 	}
 
-	
 	public static void deleteRole(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -130,8 +123,7 @@ public class RoleDAO {
 
 	}
 
-	
-	public static void updateRole(int id, Role role){
+	public static void updateRole(int id, Role role) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		Role old = session.get(Role.class, id);
@@ -142,6 +134,6 @@ public class RoleDAO {
 		session.saveOrUpdate(old);
 		session.flush();
 		tx.commit();
-		session.close();			
+		session.close();
 	}
 }

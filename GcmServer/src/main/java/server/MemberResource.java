@@ -59,7 +59,6 @@ public class MemberResource {
 
 		Member member = new Member();
 		member = MemberDAO.getMember(id);
-
 		return Response.status(Status.OK).entity(member).build();
 	}
 
@@ -70,7 +69,6 @@ public class MemberResource {
 
 		Member member = new Member();
 		member = MemberDAO.getMemberWithHighestId();
-
 		return Response.status(Status.OK).entity(member).build();
 	}
 
@@ -81,7 +79,6 @@ public class MemberResource {
 
 		List<Member> members = new ArrayList<>();
 		members = MemberDAO.getMembers();
-
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
 		};
 
@@ -95,7 +92,6 @@ public class MemberResource {
 
 		List<Member> members = new ArrayList<>();
 		members = MemberDAO.getMembersByTeamId(id);
-
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
 		};
 
@@ -114,6 +110,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMemberFromTeam/{memberid}/{teamid}")
 	public Response deleteMemberFromTeam(@PathParam("memberid") int memberid, @PathParam("teamid") int teamid) {
+
 		MemberDAO.deleteMemberFromTeam(memberid, teamid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -121,6 +118,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMember/{id}")
 	public Response deleteMember(@PathParam("id") int id) {
+
 		MemberDAO.deleteMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -128,6 +126,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMemberFromEvents/{id}")
 	public Response deleteMemberFromEvents(@PathParam("id") int id) {
+
 		MemberDAO.deleteMemberFromEvents(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -135,6 +134,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMemberFromTeams/{id}")
 	public Response deleteMemberFromTeams(@PathParam("id") int id) {
+
 		MemberDAO.deleteMemberFromTeams(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -142,6 +142,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMemberFromGames/{id}")
 	public Response deleteMemberFromGames(@PathParam("id") int id) {
+
 		MemberDAO.deleteMemberFromGames(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -149,6 +150,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMemberFromRoles/{id}")
 	public Response deleteRoleFromMember(@PathParam("id") int id) {
+
 		MemberDAO.deleteMemberFromRoles(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
@@ -156,6 +158,7 @@ public class MemberResource {
 	@DELETE
 	@Path("/deleteMemberFromSocials/{id}")
 	public Response deleteMemberFromSocials(@PathParam("id") int id) {
+
 		MemberDAO.deleteMemberFromSocials(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}

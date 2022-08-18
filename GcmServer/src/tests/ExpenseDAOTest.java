@@ -17,63 +17,51 @@ public class ExpenseDAOTest {
 		Session session = SessionUtil.getSession();
 		int id = 2;
 
-		//--------- addExpense() Test -----------//
+		// --------- addExpense() Test -----------//
 
-		//addTestExpense();
-		
-		
-		
-		//--------- deleteExpense() Test -----------//
+		// addTestExpense();
 
-		//deleteExpenseTest(id);
+		// --------- deleteExpense() Test -----------//
 
+		// deleteExpenseTest(id);
 
-		
-		//--------- getExpense() Test to get one specific expense by id -----------//
+		// --------- getExpense() Test to get one specific expense by id -----------//
 
-		//getExpenseTest(id);
+		// getExpenseTest(id);
 
-
-
-		//--------- getExpenses() Test to get a List of all expenses in database-----------//
+		// --------- getExpenses() Test to get a List of all expenses in
+		// database-----------//
 
 		getExpenseList();
 
+		// --------- updateExpense() Test -----------//
 
-
-		//--------- updateExpense() Test -----------//
-
-		//String s = "Catering";
-		//updateExpenseTest(id,s);
-
+		// String s = "Catering";
+		// updateExpenseTest(id,s);
 
 	}
-	
-	
 
 	public static void addTestExpense() {
-		Expense test = new Expense(
-				"test", 					// title
-				"ttttt", 					// desc
-				299.00, 					// amount
-				LocalDate.of(1981, 4, 11),	// date
-				"heinrich" 					//recipient
-				);						
+		Expense test = new Expense("test", // title
+				"ttttt", // desc
+				299.00, // amount
+				LocalDate.of(1981, 4, 11), // date
+				"heinrich" // recipient
+		);
 
-		ExpenseDAO.addExpense(test);			
+		ExpenseDAO.addExpense(test);
 	}
-
 
 	public static void updateExpenseTest(int id, String s) {
 		Session session = SessionUtil.getSession();
 
-		//Vorhandenen Expense anhand id aus DB holen
+		// Vorhandenen Expense anhand id aus DB holen
 		Expense m = session.get(Expense.class, id);
 
 		// Expense m ClanName wert neu setzen
 		m.setExpenseTitle(s);
 
-		//Expense m  in Datenbank updaten
+		// Expense m in Datenbank updaten
 		ExpenseDAO.updateExpense(id, m);
 
 		System.out.println(m);
@@ -88,19 +76,17 @@ public class ExpenseDAOTest {
 	}
 
 	public static void getExpenseTest(int id) {
-		System.out.println(ExpenseDAO.getExpense(id)); 
+		System.out.println(ExpenseDAO.getExpense(id));
 	}
 
 	public static void getExpenseList() {
 		List<Expense> expenses = ExpenseDAO.getExpenses();
 		ArrayList<Expense> ol = new ArrayList<Expense>();
-	
-		for(Expense m : expenses) {
-			  ol.add(m);
-			  System.out.println(m);
+
+		for (Expense m : expenses) {
+			ol.add(m);
+			System.out.println(m);
 		}
 	}
-
-
 
 }
