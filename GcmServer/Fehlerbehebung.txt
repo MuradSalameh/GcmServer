@@ -56,3 +56,7 @@ beim Löschen eines Objektes fehler foreign Key constraint ---- im DAO über ""d
 delete parent  foreign keyConstraint bei Delete:
 - tippfehler in den methoden, den hql oder den urls
 - in App.java erstellte Objekte nicht persistiert. Jedes Objekt mur bei erstellung persistiert werden.
+
+Wenn bei Bedienung Abbruch 500 server error, 
+dann den loader aus initialize innerhalb der Detail Dialoge raus nehmen
+
