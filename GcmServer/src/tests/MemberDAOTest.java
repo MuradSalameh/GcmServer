@@ -60,7 +60,10 @@ public class MemberDAOTest {
 
 		// getMembersByTeamIdTest(1);
 
-		addMemberToTeamTest(1, 1);
+//		addMemberToTeamTest(1, 1);
+
+		getTodaysMembersBirthdaysTest();
+
 	}
 
 	public static void addTestMember() {
@@ -146,6 +149,21 @@ public class MemberDAOTest {
 
 	public static void addMemberToTeamTest(int memberid, int teamid) {
 		MemberDAO.addMemberToTeam(memberid, teamid);
+	}
+
+	public static void getTodaysMembersBirthdaysTest() {
+		List<Member> members = MemberDAO.getTodaysMembersBirthdays();
+		if (members.isEmpty()) {
+			System.out.println("No Birthdays Today");
+		}
+
+		ArrayList<Member> ol = new ArrayList<Member>();
+
+		for (Member m : members) {
+			ol.add(m);
+			System.out.println(m);
+
+		}
 	}
 
 }

@@ -87,6 +87,19 @@ public class MemberDAO {
 		return filteredMembersList;
 	}
 
+	// -------- Get all members with Birthday ------
+
+	public static List<Member> getTodaysMembersBirthdays() {
+		Session session = SessionUtil.getSession();
+		String hql = "from Member m where day(m.birthday) = day(CURRENT_DATE) and month(m.birthday) = month(CURRENT_DATE)";
+		Query query = session.createQuery(hql);
+		List<Member> membersBirthday = query.list();
+
+		session.close();
+		return membersBirthday;
+
+	}
+
 	public static void deleteMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
