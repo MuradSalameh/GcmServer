@@ -11,11 +11,11 @@ import com.sun.net.httpserver.HttpServer;
 
 public class GcmServer {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InterruptedException {
 
 		URI basisUri = URI.create("http://localhost:4712/");
 		// package mit den annotierten Klassen bekanntgeben
-		ResourceConfig config = new ResourceConfig().packages("main.java.hibernate.model, main.java.server");
+		ResourceConfig config = new ResourceConfig().packages("main.java.hibernate.model, main.java.hibernate.dao, main.java.server");
 		// Server starten
 		HttpServer server = JdkHttpServerFactory.createHttpServer(basisUri, config);
 		System.out.println("Zum Beenden des GCM-Server die Eingabetaste drücken");

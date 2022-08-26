@@ -25,6 +25,9 @@ import main.java.hibernate.model.Expense;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class ExpenseResource {
+    
+ // HTTP request methods
+    
 
 	// server Test
 	@GET
@@ -34,6 +37,7 @@ public class ExpenseResource {
 		return "server test successful!";
 	}
 
+	// get expense 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/expense/{id}")
@@ -44,6 +48,7 @@ public class ExpenseResource {
 		return Response.status(Status.OK).entity(expense).build();
 	}
 
+	// get list of all expenses
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -58,6 +63,8 @@ public class ExpenseResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// add new expense
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addExpense")
@@ -68,6 +75,8 @@ public class ExpenseResource {
 
 	}
 
+	
+	//update expense
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateExpense/{id}")
@@ -77,6 +86,8 @@ public class ExpenseResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete expense
 	@DELETE
 	@Path("/deleteExpense/{id}")
 	public Response deleteExpense(@PathParam("id") int id) {

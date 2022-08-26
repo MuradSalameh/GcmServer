@@ -24,7 +24,9 @@ import main.java.hibernate.model.Member;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class MemberResource {
-
+    
+ // HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -33,6 +35,8 @@ public class MemberResource {
 		return "server test successful!";
 	}
 
+	
+	// add new member
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addMember")
@@ -43,6 +47,8 @@ public class MemberResource {
 
 	}
 
+	
+	// assign member to team in MemberTeams table
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addMemberToTeam/{memberID}/{teamID}")
@@ -52,6 +58,7 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// get member
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/member/{id}")
@@ -62,6 +69,8 @@ public class MemberResource {
 		return Response.status(Status.OK).entity(member).build();
 	}
 
+	
+	// get member with highest id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/memberWithHighestId/")
@@ -72,6 +81,8 @@ public class MemberResource {
 		return Response.status(Status.OK).entity(member).build();
 	}
 
+	
+	//get list of all members
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/memberlist")
@@ -85,6 +96,8 @@ public class MemberResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	//get all members who have birthday today
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getTodaysMembersBirthdays")
@@ -98,6 +111,8 @@ public class MemberResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get members by team id from MemberTeam table
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getMembersByTeamId/{id}")
@@ -110,7 +125,9 @@ public class MemberResource {
 
 		return Response.status(Status.OK).entity(ml).build();
 	}
-
+	
+	
+	//update member
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateMember/{id}")
@@ -120,6 +137,8 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete member from team in MemberTeam table
 	@DELETE
 	@Path("/deleteMemberFromTeam/{memberid}/{teamid}")
 	public Response deleteMemberFromTeam(@PathParam("memberid") int memberid, @PathParam("teamid") int teamid) {
@@ -128,6 +147,7 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// delete member
 	@DELETE
 	@Path("/deleteMember/{id}")
 	public Response deleteMember(@PathParam("id") int id) {
@@ -136,6 +156,8 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete member from event in MemberEvents table
 	@DELETE
 	@Path("/deleteMemberFromEvents/{id}")
 	public Response deleteMemberFromEvents(@PathParam("id") int id) {
@@ -143,7 +165,9 @@ public class MemberResource {
 		MemberDAO.deleteMemberFromEvents(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-
+	
+	
+	// delete member from all teams in MemberTeam table
 	@DELETE
 	@Path("/deleteMemberFromTeams/{id}")
 	public Response deleteMemberFromTeams(@PathParam("id") int id) {
@@ -152,6 +176,7 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// delete member from all games in MemberGames Table
 	@DELETE
 	@Path("/deleteMemberFromGames/{id}")
 	public Response deleteMemberFromGames(@PathParam("id") int id) {
@@ -160,6 +185,8 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+		
+	// delete member from all roles in MemberRoles table
 	@DELETE
 	@Path("/deleteMemberFromRoles/{id}")
 	public Response deleteRoleFromMember(@PathParam("id") int id) {
@@ -168,6 +195,8 @@ public class MemberResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete member from all socials in MemberSocials table
 	@DELETE
 	@Path("/deleteMemberFromSocials/{id}")
 	public Response deleteMemberFromSocials(@PathParam("id") int id) {

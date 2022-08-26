@@ -10,7 +10,9 @@ import main.java.hibernate.model.Partner;
 import main.java.hibernate.utils.SessionUtil;
 
 public class PartnerDAO {
-
+    // database access methods
+    
+    // add partner 
 	public static void addPartner(Partner bean) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -21,6 +23,8 @@ public class PartnerDAO {
 		session.close();
 	}
 
+	
+	//get partner
 	public static Partner getPartner(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -30,6 +34,8 @@ public class PartnerDAO {
 		return partner;
 	}
 
+	
+	//get list of all partners
 	public static List<Partner> getPartners() {
 		Session session = SessionUtil.getSession();
 		String hql = "from Partner";
@@ -39,6 +45,8 @@ public class PartnerDAO {
 		return partners;
 	}
 
+	
+	// delete partner
 	public static void deletePartner(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -49,6 +57,8 @@ public class PartnerDAO {
 
 	}
 
+	
+	// update partner
 	public static void updatePartner(int id, Partner partner) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();

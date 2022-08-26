@@ -26,6 +26,8 @@ import main.java.hibernate.model.Revenue;
 @Produces(MediaType.APPLICATION_XML)
 public class RevenueResource {
 
+ // HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,8 @@ public class RevenueResource {
 		return "server test successful!";
 	}
 
+	
+	// get revenue
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/revenue/{id}")
@@ -44,6 +48,8 @@ public class RevenueResource {
 		return Response.status(Status.OK).entity(revenue).build();
 	}
 
+	
+	// get list of all revenues
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -58,6 +64,8 @@ public class RevenueResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// add new revenue
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addRevenue")
@@ -67,6 +75,8 @@ public class RevenueResource {
 		return Response.status(Status.CREATED).build();
 	}
 
+	
+	// update revenue
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateRevenue/{id}")
@@ -76,6 +86,7 @@ public class RevenueResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// delete revenue
 	@DELETE
 	@Path("/deleteRevenue/{id}")
 	public Response deleteRevenue(@PathParam("id") int id) {

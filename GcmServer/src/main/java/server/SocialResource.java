@@ -25,7 +25,9 @@ import main.java.hibernate.model.Social;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class SocialResource {
-
+    
+ // HTTP request Methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,8 @@ public class SocialResource {
 		return "server test successful!";
 	}
 
+	
+	// Get social by id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/social/{id}")
@@ -44,6 +48,8 @@ public class SocialResource {
 		return Response.status(Status.OK).entity(social).build();
 	}
 
+	
+	//Get social with highest id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/socialWithHighestId/")
@@ -54,6 +60,8 @@ public class SocialResource {
 		return Response.status(Status.OK).entity(social).build();
 	}
 
+	
+	// Get list of all socials
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -68,6 +76,8 @@ public class SocialResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get socials by member id from MemberSocials table
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/socialsByMember/{id}")
@@ -80,6 +90,8 @@ public class SocialResource {
 		return Response.status(Status.OK).entity(sl).build();
 	}
 
+	
+	// add new social
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addSocial")
@@ -89,6 +101,8 @@ public class SocialResource {
 		return Response.status(Status.CREATED).build();
 	}
 
+	
+	// update social
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateSocial/{id}")
@@ -98,6 +112,8 @@ public class SocialResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// assign social to specific member in MemberSocials table
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addSocialToMember/{memberID}/{socialID}")
@@ -106,7 +122,9 @@ public class SocialResource {
 		SocialDAO.addSocialToMember(memberID, socialID);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-
+	
+	
+	// delete social
 	@DELETE
 	@Path("/deleteSocial/{id}")
 	public Response deleteSocial(@PathParam("id") int id) {

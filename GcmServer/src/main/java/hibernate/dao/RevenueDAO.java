@@ -10,17 +10,20 @@ import main.java.hibernate.model.Revenue;
 import main.java.hibernate.utils.SessionUtil;
 
 public class RevenueDAO {
-
+    // database access methods
+    
+    // add revenue
 	public static void addRevenue(Revenue bean) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		session.persist(bean); // Dafür die add revenue nicht mehr aufrufen, da direkt im bean gespeichert
-								// wird.
+		session.persist(bean);
 		tx.commit();
 		session.close();
 	}
 
+	
+	// get revenue
 	public static Revenue getRevenue(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -30,6 +33,8 @@ public class RevenueDAO {
 		return rev;
 	}
 
+	
+	// get list of all revenues
 	public static List<Revenue> getRevenues() {
 		Session session = SessionUtil.getSession();
 		String hql = "from Revenue";
@@ -39,6 +44,8 @@ public class RevenueDAO {
 		return revenues;
 	}
 
+	
+	// delete revenue
 	public static void deleteRevenue(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -49,6 +56,8 @@ public class RevenueDAO {
 
 	}
 
+	
+	// update revenue
 	public static void updateRevenue(int id, Revenue revenue) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();

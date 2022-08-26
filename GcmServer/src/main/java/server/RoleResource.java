@@ -26,6 +26,8 @@ import main.java.hibernate.model.Role;
 @Produces(MediaType.APPLICATION_XML)
 public class RoleResource {
 
+ // HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,8 @@ public class RoleResource {
 		return "server test successful!";
 	}
 
+	
+	// get role by id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/role/{id}")
@@ -44,6 +48,8 @@ public class RoleResource {
 		return Response.status(Status.OK).entity(role).build();
 	}
 
+	
+	// get role with highest id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/roleWithHighestId/")
@@ -54,6 +60,8 @@ public class RoleResource {
 		return Response.status(Status.OK).entity(role).build();
 	}
 
+	
+	//get list of all roles
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -68,6 +76,8 @@ public class RoleResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get roles by member id from MemberRoles table
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("rolesByMember/{id}")
@@ -80,6 +90,8 @@ public class RoleResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// add new role
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addRole")
@@ -89,6 +101,8 @@ public class RoleResource {
 		return Response.status(Status.CREATED).build();
 	}
 
+	
+	//update role
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateRole/{id}")
@@ -98,6 +112,8 @@ public class RoleResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// assign role to member in MemberRoles table
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addRoleToMember/{memberID}/{roleID}")
@@ -107,6 +123,7 @@ public class RoleResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// delete role
 	@DELETE
 	@Path("/deleteRole/{id}")
 	public Response deleteRole(@PathParam("id") int id) {
@@ -115,6 +132,8 @@ public class RoleResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete role assignment from specific member in MemberRoles table
 	@DELETE
 	@Path("/deleteRoleFromMember/{roleid}/{memberid}")
 	public Response deleteRoleFromMember(@PathParam("roleid") int roleid, @PathParam("memberid") int memberid) {

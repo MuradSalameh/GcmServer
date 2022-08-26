@@ -10,17 +10,20 @@ import main.java.hibernate.model.Expense;
 import main.java.hibernate.utils.SessionUtil;
 
 public class ExpenseDAO {
-
+    // database access methods
+    
+    // add new expense
 	public static void addExpense(Expense bean) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		session.persist(bean); // Dafür die add expense nicht mehr aufrufen, da direkt im bean gespeichert
-		// wird.
+		session.persist(bean); 
 		tx.commit();
 		session.close();
 	}
 
+	
+	// get expense
 	public static Expense getExpense(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -30,6 +33,8 @@ public class ExpenseDAO {
 		return expense;
 	}
 
+	
+	// get list of all expenses
 	public static List<Expense> getExpenses() {
 		Session session = SessionUtil.getSession();
 		String hql = "from Expense";
@@ -39,6 +44,8 @@ public class ExpenseDAO {
 		return expenses;
 	}
 
+	
+	// delete expense
 	public static void deleteExpense(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -49,6 +56,8 @@ public class ExpenseDAO {
 
 	}
 
+	
+	// update expense
 	public static void updateExpense(int id, Expense expense) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -60,7 +69,6 @@ public class ExpenseDAO {
 		old.setDate(expense.getDate());
 		old.setRecipientName(expense.getRecipientName());
 
-		// old.setExpenseTypes(expense.getExpenseTypes());
 
 		session.saveOrUpdate(old);
 		session.flush();

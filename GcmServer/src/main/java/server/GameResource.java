@@ -24,6 +24,9 @@ import main.java.hibernate.model.Game;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class GameResource {
+    
+ // HTTP request methods
+    
 
 	// server Test
 	@GET
@@ -33,6 +36,7 @@ public class GameResource {
 		return "server test successful!";
 	}
 
+	// game
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/game/{id}")
@@ -42,7 +46,9 @@ public class GameResource {
 		game = GameDAO.getGame(id);
 		return Response.status(Status.OK).entity(game).build();
 	}
-
+	
+	
+	// get list of all games
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/gamelist")
@@ -56,6 +62,7 @@ public class GameResource {
 		return Response.status(Status.OK).entity(g).build();
 	}
 
+	// get games by member id from MemberGames table
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/gamesByMember/{id}")
@@ -68,6 +75,8 @@ public class GameResource {
 		return Response.status(Status.OK).entity(sl).build();
 	}
 
+	
+	// get games by tournament from Tournament Games table
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getGamesByTournamentId/{id}")
@@ -80,6 +89,8 @@ public class GameResource {
 		return Response.status(Status.OK).entity(sl).build();
 	}
 
+	
+	// add new game
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addGame")
@@ -90,6 +101,8 @@ public class GameResource {
 
 	}
 
+	
+	// assign game to member in MemberGames table
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addGameToMember/{memberID}/{gameID}")
@@ -99,6 +112,8 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// assign game to tournament in TournamtGame table
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addGameToTournament/{gameId}/{tournamentId}")
@@ -108,6 +123,8 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// update game
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateGame/{id}")
@@ -117,6 +134,8 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete game from Member in MemberGames table
 	@DELETE
 	@Path("/deleteGameFromMember/{gameid}/{memberid}")
 	public Response deleteGameFromMember(@PathParam("gameid") int gameid, @PathParam("memberid") int memberid) {
@@ -125,6 +144,8 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete game from all members in MemberGames table
 	@DELETE
 	@Path("/deleteGameFromAllMembers/{id}")
 	public Response deleteGameFromAllMembers(@PathParam("id") int id) {
@@ -133,6 +154,7 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// delete game from specific tournament in TournamentGame table
 	@DELETE
 	@Path("/deleteGameFromTournament/{gameid}/{tournamentid}")
 	public Response deleteGameFromTournament(@PathParam("gameid") int gameid,
@@ -142,6 +164,8 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete game from all tournaments in TournamentGame table
 	@DELETE
 	@Path("/deleteGameFromAllTournaments/{id}")
 	public Response deleteGameFromAllTournaments(@PathParam("id") int id) {
@@ -150,6 +174,7 @@ public class GameResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+ 	// delete game
 	@DELETE
 	@Path("/deleteGame/{id}")
 	public Response deleteGame(@PathParam("id") int id) {

@@ -25,7 +25,9 @@ import main.java.hibernate.model.Partner;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class PartnerResource {
-
+    
+ // HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,8 @@ public class PartnerResource {
 		return "server test successful!";
 	}
 
+	
+	// get partner
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/partner/{id}")
@@ -44,9 +48,10 @@ public class PartnerResource {
 		return Response.status(Status.OK).entity(partner).build();
 	}
 
+	
+	//get list of all partners
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
 	@Path("/partnerlist")
 	public Response getPartnerList() {
 
@@ -57,6 +62,8 @@ public class PartnerResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// add new partner
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addPartner")
@@ -66,6 +73,8 @@ public class PartnerResource {
 		return Response.status(Status.CREATED).build();
 	}
 
+	
+	// update partner
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updatePartner/{id}")
@@ -75,6 +84,8 @@ public class PartnerResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	//delete partner
 	@DELETE
 	@Path("/deletePartner/{id}")
 	public Response deletePartner(@PathParam("id") int id) {

@@ -13,16 +13,21 @@ import main.java.hibernate.model.MemberEvents;
 import main.java.hibernate.utils.SessionUtil;
 
 public class EventDAO {
+    
+    // database access methods
 
+
+    // add new event
 	public static void addEvent(Event bean) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-
-		session.persist(bean); // Dafür die add event nicht mehr aufrufen, da direkt im bean gespeichert wird.
+		session.persist(bean); 
 		tx.commit();
 		session.close();
 	}
 
+	
+	// get event
 	public static Event getEvent(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -32,8 +37,9 @@ public class EventDAO {
 		return event;
 	}
 
+	
+	// get events by member id from MemberEvents table
 	public static List<Event> getEventsByMemberId(int id) {
-		// SQL: SELECT * FROM gcm.member_events where member_id= '3'
 
 		Session session = SessionUtil.getSession();
 		String hql = "from MemberEvents event_id where member_id= :id";
@@ -53,8 +59,9 @@ public class EventDAO {
 		return filteredEventsList;
 	}
 
+	
+	// get members by event id from MemberEvents table
 	public static List<Member> getMembersByEventId(int id) {
-		// SQL: SELECT * FROM gcm.member_events where member_id= '3'
 
 		Session session = SessionUtil.getSession();
 		String hql = "from MemberEvents member_id where event_id= :id";
@@ -74,6 +81,8 @@ public class EventDAO {
 		return filteredEventsList;
 	}
 
+	
+	// get list of all events
 	public static List<Event> getEvents() {
 		Session session = SessionUtil.getSession();
 		String hql = "from Event";
@@ -83,11 +92,12 @@ public class EventDAO {
 		return events;
 	}
 
+	
+	// delete event from all members in MemberEvents table
 	public static void deleteEventFromMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-
-		// Delete connection from MemberEvents Table
+		
 		String hql = "delete from MemberEvents id where event_id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
@@ -95,15 +105,13 @@ public class EventDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Event Table
-		// Event event = session.get(Event.class, id);
-		// session.remove(event);
-
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// delete event
 	public static void deleteEvent(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -114,6 +122,8 @@ public class EventDAO {
 
 	}
 
+	
+	// update event
 	public static void updateEvent(int id, Event event) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -126,7 +136,6 @@ public class EventDAO {
 		old.setEventEndTime(event.getEventEndTime());
 		old.setEventAddidtionalNotes(event.getEventAddidtionalNotes());
 		old.setReoccuring(event.isReoccuring());
-		// old.setMembers(event.getMembers());
 
 		session.saveOrUpdate(old);
 		session.flush();

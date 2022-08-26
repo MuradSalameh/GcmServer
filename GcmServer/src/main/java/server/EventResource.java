@@ -26,6 +26,8 @@ import main.java.hibernate.model.Event;
 @Produces(MediaType.APPLICATION_XML)
 public class EventResource {
 
+ // HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,8 @@ public class EventResource {
 		return "server test successful!";
 	}
 
+	
+	// get event
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/event/{id}")
@@ -44,6 +48,8 @@ public class EventResource {
 		return Response.status(Status.OK).entity(event).build();
 	}
 
+	
+	// get list of all events
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -58,6 +64,8 @@ public class EventResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get events by member from MemberEvents Table
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/eventsByMember/{id}")
@@ -70,6 +78,8 @@ public class EventResource {
 		return Response.status(Status.OK).entity(sl).build();
 	}
 
+	
+	// add new event
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addEvent")
@@ -80,6 +90,8 @@ public class EventResource {
 
 	}
 
+	
+	// update event
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateEvent/{id}")
@@ -89,6 +101,8 @@ public class EventResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete event from specific member in MemberEvents table
 	@DELETE
 	@Path("/deleteEventFromMember/{id}")
 	public Response deleteEventFromMember(@PathParam("id") int id) {
@@ -96,7 +110,9 @@ public class EventResource {
 		EventDAO.deleteEventFromMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-
+	
+	
+	//delete event
 	@DELETE
 	@Path("/deleteEvent/{id}")
 	public Response deleteEvent(@PathParam("id") int id) {

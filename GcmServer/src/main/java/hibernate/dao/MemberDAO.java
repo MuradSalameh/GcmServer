@@ -13,7 +13,9 @@ import main.java.hibernate.model.Team;
 import main.java.hibernate.utils.SessionUtil;
 
 public class MemberDAO {
-
+    // database access methods
+    
+    // add member
 	public static void addMember(Member bean) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -23,6 +25,8 @@ public class MemberDAO {
 		session.close();
 	}
 
+	
+	// assign member to team in MemberTeams table
 	public static void addMemberToTeam(int memberID, int teamID) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -39,6 +43,8 @@ public class MemberDAO {
 		session.close();
 	}
 
+	
+	// get member
 	public static Member getMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -48,6 +54,8 @@ public class MemberDAO {
 		return member;
 	}
 
+	
+	// get member with highest id
 	public static Member getMemberWithHighestId() {
 		Session session = SessionUtil.getSession();
 		// String hql = "select max(id) from Member";
@@ -58,6 +66,8 @@ public class MemberDAO {
 		return member;
 	}
 
+	
+	// get list of all members
 	public static List<Member> getMembers() {
 		Session session = SessionUtil.getSession();
 		String hql = "from Member";
@@ -67,6 +77,8 @@ public class MemberDAO {
 		return members;
 	}
 
+	
+	// get members by team id from MemberTeam table
 	public static List<Member> getMembersByTeamId(int id) {
 		Session session = SessionUtil.getSession();
 		String hql = "from MemberTeam member_id where team_id= :id";
@@ -87,7 +99,7 @@ public class MemberDAO {
 		return filteredMembersList;
 	}
 
-	// -------- Get all members with Birthday ------
+	// get all members who have birthday today
 
 	public static List<Member> getTodaysMembersBirthdays() {
 		Session session = SessionUtil.getSession();
@@ -100,6 +112,8 @@ public class MemberDAO {
 
 	}
 
+	
+	// delete member
 	public static void deleteMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -112,13 +126,12 @@ public class MemberDAO {
 		session.close();
 	}
 
+	
+	// delete member from all roles in MemberRoles table
 	public static void deleteMemberFromRoles(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		// Delete connection from MemberRoles Table
-		// ROM a WHERE a.b = :par1 OR a.c = :par2").setParameter("par1",
-		// obj).setParameter("par2", obj);
 		String hql = "delete from MemberRoles id where member_id= :memberid";
 		Query query = session.createQuery(hql);
 		query.setParameter("memberid", id);
@@ -126,20 +139,19 @@ public class MemberDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Role Table
-//		Role role = session.get(Role.class, id);
-//		session.remove(role);
 
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// delete member from all events in MemberEvents table
 	public static void deleteMemberFromEvents(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		// Delete connection from MemberMembers Table
+
 		String hql = "delete from MemberEvents id where member_id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
@@ -147,20 +159,19 @@ public class MemberDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Member Table
-		// Member member = session.get(Member.class, id);
-		// session.remove(member);
 
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// delete member from all teams in MemberTeam table
 	public static void deleteMemberFromTeams(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		// Delete connection from MemberMembers Table
+
 		String hql = "delete from MemberTeam id where member_id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
@@ -168,15 +179,14 @@ public class MemberDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Member Table
-		// Member member = session.get(Member.class, id);
-		// session.remove(member);
 
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// delete member from specific team in MemberTeam table
 	public static void deleteMemberFromTeam(int memberid, int teamid) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -189,20 +199,18 @@ public class MemberDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Game Table
-		// Game game = session.get(Game.class, id);
-		// session.remove(game);
-
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// delete member from all socials in MemberSocials table
 	public static void deleteMemberFromSocials(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		// Delete connection from MemberMembers Table
+	
 		String hql = "delete from MemberSocials id where member_id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
@@ -210,20 +218,18 @@ public class MemberDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Member Table
-		// Member member = session.get(Member.class, id);
-		// session.remove(member);
-
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// Delete member from all games in MemberGames table
 	public static void deleteMemberFromGames(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		// Delete connection from MemberMembers Table
+		
 		String hql = "delete from MemberGames id where member_id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
@@ -231,15 +237,13 @@ public class MemberDAO {
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Member Table
-		// Member member = session.get(Member.class, id);
-		// session.remove(member);
-
 		tx.commit();
 		session.clear();
 		session.close();
 	}
 
+	
+	// update member
 	public static void updateMember(int id, Member member) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();

@@ -27,6 +27,8 @@ import main.java.hibernate.model.Team;
 @Produces(MediaType.APPLICATION_XML)
 public class TeamResource {
 
+ // HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -35,6 +37,8 @@ public class TeamResource {
 		return "server test successful!";
 	}
 
+	
+	// get team by id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/team/{id}")
@@ -45,6 +49,9 @@ public class TeamResource {
 		return Response.status(Status.OK).entity(team).build();
 	}
 
+	
+	
+	// get all teams
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -59,6 +66,8 @@ public class TeamResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get teams by member id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/teamsByMember/{id}")
@@ -71,6 +80,8 @@ public class TeamResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get teams by tournament id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getTeamsByTournamentId/{id}")
@@ -83,6 +94,8 @@ public class TeamResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// get members by team
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/membersByTeam/{id}")
@@ -95,6 +108,8 @@ public class TeamResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	
+	// add new team
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addTeam")
@@ -104,6 +119,8 @@ public class TeamResource {
 		return Response.status(Status.CREATED).build();
 	}
 
+	
+	// assign team to tournament in TournamentsTeams table
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addTeamToTournament/{teamId}/{tournamentId}")
@@ -113,6 +130,8 @@ public class TeamResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// update team
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateTeam/{id}")
@@ -122,6 +141,8 @@ public class TeamResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete team
 	@DELETE
 	@Path("/deleteTeam/{id}")
 	public Response deleteTeam(@PathParam("id") int id) {
@@ -130,6 +151,8 @@ public class TeamResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	//delete team from MemberTeam table
 	@DELETE
 	@Path("/deleteTeamFromMember/{id}")
 	public Response deleteTeamFromMember(@PathParam("id") int id) {
@@ -138,6 +161,8 @@ public class TeamResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete team from all tournaments in TournamentsTeams table
 	@DELETE
 	@Path("/deleteTeamFromTournaments/{id}")
 	public Response deleteTeamFromTournaments(@PathParam("id") int id) {
@@ -146,6 +171,8 @@ public class TeamResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	//delete Team  from specific Tournament in TournamentsTeams table
 	@DELETE
 	@Path("/deleteTeamFromTournament/{teamid}/{tournamentid}")
 	public Response deleteTeamFromTournament(@PathParam("teamid") int teamid,

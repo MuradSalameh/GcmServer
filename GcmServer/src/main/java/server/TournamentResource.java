@@ -26,6 +26,8 @@ import main.java.hibernate.model.Tournament;
 @Produces(MediaType.APPLICATION_XML)
 public class TournamentResource {
 
+    	// HTTP request methods
+    
 	// server Test
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -34,6 +36,8 @@ public class TournamentResource {
 		return "server test successful!";
 	}
 
+	
+	// Get tournament by id
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/tournament/{id}")
@@ -45,6 +49,8 @@ public class TournamentResource {
 		return Response.status(Status.OK).entity(tournament).build();
 	}
 
+	
+	// Get tournament list
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	// @Consumes(MediaType.APPLICATION_XML)
@@ -60,6 +66,7 @@ public class TournamentResource {
 		return Response.status(Status.OK).entity(ml).build();
 	}
 
+	// Post new tournament
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addTournament")
@@ -70,6 +77,8 @@ public class TournamentResource {
 
 	}
 
+	
+	//update tournament
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateTournament/{id}")
@@ -79,6 +88,7 @@ public class TournamentResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	// delete tournament 
 	@DELETE
 	@Path("/deleteTournament/{id}")
 	public Response deleteTournament(@PathParam("id") int id) {
@@ -87,6 +97,8 @@ public class TournamentResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	//delete tournament from TournamentsTeams table
 	@DELETE
 	@Path("/deleteTournamentFromTeams/{id}")
 	public Response deleteTournamentsFromTeams(@PathParam("id") int id) {
@@ -95,6 +107,8 @@ public class TournamentResource {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
 
+	
+	// delete tournament from TournamentGame table
 	@DELETE
 	@Path("/deleteTournamentFromGame/{id}")
 	public Response deleteTournamentFromGame(@PathParam("id") int id) {

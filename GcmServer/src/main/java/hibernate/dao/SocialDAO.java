@@ -13,7 +13,11 @@ import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
 public class SocialDAO {
-
+    
+    
+    // database access methods
+    
+    // add new social in DB
 	public static void addSocial(Social bean) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -23,6 +27,8 @@ public class SocialDAO {
 		session.close();
 	}
 
+	
+	//assign social to member in MemberSocials table
 	public static void addSocialToMember(int memberID, int socialID) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -39,6 +45,8 @@ public class SocialDAO {
 		session.close();
 	}
 
+	
+	// get social by id
 	public static Social getSocial(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -46,6 +54,8 @@ public class SocialDAO {
 		return s;
 	}
 
+	
+	// get social with highest id
 	public static Social getSocialWithHighestId() {
 		Session session = SessionUtil.getSession();
 		// String hql = "select max(id) from Social";
@@ -58,6 +68,8 @@ public class SocialDAO {
 		return social;
 	}
 
+	
+	// get list of all socials
 	public static List<Social> getSocials() {
 		Session session = SessionUtil.getSession();
 		String hql = "from Social";
@@ -67,6 +79,8 @@ public class SocialDAO {
 		return socials;
 	}
 
+	
+	// get socials by member id from MemberSocials table
 	public static List<Social> getSocialsByMemberId(int id) {
 		// SQL: SELECT * FROM gcm.member_socials where member_id= '3'
 
@@ -87,7 +101,9 @@ public class SocialDAO {
 		session.close();
 		return filteredSocialsList;
 	}
-
+	
+	
+		//delete social from MemberSocials table
 	public static void deleteSocialFromMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -109,6 +125,8 @@ public class SocialDAO {
 		session.close();
 	}
 
+	
+	// delete social 
 	public static void deleteSocial(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
@@ -120,6 +138,8 @@ public class SocialDAO {
 
 	}
 
+	
+	//update social 
 	public static void updateSocial(int id, Social social) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
