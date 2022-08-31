@@ -29,7 +29,7 @@ public class EventDAOTest {
 		// --------- getEvents() Test to get a List of all events in
 		// database-----------//
 
-		// getEventList();
+		 getEventList();
 
 		// --------- getEvent() Test to get one specific event by id -----------//
 
@@ -42,7 +42,7 @@ public class EventDAOTest {
 
 //		getMembersByEventIdTest(1);
 //		getEventsByMemberIdTest(1); 
-		deleteEventFromMemberTest(2);
+//		deleteEventFromMemberTest(2);
 
 	}
 

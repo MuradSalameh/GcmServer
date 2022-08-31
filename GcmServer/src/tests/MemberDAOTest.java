@@ -39,7 +39,7 @@ public class MemberDAOTest {
 
 		// --------- getMember() Test to get one specific member by id -----------//
 
-		// getMemberTest(id);
+	 getMemberTest(10);
 
 		// --------- updateMember() Test -----------//
 
@@ -62,7 +62,7 @@ public class MemberDAOTest {
 
 //		addMemberToTeamTest(1, 1);
 
-		getTodaysMembersBirthdaysTest();
+//		getTodaysMembersBirthdaysTest();
 
 	}
 
