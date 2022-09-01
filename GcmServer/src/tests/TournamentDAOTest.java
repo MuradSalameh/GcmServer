@@ -30,7 +30,7 @@ public class TournamentDAOTest {
 		// --------- getTournaments() Test to get a List of all tournaments in
 		// database-----------//
 
-//		getTournamentList();
+		getTournamentList();
 
 		// --------- deleteTournament() Test -----------//
 
@@ -43,8 +43,8 @@ public class TournamentDAOTest {
 
 		// --------- updateTournament() Test -----------//
 
-		String s = "BOBO TOURNAMENT";
-		updateTournamentTest(id, s);
+//		String s = "BOBO TOURNAMENT";
+//		updateTournamentTest(id, s);
 
 	}
 

@@ -43,9 +43,10 @@ public class TeamResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/team/{id}")
 	public Response getTeam(@PathParam("id") int id) {
-
+	    System.out.println("getTeam" + id);
 		Team team = new Team();
 		team = TeamDAO.getTeam(id);
+		System.out.println("Team Resource Team: " + team);
 		return Response.status(Status.OK).entity(team).build();
 	}
 
@@ -57,6 +58,7 @@ public class TeamResource {
 	// @Consumes(MediaType.APPLICATION_XML)
 	@Path("/teamlist")
 	public Response getTeamList() {
+	    System.out.println("getTeamList");
 
 		List<Team> teams = new ArrayList<>();
 		teams = TeamDAO.getTeams();
@@ -72,6 +74,7 @@ public class TeamResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/teamsByMember/{id}")
 	public Response getTeamsByMember(@PathParam("id") int id) {
+	    System.out.println("getTeamsByMember" + id);
 
 		List<Team> teams = TeamDAO.getTeamsByMemberId(id);
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
@@ -86,6 +89,7 @@ public class TeamResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getTeamsByTournamentId/{id}")
 	public Response getTeamsByTournamentId(@PathParam("id") int id) {
+	    System.out.println("getTeamsByTournamentId" + id);
 
 		List<Team> teams = TeamDAO.getTeamsByTournamentId(id);
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
@@ -100,6 +104,7 @@ public class TeamResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/membersByTeam/{id}")
 	public Response getMembersByTeam(@PathParam("id") int id) {
+	    System.out.println("getMembersByTeam" + id);
 
 		List<Member> members = TeamDAO.getMembersByTeamId(id);
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
@@ -114,6 +119,7 @@ public class TeamResource {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addTeam")
 	public Response postTeam(Team newTeam) {
+	    System.out.println("postTeam" + " " + newTeam);
 
 		TeamDAO.addTeam(newTeam);
 		return Response.status(Status.CREATED).build();
@@ -125,6 +131,7 @@ public class TeamResource {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/addTeamToTournament/{teamId}/{tournamentId}")
 	public Response addTeamToTournament(@PathParam("teamId") int teamId, @PathParam("tournamentId") int tournamentId) {
+	    System.out.println("addTeamToTournament" + " " + teamId + " " + tournamentId);
 
 		TeamDAO.addTeamToTournament(teamId, tournamentId);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
@@ -136,6 +143,7 @@ public class TeamResource {
 	@Consumes(MediaType.APPLICATION_XML)
 	@Path("/updateTeam/{id}")
 	public Response putTeam(@PathParam("id") int id, Team alteredTeam) {
+	    System.out.println("putTeam" + " " + id + " " + alteredTeam);
 
 		TeamDAO.updateTeam(id, alteredTeam);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
@@ -146,6 +154,7 @@ public class TeamResource {
 	@DELETE
 	@Path("/deleteTeam/{id}")
 	public Response deleteTeam(@PathParam("id") int id) {
+	    System.out.println("deleteTeam" + " " + id);
 
 		TeamDAO.deleteTeam(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
@@ -156,6 +165,7 @@ public class TeamResource {
 	@DELETE
 	@Path("/deleteTeamFromMember/{id}")
 	public Response deleteTeamFromMember(@PathParam("id") int id) {
+	    System.out.println("deleteTeamFromMember" + " " + id);
 
 		TeamDAO.deleteTeamFromMember(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
@@ -166,6 +176,7 @@ public class TeamResource {
 	@DELETE
 	@Path("/deleteTeamFromTournaments/{id}")
 	public Response deleteTeamFromTournaments(@PathParam("id") int id) {
+	    System.out.println("deleteTeamFromTournaments" + " " + id);
 
 		TeamDAO.deleteTeamFromTournaments(id);
 		return Response.status(Status.NOT_IMPLEMENTED).build();
@@ -177,6 +188,8 @@ public class TeamResource {
 	@Path("/deleteTeamFromTournament/{teamid}/{tournamentid}")
 	public Response deleteTeamFromTournament(@PathParam("teamid") int teamid,
 			@PathParam("tournamentid") int tournamentid) {
+
+	    System.out.println("deleteTeamFromTournament" + " " + teamid + " " + tournamentid);
 
 		TeamDAO.deleteTeamFromTournament(teamid, tournamentid);
 		return Response.status(Status.NOT_IMPLEMENTED).build();

@@ -80,8 +80,9 @@ public class MemberDAO {
 	
 	// get members by team id from MemberTeam table
 	public static List<Member> getMembersByTeamId(int id) {
+	    
 		Session session = SessionUtil.getSession();
-		String hql = "from MemberTeam member_id where team_id= :id";
+		String hql = "from MemberTeam member_id  where team_id = :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 		List<MemberTeam> membersTeam = query.list();

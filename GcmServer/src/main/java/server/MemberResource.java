@@ -88,10 +88,15 @@ public class MemberResource {
 	@Path("/memberlist")
 	public Response getMemberList() {
 
+	    
+	    
 		List<Member> members = new ArrayList<>();
 		members = MemberDAO.getMembers();
+				
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
 		};
+		
+		
 
 		return Response.status(Status.OK).entity(ml).build();
 	}
@@ -117,7 +122,9 @@ public class MemberResource {
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/getMembersByTeamId/{id}")
 	public Response getMembersByTeamId(@PathParam("id") int id) {
+	    	System.out.println("getMembersByTeamId" + " " + id);
 
+	    
 		List<Member> members = new ArrayList<>();
 		members = MemberDAO.getMembersByTeamId(id);
 		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {

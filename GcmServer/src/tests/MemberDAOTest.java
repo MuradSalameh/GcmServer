@@ -39,7 +39,7 @@ public class MemberDAOTest {
 
 		// --------- getMember() Test to get one specific member by id -----------//
 
-	 getMemberTest(10);
+//	 getMemberTest(10);
 
 		// --------- updateMember() Test -----------//
 
@@ -58,7 +58,7 @@ public class MemberDAOTest {
 
 		// deleteMemberFromGamesTest(1);
 
-		// getMembersByTeamIdTest(1);
+		 getMembersByTeamIdTest(13);
 
 //		addMemberToTeamTest(1, 1);
 
