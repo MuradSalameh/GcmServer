@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Revenue;
 import main.java.hibernate.utils.SessionUtil;
@@ -37,12 +36,21 @@ public class RevenueDAO {
 	// get list of all revenues
 	public static List<Revenue> getRevenues() {
 		Session session = SessionUtil.getSession();
-		String hql = "from Revenue";
-		Query query = session.createQuery(hql);
-		List<Revenue> revenues = query.list();
+		List<Revenue> list = session.createQuery(
+			"select o from Revenue o",
+			Revenue.class)
+			.getResultList();
+
+
+		for (Revenue t : list) {		
+			System.out.println(t);
+		}
+		
 		session.close();
-		return revenues;
+		return list;
 	}
+	
+	
 
 	
 	// delete revenue

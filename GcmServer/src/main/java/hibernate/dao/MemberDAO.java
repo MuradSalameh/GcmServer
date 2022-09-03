@@ -1,6 +1,5 @@
 package main.java.hibernate.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -70,34 +69,41 @@ public class MemberDAO {
 	// get list of all members
 	public static List<Member> getMembers() {
 		Session session = SessionUtil.getSession();
-		String hql = "from Member";
-		Query query = session.createQuery(hql);
-		List<Member> members = new ArrayList<Member>(query.list());
+		
+		List<Member> list = session.createQuery(
+			"select o from Member o",
+			Member.class)
+			.getResultList();
+
+
+		for (Member t : list) {		
+			System.out.println(t);
+		}
+		
 		session.close();
-		return members;
+		return list;
 	}
 
 	
-	// get members by team id from MemberTeam table
+	// get members by team id from MemberTeams table
 	public static List<Member> getMembersByTeamId(int id) {
 	    
+
 		Session session = SessionUtil.getSession();
-		String hql = "from MemberTeam member_id  where team_id = :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		List<MemberTeam> membersTeam = query.list();
+	
+		List<Member> teamsMembers = session.createQuery(
+			"select member m from MemberTeam tt where team.id= :id",
+			Member.class)
+			.setParameter("id", id).getResultList();
 
-		List<Member> filteredMembersList = new ArrayList<>();
-
-		for (MemberTeam m : membersTeam) {
-			int sId = m.getMember().getId();
-			Member s = session.get(Member.class, sId);
-			filteredMembersList.add(s);
-			System.out.println(s);
+		for (Member m : teamsMembers) {		
+			System.out.println(m);
 		}
 
+
+
 		session.close();
-		return filteredMembersList;
+		return teamsMembers;
 	}
 
 	// get all members who have birthday today
@@ -133,7 +139,7 @@ public class MemberDAO {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		String hql = "delete from MemberRoles id where member_id= :memberid";
+		String hql = "delete from MemberRoles mr where member.id= :memberid";
 		Query query = session.createQuery(hql);
 		query.setParameter("memberid", id);
 
@@ -153,7 +159,7 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 
 
-		String hql = "delete from MemberEvents id where member_id= :id";
+		String hql = "delete from MemberEvents me where member.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 
@@ -173,7 +179,7 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 
 
-		String hql = "delete from MemberTeam id where member_id= :id";
+		String hql = "delete from MemberTeam mt where member.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 
@@ -192,7 +198,7 @@ public class MemberDAO {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		String hql = "delete from MemberTeam id where member_id= :memberid and team_id= :teamid";
+		String hql = "delete from MemberTeam mt where member.id= :memberid and team.id= :teamid";
 		Query query = session.createQuery(hql);
 		query.setParameter("memberid", memberid);
 		query.setParameter("teamid", teamid);
@@ -212,7 +218,7 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 
 	
-		String hql = "delete from MemberSocials id where member_id= :id";
+		String hql = "delete from MemberSocials ms where member.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 
@@ -231,7 +237,7 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 
 		
-		String hql = "delete from MemberGames id where member_id= :id";
+		String hql = "delete from MemberGames mg where member.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 

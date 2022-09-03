@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Partner;
 import main.java.hibernate.utils.SessionUtil;
@@ -38,11 +37,19 @@ public class PartnerDAO {
 	//get list of all partners
 	public static List<Partner> getPartners() {
 		Session session = SessionUtil.getSession();
-		String hql = "from Partner";
-		Query query = session.createQuery(hql);
-		List<Partner> partners = query.list();
+		
+		List<Partner> list = session.createQuery(
+			"select o from Partner o",
+			Partner.class)
+			.getResultList();
+
+
+		for (Partner t : list) {		
+			System.out.println(t);
+		}
+		
 		session.close();
-		return partners;
+		return list;
 	}
 
 	

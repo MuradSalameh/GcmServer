@@ -30,3 +30,45 @@ join table query by ID ---
 - im client servicefunctions funktion anlegen.
 
 
+
+List<Event> list = session.createQuery(
+			"select o from Event o",
+			Event.class)
+			.getResultList();
+
+
+		for (Event t : list) {		
+			System.out.println(t);
+		}
+		
+		session.close();
+		return list;
+	}
+	
+	
+	
+
+List<Team> list = session.createQuery(
+			"select team t from MemberTeam mt where member.id= :id",
+			Team.class)
+			.setParameter("id", id).getResultList();
+
+
+		for (Team o : list) {		
+			System.out.println(o);
+		}
+		
+		session.close();
+		return list;
+	}
+		
+		
+		
+"delete team t from TournamentsTeams tt where team.id= :teamid and tournament.id= :tournamentid";
+		
+		
+		
+		
+		
+		
+		

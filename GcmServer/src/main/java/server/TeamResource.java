@@ -79,6 +79,9 @@ public class TeamResource {
 		List<Team> teams = TeamDAO.getTeamsByMemberId(id);
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
 		};
+	    
+	  
+	
 
 		return Response.status(Status.OK).entity(ml).build();
 	}
@@ -94,6 +97,8 @@ public class TeamResource {
 		List<Team> teams = TeamDAO.getTeamsByTournamentId(id);
 		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
 		};
+		
+		
 
 		return Response.status(Status.OK).entity(ml).build();
 	}

@@ -1,6 +1,5 @@
 package main.java.hibernate.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -70,13 +69,19 @@ public class RoleDAO {
 	// get list of all roles
 	public static List<Role> getRoles() {
 		Session session = SessionUtil.getSession();
-		String hql = "from Role";
-		Query query = session.createQuery(hql);
-		List<Role> roles = query.list();
-		session.close();
-		return roles;
-	}
+		List<Role> list = session.createQuery(
+			"select o from Role o",
+			Role.class)
+			.getResultList();
 
+
+		for (Role t : list) {		
+			System.out.println(t);
+		}
+		
+		session.close();
+		return list;
+	}
 	
 	// get roles by member id from MemberRoles table
 	public static List<Role> getRolesByMemberId(int id) {
@@ -84,21 +89,18 @@ public class RoleDAO {
 		// SELECT * FROM gcm.member_socials where member_id= '3'
 
 		Session session = SessionUtil.getSession();
-		String hql = "from MemberRoles role_id where member_id= :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		List<MemberRoles> rolesMember = query.list();
-		List<Role> filteredRolesList = new ArrayList<>();
+		List<Role> list = session.createQuery(
+			"select role r from MemberRoles m where member.id= :id",
+			Role.class)
+			.setParameter("id", id).getResultList();
 
-		for (MemberRoles m : rolesMember) {
-			int sId = m.getRole().getId();
-			Role s = session.get(Role.class, sId);
-			filteredRolesList.add(s);
 
+		for (Role o : list) {		
+			System.out.println(o);
 		}
-
+		
 		session.close();
-		return filteredRolesList;
+		return list;
 	}
 
 	// delete role from specific member in MemberRoles table
@@ -106,7 +108,7 @@ public class RoleDAO {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		
-		String hql = "delete from MemberRoles id where role_id= :roleid and member_id= :memberid";
+		String hql = "delete from MemberRoles mr where role.id= :roleid and member.id= :memberid";
 		Query query = session.createQuery(hql);
 		query.setParameter("roleid", roleid);
 		query.setParameter("memberid", memberid);

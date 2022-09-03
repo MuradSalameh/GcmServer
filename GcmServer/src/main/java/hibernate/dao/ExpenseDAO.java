@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Expense;
 import main.java.hibernate.utils.SessionUtil;
@@ -37,11 +36,18 @@ public class ExpenseDAO {
 	// get list of all expenses
 	public static List<Expense> getExpenses() {
 		Session session = SessionUtil.getSession();
-		String hql = "from Expense";
-		Query query = session.createQuery(hql);
-		List<Expense> expenses = query.list();
+		List<Expense> list = session.createQuery(
+			"select o from Expense o",
+			Expense.class)
+			.getResultList();
+
+
+		for (Expense t : list) {		
+			System.out.println(t);
+		}
+		
 		session.close();
-		return expenses;
+		return list;
 	}
 
 	
@@ -53,6 +59,8 @@ public class ExpenseDAO {
 		session.remove(expense);
 		tx.commit();
 		session.close();
+		
+		
 
 	}
 

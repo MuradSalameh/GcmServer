@@ -1,6 +1,5 @@
 package main.java.hibernate.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,7 +7,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import main.java.hibernate.model.Member;
-import main.java.hibernate.model.MemberTeam;
 import main.java.hibernate.model.Team;
 import main.java.hibernate.model.Tournament;
 import main.java.hibernate.model.TournamentsTeams;
@@ -63,35 +61,43 @@ public class TeamDAO {
 	
 	// get list of all teams from db
 	public static List<Team> getTeams() {
+	    
 		Session session = SessionUtil.getSession();
-		String hql = "from Team";
-		Query query = session.createQuery(hql);
-		List<Team> teams = new ArrayList<Team>(query.list());
+		List<Team> list = session.createQuery(
+			"select o from Team o",
+			Team.class)
+			.getResultList();
+
+
+		for (Team t : list) {		
+			System.out.println(t);
+		}
+		
 		session.close();
-		return teams;
+		return list;
 	}
 
 	
 	// get teams by member id from MemberTeam table
 	public static List<Team> getTeamsByMemberId(int id) {
 		// SQL: SELECT * FROM gcm.member_teams where member_id= '3'
-
+	    
 		Session session = SessionUtil.getSession();
-		String hql = "from MemberTeam team_id where member_id= :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		List<MemberTeam> teamsMember = query.list();
-		List<Team> filteredTeamsList = new ArrayList<>();
+//		String hql = "from MemberTeam team_id where member_id= :id";
+//		Query query = session.createQuery(hql);
+			
+		List<Team> teamsMember = session.createQuery(
+			"select team t from MemberTeam mt where member.id= :id",
+			Team.class)
+			.setParameter("id", id).getResultList();
 
-		for (MemberTeam m : teamsMember) {
-			int sId = m.getTeam().getId();
-			Team s = session.get(Team.class, sId);
-			filteredTeamsList.add(s);
-			System.out.println(s);
+
+		for (Team t : teamsMember) {		
+			System.out.println(t);
 		}
 
-		session.close();
-		return filteredTeamsList;
+		session.close();		
+		return teamsMember;
 	}
 
 	
@@ -99,43 +105,39 @@ public class TeamDAO {
 	public static List<Team> getTeamsByTournamentId(int id) {
 
 		Session session = SessionUtil.getSession();
-		String hql = "from TournamentsTeams team_id where tournament_id= :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		List<TournamentsTeams> teamsTournament = query.list();
-		List<Team> filteredTeamsList = new ArrayList<>();
+		List<Team> teamsTournament = session.createQuery(
+			"select team t from TournamentsTeams tt where tournament.id= :id",
+			Team.class)
+			.setParameter("id", id).getResultList();
 
-		for (TournamentsTeams m : teamsTournament) {
-			int sId = m.getTeam().getId();
-			Team s = session.get(Team.class, sId);
-			filteredTeamsList.add(s);
-			System.out.println(s);
+		for (Team t : teamsTournament) {		
+			System.out.println(t);
 		}
 
 		session.close();
-		return filteredTeamsList;
+		return teamsTournament;
 	}
 
 	
 	// get members by team id from MemberTeams table
 	public static List<Member> getMembersByTeamId(int id) {
+	    
 
 		Session session = SessionUtil.getSession();
-		String hql = "from MemberTeam member_id where team_id= :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		List<MemberTeam> membersTeam = query.list();
-		List<Member> filteredTeamsList = new ArrayList<>();
+	
+		List<Member> teamsMembers = session.createQuery(
+			"select member m from MemberTeam tt where team.id= :id",
+			Member.class)
+			.setParameter("id", id).getResultList();
 
-		for (MemberTeam m : membersTeam) {
-			int sId = m.getMember().getId();
-			Member s = session.get(Member.class, sId);
-			filteredTeamsList.add(s);
-			System.out.println(s);
+		for (Member m : teamsMembers) {		
+			System.out.println(m);
 		}
 
+
+
 		session.close();
-		return filteredTeamsList;
+		return teamsMembers;
 	}
 
 	
@@ -143,17 +145,20 @@ public class TeamDAO {
 	public static void deleteTeamFromMember(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
+		
+//		int deletedEntities = session.createQuery(
+//			"ddelete team t from MemberTeam mt where team.id= :id")
+//		.setParameter("id", id)
+//		.executeUpdate();
 
 		// Delete connection from MemberTeams Table
-		String hql = "delete from MemberTeam id where team_id= :id";
+		String hql = "delete from MemberTeam mt where team.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 
 		int count = query.executeUpdate();
 		System.out.println(count + " Record(s) Deleted.");
 
-		// Remove from Team Table
-//    	Team team = session.get(Team.class, id);
 //		session.remove(team);
 
 		tx.commit();
@@ -165,9 +170,9 @@ public class TeamDAO {
 	public static void deleteTeamFromTournaments(int id) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
-
+		System.out.println("delete team from all tournaments");
 		// Delete connection from MemberTeams Table
-		String hql = "delete from TournamentsTeams id where team_id= :id";
+		String hql = "delete from TournamentsTeams tt where team.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 
@@ -184,8 +189,9 @@ public class TeamDAO {
 	public static void deleteTeamFromTournament(int teamid, int tournamentid) {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
+		System.out.println("delete team from specific tournament");
 
-		String hql = "delete from TournamentsTeams id where team_id= :teamid and tournament_id= :tournamentid";
+		String hql = "delete from TournamentsTeams tt where team.id= :teamid and tournament.id= :tournamentid";
 		Query query = session.createQuery(hql);
 		query.setParameter("teamid", teamid);
 		query.setParameter("tournamentid", tournamentid);

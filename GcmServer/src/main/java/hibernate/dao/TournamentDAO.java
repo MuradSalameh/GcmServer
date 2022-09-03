@@ -36,11 +36,19 @@ public class TournamentDAO {
 	// get list of all tournaments from DB
 	public static List<Tournament> getTournaments() {
 		Session session = SessionUtil.getSession();
-		String hql = "from Tournament";
-		Query query = session.createQuery(hql);
-		List<Tournament> tournaments = query.list();
+		
+		List<Tournament> tlist = session.createQuery(
+			"select t from Tournament t",
+			Tournament.class)
+			.getResultList();
+
+
+		for (Tournament t : tlist) {		
+			System.out.println(t);
+		}
+		
 		session.close();
-		return tournaments;
+		return tlist;
 	}
 
 	// delete tournament from DB
@@ -61,7 +69,7 @@ public class TournamentDAO {
 		Transaction tx = session.beginTransaction();
 
 		// Delete connection from MemberTeams Table
-		String hql = "delete from TournamentsTeams id where tournament_id= :id";
+		String hql = "delete from TournamentsTeams tt where tournament.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 
@@ -79,7 +87,7 @@ public class TournamentDAO {
 		Session session = SessionUtil.getSession();
 		Transaction tx = session.beginTransaction();
 
-		String hql = "delete from TournamentGame id where tournament_id= :id";
+		String hql = "delete from TournamentGame tg where tournament.id= :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 

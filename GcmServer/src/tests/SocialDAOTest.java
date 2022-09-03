@@ -32,7 +32,7 @@ public class SocialDAOTest {
 
 		// --------- deleteSocial() Test -----------//
 
-		deleteSocialTest(id);
+//		deleteSocialTest(id);
 
 		// --------- getSocial() Test to get one specific social by id -----------//
 
@@ -45,7 +45,7 @@ public class SocialDAOTest {
 
 		// --------- getSocialById() -----------//
 
-		// getSocialsByMemberIdTest(1);
+		 getSocialsByMemberIdTest(2);
 //		deleteSocialFromMemberTest(1);
 
 	}

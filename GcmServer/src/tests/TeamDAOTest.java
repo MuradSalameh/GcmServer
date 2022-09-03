@@ -44,19 +44,19 @@ public class TeamDAOTest {
 
 		// --------- getTeamsByMemberIdTest() Test -----------//
 
-//		getTeamsByMemberIdTest(3);
+//		getTeamsByMemberIdTest(2);
 
 		// --------- getMembersByTeamIdTest() Test -----------//
 
-//		getMembersByTeamIdTest(1);
+		getMembersByTeamIdTest(14);
 
 		// --------- deleteTeamFromTournamentsTest() Test -----------//
 
 //		deleteTeamFromTournamentsTest(1);
 
-		getTeamsByTournamentIdTest(2);
-
-		addTeamToTournamentTest(7, 2);
+//		getTeamsByTournamentIdTest(5);
+//
+//		addTeamToTournamentTest(7, 2);
 	}
 
 	public static void addTestTeam() {
@@ -106,12 +106,12 @@ public class TeamDAOTest {
 	}
 
 	public static void getTeamsByMemberIdTest(int id) {
-
+	    	System.out.println("Get Teams By MemberID\n");
 		TeamDAO.getTeamsByMemberId(id);
 	}
 
 	public static void getMembersByTeamIdTest(int id) {
-
+	    
 		TeamDAO.getMembersByTeamId(id);
 	}
 

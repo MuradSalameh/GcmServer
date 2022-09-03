@@ -2,8 +2,6 @@ package tests;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 
@@ -89,13 +87,8 @@ public class TournamentDAOTest {
 	}
 
 	public static void getTournamentList() {
-		List<Tournament> tournaments = TournamentDAO.getTournaments();
-		ArrayList<Tournament> ol = new ArrayList<Tournament>();
-
-		for (Tournament m : tournaments) {
-			ol.add(m);
-			System.out.println(m);
-		}
+		TournamentDAO.getTournaments();
+		
 	}
 
 }
