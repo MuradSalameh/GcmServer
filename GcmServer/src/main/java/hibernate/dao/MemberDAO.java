@@ -21,7 +21,8 @@ public class MemberDAO {
 
 		session.persist(bean);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -39,7 +40,8 @@ public class MemberDAO {
 
 		session.save(mt);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -49,7 +51,9 @@ public class MemberDAO {
 		Transaction tx = session.beginTransaction();
 
 		Member member = session.get(Member.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return member;
 	}
 
@@ -61,7 +65,9 @@ public class MemberDAO {
 		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Member").getSingleResult();
 
 		Member member = session.get(Member.class, maxId);
-
+		
+		 session.clear();
+		 session.close();
 		return member;
 	}
 
@@ -80,7 +86,9 @@ public class MemberDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -102,7 +110,9 @@ public class MemberDAO {
 
 
 
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return teamsMembers;
 	}
 
@@ -114,7 +124,9 @@ public class MemberDAO {
 		Query query = session.createQuery(hql);
 		List<Member> membersBirthday = query.list();
 
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return membersBirthday;
 
 	}
@@ -130,7 +142,8 @@ public class MemberDAO {
 		session.remove(member);
 		// session.delete(session.find(Member.class, id));
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -269,8 +282,9 @@ public class MemberDAO {
 		old.setBirthday(member.getBirthday());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 }

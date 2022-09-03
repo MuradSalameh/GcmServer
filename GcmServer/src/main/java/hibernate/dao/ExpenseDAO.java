@@ -18,7 +18,8 @@ public class ExpenseDAO {
 
 		session.persist(bean); 
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -28,7 +29,9 @@ public class ExpenseDAO {
 		Transaction tx = session.beginTransaction();
 
 		Expense expense = session.get(Expense.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return expense;
 	}
 
@@ -46,7 +49,8 @@ public class ExpenseDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -58,7 +62,8 @@ public class ExpenseDAO {
 		Expense expense = session.get(Expense.class, id);
 		session.remove(expense);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 		
 		
 
@@ -79,9 +84,10 @@ public class ExpenseDAO {
 
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 }

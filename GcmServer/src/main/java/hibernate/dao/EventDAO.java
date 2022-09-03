@@ -21,7 +21,8 @@ public class EventDAO {
 		Transaction tx = session.beginTransaction();
 		session.persist(bean); 
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -31,8 +32,12 @@ public class EventDAO {
 		Transaction tx = session.beginTransaction();
 
 		Event event = session.get(Event.class, id);
-
+		
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return event;
+		
 	}
 
 	
@@ -50,8 +55,9 @@ public class EventDAO {
 			System.out.println(e);
 		}
 		
-
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return eventsMember;
 	}
 
@@ -70,7 +76,9 @@ public class EventDAO {
 			System.out.println(e);
 		}
 
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return eventsMember;
 	}
 
@@ -88,7 +96,8 @@ public class EventDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -118,7 +127,8 @@ public class EventDAO {
 		Event event = session.get(Event.class, id);
 		session.remove(event);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -138,9 +148,10 @@ public class EventDAO {
 		old.setReoccuring(event.isReoccuring());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 }

@@ -21,7 +21,8 @@ public class RoleDAO {
 
 		session.persist(bean);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -39,7 +40,8 @@ public class RoleDAO {
 
 		session.save(mr);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -49,7 +51,9 @@ public class RoleDAO {
 		Transaction tx = session.beginTransaction();
 
 		Role r = session.get(Role.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return r;
 	}
 
@@ -61,7 +65,9 @@ public class RoleDAO {
 		Integer maxId = (Integer) session.createNativeQuery("select max(id) from Role").getSingleResult();
 
 		Role role = session.get(Role.class, maxId);
-
+		
+		 session.clear();
+		 session.close();
 		return role;
 	}
 
@@ -79,7 +85,8 @@ public class RoleDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return list;
 	}
 	
@@ -99,7 +106,8 @@ public class RoleDAO {
 			System.out.println(o);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -129,7 +137,8 @@ public class RoleDAO {
 		Role role = session.get(Role.class, id);
 		session.remove(role);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -144,8 +153,9 @@ public class RoleDAO {
 		old.setRoleDescription(role.getRoleDescription());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 }

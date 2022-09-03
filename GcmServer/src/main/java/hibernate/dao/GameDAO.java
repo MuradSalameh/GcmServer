@@ -22,8 +22,10 @@ public class GameDAO {
 		Transaction tx = session.beginTransaction();
 
 		session.persist(bean); 
+		
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -41,7 +43,8 @@ public class GameDAO {
 
 		session.save(mr);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -59,7 +62,8 @@ public class GameDAO {
 
 		session.save(mr);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -70,7 +74,13 @@ public class GameDAO {
 
 		Game game = session.get(Game.class, id);
 
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return game;
+		
+		
+		 
 	}
 
 	
@@ -87,7 +97,8 @@ public class GameDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -101,12 +112,13 @@ public class GameDAO {
 			Game.class)
 			.setParameter("id", id).getResultList();
 
-
+		
 		for (Game o : list) {		
 			System.out.println(o);
 		}
 		
-
+		
+		 session.clear();
 		session.close();
 		return list;
 	}
@@ -125,6 +137,7 @@ public class GameDAO {
 			System.out.println(o);
 		}
 		
+		 session.clear();
 		session.close();
 		return list;
 	}
@@ -143,6 +156,7 @@ public class GameDAO {
 			System.out.println(o);
 		}
 		
+		 session.clear();
 		session.close();
 		return list;
 	}
@@ -156,7 +170,7 @@ public class GameDAO {
 		int deletedEntities = session.createQuery(
 			"delete from MemberGames mg where game.id= :gameid and member.id= :memberid")
 		.setParameter("gameid", gameid).setParameter("memberid", memberid).executeUpdate();
-
+		
 //		String hql = "delete game g from MemberGames mg where game.id= :gameid and member.id= :memberid";
 //		Query query = session.createQuery(hql);
 //		query.setParameter("gameid", gameid).setParameter("memberid", memberid);
@@ -169,7 +183,8 @@ public class GameDAO {
 		// session.remove(game);
 
 		tx.commit();
-		session.clear();
+		
+		 session.clear();
 		session.close();
 	}
 
@@ -239,7 +254,8 @@ public class GameDAO {
 		Game game = session.get(Game.class, id);
 		session.remove(game);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -256,8 +272,9 @@ public class GameDAO {
 		old.setGameAdditionalNotes(game.getGameAdditionalNotes());
 
 		session.saveOrUpdate(old);
-		session.flush();
+	//	session.flush();
 		tx.commit();
+		 session.clear();
 		session.close();
 	}
 

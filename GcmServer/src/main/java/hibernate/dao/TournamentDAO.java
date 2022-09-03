@@ -20,7 +20,8 @@ public class TournamentDAO {
 
 		session.persist(bean); 
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 	
 	// Get tournament from DB
@@ -29,7 +30,9 @@ public class TournamentDAO {
 		Transaction tx = session.beginTransaction();
 
 		Tournament t = session.get(Tournament.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return t;
 	}
 
@@ -47,7 +50,8 @@ public class TournamentDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return tlist;
 	}
 
@@ -58,7 +62,8 @@ public class TournamentDAO {
 		Tournament tournament = session.find(Tournament.class, id);
 		session.remove(tournament);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -114,9 +119,10 @@ public class TournamentDAO {
 		old.setTournamentResult(tournament.getTournamentResult());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 }

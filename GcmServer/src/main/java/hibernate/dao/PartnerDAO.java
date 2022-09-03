@@ -19,7 +19,8 @@ public class PartnerDAO {
 		session.persist(bean); // Dafür die add partner nicht mehr aufrufen, da direkt im bean gespeichert
 								// wird.
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -29,7 +30,9 @@ public class PartnerDAO {
 		Transaction tx = session.beginTransaction();
 
 		Partner partner = session.get(Partner.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return partner;
 	}
 
@@ -47,8 +50,9 @@ public class PartnerDAO {
 		for (Partner t : list) {		
 			System.out.println(t);
 		}
-		
-		session.close();
+	
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -60,7 +64,8 @@ public class PartnerDAO {
 		Partner partner = session.get(Partner.class, id);
 		session.remove(partner);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -87,9 +92,10 @@ public class PartnerDAO {
 		old.setPhoneNumber(partner.getPhoneNumber());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 }

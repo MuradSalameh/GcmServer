@@ -23,7 +23,8 @@ public class SocialDAO {
 
 	session.persist(bean);
 	tx.commit();
-	session.close();
+	 session.clear();
+	 session.close();
     }
 
 
@@ -41,7 +42,8 @@ public class SocialDAO {
 
 	session.save(ms);
 	tx.commit();
-	session.close();
+	 session.clear();
+	 session.close();
     }
 
 
@@ -50,6 +52,9 @@ public class SocialDAO {
 	Session session = SessionUtil.getSession();
 	Transaction tx = session.beginTransaction();
 	Social s = session.get(Social.class, id);
+	tx.commit();
+	 session.clear();
+	 session.close();
 	return s;
     }
 
@@ -63,7 +68,9 @@ public class SocialDAO {
 	System.out.println(maxId);
 
 	Social social = session.get(Social.class, maxId);
-
+	
+	 session.clear();
+	 session.close();
 	return social;
     }
 
@@ -81,8 +88,9 @@ public class SocialDAO {
 	for (Social t : list) {		
 	    System.out.println(t);
 	}
-
-	session.close();
+	
+	 session.clear();
+	 session.close();
 	return list;
     }
 
@@ -95,7 +103,7 @@ public class SocialDAO {
 	Session session = SessionUtil.getSession();
 
 	List<Social> list = session.createQuery(
-		"select social t from MemberSocials mt where member.id= :id",
+		"select social s from MemberSocials ms where member.id= :id",
 		Social.class)
 		.setParameter("id", id).getResultList();
 
@@ -103,8 +111,9 @@ public class SocialDAO {
 	for (Social o : list) {		
 	    System.out.println(o);
 	}
-
-	session.close();
+	
+	 session.clear();
+	 session.close();
 	return list;
     }
 
@@ -140,7 +149,8 @@ public class SocialDAO {
 	Social social = session.get(Social.class, id);
 	session.remove(social);
 	tx.commit();
-	session.close();
+	 session.clear();
+	 session.close();
 
     }
 
@@ -157,9 +167,10 @@ public class SocialDAO {
 	old.setSocialNotes(social.getSocialNotes());
 
 	session.saveOrUpdate(old);
-	session.flush();
+	//session.flush();
 	tx.commit();
-	session.close();
+	 session.clear();
+	 session.close();
     }
 
 }

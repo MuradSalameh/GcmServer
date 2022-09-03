@@ -24,7 +24,8 @@ public class TeamDAO {
 
 		session.persist(bean);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -42,7 +43,8 @@ public class TeamDAO {
 
 		session.save(mr);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -52,7 +54,9 @@ public class TeamDAO {
 		Transaction tx = session.beginTransaction();
 
 		Team t = session.get(Team.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return t;
 		
 		
@@ -73,7 +77,9 @@ public class TeamDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return list;
 	}
 
@@ -95,8 +101,8 @@ public class TeamDAO {
 		for (Team t : teamsMember) {		
 			System.out.println(t);
 		}
-
-		session.close();		
+		 session.clear();
+		 session.close();		
 		return teamsMember;
 	}
 
@@ -113,8 +119,9 @@ public class TeamDAO {
 		for (Team t : teamsTournament) {		
 			System.out.println(t);
 		}
-
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return teamsTournament;
 	}
 
@@ -135,8 +142,9 @@ public class TeamDAO {
 		}
 
 
-
-		session.close();
+		
+		 session.clear();
+		 session.close();
 		return teamsMembers;
 	}
 
@@ -211,8 +219,10 @@ public class TeamDAO {
 		Transaction tx = session.beginTransaction();
 		Team team = session.get(Team.class, id);
 		session.remove(team);
+		
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -227,9 +237,10 @@ public class TeamDAO {
 		// old.setMembers(team.getMembers());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 }

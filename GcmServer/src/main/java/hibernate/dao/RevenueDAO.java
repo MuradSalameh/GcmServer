@@ -18,7 +18,8 @@ public class RevenueDAO {
 
 		session.persist(bean);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 	
@@ -28,7 +29,9 @@ public class RevenueDAO {
 		Transaction tx = session.beginTransaction();
 
 		Revenue rev = session.get(Revenue.class, id);
-
+		tx.commit();
+		 session.clear();
+		 session.close();
 		return rev;
 	}
 
@@ -46,7 +49,8 @@ public class RevenueDAO {
 			System.out.println(t);
 		}
 		
-		session.close();
+		 session.clear();
+		 session.close();
 		return list;
 	}
 	
@@ -60,7 +64,8 @@ public class RevenueDAO {
 		Revenue revenue = session.get(Revenue.class, id);
 		session.remove(revenue);
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 
 	}
 
@@ -77,9 +82,10 @@ public class RevenueDAO {
 		old.setDate(revenue.getDate());
 
 		session.saveOrUpdate(old);
-		session.flush();
+		//session.flush();
 		tx.commit();
-		session.close();
+		 session.clear();
+		 session.close();
 	}
 
 }
