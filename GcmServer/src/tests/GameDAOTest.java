@@ -48,10 +48,11 @@ public class GameDAOTest {
 //		getMembersByGameIdTest(id3);
 
 //		getGamesByMemberIdTest(id2);
+		getGamesByTournamentIdTest(1);
 
 //		deleteGameFromMemberTest(id3);
 
-		deleteGameFromTournamentTest(6, 2);
+//		deleteGameFromTournamentTest(6, 2);
 
 	}
 
@@ -108,6 +109,9 @@ public class GameDAOTest {
 
 	public static void getGamesByMemberIdTest(int id) {
 		GameDAO.getGamesByMemberId(id);
+	}
+	public static void getGamesByTournamentIdTest(int id) {
+	    GameDAO.getGamesByTournamentId(id);
 	}
 
 	public static void deleteGameFromMemberTest(int gameid, int memberid) {

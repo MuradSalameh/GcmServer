@@ -116,7 +116,7 @@ public class GameDAO {
 
 		Session session = SessionUtil.getSession();
 		List<Game> list = session.createQuery(
-			"select game g from MemberGames mg where tournament.id= :id",
+			"select game g from TournamentGame mg where tournament.id= :id",
 			Game.class)
 			.setParameter("id", id).getResultList();
 
