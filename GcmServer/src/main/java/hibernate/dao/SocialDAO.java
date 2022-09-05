@@ -12,8 +12,6 @@ import main.java.hibernate.model.Social;
 import main.java.hibernate.utils.SessionUtil;
 
 public class SocialDAO {
-
-
     // database access methods
 
     // add new social in DB
@@ -22,9 +20,10 @@ public class SocialDAO {
 	Transaction tx = session.beginTransaction();
 
 	session.persist(bean);
+
 	tx.commit();
-	 session.clear();
-	 session.close();
+	session.clear();
+	session.close();
     }
 
 
@@ -41,9 +40,10 @@ public class SocialDAO {
 	ms.setSocial(s);
 
 	session.save(ms);
+
 	tx.commit();
-	 session.clear();
-	 session.close();
+	session.clear();
+	session.close();
     }
 
 
@@ -51,10 +51,12 @@ public class SocialDAO {
     public static Social getSocial(int id) {
 	Session session = SessionUtil.getSession();
 	Transaction tx = session.beginTransaction();
+
 	Social s = session.get(Social.class, id);
+
 	tx.commit();
-	 session.clear();
-	 session.close();
+	session.clear();
+	session.close();
 	return s;
     }
 
@@ -62,15 +64,13 @@ public class SocialDAO {
     // get social with highest id
     public static Social getSocialWithHighestId() {
 	Session session = SessionUtil.getSession();
-	// String hql = "select max(id) from Social";
+
 	Integer maxId = (Integer) session.createNativeQuery("select max(id) from Social").getSingleResult();
-
 	System.out.println(maxId);
-
 	Social social = session.get(Social.class, maxId);
-	
-	 session.clear();
-	 session.close();
+
+	session.clear();
+	session.close();
 	return social;
     }
 
@@ -84,13 +84,12 @@ public class SocialDAO {
 		Social.class)
 		.getResultList();
 
-
 	for (Social t : list) {		
 	    System.out.println(t);
 	}
-	
-	 session.clear();
-	 session.close();
+
+	session.clear();
+	session.close();
 	return list;
     }
 
@@ -98,8 +97,6 @@ public class SocialDAO {
 
     // get socials by member id from MemberSocials table
     public static List<Social> getSocialsByMemberId(int id) {
-	// SQL: SELECT * FROM gcm.member_socials where member_id= '3'
-
 	Session session = SessionUtil.getSession();
 
 	List<Social> list = session.createQuery(
@@ -107,13 +104,12 @@ public class SocialDAO {
 		Social.class)
 		.setParameter("id", id).getResultList();
 
-
 	for (Social o : list) {		
 	    System.out.println(o);
 	}
-	
-	 session.clear();
-	 session.close();
+
+	session.clear();
+	session.close();
 	return list;
     }
 
@@ -123,7 +119,6 @@ public class SocialDAO {
 	Session session = SessionUtil.getSession();
 	Transaction tx = session.beginTransaction();
 
-	// Delete connection from MemberSocials Table
 	String hql = "delete from MemberSocials ms where social.id= :id";
 	Query query = session.createQuery(hql);
 	query.setParameter("id", id);
@@ -131,7 +126,6 @@ public class SocialDAO {
 	int count = query.executeUpdate();
 	System.out.println(count + " Record(s) Deleted.");
 
-	// Remove from Social Table
 	Social social = session.get(Social.class, id);
 	session.remove(social);
 
@@ -148,9 +142,10 @@ public class SocialDAO {
 
 	Social social = session.get(Social.class, id);
 	session.remove(social);
+
 	tx.commit();
-	 session.clear();
-	 session.close();
+	session.clear();
+	session.close();
 
     }
 
@@ -159,6 +154,7 @@ public class SocialDAO {
     public static void updateSocial(int id, Social social) {
 	Session session = SessionUtil.getSession();
 	Transaction tx = session.beginTransaction();
+
 	Social old = session.get(Social.class, id);
 
 	old.setSocialPlatform(social.getSocialPlatform());
@@ -167,10 +163,10 @@ public class SocialDAO {
 	old.setSocialNotes(social.getSocialNotes());
 
 	session.saveOrUpdate(old);
-	//session.flush();
+
 	tx.commit();
-	 session.clear();
-	 session.close();
+	session.clear();
+	session.close();
     }
 
 }

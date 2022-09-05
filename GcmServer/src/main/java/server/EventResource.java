@@ -26,98 +26,91 @@ import main.java.hibernate.model.Event;
 @Produces(MediaType.APPLICATION_XML)
 public class EventResource {
 
- // HTTP request methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
+    // HTTP request methods
 
-	
-	// get event
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/event/{id}")
-	public Response getEvent(@PathParam("id") int id) {
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-		Event event = new Event();
-		event = EventDAO.getEvent(id);
-		return Response.status(Status.OK).entity(event).build();
-	}
+    // get event
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/event/{id}")
+    public Response getEvent(@PathParam("id") int id) {
 
-	
-	// get list of all events
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
-	@Path("/eventlist")
-	public Response getEventList() {
+	Event event = new Event();
+	event = EventDAO.getEvent(id);
+	return Response.status(Status.OK).entity(event).build();
+    }
 
-		List<Event> events = new ArrayList<>();
-		events = EventDAO.getEvents();
-		GenericEntity<List<Event>> ml = new GenericEntity<List<Event>>(Lists.newArrayList(events)) {
-		};
+    // get list of all events
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    // @Consumes(MediaType.APPLICATION_XML)
+    @Path("/eventlist")
+    public Response getEventList() {
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Event> events = new ArrayList<>();
+	events = EventDAO.getEvents();
+	GenericEntity<List<Event>> ml = new GenericEntity<List<Event>>(Lists.newArrayList(events)) {
+	};
 
-	
-	// get events by member from MemberEvents Table
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/eventsByMember/{id}")
-	public Response getEventsByMember(@PathParam("id") int id) {
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		List<Event> s = EventDAO.getEventsByMemberId(id);
-		GenericEntity<List<Event>> sl = new GenericEntity<List<Event>>(Lists.newArrayList(s)) {
-		};
+    // get events by member from MemberEvents Table
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/eventsByMember/{id}")
+    public Response getEventsByMember(@PathParam("id") int id) {
 
-		return Response.status(Status.OK).entity(sl).build();
-	}
+	List<Event> s = EventDAO.getEventsByMemberId(id);
+	GenericEntity<List<Event>> sl = new GenericEntity<List<Event>>(Lists.newArrayList(s)) {
+	};
 
-	
-	// add new event
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addEvent")
-	public Response postEvent(Event newEvent) {
+	return Response.status(Status.OK).entity(sl).build();
+    }
 
-		EventDAO.addEvent(newEvent);
-		return Response.status(Status.CREATED).build();
+    // add new event
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addEvent")
+    public Response postEvent(Event newEvent) {
 
-	}
+	EventDAO.addEvent(newEvent);
+	return Response.status(Status.CREATED).build();
 
-	
-	// update event
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateEvent/{id}")
-	public Response putEvent(@PathParam("id") int id, Event alteredEvent) {
+    }
 
-		EventDAO.updateEvent(id, alteredEvent);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // update event
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updateEvent/{id}")
+    public Response putEvent(@PathParam("id") int id, Event alteredEvent) {
 
-	
-	// delete event from specific member in MemberEvents table
-	@DELETE
-	@Path("/deleteEventFromMember/{id}")
-	public Response deleteEventFromMember(@PathParam("id") int id) {
+	EventDAO.updateEvent(id, alteredEvent);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		EventDAO.deleteEventFromMember(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
-	
-	
-	//delete event
-	@DELETE
-	@Path("/deleteEvent/{id}")
-	public Response deleteEvent(@PathParam("id") int id) {
+    // delete event from specific member in MemberEvents table
+    @DELETE
+    @Path("/deleteEventFromMember/{id}")
+    public Response deleteEventFromMember(@PathParam("id") int id) {
 
-		EventDAO.deleteEvent(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+	EventDAO.deleteEventFromMember(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
+
+    // delete event
+    @DELETE
+    @Path("/deleteEvent/{id}")
+    public Response deleteEvent(@PathParam("id") int id) {
+
+	EventDAO.deleteEvent(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 }

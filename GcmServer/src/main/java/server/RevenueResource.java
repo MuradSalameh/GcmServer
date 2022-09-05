@@ -26,71 +26,67 @@ import main.java.hibernate.model.Revenue;
 @Produces(MediaType.APPLICATION_XML)
 public class RevenueResource {
 
- // HTTP request methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
+    // HTTP request methods
 
-	
-	// get revenue
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/revenue/{id}")
-	public Response getRevenue(@PathParam("id") int id) {
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-		Revenue revenue = new Revenue();
-		revenue = RevenueDAO.getRevenue(id);
-		return Response.status(Status.OK).entity(revenue).build();
-	}
+    // get revenue
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/revenue/{id}")
+    public Response getRevenue(@PathParam("id") int id) {
 
-	
-	// get list of all revenues
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
-	@Path("/revenuelist")
-	public Response getRevenueList() {
+	Revenue revenue = new Revenue();
+	revenue = RevenueDAO.getRevenue(id);
+	return Response.status(Status.OK).entity(revenue).build();
+    }
 
-		List<Revenue> revenues = new ArrayList<>();
-		revenues = RevenueDAO.getRevenues();
-		GenericEntity<List<Revenue>> ml = new GenericEntity<List<Revenue>>(Lists.newArrayList(revenues)) {
-		};
+    // get list of all revenues
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    // @Consumes(MediaType.APPLICATION_XML)
+    @Path("/revenuelist")
+    public Response getRevenueList() {
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Revenue> revenues = new ArrayList<>();
+	revenues = RevenueDAO.getRevenues();
+	GenericEntity<List<Revenue>> ml = new GenericEntity<List<Revenue>>(Lists.newArrayList(revenues)) {
+	};
 
-	
-	// add new revenue
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addRevenue")
-	public Response postRevenue(Revenue newRevenue) {
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		RevenueDAO.addRevenue(newRevenue);
-		return Response.status(Status.CREATED).build();
-	}
+    // add new revenue
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addRevenue")
+    public Response postRevenue(Revenue newRevenue) {
 
-	
-	// update revenue
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateRevenue/{id}")
-	public Response putRevenue(@PathParam("id") int id, Revenue alteredRevenue) {
+	RevenueDAO.addRevenue(newRevenue);
+	return Response.status(Status.CREATED).build();
+    }
 
-		RevenueDAO.updateRevenue(id, alteredRevenue);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // update revenue
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updateRevenue/{id}")
+    public Response putRevenue(@PathParam("id") int id, Revenue alteredRevenue) {
 
-	// delete revenue
-	@DELETE
-	@Path("/deleteRevenue/{id}")
-	public Response deleteRevenue(@PathParam("id") int id) {
-		RevenueDAO.deleteRevenue(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+	RevenueDAO.updateRevenue(id, alteredRevenue);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
+
+    // delete revenue
+    @DELETE
+    @Path("/deleteRevenue/{id}")
+    public Response deleteRevenue(@PathParam("id") int id) {
+	RevenueDAO.deleteRevenue(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 }

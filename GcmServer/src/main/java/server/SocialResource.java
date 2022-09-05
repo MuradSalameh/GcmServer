@@ -25,111 +25,103 @@ import main.java.hibernate.model.Social;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class SocialResource {
-    
- // HTTP request Methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
 
-	
-	// Get social by id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/social/{id}")
-	public Response getSocial(@PathParam("id") int id) {
+    // HTTP request Methods
 
-		Social social = new Social();
-		social = SocialDAO.getSocial(id);
-		return Response.status(Status.OK).entity(social).build();
-	}
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-	
-	//Get social with highest id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/socialWithHighestId/")
-	public Response getSocialWithhighestId() {
+    // Get social by id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/social/{id}")
+    public Response getSocial(@PathParam("id") int id) {
 
-		Social social = new Social();
-		social = SocialDAO.getSocialWithHighestId();
-		return Response.status(Status.OK).entity(social).build();
-	}
+	Social social = new Social();
+	social = SocialDAO.getSocial(id);
+	return Response.status(Status.OK).entity(social).build();
+    }
 
-	
-	// Get list of all socials
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
-	@Path("/sociallist")
-	public Response getSocialList() {
+    // Get social with highest id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/socialWithHighestId/")
+    public Response getSocialWithhighestId() {
 
-		List<Social> socials = new ArrayList<>();
-		socials = SocialDAO.getSocials();
-		GenericEntity<List<Social>> ml = new GenericEntity<List<Social>>(Lists.newArrayList(socials)) {
-		};
+	Social social = new Social();
+	social = SocialDAO.getSocialWithHighestId();
+	return Response.status(Status.OK).entity(social).build();
+    }
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+    // Get list of all socials
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    // @Consumes(MediaType.APPLICATION_XML)
+    @Path("/sociallist")
+    public Response getSocialList() {
 
-	
-	// get socials by member id from MemberSocials table
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/socialsByMember/{id}")
-	public Response getSocialsByMember(@PathParam("id") int id) {
+	List<Social> socials = new ArrayList<>();
+	socials = SocialDAO.getSocials();
+	GenericEntity<List<Social>> ml = new GenericEntity<List<Social>>(Lists.newArrayList(socials)) {
+	};
 
-		List<Social> s = SocialDAO.getSocialsByMemberId(id);
-		GenericEntity<List<Social>> sl = new GenericEntity<List<Social>>(Lists.newArrayList(s)) {
-		};
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		return Response.status(Status.OK).entity(sl).build();
-	}
+    // get socials by member id from MemberSocials table
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/socialsByMember/{id}")
+    public Response getSocialsByMember(@PathParam("id") int id) {
 
-	
-	// add new social
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addSocial")
-	public Response postSocial(Social newSocial) {
+	List<Social> s = SocialDAO.getSocialsByMemberId(id);
+	GenericEntity<List<Social>> sl = new GenericEntity<List<Social>>(Lists.newArrayList(s)) {
+	};
 
-		SocialDAO.addSocial(newSocial);
-		return Response.status(Status.CREATED).build();
-	}
+	return Response.status(Status.OK).entity(sl).build();
+    }
 
-	
-	// update social
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateSocial/{id}")
-	public Response putSocial(@PathParam("id") int id, Social alteredSocial) {
+    // add new social
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addSocial")
+    public Response postSocial(Social newSocial) {
 
-		SocialDAO.updateSocial(id, alteredSocial);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+	SocialDAO.addSocial(newSocial);
+	return Response.status(Status.CREATED).build();
+    }
 
-	
-	// assign social to specific member in MemberSocials table
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addSocialToMember/{memberID}/{socialID}")
-	public Response putSocial(@PathParam("memberID") int memberID, @PathParam("socialID") int socialID) {
+    // update social
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updateSocial/{id}")
+    public Response putSocial(@PathParam("id") int id, Social alteredSocial) {
 
-		SocialDAO.addSocialToMember(memberID, socialID);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
-	
-	
-	// delete social
-	@DELETE
-	@Path("/deleteSocial/{id}")
-	public Response deleteSocial(@PathParam("id") int id) {
+	SocialDAO.updateSocial(id, alteredSocial);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		SocialDAO.deleteSocialFromMember(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // assign social to specific member in MemberSocials table
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addSocialToMember/{memberID}/{socialID}")
+    public Response putSocial(@PathParam("memberID") int memberID, @PathParam("socialID") int socialID) {
+
+	SocialDAO.addSocialToMember(memberID, socialID);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
+
+    // delete social
+    @DELETE
+    @Path("/deleteSocial/{id}")
+    public Response deleteSocial(@PathParam("id") int id) {
+
+	SocialDAO.deleteSocialFromMember(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 }

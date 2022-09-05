@@ -26,95 +26,90 @@ import main.java.hibernate.model.Tournament;
 @Produces(MediaType.APPLICATION_XML)
 public class TournamentResource {
 
-    	// HTTP request methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
+    // HTTP request methods
 
-	
-	// Get tournament by id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/tournament/{id}")
-	public Response getTournament(@PathParam("id") int id) {
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-		Tournament tournament = new Tournament();
-		tournament = TournamentDAO.getTournament(id);
+    // Get tournament by id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/tournament/{id}")
+    public Response getTournament(@PathParam("id") int id) {
 
-		return Response.status(Status.OK).entity(tournament).build();
-	}
+	Tournament tournament = new Tournament();
+	tournament = TournamentDAO.getTournament(id);
 
-	
-	// Get tournament list
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
-	@Path("/tournamentlist")
-	public Response getTournamentList() {
+	return Response.status(Status.OK).entity(tournament).build();
+    }
 
-		List<Tournament> tournaments = new ArrayList<>();
-		tournaments = TournamentDAO.getTournaments();
+    // Get tournament list
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    // @Consumes(MediaType.APPLICATION_XML)
+    @Path("/tournamentlist")
+    public Response getTournamentList() {
 
-		GenericEntity<List<Tournament>> ml = new GenericEntity<List<Tournament>>(Lists.newArrayList(tournaments)) {
-		};
+	List<Tournament> tournaments = new ArrayList<>();
+	tournaments = TournamentDAO.getTournaments();
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	GenericEntity<List<Tournament>> ml = new GenericEntity<List<Tournament>>(Lists.newArrayList(tournaments)) {
+	};
 
-	// Post new tournament
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addTournament")
-	public Response postTournament(Tournament newTournament) {
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		TournamentDAO.addTournament(newTournament);
-		return Response.status(Status.CREATED).build();
+    // Post new tournament
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addTournament")
+    public Response postTournament(Tournament newTournament) {
 
-	}
+	TournamentDAO.addTournament(newTournament);
+	return Response.status(Status.CREATED).build();
 
-	
-	//update tournament
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateTournament/{id}")
-	public Response putTournament(@PathParam("id") int id, Tournament alteredTournament) {
+    }
 
-		TournamentDAO.updateTournament(id, alteredTournament);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // update tournament
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updateTournament/{id}")
+    public Response putTournament(@PathParam("id") int id, Tournament alteredTournament) {
 
-	// delete tournament 
-	@DELETE
-	@Path("/deleteTournament/{id}")
-	public Response deleteTournament(@PathParam("id") int id) {
+	TournamentDAO.updateTournament(id, alteredTournament);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TournamentDAO.deleteTournament(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete tournament
+    @DELETE
+    @Path("/deleteTournament/{id}")
+    public Response deleteTournament(@PathParam("id") int id) {
 
-	
-	//delete tournament from TournamentsTeams table
-	@DELETE
-	@Path("/deleteTournamentFromTeams/{id}")
-	public Response deleteTournamentsFromTeams(@PathParam("id") int id) {
+	TournamentDAO.deleteTournament(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TournamentDAO.deleteTournamentsFromTeams(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete tournament from TournamentsTeams table
+    @DELETE
+    @Path("/deleteTournamentFromTeams/{id}")
+    public Response deleteTournamentsFromTeams(@PathParam("id") int id) {
 
-	
-	// delete tournament from TournamentGame table
-	@DELETE
-	@Path("/deleteTournamentFromGame/{id}")
-	public Response deleteTournamentFromGame(@PathParam("id") int id) {
+	TournamentDAO.deleteTournamentsFromTeams(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TournamentDAO.deleteTournamentFromGame(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete tournament from TournamentGame table
+    @DELETE
+    @Path("/deleteTournamentFromGame/{id}")
+    public Response deleteTournamentFromGame(@PathParam("id") int id) {
+
+	TournamentDAO.deleteTournamentFromGame(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
 }

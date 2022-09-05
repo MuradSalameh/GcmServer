@@ -26,119 +26,111 @@ import main.java.hibernate.model.Role;
 @Produces(MediaType.APPLICATION_XML)
 public class RoleResource {
 
- // HTTP request methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
+    // HTTP request methods
 
-	
-	// get role by id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/role/{id}")
-	public Response getRole(@PathParam("id") int id) {
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-		Role role = new Role();
-		role = RoleDAO.getRole(id);
-		return Response.status(Status.OK).entity(role).build();
-	}
+    // get role by id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/role/{id}")
+    public Response getRole(@PathParam("id") int id) {
 
-	
-	// get role with highest id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/roleWithHighestId/")
-	public Response getRoleWithhighestId() {
+	Role role = new Role();
+	role = RoleDAO.getRole(id);
+	return Response.status(Status.OK).entity(role).build();
+    }
 
-		Role role = new Role();
-		role = RoleDAO.getRoleWithHighestId();
-		return Response.status(Status.OK).entity(role).build();
-	}
+    // get role with highest id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/roleWithHighestId/")
+    public Response getRoleWithhighestId() {
 
-	
-	//get list of all roles
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
-	@Path("/rolelist")
-	public Response getRoleList() {
+	Role role = new Role();
+	role = RoleDAO.getRoleWithHighestId();
+	return Response.status(Status.OK).entity(role).build();
+    }
 
-		List<Role> roles = new ArrayList<>();
-		roles = RoleDAO.getRoles();
-		GenericEntity<List<Role>> ml = new GenericEntity<List<Role>>(Lists.newArrayList(roles)) {
-		};
+    // get list of all roles
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    // @Consumes(MediaType.APPLICATION_XML)
+    @Path("/rolelist")
+    public Response getRoleList() {
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Role> roles = new ArrayList<>();
+	roles = RoleDAO.getRoles();
+	GenericEntity<List<Role>> ml = new GenericEntity<List<Role>>(Lists.newArrayList(roles)) {
+	};
 
-	
-	// get roles by member id from MemberRoles table
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("rolesByMember/{id}")
-	public Response getRolesByMember(@PathParam("id") int id) {
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		List<Role> roles = RoleDAO.getRolesByMemberId(id);
-		GenericEntity<List<Role>> ml = new GenericEntity<List<Role>>(Lists.newArrayList(roles)) {
-		};
+    // get roles by member id from MemberRoles table
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("rolesByMember/{id}")
+    public Response getRolesByMember(@PathParam("id") int id) {
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Role> roles = RoleDAO.getRolesByMemberId(id);
+	GenericEntity<List<Role>> ml = new GenericEntity<List<Role>>(Lists.newArrayList(roles)) {
+	};
 
-	
-	// add new role
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addRole")
-	public Response postRole(Role newRole) {
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		RoleDAO.addRole(newRole);
-		return Response.status(Status.CREATED).build();
-	}
+    // add new role
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addRole")
+    public Response postRole(Role newRole) {
 
-	
-	//update role
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateRole/{id}")
-	public Response putRole(@PathParam("id") int id, Role alteredRole) {
+	RoleDAO.addRole(newRole);
+	return Response.status(Status.CREATED).build();
+    }
 
-		RoleDAO.updateRole(id, alteredRole);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // update role
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updateRole/{id}")
+    public Response putRole(@PathParam("id") int id, Role alteredRole) {
 
-	
-	// assign role to member in MemberRoles table
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addRoleToMember/{memberID}/{roleID}")
-	public Response putRole(@PathParam("memberID") int memberID, @PathParam("roleID") int roleID) {
+	RoleDAO.updateRole(id, alteredRole);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		RoleDAO.addRoleToMember(memberID, roleID);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // assign role to member in MemberRoles table
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addRoleToMember/{memberID}/{roleID}")
+    public Response putRole(@PathParam("memberID") int memberID, @PathParam("roleID") int roleID) {
 
-	// delete role
-	@DELETE
-	@Path("/deleteRole/{id}")
-	public Response deleteRole(@PathParam("id") int id) {
+	RoleDAO.addRoleToMember(memberID, roleID);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		RoleDAO.deleteRole(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete role
+    @DELETE
+    @Path("/deleteRole/{id}")
+    public Response deleteRole(@PathParam("id") int id) {
 
-	
-	// delete role assignment from specific member in MemberRoles table
-	@DELETE
-	@Path("/deleteRoleFromMember/{roleid}/{memberid}")
-	public Response deleteRoleFromMember(@PathParam("roleid") int roleid, @PathParam("memberid") int memberid) {
+	RoleDAO.deleteRole(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		RoleDAO.deleteRoleFromMember(roleid, memberid);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete role assignment from specific member in MemberRoles table
+    @DELETE
+    @Path("/deleteRoleFromMember/{roleid}/{memberid}")
+    public Response deleteRoleFromMember(@PathParam("roleid") int roleid, @PathParam("memberid") int memberid) {
+
+	RoleDAO.deleteRoleFromMember(roleid, memberid);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 }

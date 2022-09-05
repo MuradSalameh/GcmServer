@@ -27,177 +27,159 @@ import main.java.hibernate.model.Team;
 @Produces(MediaType.APPLICATION_XML)
 public class TeamResource {
 
- // HTTP request methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
+    // HTTP request methods
 
-	
-	// get team by id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/team/{id}")
-	public Response getTeam(@PathParam("id") int id) {
-	    System.out.println("getTeam" + id);
-		Team team = new Team();
-		team = TeamDAO.getTeam(id);
-		System.out.println("Team Resource Team: " + team);
-		return Response.status(Status.OK).entity(team).build();
-	}
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-	
-	
-	// get all teams
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	// @Consumes(MediaType.APPLICATION_XML)
-	@Path("/teamlist")
-	public Response getTeamList() {
-	    System.out.println("getTeamList");
+    // get team by id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/team/{id}")
+    public Response getTeam(@PathParam("id") int id) {
+	System.out.println("getTeam" + id);
+	Team team = new Team();
+	team = TeamDAO.getTeam(id);
+	System.out.println("Team Resource Team: " + team);
+	return Response.status(Status.OK).entity(team).build();
+    }
 
-		List<Team> teams = new ArrayList<>();
-		teams = TeamDAO.getTeams();
-		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
-		};
+    // get all teams
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    // @Consumes(MediaType.APPLICATION_XML)
+    @Path("/teamlist")
+    public Response getTeamList() {
+	System.out.println("getTeamList");
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Team> teams = new ArrayList<>();
+	teams = TeamDAO.getTeams();
+	GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
+	};
 
-	
-	// get teams by member id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/teamsByMember/{id}")
-	public Response getTeamsByMember(@PathParam("id") int id) {
-	    System.out.println("getTeamsByMember" + id);
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		List<Team> teams = TeamDAO.getTeamsByMemberId(id);
-		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
-		};
-	    
-	  
-	
+    // get teams by member id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/teamsByMember/{id}")
+    public Response getTeamsByMember(@PathParam("id") int id) {
+	System.out.println("getTeamsByMember" + id);
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Team> teams = TeamDAO.getTeamsByMemberId(id);
+	GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
+	};
 
-	
-	// get teams by tournament id
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/getTeamsByTournamentId/{id}")
-	public Response getTeamsByTournamentId(@PathParam("id") int id) {
-	    System.out.println("getTeamsByTournamentId" + id);
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		List<Team> teams = TeamDAO.getTeamsByTournamentId(id);
-		GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
-		};
-		
-		
+    // get teams by tournament id
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/getTeamsByTournamentId/{id}")
+    public Response getTeamsByTournamentId(@PathParam("id") int id) {
+	System.out.println("getTeamsByTournamentId" + id);
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Team> teams = TeamDAO.getTeamsByTournamentId(id);
+	GenericEntity<List<Team>> ml = new GenericEntity<List<Team>>(Lists.newArrayList(teams)) {
+	};
 
-	
-	// get members by team
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/membersByTeam/{id}")
-	public Response getMembersByTeam(@PathParam("id") int id) {
-	    System.out.println("getMembersByTeam" + id);
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		List<Member> members = TeamDAO.getMembersByTeamId(id);
-		GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
-		};
+    // get members by team
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/membersByTeam/{id}")
+    public Response getMembersByTeam(@PathParam("id") int id) {
+	System.out.println("getMembersByTeam" + id);
 
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	List<Member> members = TeamDAO.getMembersByTeamId(id);
+	GenericEntity<List<Member>> ml = new GenericEntity<List<Member>>(Lists.newArrayList(members)) {
+	};
 
-	
-	// add new team
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addTeam")
-	public Response postTeam(Team newTeam) {
-	    System.out.println("postTeam" + " " + newTeam);
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-		TeamDAO.addTeam(newTeam);
-		return Response.status(Status.CREATED).build();
-	}
+    // add new team
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addTeam")
+    public Response postTeam(Team newTeam) {
+	System.out.println("postTeam" + " " + newTeam);
 
-	
-	// assign team to tournament in TournamentsTeams table
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addTeamToTournament/{teamId}/{tournamentId}")
-	public Response addTeamToTournament(@PathParam("teamId") int teamId, @PathParam("tournamentId") int tournamentId) {
-	    System.out.println("addTeamToTournament" + " " + teamId + " " + tournamentId);
+	TeamDAO.addTeam(newTeam);
+	return Response.status(Status.CREATED).build();
+    }
 
-		TeamDAO.addTeamToTournament(teamId, tournamentId);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // assign team to tournament in TournamentsTeams table
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addTeamToTournament/{teamId}/{tournamentId}")
+    public Response addTeamToTournament(@PathParam("teamId") int teamId, @PathParam("tournamentId") int tournamentId) {
+	System.out.println("addTeamToTournament" + " " + teamId + " " + tournamentId);
 
-	
-	// update team
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updateTeam/{id}")
-	public Response putTeam(@PathParam("id") int id, Team alteredTeam) {
-	    System.out.println("putTeam" + " " + id + " " + alteredTeam);
+	TeamDAO.addTeamToTournament(teamId, tournamentId);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TeamDAO.updateTeam(id, alteredTeam);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // update team
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updateTeam/{id}")
+    public Response putTeam(@PathParam("id") int id, Team alteredTeam) {
+	System.out.println("putTeam" + " " + id + " " + alteredTeam);
 
-	
-	// delete team
-	@DELETE
-	@Path("/deleteTeam/{id}")
-	public Response deleteTeam(@PathParam("id") int id) {
-	    System.out.println("deleteTeam" + " " + id);
+	TeamDAO.updateTeam(id, alteredTeam);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TeamDAO.deleteTeam(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete team
+    @DELETE
+    @Path("/deleteTeam/{id}")
+    public Response deleteTeam(@PathParam("id") int id) {
+	System.out.println("deleteTeam" + " " + id);
 
-	
-	//delete team from MemberTeam table
-	@DELETE
-	@Path("/deleteTeamFromMember/{id}")
-	public Response deleteTeamFromMember(@PathParam("id") int id) {
-	    System.out.println("deleteTeamFromMember" + " " + id);
+	TeamDAO.deleteTeam(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TeamDAO.deleteTeamFromMember(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete team from MemberTeam table
+    @DELETE
+    @Path("/deleteTeamFromMember/{id}")
+    public Response deleteTeamFromMember(@PathParam("id") int id) {
+	System.out.println("deleteTeamFromMember" + " " + id);
 
-	
-	// delete team from all tournaments in TournamentsTeams table
-	@DELETE
-	@Path("/deleteTeamFromTournaments/{id}")
-	public Response deleteTeamFromTournaments(@PathParam("id") int id) {
-	    System.out.println("deleteTeamFromTournaments" + " " + id);
+	TeamDAO.deleteTeamFromMember(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-		TeamDAO.deleteTeamFromTournaments(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // delete team from all tournaments in TournamentsTeams table
+    @DELETE
+    @Path("/deleteTeamFromTournaments/{id}")
+    public Response deleteTeamFromTournaments(@PathParam("id") int id) {
+	System.out.println("deleteTeamFromTournaments" + " " + id);
 
-	
-	//delete Team  from specific Tournament in TournamentsTeams table
-	@DELETE
-	@Path("/deleteTeamFromTournament/{teamid}/{tournamentid}")
-	public Response deleteTeamFromTournament(@PathParam("teamid") int teamid,
-			@PathParam("tournamentid") int tournamentid) {
+	TeamDAO.deleteTeamFromTournaments(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
-	    System.out.println("deleteTeamFromTournament" + " " + teamid + " " + tournamentid);
+    // delete Team from specific Tournament in TournamentsTeams table
+    @DELETE
+    @Path("/deleteTeamFromTournament/{teamid}/{tournamentid}")
+    public Response deleteTeamFromTournament(@PathParam("teamid") int teamid,
+	    @PathParam("tournamentid") int tournamentid) {
 
-		TeamDAO.deleteTeamFromTournament(teamid, tournamentid);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+	System.out.println("deleteTeamFromTournament" + " " + teamid + " " + tournamentid);
+
+	TeamDAO.deleteTeamFromTournament(teamid, tournamentid);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 
 }

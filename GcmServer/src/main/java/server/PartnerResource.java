@@ -25,71 +25,66 @@ import main.java.hibernate.model.Partner;
 @Consumes(MediaType.APPLICATION_XML)
 @Produces(MediaType.APPLICATION_XML)
 public class PartnerResource {
-    
- // HTTP request methods
-    
-	// server Test
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/test")
-	public String serverTest() {
-		return "server test successful!";
-	}
 
-	
-	// get partner
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/partner/{id}")
-	public Response getPartner(@PathParam("id") int id) {
+    // HTTP request methods
 
-		Partner partner = new Partner();
-		partner = PartnerDAO.getPartner(id);
-		return Response.status(Status.OK).entity(partner).build();
-	}
+    // server Test
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/test")
+    public String serverTest() {
+	return "server test successful!";
+    }
 
-	
-	//get list of all partners
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/partnerlist")
-	public Response getPartnerList() {
+    // get partner
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/partner/{id}")
+    public Response getPartner(@PathParam("id") int id) {
 
-		List<Partner> partners = new ArrayList<>();
-		partners = PartnerDAO.getPartners();
-		GenericEntity<List<Partner>> ml = new GenericEntity<List<Partner>>(Lists.newArrayList(partners)) {
-		};
-		return Response.status(Status.OK).entity(ml).build();
-	}
+	Partner partner = new Partner();
+	partner = PartnerDAO.getPartner(id);
+	return Response.status(Status.OK).entity(partner).build();
+    }
 
-	
-	// add new partner
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/addPartner")
-	public Response postPartner(Partner newPartner) {
+    // get list of all partners
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/partnerlist")
+    public Response getPartnerList() {
 
-		PartnerDAO.addPartner(newPartner);
-		return Response.status(Status.CREATED).build();
-	}
+	List<Partner> partners = new ArrayList<>();
+	partners = PartnerDAO.getPartners();
+	GenericEntity<List<Partner>> ml = new GenericEntity<List<Partner>>(Lists.newArrayList(partners)) {
+	};
+	return Response.status(Status.OK).entity(ml).build();
+    }
 
-	
-	// update partner
-	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	@Path("/updatePartner/{id}")
-	public Response putPartner(@PathParam("id") int id, Partner alteredPartner) {
+    // add new partner
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/addPartner")
+    public Response postPartner(Partner newPartner) {
 
-		PartnerDAO.updatePartner(id, alteredPartner);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+	PartnerDAO.addPartner(newPartner);
+	return Response.status(Status.CREATED).build();
+    }
 
-	
-	//delete partner
-	@DELETE
-	@Path("/deletePartner/{id}")
-	public Response deletePartner(@PathParam("id") int id) {
-		PartnerDAO.deletePartner(id);
-		return Response.status(Status.NOT_IMPLEMENTED).build();
-	}
+    // update partner
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    @Path("/updatePartner/{id}")
+    public Response putPartner(@PathParam("id") int id, Partner alteredPartner) {
+
+	PartnerDAO.updatePartner(id, alteredPartner);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
+
+    // delete partner
+    @DELETE
+    @Path("/deletePartner/{id}")
+    public Response deletePartner(@PathParam("id") int id) {
+	PartnerDAO.deletePartner(id);
+	return Response.status(Status.NOT_IMPLEMENTED).build();
+    }
 }
