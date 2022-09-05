@@ -1,37 +1,37 @@
 package main.java.hibernate.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 @Table(name = "partner")
-public class Partner{
-	
+public class Partner implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private int id;		
+	private int id;
 
 	@Column(name = "company_name")
 	private String companyName;
-	
+
 	@Column(name = "contact_person_name")
 	private String contactPersonName;
-	
+
 	@Column(name = "contact_person_phone")
 	private String contactPersonPhone;
-	
+
 	@Column(name = "contact_person_mail")
 	private String contactPersonMail;
 
@@ -39,7 +39,7 @@ public class Partner{
 	private String firstName;
 
 	@Column(name = "last_name")
-	private String lastName;	
+	private String lastName;
 
 	@Column(name = "address_street")
 	private String adressStreet;
@@ -51,35 +51,24 @@ public class Partner{
 	private String adressPostCode;
 
 	@Column(name = "address_city")
-	private String adressCity;	
+	private String adressCity;
 
 	@Column(name = "country")
-	private String country;	
+	private String country;
 
 	@Column(name = "email")
-	private String email;	
+	private String email;
 
 	@Column(name = "phone_number")
-	private String phoneNumber;	
+	private String phoneNumber;
 
-	//join table for partner socials
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-            name="partner_socials",
-            joinColumns = @JoinColumn( name="partner_id"),
-            inverseJoinColumns = @JoinColumn( name="social_id")
-    )
-	List<Social> socials = new ArrayList<>();
-
-	
 	public Partner() {
 		super();
 	}
 
-
 	public Partner(String companyName, String contactPersonName, String contactPersonPhone, String contactPersonMail,
 			String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Social> socials) {
+			String adressCity, String country, String email, String phoneNumber) {
 		super();
 		this.companyName = companyName;
 		this.contactPersonName = contactPersonName;
@@ -94,156 +83,138 @@ public class Partner{
 		this.country = country;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.socials = socials;
+
 	}
 
-
+	@XmlElement(name = "CompanyName")
 	public String getCompanyName() {
 		return companyName;
 	}
-
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
 
-
+	@XmlElement(name = "ContactPersonName")
 	public String getContactPersonName() {
 		return contactPersonName;
 	}
-
 
 	public void setContactPersonName(String contactPersonName) {
 		this.contactPersonName = contactPersonName;
 	}
 
-
+	@XmlElement(name = "ContactPersonPhone")
 	public String getContactPersonPhone() {
 		return contactPersonPhone;
 	}
-
 
 	public void setContactPersonPhone(String contactPersonPhone) {
 		this.contactPersonPhone = contactPersonPhone;
 	}
 
-
+	@XmlElement(name = "ContactPersonMail")
 	public String getContactPersonMail() {
 		return contactPersonMail;
 	}
-
 
 	public void setContactPersonMail(String contactPersonMail) {
 		this.contactPersonMail = contactPersonMail;
 	}
 
-
+	@XmlElement(name = "FirstName")
 	public String getFirstName() {
 		return firstName;
 	}
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
+	@XmlElement(name = "LastName")
 	public String getLastName() {
 		return lastName;
 	}
-
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-
+	@XmlElement(name = "AddressStreet")
 	public String getAdressStreet() {
 		return adressStreet;
 	}
-
 
 	public void setAdressStreet(String adressStreet) {
 		this.adressStreet = adressStreet;
 	}
 
-
+	@XmlElement(name = "AddressNumber")
 	public String getAdressNumber() {
 		return adressNumber;
 	}
-
 
 	public void setAdressNumber(String adressNumber) {
 		this.adressNumber = adressNumber;
 	}
 
-
+	@XmlElement(name = "AddressPostCode")
 	public String getAdressPostCode() {
 		return adressPostCode;
 	}
-
 
 	public void setAdressPostCode(String adressPostCode) {
 		this.adressPostCode = adressPostCode;
 	}
 
-
+	@XmlElement(name = "AddressCity")
 	public String getAdressCity() {
 		return adressCity;
 	}
-
 
 	public void setAdressCity(String adressCity) {
 		this.adressCity = adressCity;
 	}
 
-
+	@XmlElement(name = "Country")
 	public String getCountry() {
 		return country;
 	}
-
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-
+	@XmlElement(name = "Email")
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
+	@XmlElement(name = "PhoneNumber")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-
-	public List<Social> getSocials() {
-		return socials;
-	}
-
-
-	public void setSocials(List<Social> socials) {
-		this.socials = socials;
-	}
-
-
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "\nPartner id=" + id + "\ncompanyName=" + companyName + "\ncontactPersonName=" + contactPersonName
+				+ "\ncontactPersonPhone=" + contactPersonPhone + "\ncontactPersonMail=" + contactPersonMail
+				+ "\nfirstName=" + firstName + "\nlastName=" + lastName + "\nadressStreet=" + adressStreet
+				+ "\nadressNumber=" + adressNumber + "\nadressPostCode=" + adressPostCode + "\nadressCity=" + adressCity
+				+ "\ncountry=" + country + "\nemail=" + email + "\nphoneNumber=" + phoneNumber;
+	}
 
 }

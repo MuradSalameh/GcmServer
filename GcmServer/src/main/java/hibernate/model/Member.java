@@ -1,267 +1,258 @@
 package main.java.hibernate.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement(name = "Member")
 
 @Entity
 @Table(name = "member")
-public class Member {
+public class Member implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private int id;	
+	private int id;
 
-	@Column(name = "first_name")
-	private String firstName;
+	@Column(name = "clan_name")
+	private String clanName;
 
-	@Column(name = "last_name")
-	private String lastName;	
+	@Column(name = "clan_id")
+	private String clanId;
 
-	@Column(name = "address_street")
-	private String adressStreet;
+	@Column(name = "realName")
+	private String realName;
 
-	@Column(name = "address_number")
-	private String adressNumber;
+	@Column(name = "address")
+	private String address;
 
 	@Column(name = "address_postcode")
-	private String adressPostCode;
+	private String addressPostCode;
 
 	@Column(name = "address_city")
-	private String adressCity;	
+	private String addressCity;
 
 	@Column(name = "country")
-	private String country;	
+	private String country;
 
 	@Column(name = "email")
-	private String email;	
+	private String email;
 
 	@Column(name = "phone_number")
-	private String phoneNumber;	
-	
+	private String phoneNumber;
 
-	//join table for member roles
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="member_roles",
-			joinColumns = @JoinColumn( name="member_id"),
-			inverseJoinColumns = @JoinColumn( name="role_id")
-			)
-	List<Role> roles = new ArrayList<>();
+	// join table for member roles
+	@OneToMany(mappedBy = "member")
+	Set<MemberRoles> memberRoles = new HashSet<>();
 
-	
-	//join table for member socials
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(
-			name="member_socials",
-			joinColumns = @JoinColumn( name="member_id"),
-			inverseJoinColumns = @JoinColumn( name="social_id")
-			)
-	List<Social> socials = new ArrayList<>();
+	// join table for member socials
+	@OneToMany(mappedBy = "member")
+	Set<MemberSocials> memberSocials = new HashSet<>();
 
-	
-	//join table for games
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-			name = "member_game", 
-			joinColumns = { @JoinColumn(name = "member_id") }, 
-			inverseJoinColumns = { @JoinColumn(name = "game_id") }
-			)
-	List<Game> games = new ArrayList<>();
+	// join table for games --- Custom ManyToMany
+	@OneToMany(mappedBy = "member")
+	Set<MemberGames> memberGames = new HashSet<>();
 
-	
+	// join table members events --- Custom ManyToMany
+	@OneToMany(mappedBy = "member")
+	Set<MemberEvents> memberEvents = new HashSet<>();
+
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-	
-	@ManyToMany(mappedBy = "members")
-	List<Team> teams = new ArrayList<>();
-
+	// TEAMS
+	@OneToMany(mappedBy = "member")
+	private Set<MemberTeam> memberTeam = new HashSet<>();
 
 	public Member() {
 		super();
 	}
 
-
-	public Member(String firstName, String lastName, String adressStreet, String adressNumber, String adressPostCode,
-			String adressCity, String country, String email, String phoneNumber, List<Role> roles, List<Social> socials,
-			List<Game> games, LocalDate birthday, List<Team> teams) {
+	public Member(String clanName, String clanId, String realName, String address, String addressPostCode,
+			String addressCity, String country, String email, String phoneNumber, Set<MemberRoles> memberRoles,
+			Set<MemberSocials> memberSocials, Set<MemberGames> memberGames, Set<MemberEvents> memberEvents,
+			LocalDate birthday, Set<MemberTeam> memberTeam) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.adressStreet = adressStreet;
-		this.adressNumber = adressNumber;
-		this.adressPostCode = adressPostCode;
-		this.adressCity = adressCity;
+		this.clanName = clanName;
+		this.clanId = clanId;
+		this.realName = realName;
+		this.address = address;
+		this.addressPostCode = addressPostCode;
+		this.addressCity = addressCity;
 		this.country = country;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		this.roles = roles;
-		this.socials = socials;
-		this.games = games;
+		this.memberRoles = memberRoles;
+		this.memberSocials = memberSocials;
+		this.memberGames = memberGames;
+		this.memberEvents = memberEvents;
 		this.birthday = birthday;
-		this.teams = teams;
+		this.memberTeam = memberTeam;
 	}
 
-
-	public String getFirstName() {
-		return firstName;
+	@XmlElement(name = "ClanName")
+	public String getClanName() {
+		return clanName;
 	}
 
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setClanName(String clanName) {
+		this.clanName = clanName;
 	}
 
-
-	public String getLastName() {
-		return lastName;
+	@XmlElement(name = "ClanID")
+	public String getClanId() {
+		return clanId;
 	}
 
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setClanId(String clanId) {
+		this.clanId = clanId;
 	}
 
-
-	public String getAdressStreet() {
-		return adressStreet;
+	@XmlElement(name = "RealName")
+	public String getRealName() {
+		return realName;
 	}
 
-
-	public void setAdressStreet(String adressStreet) {
-		this.adressStreet = adressStreet;
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
-
-	public String getAdressNumber() {
-		return adressNumber;
+	@XmlElement(name = "Address")
+	public String getAddress() {
+		return address;
 	}
 
-
-	public void setAdressNumber(String adressNumber) {
-		this.adressNumber = adressNumber;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-
-	public String getAdressPostCode() {
-		return adressPostCode;
+	@XmlElement(name = "AddressPostCode")
+	public String getAddressPostCode() {
+		return addressPostCode;
 	}
 
-
-	public void setAdressPostCode(String adressPostCode) {
-		this.adressPostCode = adressPostCode;
+	public void setAddressPostCode(String addressPostCode) {
+		this.addressPostCode = addressPostCode;
 	}
 
-
-	public String getAdressCity() {
-		return adressCity;
+	@XmlElement(name = "AddressCity")
+	public String getAddressCity() {
+		return addressCity;
 	}
 
-
-	public void setAdressCity(String adressCity) {
-		this.adressCity = adressCity;
+	public void setAddressCity(String addressCity) {
+		this.addressCity = addressCity;
 	}
 
-
+	@XmlElement(name = "Country")
 	public String getCountry() {
 		return country;
 	}
-
 
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
-
+	@XmlElement(name = "Email")
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
+	@XmlElement(name = "PhoneNumber")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-
-	public List<Social> getSocials() {
-		return socials;
-	}
-
-
-	public void setSocials(List<Social> socials) {
-		this.socials = socials;
-	}
-
-
-	public List<Game> getGames() {
-		return games;
-	}
-
-
-	public void setGames(List<Game> games) {
-		this.games = games;
-	}
-
-
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@XmlElement(name = "Birthday")
 	public LocalDate getBirthday() {
 		return birthday;
 	}
-
 
 	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
-
-	public List<Team> getTeams() {
-		return teams;
+	@XmlTransient
+	public Set<MemberRoles> getMemberRoles() {
+		return memberRoles;
 	}
 
-
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
+	public void setMemberRoles(Set<MemberRoles> memberRoles) {
+		this.memberRoles = memberRoles;
 	}
 
+	@XmlTransient
+	public Set<MemberSocials> getMemberSocials() {
+		return memberSocials;
+	}
 
+	public void setMemberSocials(Set<MemberSocials> memberSocials) {
+		this.memberSocials = memberSocials;
+	}
+
+	@XmlTransient
+	public Set<MemberGames> getMemberGames() {
+		return memberGames;
+	}
+
+	public void setMemberGames(Set<MemberGames> memberGames) {
+		this.memberGames = memberGames;
+	}
+
+	@XmlTransient
+	public Set<MemberEvents> getMemberEvents() {
+		return memberEvents;
+	}
+
+	public void setMemberEvents(Set<MemberEvents> memberEvents) {
+		this.memberEvents = memberEvents;
+	}
+
+	@XmlTransient
+	public Set<MemberTeam> getMemberTeam() {
+		return memberTeam;
+	}
+
+	public void setMemberTeam(Set<MemberTeam> memberTeam) {
+		this.memberTeam = memberTeam;
+	}
+
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "\nMember id = " + id + "\nclanName = " + clanName + "\nclanId = " + clanId + "\nrealName = " + realName
+				+ "\naddress=" + address + "\naddressPostCode=" + addressPostCode + "\naddressCity=" + addressCity
+				+ "\ncountry=" + country + "\nemail=" + email + "\nphoneNumber=" + phoneNumber + "\nbirthday="
+				+ birthday + "\n----------------------------------" + "\n";
+	}
 
 }

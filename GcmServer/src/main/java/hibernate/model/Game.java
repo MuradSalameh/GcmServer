@@ -1,24 +1,28 @@
 package main.java.hibernate.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumn;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+@XmlRootElement
 @Entity
 @Table(name = "game")
-public class Game {
+public class Game implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,129 +32,99 @@ public class Game {
 	@Column(name = "game_title")
 	private String gameTitle;
 
-
 	@Column(name = "release_date")
 	private LocalDate releaseDate;
 
-	// join table genre games
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-			name="game_genre",
-			joinColumns = @JoinColumn( name="game_id"),
-			inverseJoinColumns = @JoinColumn( name="genre_id")
-			)
-	List<Genre> genres = new ArrayList<Genre>();
+	@OneToMany(mappedBy = "game")
+	Set<MemberGames> memberGames = new HashSet<>();
 
-	//join table members games
-	@ManyToMany(mappedBy = "games")
-	List<Member> members = new ArrayList<Member>();
-	
-	// join column tournament game
-	@OneToMany(mappedBy="game")
-    List<Tournament> tournaments = new ArrayList<Tournament>();
-	
-
+	@OneToMany(mappedBy = "game")
+	private Set<TournamentGame> tournamentGame = new HashSet<>();
 
 	@Column(name = "game_additional_notes")
-	private String gameAddidionalNotes;
-
-
+	private String gameAdditionalNotes;
 
 	public Game() {
 		super();
 	}
 
-
-
-	public Game(String gameTitle, LocalDate releaseDate, List<Genre> genres, List<Member> members,
-			List<Tournament> tournaments, String gameAddidionalNotes) {
+	public Game(String gameTitle, LocalDate releaseDate, Set<MemberGames> memberGames,
+			Set<TournamentGame> tournamentGame, String gameAdditionalNotes) {
 		super();
 		this.gameTitle = gameTitle;
 		this.releaseDate = releaseDate;
-		this.genres = genres;
-		this.members = members;
-		this.tournaments = tournaments;
-		this.gameAddidionalNotes = gameAddidionalNotes;
+		this.memberGames = memberGames;
+		this.tournamentGame = tournamentGame;
+		this.gameAdditionalNotes = gameAdditionalNotes;
 	}
 
-
-
+	@XmlElement(name = "GameTitle")
 	public String getGameTitle() {
 		return gameTitle;
 	}
-
-
 
 	public void setGameTitle(String gameTitle) {
 		this.gameTitle = gameTitle;
 	}
 
-
-
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@XmlElement(name = "ReleaseDate")
 	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
-
-
 
 	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
-
-
-	public List<Genre> getGenres() {
-		return genres;
+	@XmlTransient
+	public Set<MemberGames> getMemberGames() {
+		return memberGames;
 	}
 
-
-
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
+	public void setMemberGames(Set<MemberGames> memberGames) {
+		this.memberGames = memberGames;
 	}
 
-
-
-	public List<Member> getMembers() {
-		return members;
+	@XmlTransient
+	public Set<TournamentGame> getTournamentGame() {
+		return tournamentGame;
 	}
 
-
-
-	public void setMembers(List<Member> members) {
-		this.members = members;
+	public void setTournamentGame(Set<TournamentGame> tournamentGame) {
+		this.tournamentGame = tournamentGame;
 	}
 
-
-
-	public List<Tournament> getTournaments() {
-		return tournaments;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-
-
-	public void setTournaments(List<Tournament> tournaments) {
-		this.tournaments = tournaments;
+	@XmlTransient
+	public Set<MemberGames> getMembers() {
+		return memberGames;
 	}
 
-
-
-	public String getGameAddidionalNotes() {
-		return gameAddidionalNotes;
+	public void setMembers(Set<MemberGames> memberGames) {
+		this.memberGames = memberGames;
 	}
 
-
-
-	public void setGameAddidionalNotes(String gameAddidionalNotes) {
-		this.gameAddidionalNotes = gameAddidionalNotes;
+	@XmlElement(name = "GameAdditionalNotes")
+	public String getGameAdditionalNotes() {
+		return gameAdditionalNotes;
 	}
 
+	public void setGameAdditionalNotes(String gameAdditionalNotes) {
+		this.gameAdditionalNotes = gameAdditionalNotes;
+	}
 
-
+	@XmlElement(name = "ID", required = true)
 	public int getId() {
 		return id;
 	}
 
-
-	
+	@Override
+	public String toString() {
+		return "\nGame id=" + id + "\ngameTitle=" + gameTitle + "\nreleaseDate=" + releaseDate
+				+ "\ngameAdditionalNotes=" + gameAdditionalNotes + "\n----------------------------------" + "\n";
+	}
 }

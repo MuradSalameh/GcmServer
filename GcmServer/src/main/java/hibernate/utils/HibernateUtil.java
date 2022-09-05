@@ -4,65 +4,35 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import main.java.hibernate.model.Expense;
-import main.java.hibernate.model.ExpenseType;
-import main.java.hibernate.model.Game;
-import main.java.hibernate.model.Genre;
-import main.java.hibernate.model.Member;
-import main.java.hibernate.model.Revenue;
-import main.java.hibernate.model.RevenueType;
-import main.java.hibernate.model.Role;
-import main.java.hibernate.model.Social;
-import main.java.hibernate.model.Team;
-import main.java.hibernate.model.Tournament;
-
 public class HibernateUtil {
-	private static Session session = null;	
-	
-	public static void startSession() {
-		// create configurations
-		Configuration configuration = new Configuration();
-		configuration.configure("hibernate.cfg.xml");		
-		configuration.addAnnotatedClass(Role.class);
-		configuration.addAnnotatedClass(Social.class);
-		configuration.addAnnotatedClass(Team.class);
-		configuration.addAnnotatedClass(Tournament.class);
-		configuration.addAnnotatedClass(Member.class);
-		configuration.addAnnotatedClass(Game.class);
-		configuration.addAnnotatedClass(Genre.class);
-		configuration.addAnnotatedClass(Tournament.class);
-		configuration.addAnnotatedClass(Team.class);
-		configuration.addAnnotatedClass(Expense.class);
-		configuration.addAnnotatedClass(ExpenseType.class);
-		configuration.addAnnotatedClass(Revenue.class);
-		configuration.addAnnotatedClass(RevenueType.class);		
+    private static Session session = null;
 
-		// crate session factory - data source
-		SessionFactory sessionFactory = configuration.buildSessionFactory();
+    public static void startSession() {
+	// create configurations
+	Configuration configuration = new Configuration();
+	configuration.configure("/main/resources/hibernate.cfg.xml");
 
-		//initialize session object
-		session = sessionFactory.openSession();
+	// crate session factory - data source
+	SessionFactory sessionFactory = configuration.buildSessionFactory();
 
-		if(!session.isOpen()) {
-			System.out.println("Unable to open session!");
-		} else {
-			System.out.println("Session is open");
-		}
+	// initialize session object
+	session = sessionFactory.openSession();
 
-		session.beginTransaction();
+	if (!session.isOpen()) {
+	    System.out.println("Unable to open session!");
+	} else {
+	    System.out.println("Session is open");
 	}
 
-	public static void sessionCommit() {
-		session.getTransaction().commit();
-	}
+	session.beginTransaction();
+    }
 
-	public static Session getSession() {
-		return session;
-	}
-	
-	
-	
-	
+    public static void sessionCommit() {
+	session.getTransaction().commit();
+    }
+
+    public static Session getSession() {
+	return session;
+    }
+
 }
-
-

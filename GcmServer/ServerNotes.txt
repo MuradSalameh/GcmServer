@@ -1,5 +1,74 @@
 ToDo:
-member_team annotation
 
-server side serialization - restful jersey
+FxmlDocumentController auf neue MainScreen.fxml umschreiben. von anchor zu borderpane
 
+- 
+
+Schreibfehler:
+
+tournament title in tournament klassen.
+
+
+
+--- klassen projekt naktualisieren ohne hibernate annotationen nur mit XML anotationen --- AUF IMPOTRTS ACHTEN!!!!!!!
+
+
+
+
+Fragen: warum so viele abfragen?
+
+
+roles rausnehmen und als direkte Auswahl mit festgelegten rollen setzen.
+
+
+join table query by ID --- 
+- erst join table als klasse anlegen und hibernate mappings machen
+- joinTable klasse in hibernat config eintragen
+-  im server dao funktion anlegen
+
+- im server resource funktion anlegen
+- im client servicefunctions funktion anlegen.
+
+
+
+List<Event> list = session.createQuery(
+			"select o from Event o",
+			Event.class)
+			.getResultList();
+
+
+		for (Event t : list) {		
+			System.out.println(t);
+		}
+		
+		session.close();
+		return list;
+	}
+	
+	
+	
+
+List<Team> list = session.createQuery(
+			"select team t from MemberTeam mt where member.id= :id",
+			Team.class)
+			.setParameter("id", id).getResultList();
+
+
+		for (Team o : list) {		
+			System.out.println(o);
+		}
+		
+		session.close();
+		return list;
+	}
+		
+		
+		
+"delete team t from TournamentsTeams tt where team.id= :teamid and tournament.id= :tournamentid";
+		
+		
+		
+		
+		
+		
+		

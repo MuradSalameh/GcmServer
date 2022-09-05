@@ -1,0 +1,62 @@
+Fehler:
+
+IMPORTS!!!! - JAAVAX.PERSISTANCE    & JAKARARTA.XML - !!!!!
+
+--------- HTTP 500 Internal Server Error 
+bei abruf von liste vom Server:
+Exception in thread "main" jakarta.ws.rs.InternalServerErrorException: HTTP 500 Internal Server Error
+Lösung: Server neu Starten nach änderungen an Server-Dateien
+IMPORTS XML auf jakarta setzen bei gcmClasses und bei hibernate.models ,
+
+eventuell - xml annotationen Listen auf Transient setzen in hibernate.models und in gcmClasses
+Alternativ : wie listen innerhalb von Listen mit übertragen?
+
+-----------------
+
+body writer fehler ---> imports checken jakarta
+
+
+
+Datenbank Mappings:
+
+Tournament: Cannot delete or update a parent row: a foreign key constraint fails (`gcm`.`tournament_teams`, CONSTRAINT `FKguo939y7qyj537p7q5hj82yhn` FOREIGN KEY (`team_id`) REFERENCES `team` (`ID`))
+Mapping Genre Game. - Versuchen mapping auf games zu legen?
+
+Teams mapping checken wegen delete.
+
+Lösung: erst verknüpfung aus join table löschen dann entitiy löschen
+
+
+
+Schreibfehler:
+
+tournament title in tournament klassen.
+additional in allen klassen kontrollieren - irgenwo falsch
+
+
+JavaFX Tabellendaten werden nicht angezeigt --> 
+schauen ob jeweilige Tabelle inhalte hat in der DB
+import korrekte serviceFunction checken
+fx:ids der elemente checken
+schauen ob SceneController gesetzt ist
+
+
+Fhler: java.lang.NullPointerException: Cannot invoke "javafx.scene.control.TextField.setText(String)" because "this.clanNameTf" is null
+Lösung: Optional<ButtonType> result = dialogAn.showAndWait();	muss vor den Controller
+
+
+Fehler bei erstellen der Datenbanken über App.java:
+Error executing DDL "alter table game_genres add constraint FK4q9qal2sqn8hjy7l58ver6ne6 foreign key (ID) references game_genres (ID)" via JDBC Statement
+Lösung: Mappings checken
+
+
+beim Löschen eines Objektes fehler foreign Key constraint ---- im DAO über ""delete From..." löschen und session.remove(); entfernen
+
+
+delete parent  foreign keyConstraint bei Delete:
+- tippfehler in den methoden, den hql oder den urls
+- in App.java erstellte Objekte nicht persistiert. Jedes Objekt mur bei erstellung persistiert werden.
+
+Wenn bei Bedienung Abbruch 500 server error, 
+dann den loader aus initialize innerhalb der Detail Dialoge raus nehmen
+

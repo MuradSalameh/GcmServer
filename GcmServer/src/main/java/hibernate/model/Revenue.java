@@ -1,52 +1,73 @@
 package main.java.hibernate.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Revenue {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+@XmlRootElement
+@Entity
+@Table(name = "revenue")
+public class Revenue implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private int id;
-	private String title;
-	private String description;
+
+	@Column(name = "revenue_title")
+	private String revenueTitle;
+
+	@Column(name = "revenue_description")
+	private String revenueDescription;
+
+	@Column(name = "amount")
 	private double amount;
+
+	@Column(name = "date")
 	private LocalDate date;
-	private Partner partner;
-	private RevenueType reventueType;
-	
-	public Revenue(int id, String title, String description, double amount, LocalDate date, Partner partner,
-			RevenueType reventueType) {
+
+	public Revenue() {
 		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
+	}
+
+	public Revenue(String revenueTitle, String revenueDescription, double amount, LocalDate date) {
+		super();
+		this.revenueTitle = revenueTitle;
+		this.revenueDescription = revenueDescription;
 		this.amount = amount;
 		this.date = date;
-		this.partner = partner;
-		this.reventueType = reventueType;
 	}
 
-	public int getId() {
-		return id;
+	@XmlElement(name = "RevenueTitle")
+	public String getRevenueTitle() {
+		return revenueTitle;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRevenueTitle(String revenueTitle) {
+		this.revenueTitle = revenueTitle;
 	}
 
-	public String getTitle() {
-		return title;
+	@XmlElement(name = "ReveneueDescription")
+	public String getRevenueDescription() {
+		return revenueDescription;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setRevenueDescription(String revenueDescription) {
+		this.revenueDescription = revenueDescription;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	@XmlElement(name = "Amount")
 	public double getAmount() {
 		return amount;
 	}
@@ -55,6 +76,8 @@ public class Revenue {
 		this.amount = amount;
 	}
 
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@XmlElement(name = "Date")
 	public LocalDate getDate() {
 		return date;
 	}
@@ -63,24 +86,15 @@ public class Revenue {
 		this.date = date;
 	}
 
-	public Partner getPartner() {
-		return partner;
+	@XmlElement(name = "ID", required = true)
+	public int getId() {
+		return id;
 	}
 
-	public void setPartner(Partner partner) {
-		this.partner = partner;
+	@Override
+	public String toString() {
+		return "\nRevenue id=" + id + "\nrevenueTitle=" + revenueTitle + "\nrevenueDescription=" + revenueDescription
+				+ "\namount=" + amount + "\ndate=" + date + "\n----------------------------------" + "\n";
 	}
-
-	public RevenueType getReventueType() {
-		return reventueType;
-	}
-
-	public void setReventueType(RevenueType reventueType) {
-		this.reventueType = reventueType;
-	}
-	
-	
-	
-	
 
 }
