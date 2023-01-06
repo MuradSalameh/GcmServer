@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		
+		<!-- url -->
+		<property name= "hibernate.connection.url">jdbc:mysql://${hibernate_db_host}/${hibernate_db_name}</property>
+		
+		<!-- username -->
+		<property name= "hibernate.connection.username">${hibernate_username}</property>
+
+		<!-- password -->
+		<property name= "hibernate.connection.password">${hibernate_password}</property>
+		
+		<!-- mysql driver -->
+		<property name= "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		
+		<!-- dialect -->
+		 <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		
+		<!-- show sql -->
+		<property name= "hibernate.show_sql">${hibernate_show_sql}</property>
+		
+		<!-- create tables if not existing or update if existing -->
+		 <property name="hibernate.hbm2ddl.auto">update</property>
+		 
+		<mapping class="main.java.hibernate.model.Expense"/>
+		<mapping class="main.java.hibernate.model.Game"/>
+		<mapping class="main.java.hibernate.model.Member"/>
+		<mapping class="main.java.hibernate.model.Partner"/>
+		<mapping class="main.java.hibernate.model.Revenue"/>	
+		<mapping class="main.java.hibernate.model.Role"/>
+		<mapping class="main.java.hibernate.model.Social"/>
+		<mapping class="main.java.hibernate.model.Team"/>
+		<mapping class="main.java.hibernate.model.Event"/>
+		<mapping class="main.java.hibernate.model.Tournament"/>
+		<mapping class="main.java.hibernate.model.MemberSocials"/>
+		<mapping class="main.java.hibernate.model.MemberRoles"/>
+		<mapping class="main.java.hibernate.model.MemberTeam"/>
+		<mapping class="main.java.hibernate.model.MemberGames"/>
+		<mapping class="main.java.hibernate.model.MemberEvents"/>
+		<mapping class="main.java.hibernate.model.TournamentsTeams"/>
+		<mapping class="main.java.hibernate.model.TournamentGame"/>
+
+		
+		
+	</session-factory>
+</hibernate-configuration>
